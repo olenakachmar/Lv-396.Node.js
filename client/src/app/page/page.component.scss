@@ -1,0 +1,32 @@
+$grid-columns: 12 !default;
+$grid-gutter-width: 20px !default;
+
+.col,
+[class*="col-"],
+.container-fluid,
+.container,
+.row {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+$container-max-widths: (
+  sm: 420px,
+  md: 720px,
+  lg: 1280px
+);
+
+$font-stack: Arial, sans-serif;
+$primary-color: #2699FB;
+$case-color: #BCE0FD;
+$bg-color: #F1F9FF;
+$bg2-color: #fff;
+
+.main-wrapper {
+  min-height: 100vh;
+  font-family: $font-stack;
+  font-size: 14px;
+  line-height: 16px;
+  background: $bg-color;
+  color: $primary-color;
+}
