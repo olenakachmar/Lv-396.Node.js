@@ -1,0 +1,19 @@
+{
+  "user": {
+    "first_name": "Name",
+    "last_name": "Surname",
+    "position": "Position",
+    "manager": {
+      "managerID": "123",
+      "managerName": "Manager name"
+    },
+    "department": "department",
+    "email": "email",
+    "phone": "+380000000000",
+    "contacts": {
+      "skype": "skype",
+      "telegram": "telegram"
+    },
+    "photoURL": "https://photo.url"
+  }
+}
