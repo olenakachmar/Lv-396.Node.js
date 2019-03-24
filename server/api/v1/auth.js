@@ -29,9 +29,8 @@ router.post('/signup',(req, res) => {
     newUser.save((err, user) => {
       if (err) {
         res.json({
-          error: err,
+          err
         });
-        res.end();
       } else {
           res.status(201).json({
             user,

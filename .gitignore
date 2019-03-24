@@ -3,6 +3,7 @@ client/.idea/
 # add from angular
 
 .idea/
+.env
 
 # compiled output
 client/dist
