@@ -24,6 +24,6 @@ body:
 header: 
 * Authorization: JWT Token in format "Bearer ${token}"
 ## Response
-Message 'U passed the authentication' if token is verified **OR** 403 Not authorized error
+Message 'U passed the authentication' if token is verified **OR** 403 Not authorized error if token isn't verified
 
 ------
