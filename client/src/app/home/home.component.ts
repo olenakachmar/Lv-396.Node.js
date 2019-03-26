@@ -3,6 +3,9 @@ import { AuthService } from '../app_services/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { JwtHelperService } from '@auth0/angular-jwt';
+
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,20 +16,21 @@ export class HomeComponent implements OnInit {
 
   public frm: FormGroup;
   public hasFailed = false;
-  public showInputErrorsUsername = false;
+  public showInputErrorslogin = false;
   public showInputErrorsPassword = false;
 
   constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
     this.message = '';
     this.frm = fb.group({
-      username: ['', Validators.required],
+      login: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
 
-  login(username: string, password: string): boolean {
-    if (this.frm.invalid && this.frm.get('username').value === '') {
-      this.showInputErrorsUsername = true;
+  auth(login: string, password: string): boolean {
+    const helper = new JwtHelperService();
+    if (this.frm.invalid && this.frm.get('login').value === '') {
+      this.showInputErrorslogin = true;
       return;
     } else if (this.frm.invalid && this.frm.get('password').value === '') {
       this.showInputErrorsPassword = true;
@@ -34,10 +38,12 @@ export class HomeComponent implements OnInit {
     }
 
     this.authService
-      .login(username, password)
+      .auth(login, password)
       .subscribe(
         (response) => {
           localStorage.setItem('username', response.token);
+          console.log(response);
+          // console.log(helper.decodeToken(response.token));
           this.router.navigate(['/profile']);
         },
         (error) => {
