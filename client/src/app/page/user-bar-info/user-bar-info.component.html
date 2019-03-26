@@ -1,0 +1,17 @@
+<div class="user-bar-info">
+  <div class="grid-1">
+    <app-user-image></app-user-image>
+  </div>
+
+  <div>
+    <div class="main-user-info">
+      <p>{{userinfo.name}} {{userinfo.surname}}</p>
+      <p>{{userinfo.position}}</p>
+    </div>
+    <app-link-to-profile class="additional-info" [info]="userinfo.managerName + ' ' + userinfo.managerSurname"
+                         [label]="'My manager'"></app-link-to-profile>
+    <app-link-to-profile class="additional-info" [info]="userinfo.departament"
+                         [label]="'My department'"></app-link-to-profile>
+  </div>
+</div>
+
