@@ -10,36 +10,34 @@ router.get('/secret', passport.authenticate('jwt', { session: false }), async (r
 });
 
 router.post('/login', (req, res) => {
-  User.findOne({ login: req.body.login}, (err, user) => {
-      if (err || !user) {
-          res.json({ err: 'User not found' });
-      } else {
-          if (user.checkPassword(req.body.password)) {
-              res.json({ token: jwt.sign({login: req.body.login}, process.env.JWT_SECRET, {expiresIn: 3600}) } )
-          } else {
-              res.json({ err: 'passwords don\'t match' });
-          }
-      }
-  })
+  User.findOne({ login: req.body.login }, (err, user) => {
+    if (err || !user) {
+      res.status(401).json({ err: 'User not found' });
+    } else if (user.checkPassword(req.body.password)) {
+      res.json({ token: jwt.sign({ login: req.body.login }, process.env.JWT_SECRET, { expiresIn: 3600 }) });
+    } else {
+      res.status(401).json({ err: 'passwords don\'t match' });
+    }
+  });
 });
 
-router.post('/signup',(req, res) => {
+router.post('/signup', (req, res) => {
   if (req.body.login && req.body.password) {
     const newUser = User({ login: req.body.login, password: req.body.password });
     newUser.save((err, user) => {
       if (err) {
-        res.json({
-          err
+        res.status(401).json({
+          err,
         });
       } else {
-          res.status(201).json({
-            user,
-          });
-        }
+        res.status(201).json({
+          user,
+        });
+      }
     });
   } else {
-    res.json({
-      err: 'You must provide password and login'
+    res.status(401).json({
+      err: 'You must provide password and login',
     });
   }
 });
