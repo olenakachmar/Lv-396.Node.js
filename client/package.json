@@ -23,6 +23,7 @@
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
     "jquery": "^1.9.1",
+    "jwt-decode": "^2.2.0",
     "ngx-bootstrap": "^3.2.0",
     "popper.js": "^1.14.7",
     "rxjs": "~6.3.3",

@@ -22,24 +22,24 @@ import { CheckDevGuard } from './app_guards/checkDev.guard';
 
 
 @NgModule({
-	declarations: [
-		AppComponent,
+  declarations: [
+    AppComponent,
 
-		PageComponent,
-		HomeComponent,
-		PageNotFoundComponent
-	],
-	imports: [
-		BrowserModule,
-		AppRoutingModule,
-		FormsModule,
-		HttpModule,
+    PageComponent,
+    HomeComponent,
+    PageNotFoundComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpModule,
 
-		ReactiveFormsModule,
-		BsDropdownModule.forRoot(),
-		AccordionModule.forRoot(),
-	],
-	providers: [AUTH_PROVIDERS, LoggedInGuard, LoggedOutGuard, CheckDevGuard],
-	bootstrap: [AppComponent]
+    ReactiveFormsModule,
+    BsDropdownModule.forRoot(),
+    AccordionModule.forRoot(),
+  ],
+  providers: [AUTH_PROVIDERS, LoggedInGuard, LoggedOutGuard, CheckDevGuard],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
