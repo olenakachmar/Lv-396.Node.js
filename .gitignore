@@ -4,6 +4,8 @@ client/.idea/
 
 .idea/
 
+.idea
+
 # compiled output
 client/dist
 client/tmp

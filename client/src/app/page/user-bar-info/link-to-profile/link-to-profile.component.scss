@@ -1,0 +1,21 @@
+$font-stack: Arial, sans-serif;
+$primary-color: #2699FB;
+$case-color: #BCE0FD;
+$bg-color: #F1F9FF;
+$bg2-color: #fff;
+$base-font-size: 14px;
+$base-line-height: 16px;
+
+.additional-info{
+  :first-child{
+    font-size: $base-font-size;
+  }
+  :last-child{
+    font-size: 25px;
+    font-weight: bold;
+    font-style: italic;
+  }
+}
+div{
+  cursor: pointer;
+}
