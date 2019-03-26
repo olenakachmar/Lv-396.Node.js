@@ -12,21 +12,21 @@ import { CheckDevGuard } from './app_guards/checkDev.guard';
 
 
 const routes: Routes = [
-	{ path: '', redirectTo: 'home', pathMatch: 'full' },
-	{ path: 'home', component: HomeComponent, canActivate: [LoggedOutGuard, CheckDevGuard] },
-	{
-		path: 'profile',
-		component: PageComponent,
-		canActivate: [LoggedInGuard]
-	},
-	{
-		path: '**',
-		component: PageNotFoundComponent
-	}
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent, canActivate: [LoggedOutGuard, CheckDevGuard] },
+  {
+    path: 'profile',
+    component: PageComponent,
+    canActivate: [LoggedInGuard]
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent
+  }
 ];
 
 @NgModule({
-	imports: [RouterModule.forRoot(routes)],
-	exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
