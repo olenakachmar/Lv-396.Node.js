@@ -8,12 +8,10 @@ export class AuthService {
 	constructor( private http: Http ) { }
 
 	login(username: string, password: string) {
-		return this.http
-      .post('https://reqres.in/api/login', {
-        username,
-        password
-      })
-    .map(response => response.json());
+		return this.http.post('https://reqres.in/api/login', {
+		username,
+		password
+		}).map(response => response.json());
 	}
 
 	logout(): any {
@@ -27,8 +25,6 @@ export class AuthService {
  	isLoggedIn(): boolean {
  		return this.getUser() !== null;
 	}
-	 
-
 }
 
 export const AUTH_PROVIDERS: Array<any> = [
