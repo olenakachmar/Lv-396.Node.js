@@ -1,0 +1,48 @@
+$font-stack: Arial, sans-serif;
+$primary-color: #2699FB;
+$case-color: #BCE0FD;
+$bg-color: #F1F9FF;
+$bg2-color: #fff;
+$base-font-size: 14px;
+$base-line-height: 16px;
+
+.user-bar-info {
+  width: 100%;
+  height: auto;
+  background-color: white;
+  align-items: center;
+  padding: 20px 20px 0 40px;
+  color: $primary-color;
+  text-align: center;
+
+  @media (max-width: 1197px) {
+    @media (min-width: 500px) {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+    }
+  }
+  @media (min-width: 992px) {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.main-user-info {
+  margin-top: 40px;
+  :first-child {
+    font-size: 40px;
+    font-weight: bold;
+  }
+  :last-child {
+    font-size: 25px;
+    font-weight: bold;
+    font-style: italic;
+  }
+}
+
+.additional-info {
+  margin-top: 40px;
+}
+
+
+

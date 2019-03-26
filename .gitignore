@@ -5,6 +5,8 @@ client/.idea/
 .idea/
 .env
 
+.idea
+
 # compiled output
 client/dist
 client/tmp
