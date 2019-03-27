@@ -1,8 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LinkToProfileComponent } from './link-to-profile.component';
-import {expect} from '@angular/platform-browser/testing/src/matchers';
-import {describe} from 'selenium-webdriver/testing';
 
 describe('LinkToProfileComponent', () => {
   let component: LinkToProfileComponent;

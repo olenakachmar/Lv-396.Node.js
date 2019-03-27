@@ -12,7 +12,6 @@ export class PageComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
     this.jsonData = {
       menuRight: [
         {
@@ -72,8 +71,8 @@ export class PageComponent implements OnInit {
           date: '22/03/2019',
           author: 'Alex Somename',
           content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ' +
-            'tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ' +
-            'ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis',
+              'tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ' +
+              'ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis',
         },
         {
           id: 2,
@@ -84,8 +83,8 @@ export class PageComponent implements OnInit {
           date: '23/03/2019',
           author: 'Alex3 Somename',
           content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ' +
-            'tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ' +
-            'ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis',
+              'tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ' +
+              'ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis',
         },
         {
           id: 3,
@@ -96,8 +95,8 @@ export class PageComponent implements OnInit {
           date: '24/03/2019',
           author: 'Alex2 Somename',
           content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ' +
-            'incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ' +
-            'exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis',
+              'incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ' +
+              'exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis',
         },
         {
           id: 4,
@@ -108,8 +107,8 @@ export class PageComponent implements OnInit {
           date: '25/03/2019',
           author: 'Alex1 Somename',
           content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ' +
-            'incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ' +
-            'exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis',
+              'incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ' +
+              'exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis',
         },
         {
           id: 5,
@@ -120,8 +119,8 @@ export class PageComponent implements OnInit {
           date: '26/03/2019',
           author: 'Alex2 Somename',
           content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ' +
-            'incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ' +
-            'exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis',
+              'incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ' +
+              'exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis',
         }
       ],
       filters: [
@@ -157,12 +156,12 @@ export class PageComponent implements OnInit {
   selectFilterOption = (data: any) => {
     if (this.jsonData.filters.length) {
       this.jsonData.filters = this.jsonData.filters.map(
-        (item, index) => index === data.filterId ? {
-          name: item.name,
-          isCalendar: item.isCalendar,
-          defaultValue: data.optionId,
-          options: item.options
-        } : item
+          (item, index) => index === data.filterId ? {
+            name: item.name,
+            isCalendar: item.isCalendar,
+            defaultValue: data.optionId,
+            options: item.options
+          } : item
       );
     }
   }

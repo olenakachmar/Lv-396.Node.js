@@ -11,7 +11,9 @@ export class FilterComponent implements OnInit {
   @Output() getFilter = new EventEmitter();
 
   constructor() { }
-  ngOnInit() {}
+
+  ngOnInit() {
+  }
 
   makeFullWidth = () => {
     return this.cssClass.length ? 'width-100' : '';
