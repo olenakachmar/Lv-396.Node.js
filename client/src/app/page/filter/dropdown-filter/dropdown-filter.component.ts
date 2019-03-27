@@ -5,20 +5,19 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   templateUrl: './dropdown-filter.component.html',
   styleUrls: ['./dropdown-filter.component.scss']
 })
-export class DropdownFilterComponent {
-  @Input() filterItem: {isCalendar, defaultValue, options};
+export class DropdownFilterComponent implements OnInit {
+  @Input() filterItem: {isCalendar, defaultValue, options };
   @Input() id: number;
   @Input() cssClass: string;
   @Output() filterVal = new EventEmitter();
   title: string;
-  options: [];
 
   constructor() { }
 
   ngOnInit() {
-    this.options = this.filterItem.options;
     let titleObj: {name, value};
-    titleObj = this.options.filter((item: {value, name}) => this.filterItem.defaultValue === item.value )[0];
+    titleObj = this.filterItem.options.length ? this.filterItem.options.filter(
+        (item: {value, name}) => this.filterItem.defaultValue === item.value )[0] : {name: 'option', value: -1};
     this.title = titleObj.name;
   }
 
@@ -29,6 +28,14 @@ export class DropdownFilterComponent {
   selectIt = (i, event) => {
     this.filterVal.emit(i);
     event.preventDefault();
+  }
+
+  objReady = (el: any) => {
+    return (typeof(el) !== 'undefined') ? true : false;
+  }
+
+  getOptions = (el: any) => {
+    return el.options.length ? el.options : [];
   }
 
 }
