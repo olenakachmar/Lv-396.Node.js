@@ -1,0 +1,62 @@
+<button type="button" class="btn btn-outline-primary text-reassign" (click)="openModal(template, $event)">RE-ASSIGN</button>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">CREATE TASK</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" >
+    <div class="modal-grid">
+      <div class="name-grid">
+        <input class="form-control" type="text" placeholder={{item.name}}>
+      </div>
+      <div class="btn-group filter-grid" dropdown>
+        <button type="button" dropdownToggle class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{item.status.name}}
+        </button>
+        <div *dropdownMenu class="dropdown-menu">
+          <a class="dropdown-item" href="#">LOW</a>
+          <a class="dropdown-item" href="#">NORMAL</a>
+          <a class="dropdown-item" href="#">HIGHT</a>
+        </div>
+      </div>
+      <div class="btn-group assign-grid" dropdown>
+        <button type="button" dropdownToggle class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Assign To
+        </button>
+        <div *dropdownMenu class="dropdown-menu">
+          <a class="dropdown-item" href="#">1</a>
+          <a class="dropdown-item" href="#">2</a>
+          <a class="dropdown-item" href="#">3</a>
+        </div>
+      </div>
+      <div class=" btn-group date-grid">
+        <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{item.date}}
+        </button>
+      </div>
+      <div class="text-grid">
+        <textarea class="form-control" aria-label="With textarea">{{item.content}}</textarea>
+      </div>
+      <div class="fromName-grid">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">FROM</span>
+          </div>
+          <input type="text" disabled class="form-control" placeholder={{item.author}} aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+      </div>
+      <div class="reassignFrom-grid"><div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">REASSIGN FROM</span>
+        </div>
+        <input type="text" disabled class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+      </div></div>
+      <div class="addTask-grid">
+        <button type="button" class="btn btn-primary">ADD TASK</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
