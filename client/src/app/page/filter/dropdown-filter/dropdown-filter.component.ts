@@ -16,8 +16,8 @@ export class DropdownFilterComponent implements OnInit {
 
   ngOnInit() {
     let titleObj: {name, value};
-    titleObj = this.filterItem.options.length ? this.filterItem.options.filter(
-        (item: {value, name}) => this.filterItem.defaultValue === item.value )[0] : {name: 'option', value: -1};
+    titleObj = this.filterItem.options.filter(
+        (item: {value, name}) => this.filterItem.defaultValue === item.value )[0];
     this.title = titleObj.name;
   }
 
@@ -28,14 +28,6 @@ export class DropdownFilterComponent implements OnInit {
   selectIt = (i, event) => {
     this.filterVal.emit(i);
     event.preventDefault();
-  }
-
-  objReady = (el: any) => {
-    return (typeof(el) !== 'undefined') ? true : false;
-  }
-
-  getOptions = (el: any) => {
-    return el.options.length ? el.options : [];
   }
 
 }
