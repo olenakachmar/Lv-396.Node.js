@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-link-to-profile',
@@ -9,12 +9,13 @@ export class LinkToProfileComponent implements OnInit {
   @Input() label: string;
   @Input() info: string;
 
-  constructor() { }
+  constructor() {
+  }
+  onClickEvent(): boolean {
+    return false;
+  }
 
   ngOnInit() {
   }
 
-  onClickEvent(): boolean {
-    return false;
-  }
 }
