@@ -12,6 +12,8 @@ import { TasksService } from './common/tasks.service';
 export class PageComponent implements OnInit {
   filters: Filter[];
   tasks: Task[];
+  makeShow: boolean;
+  taskToEdit: Task;
 
   jsonData;
 
@@ -20,6 +22,7 @@ export class PageComponent implements OnInit {
   ngOnInit() {
     this.getFilters();
     this.getTasks();
+    this.makeShow = false;
 
     this.jsonData = {
       menuRight: [
@@ -85,7 +88,7 @@ export class PageComponent implements OnInit {
 
   filterGrids = () => {
     return this.filters.length ? ('filter-col-' + this.filters.length) : '';
-  }
+  };
 
   selectFilterOption = (data: any) => {
     if (this.filters.length) {
@@ -98,6 +101,19 @@ export class PageComponent implements OnInit {
             options: item.options
           } : item
       );
+    }
+  };
+  show = (data: any) => {
+    this.makeShow = true;
+    this.taskToEdit = {
+      id: -1,
+      name: '',
+      excerpt: '',
+      status: {name: 'normal', value: 0},
+      type: {name: 'task', value: 0},
+      date: '',
+      author: '',
+      content: ''
     }
   }
 }

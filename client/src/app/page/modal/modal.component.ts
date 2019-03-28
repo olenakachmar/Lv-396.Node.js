@@ -10,10 +10,15 @@ export class ModalComponent implements OnInit {
 
   @Input() item: any;
   modalRef: BsModalRef;
+  @Input() show: boolean;
+
 
   constructor(private modalService: BsModalService) {}
 
   ngOnInit() {
+    if (this.show == true) {
+      this.openModal('#template');
+    }
   }
 
   openModal(template: TemplateRef<any>) {
