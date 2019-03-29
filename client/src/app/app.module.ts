@@ -32,7 +32,7 @@ import { ModalComponent } from './page/modal/modal.component';
 import { UserImageComponent } from './page/user-bar-info/user-image/user-image.component';
 import { LinkToProfileComponent } from './page/user-bar-info/link-to-profile/link-to-profile.component';
 import { UserBarInfoComponent } from './page/user-bar-info/user-bar-info.component';
-import { AddTaskButtonComponent } from './page/add-task-button/add-task-button.component';
+
 
 @NgModule({
   declarations: [
@@ -51,8 +51,7 @@ import { AddTaskButtonComponent } from './page/add-task-button/add-task-button.c
     ModalComponent,
     UserImageComponent,
     LinkToProfileComponent,
-    UserBarInfoComponent,
-    AddTaskButtonComponent,
+    UserBarInfoComponent
   ],
   imports: [
     BrowserModule,

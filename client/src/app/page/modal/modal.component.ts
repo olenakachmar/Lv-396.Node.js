@@ -1,5 +1,5 @@
-import { Component, OnInit, TemplateRef, Input } from '@angular/core';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import {Component, OnInit, TemplateRef, Input} from '@angular/core';
+import {BsModalService, BsModalRef} from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-modal',
@@ -9,9 +9,12 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 export class ModalComponent implements OnInit {
 
   @Input() item: any;
+  @Input() modalType: string;
+
   modalRef: BsModalRef;
 
-  constructor(private modalService: BsModalService) {}
+  constructor(private modalService: BsModalService) {
+  }
 
   ngOnInit() {
   }

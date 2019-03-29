@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { Filter } from './common/filter';
 import { FiltersService } from './common/filters.service';
 import { Task } from './common/task';
 import { TasksService } from './common/tasks.service';
+
 
 @Component({
   selector: 'app-page',
@@ -12,6 +13,8 @@ import { TasksService } from './common/tasks.service';
 export class PageComponent implements OnInit {
   filters: Filter[];
   tasks: Task[];
+  item:object = new Task();
+
 
   jsonData;
 

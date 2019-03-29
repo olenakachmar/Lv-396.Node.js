@@ -12,7 +12,9 @@
         <div class="container-fluid list-wrapper">
           <app-list [tasks]="tasks | filterTasksBy: filters"></app-list>
         </div>
-        <app-add-task-button></app-add-task-button>
+        <div class="re-assign">
+          <app-modal [modalType]="'CREATE'" [item]="item"></app-modal>
+        </div>
       </main>
     </div>
   </section>
