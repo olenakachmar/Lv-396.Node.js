@@ -5,6 +5,20 @@ import { NavbarProfileComponent } from './navbar-profile.component';
 describe('NavbarProfileComponent', () => {
   let component: NavbarProfileComponent;
   let fixture: ComponentFixture<NavbarProfileComponent>;
+  const menuRight = [
+    {
+      id: 1,
+      href: '#1',
+      title: 'Log Out',
+      isCurrent: false,
+    },
+    {
+      id: 2,
+      href: '#2',
+      title: 'Edit Profile',
+      isCurrent: false,
+    }
+  ];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -16,6 +30,7 @@ describe('NavbarProfileComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NavbarProfileComponent);
     component = fixture.componentInstance;
+    component.menuRight = menuRight;
     fixture.detectChanges();
   });
 
