@@ -1,13 +1,19 @@
 <div class="container-fluid main-wrapper">
   <header class="container-fluid header-navbar">
-      Paste custom header tag here
+    <app-navbar [menuBurger]="jsonData.menuBurger" [menuRight]="jsonData.menuRight"></app-navbar>
   </header>
   <section class="container page-wrapper">
-    <div class="col-lg-4 sidebar-wrapper">
-      Paste custom sidebar tag here
+    <div class="row">
+      <div class="col-lg-4 sidebar-wrapper">
+        <app-user-bar-info class="user-bar-info" [userinfo]="jsonData.userinfo"></app-user-bar-info>
+      </div>
+      <main class="col-lg-8 content-wrapper">
+        <app-filter class="container-fluid filter-wrapper {{filterGrids()}}" [cssClass]="filterGrids()" [filters]="filters" (getFilter)="selectFilterOption($event)"></app-filter>
+        <div class="container-fluid list-wrapper">
+          <app-list [tasks]="tasks | filterTasksBy: filters"></app-list>
+        </div>
+        <app-add-task-button></app-add-task-button>
+      </main>
     </div>
-    <main class="col-lg-8 content-wrapper">
-      Paste Page content here
-    </main>
   </section>
 </div>

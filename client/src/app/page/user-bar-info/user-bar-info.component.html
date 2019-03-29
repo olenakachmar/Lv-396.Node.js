@@ -1,0 +1,18 @@
+<div class="user-bar-info">
+  <div class="photo">
+    <app-user-image></app-user-image>
+  </div>
+  <input type="checkbox" id="bt"/>
+  <label class="check-button" for="bt">Show more</label>
+  <div class="toggle-show">
+    <div class="main-user-info">
+      <div>{{userinfo.name}} {{userinfo.surname}}</div>
+      <div>{{userinfo.position}}</div>
+    </div>
+    <app-link-to-profile class="additional-info" [info]="userinfo.managerName + ' ' + userinfo.managerSurname"
+                         [label]="'My manager'"></app-link-to-profile>
+    <app-link-to-profile class="additional-info" [info]="userinfo.departament"
+                         [label]="'My department'"></app-link-to-profile>
+  </div>
+</div>
+

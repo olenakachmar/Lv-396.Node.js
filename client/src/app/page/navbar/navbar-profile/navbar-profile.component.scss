@@ -1,0 +1,63 @@
+$textColor: #ffff;
+$bg-color: #F1F9FF;
+
+a {
+  border:0;
+  text-decoration:none;
+  color: $textColor;
+  font: 10px Arial, sans-serif;
+  font-weight: normal;
+  line-height: 20px;
+}
+
+.user-info__wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color: $textColor;
+}
+.user-info__notifications :last-child {
+  cursor: default;
+}
+.user-info__btn {
+  position: relative;
+  display: flex;
+  width: 67%;
+  height: 100%;
+  a {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+  }
+  ul {
+    position: absolute;
+    left: -115px!important;
+    width: 240px;
+    border-radius: 1px;
+    border-color: #BCE0FD;
+    padding: 0;
+    margin-top: 25px;
+    li {
+      position: relative;
+      content: "";
+    }
+    li a {
+      font: normal 14px arial, sans-serif;
+      color: #2699FB;
+      padding: 17px;
+    }
+  }
+}
+
+.dropdown-menu li a:hover {
+  background: $bg-color!important;
+}
+.dropdown-menu li a{
+  position: relative;
+}
+.dropdown-menu li.current a::after {
+  position: absolute;
+  content: url('../../../../assets/img/symbol_ok.svg');
+  left: 200px;
+}

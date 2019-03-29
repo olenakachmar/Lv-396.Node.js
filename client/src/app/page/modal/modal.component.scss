@@ -1,0 +1,164 @@
+$modal-back-color: #F1F9FF;
+$modal-text-color: #2699FB;
+$modal-border-color: #7FC4FD;
+
+.text-reassign {
+  font-size: 14px;
+}
+
+::ng-deep .modal-content {
+  background-color: $modal-back-color;
+  border-radius: 0%;
+  color: $modal-text-color;
+  font-family: Arial, Regular;
+}
+
+::ng-deep .modal-content {
+  border: none;
+}
+
+.modal-header {
+  border-bottom:  none;
+}
+
+.modal-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 10px;
+}
+
+.name-grid {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 1;
+}
+
+.text-grid {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 3;
+}
+
+.fromName-grid{
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 4;
+  grid-row-end: 4;
+}
+
+.reassignFrom-grid {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 5;
+  grid-row-end: 5;
+}
+
+.addTask-grid {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  margin-left: 34px;
+}
+
+.name-grid input, .filter-grid button, .assign-grid button, .date-grid button,
+.text-grid textarea {
+  height: 50px;
+  border: $modal-border-color 1px solid;
+  border-radius: 0%;
+  background-color: #fff;
+  width: 100%;
+  font-size: 14px;
+  text-align: left;
+}
+
+.input-group-prepend, .form-control {
+  height: 50px;
+  border-radius: 0%;
+  background-color: #fff;
+  color: $modal-text-color;
+  border: #BCE0FD solid 1px;
+}
+
+.input-group-prepend span{
+  width: 138px;
+  background-color: #BCE0FD;
+  border-radius: 0%;
+  color: $modal-text-color;
+  font-size: 12px;
+  font-weight: bold;
+  border:none;
+}
+
+.name-grid input::placeholder {
+  color:$modal-text-color;
+}
+
+.fromName-grid input::placeholder, .reassignFrom-grid input::placeholder{
+  color: #BCE0FD;
+  font-size: 14px;
+}
+
+.text-grid textarea {
+  height: 120px;
+}
+
+.addTask-grid button {
+  font-size: 12px;
+  height: 50px;
+  border-radius: 0%;
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+.dropdown-item{
+  color: $modal-text-color;
+  font-size: 14px;
+}
+
+.btn-outline-primary:hover {
+  color:$modal-text-color;
+}
+.dropdown-toggle::after {
+  position: absolute;
+  display: block;
+  right: 20px;
+  top: 17px;
+  width: 16px;
+  height: 16px;
+  border: 0;
+  background: url('../../../assets/img/arrow_down.svg') center center no-repeat;
+}
+.dropdown-toggle[aria-expanded='true']::after{
+  background: url('../../../assets/img/arrow_up.svg') center center no-repeat;
+}
+::ng-deep .modal-dialog {
+  top: 30px;
+}
+.close {
+  position: absolute;
+  top: -25px;
+  right: -25px;
+  background-color: $modal-back-color;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  opacity: 1;
+}
+
+.close span {
+  position: absolute;
+  top: 5px;
+  left: 11px;
+  color: $modal-border-color;
+  font-size: 32px;
+}
+
+@media(max-width:610px) {
+  .close {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    background-color: transparent;
+  }
+}
