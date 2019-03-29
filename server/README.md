@@ -57,7 +57,8 @@ header:
 **DELETE /api/v1/users** <br/>
 ## Request
 header: 
-* Authorization: JWT Token in format "Bearer ${token}"
+* Authorization: JWT Token in format "Bearer ${token}" <br/>
+
 body: 
 * id: ID of user to be deleted
 ## Response
@@ -70,7 +71,8 @@ body:
 **PUT /api/v1/users** <br/>
 ## Request
 header: 
-* Authorization: JWT Token in format "Bearer ${token}"
+* Authorization: JWT Token in format "Bearer ${token}" <br/>
+
 body: 
 * id: ID of the user to be updated
 * password (optional): New password for user
