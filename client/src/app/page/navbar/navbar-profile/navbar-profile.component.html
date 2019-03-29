@@ -9,7 +9,7 @@
       <img src="{{ avatar }}" alt="avatar">
     </a>
     <ul id="dropdown-disabled-item" *dropdownMenu class="dropdown-menu" role="menu"
-      aria-labelledby="button-disabled-item">
+        aria-labelledby="button-disabled-item">
       <li role="menuitem" *ngFor="let link of menuRight; let i = index" [ngClass]="{'current': link.isCurrent}" (click)="changeCurrent(i, menuRight)">
         <a class="dropdown-item" href="{{link.href}}">{{link.title}}</a>
       </li>
