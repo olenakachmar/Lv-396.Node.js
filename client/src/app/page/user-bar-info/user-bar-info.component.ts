@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 
 @Component({
   selector: 'app-user-bar-info',
@@ -8,9 +8,9 @@ import { Component, OnInit, Input } from '@angular/core';
 export class UserBarInfoComponent implements OnInit {
   @Input() userinfo: {};
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
-
 }
