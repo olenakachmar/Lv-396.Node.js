@@ -6,6 +6,21 @@ describe('DropdownFilterComponent', () => {
   let component: DropdownFilterComponent;
   let fixture: ComponentFixture<DropdownFilterComponent>;
 
+  // const InputInfo = {
+  const filterItem = {
+      id: 0,
+      name: 'type',
+      isCalendar: false,
+      defaultValue: 0,
+      options: [
+        { name: 'Show all tasks', value: -1 },
+        { name: 'Show delegates tasks only', value: 0 },
+        { name: 'Show issues only', value: 1 },
+      ],
+    };
+  const id = 0;
+  const cssClassEl = 'width-100';
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ DropdownFilterComponent ]
@@ -16,6 +31,9 @@ describe('DropdownFilterComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DropdownFilterComponent);
     component = fixture.componentInstance;
+    component.filterItem = filterItem;
+    component.id = id;
+    component.cssClassEl = cssClassEl;
     fixture.detectChanges();
   });
 
