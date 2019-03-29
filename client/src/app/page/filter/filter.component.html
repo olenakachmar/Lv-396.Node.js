@@ -1,3 +1,3 @@
 <div class="filter-item child-{{cssClass}}" *ngFor="let filterItem of filters; let i = index">
-  <app-dropdown-filter *ngIf="filterItem.isCalendar == false" class="filter-item-container" [cssClassEl]="makeFullWidth()" [filterItem]="filterItem" [id]="i" (filterVal)="this.getFilter.emit({'filterId': i, 'optionId': $event})"></app-dropdown-filter>
+  <app-dropdown-filter *ngIf="filterItem.isCalendar == false" class="filter-item-container" [cssClassName]="makeFullWidth()" [filterItem]="filterItem" [id]="i" (filterVal)="this.getFilter.emit({'filterId': i, 'optionId': $event})"></app-dropdown-filter>
 </div>

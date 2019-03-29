@@ -3,9 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ListComponent } from './list.component';
 import { AccordionComponent } from './accordion/accordion.component';
 
-// import { AccordionModule } from 'ngx-bootstrap/accordion';
-// import { ModalModule } from 'ngx-bootstrap/modal';
-
 import { Task } from '../common/task';
 
 describe('ListComponent', () => {
@@ -76,10 +73,6 @@ describe('ListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        // AccordionModule.forRoot(),
-        // ModalModule.forRoot()
-      ],
       declarations: [
         AccordionComponent,
         ListComponent

@@ -6,7 +6,6 @@ describe('LinkToProfileComponent', () => {
   let component: LinkToProfileComponent;
   let fixture: ComponentFixture<LinkToProfileComponent>;
   const label = '';
-  const info = '';
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

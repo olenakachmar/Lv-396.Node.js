@@ -5,8 +5,6 @@ import { DropdownFilterComponent } from './dropdown-filter.component';
 describe('DropdownFilterComponent', () => {
   let component: DropdownFilterComponent;
   let fixture: ComponentFixture<DropdownFilterComponent>;
-
-  // const InputInfo = {
   const filterItem = {
       id: 0,
       name: 'type',
@@ -19,7 +17,7 @@ describe('DropdownFilterComponent', () => {
       ],
     };
   const id = 0;
-  const cssClassEl = 'width-100';
+  const cssClassName = 'width-100';
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -33,7 +31,7 @@ describe('DropdownFilterComponent', () => {
     component = fixture.componentInstance;
     component.filterItem = filterItem;
     component.id = id;
-    component.cssClassEl = cssClassEl;
+    component.cssClassName = cssClassName;
     fixture.detectChanges();
   });
 
