@@ -7,7 +7,6 @@ In order to succesfully start the server you must prepare this environment varia
 # ENDPOINTS
 **POST /api/v1/auth/signup** <br/>
 ## Request
-['login', 'password', 'firstName', 'lastName', 'position', 'email', 'phone', 'type', 'manager', 'teamlead', 'department', 'photoURL', 'hr']
 body: 
 * login: Login of new user
 * password: Password of new user
