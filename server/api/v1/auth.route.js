@@ -2,6 +2,9 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const User = require('../../models/user.model');
 const { JWT_SECRET } = require('../../config/config');
+const config = require('../../config/config');
+
+const { arrKeys } = config;
 
 const router = express.Router();
 
@@ -19,7 +22,6 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/signup', (req, res) => {
-  const arrKeys = ['login', 'password', 'firstName', 'lastName', 'position', 'email', 'phone', 'type', 'manager', 'teamlead', 'department', 'photoURL', 'hr'];
   const parameters = arrKeys.reduce((obj, el) => {
     if (req.body[el]) {
       return { ...obj, [el]: req.body[el] };
@@ -27,18 +29,16 @@ router.post('/signup', (req, res) => {
     return { ...obj };
   }, {});
 
-  const newUser = User();
-  Object.assign(newUser, parameters);
+  const newUser = User({ ...parameters });
   newUser.save((err, user) => {
     if (err) {
       res.status(500).json({
         err,
       });
-    } else {
-      res.status(201).json({
-        user,
-      });
     }
+    res.status(201).json({
+      user,
+    });
   });
 });
 
