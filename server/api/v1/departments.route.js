@@ -17,23 +17,17 @@ router.get('/:title', (req, res) => {
   }).populate('employees');
 });
 router.post('', async (req, res) => {
-  if (req.body.title && req.body.employees) {
-    const department = await Department.findOne({ title: req.body.title });
-    department.employees = [...department.employees, req.body.employees];
-    department.save((err) => {
-      if (err) {
-        res.json({
-          error: err,
-        });
-        res.end();
-      }
-      res.status(201).send('User added to department');
-    });
-  } else {
-    res.json({
-      err: 'You should enter title of department and id of employee',
-    });
-  }
+  const department = await Department.findOne({ title: req.body.title });
+  department.employees = [...department.employees, req.body.employees];
+  department.save((err) => {
+    if (err) {
+      res.json({
+        error: err,
+      });
+      res.end();
+    }
+    res.status(201).send('User added to department');
+  });
 });
 
 module.exports = router;

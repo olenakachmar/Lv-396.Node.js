@@ -22,34 +22,23 @@ router.get('/list', (req, res) => {
 });
 
 router.post('/add', (req, res) => {
-  if (req.body.title && req.body.type
-      && req.body.priority && req.body.value
-      && req.body.assignTo && req.body.ownerID) {
-    const newIssue = Issues({
-      title: req.body.title,
-      type: req.body.type,
-      created: new Moment().subtract(10, 'days').calendar(),
-      priority: req.body.priority,
-      assignTo: req.body.assignTo,
-      value: req.body.value,
-      ownerID: req.body.ownerID,
-    });
-    newIssue.save((err, issue) => {
-      if (err) {
-        res.json({
-          error: err,
-        });
-        res.end();
-      }
-      res.status(201).json({
-        issue,
+  const newIssue = Issues({
+    title: req.body.title,
+    type: req.body.type,
+    created: new Moment().subtract(10, 'days').calendar(),
+    priority: req.body.priority,
+    assignTo: req.body.assignTo,
+    value: req.body.value,
+    ownerID: req.body.ownerID,
+  });
+  newIssue.save((err) => {
+    if (err) {
+      res.json({
+        error: err,
       });
-    });
-  } else {
-    res.status(400).json({
-      err: 'You must provide all required parameters',
-      required: 'title, type, priority, value, assignTo, ownerID',
-    });
-  }
+      res.end();
+    }
+    res.status(201).send('Issue added');
+  });
 });
 module.exports = router;
