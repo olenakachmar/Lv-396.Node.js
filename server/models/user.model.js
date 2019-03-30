@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
@@ -13,8 +14,77 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  position: {
+    type: String,
+    required: true,
+  },
+  manager: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  },
+  teamlead: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  },
+  department: {
+    type: Schema.Types.ObjectId,
+    ref: 'Department',
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
+  },
+  phone: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  contacts: [
+    {
+      contact_name: {
+        type: String,
+        required: true,
+      },
+      contact_value: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  photoURL: {
+    type: String,
+  },
+  hr: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  },
+  type: {
+    type: String,
+    required: true,
+  },
+  dates: [
+    {
+      topic: {
+        type: String,
+        required: true,
+      },
+      date: {
+        type: Date,
+        required: true,
+      },
+    },
+  ],
 });
-
 
 function hashPassword(next) {
   if (!this.isModified('password')) return next();
@@ -27,6 +97,7 @@ function hashPassword(next) {
   });
   return 1;
 }
+
 UserSchema.pre('save', hashPassword);
 
 function checkPassword(passwordToCheck) {
@@ -34,6 +105,28 @@ function checkPassword(passwordToCheck) {
 }
 
 UserSchema.methods.checkPassword = checkPassword;
+
+UserSchema.set('toObject', {
+  transform(doc, ret) {
+    const object = ret;
+    delete object.password;
+    delete object.login;
+    delete object.type;
+    delete object.__v;
+    return object;
+  },
+});
+
+UserSchema.set('toJSON', {
+  transform(doc, ret) {
+    const object = ret;
+    delete object.password;
+    delete object.login;
+    delete object.type;
+    delete object.__v;
+    return object;
+  },
+});
 
 const User = mongoose.model('User', UserSchema);
 module.exports = User;
