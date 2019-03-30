@@ -1,6 +1,9 @@
 const express = require('express');
 const passport = require('../../config/passport');
 const User = require('../../models/user.model');
+const config = require('../../config/config');
+
+const { arrKeys } = config;
 
 const router = express.Router();
 
@@ -13,9 +16,8 @@ router.route('/users')
       .exec((err, users) => {
         if (err) {
           res.status(500).json({ err });
-        } else {
-          res.json(users);
         }
+        res.json(users);
       });
   })
   .delete(passport.authenticate('jwt', { session: false }), (req, res) => {
@@ -34,7 +36,6 @@ router.route('/users')
   })
   .put(passport.authenticate('jwt', { session: false }), (req, res) => {
     const { id } = req.body;
-    const arrKeys = ['login', 'password', 'firstName', 'lastName', 'position', 'email', 'phone', 'type', 'manager', 'teamlead', 'department', 'photoURL', 'hr'];
     const user = arrKeys.reduce((obj, el) => {
       if (req.body[el]) {
         return { ...obj, [el]: req.body[el] };
@@ -46,7 +47,7 @@ router.route('/users')
       if (!doc) {
         res.status(404).json({ err: 'User not found' });
       } else {
-        Object.assign(doc, user);
+        doc = { ...doc, ...user };
         doc.save();
         res.json(doc);
       }
