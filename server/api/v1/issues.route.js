@@ -13,11 +13,10 @@ router.get('/list', (req, res) => {
     (err, issues) => {
       if (err) {
         res.status(500).json({ err });
-      } else if (!issues) {
+      } else if (!priority && !type) {
         res.status(404).json({ err: 'Issue not found' });
-      } else {
-        res.json(issues);
       }
+      res.json(issues);
     }).populate(['assignTo', 'ownerID']);
 });
 

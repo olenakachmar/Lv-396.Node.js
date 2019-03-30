@@ -11,9 +11,8 @@ router.get('/:title', (req, res) => {
       res.status(500).json({ err });
     } else if (!department) {
       res.status(404).json({ err: 'Department not found' });
-    } else {
-      res.json(department);
     }
+    res.json(department);
   }).populate('employees');
 });
 router.post('', async (req, res) => {
