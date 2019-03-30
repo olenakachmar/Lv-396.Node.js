@@ -1,18 +1,23 @@
-<nav class="navbar navbar-dark bg-primary p-0">
-  <div class="container-fluid">
+<div class="container-fluid p-0">
+  <nav class="navbar navbar-dark bg-primary p-0">
     <div class="col-3 d-flex">
-      <a href="javascript:void(0);"  (click) = "isActive =! isActive" ><img src='assets/img/navbar-menu-mob.png' alt="menu"></a>
-      <a href="#"><img src='assets/img/logo-mob.png' alt="main-page"></a>
-      <div class="hide-menu" [ngClass] = "{'active': isActive}">
+      <a href="javascript:void(0)" (click)="isActive = !isActive">
+        <img class="btn-menu" src="assets/img/navbar-menu-desk.png" alt="menu">
+      </a>
+      <a href="javascript:void(0)"  [routerLink]="[ '/profile' ]" (click)="homePage(); isActive = false">
+        <img class="logo" src='assets/img/logo-desk.png' alt="main-page">
+      </a>
+      <div class="hide-menu" [ngClass]="{'active': isActive}">
         <ul class="hide-menu__list">
-          <li class="hide-menu__item"  *ngFor="let link of menuBurger; let i = index" [ngClass]="{'current': link.isCurrent}" (click)="changeCurrent(i, menuBurger)">
-            <a href="{{ link.href }}">{{ link.title }}</a>
+          <li class="hide-menu__item" *ngFor="let link of jsonData.menuBurger; let i = index"
+            [ngClass]="{'current': link.isCurrent}" (click)="changeCurrent(i, jsonData.menuBurger)">
+            <a href="javascript:void(0)" [routerLink]="[ link.router ]" (click)="isActive = !isActive">{{ link.title }}</a>
           </li>
         </ul>
       </div>
     </div>
-    <div class="col-3 col-lg-2 d-flex ml-auto">
-      <app-navbar-profile class="user-info" [menuRight]="menuRight"></app-navbar-profile>
+    <div class="col-5 col-md-4 col-lg-3 d-flex ml-auto">
+      <app-navbar-profile class="user-info" [menuRight]="jsonData.menuRight"></app-navbar-profile>
     </div>
-  </div>
-</nav>
+  </nav>
+</div>

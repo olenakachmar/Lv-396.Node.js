@@ -1,4 +1,4 @@
-<div class="container-fluid main-wrapper">
+<!-- <div class="container-fluid main-wrapper">
   <header class="container-fluid header-navbar">
     <app-navbar [menuBurger]="jsonData.menuBurger" [menuRight]="jsonData.menuRight"></app-navbar>
   </header>
@@ -16,4 +16,15 @@
       </main>
     </div>
   </section>
+</div> -->
+<div class="container-fluid main-wrapper">
+  <header class="container-fluid header-navbar">
+    <app-navbar></app-navbar>
+  </header>
+  <section class="container page-wrapper">
+    <div class="row">
+      <router-outlet></router-outlet>
+    </div>
+  </section>
 </div>
+

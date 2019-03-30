@@ -1,51 +1,99 @@
+@import "./node_modules/bootstrap/scss/mixins";
+@import "./node_modules/bootstrap/scss/functions";
+@import "./node_modules/bootstrap/scss/variables";
+
 $textColor: #ffff;
+$primary-color: #2699FB;
+$case-color: #BCE0FD;
 $bg-color: #F1F9FF;
 
 a {
-  border:0;
-  text-decoration:none;
-  color: $textColor;
-  font: 10px Arial, sans-serif;
-  font-weight: normal;
-  line-height: 20px;
+  border: none;
+  text-decoration: none;
+}
+p {
+  padding: 0;
+  margin: 0;
 }
 
-.user-info__wrapper {
+.wrapper {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  color: $textColor;
-}
-.user-info__notifications :last-child {
-  cursor: default;
-}
-.user-info__btn {
-  position: relative;
-  display: flex;
-  width: 67%;
-  height: 100%;
-  a {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
+  height: 70px;
+  line-height: 70px;
+  .notifications {
+		width: 100%;
+    text-align: right;
+    cursor: default;
+		@include media-breakpoint-up(md) {
+			width: 35%;
+			text-align: left;
+		}
+		&__icon {
+			height: 16px;
+      width: 16px;
+			@include media-breakpoint-up(md) {
+				height: 20px;
+				width: 20px;
+      }    
+		}
+		&__number {
+			font: normal 14px arial, sans-serif;
+			@include media-breakpoint-up(md) {
+      	font: 16px Arial, sans-serif;
+      }    
+		}
   }
-  ul {
-    position: absolute;
-    left: -115px!important;
-    width: 240px;
-    border-radius: 1px;
-    border-color: #BCE0FD;
-    padding: 0;
-    margin-top: 25px;
-    li {
-      position: relative;
-      content: "";
+  .right-navbar {
+		display: flex;
+    height: 100%;
+		width: 65%;
+    &__btn {
+			display: flex;
+			flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      width: 100%;
+      @include media-breakpoint-up(md) {
+        justify-content: space-between;
+      } 
     }
-    li a {
-      font: normal 14px arial, sans-serif;
-      color: #2699FB;
+    &__name {
+      display: none;
+      @include media-breakpoint-up(md) {
+        display: flex;
+        font: 14px Arial, sans-serif;
+        color: #ffff;
+      }    
+    }
+    &__avatar {
+      height: 25px;
+      width: 25px;
+      border-radius: 50%;
+      margin-left: 10px;
+			@include media-breakpoint-up(md) {
+				height: 30px;
+        width: 30px;
+        margin-left: auto;
+      }    
+    }
+    &__menu {
+      margin: 0!important;
+      padding: 0;
+      right: 0 !important;
+      left: auto!important;
+      width: 240px;
+      border-color: $case-color;
+			border-radius: 1px;
+    }
+    &__item {
+      font: normal 12px arial, sans-serif;
+      color: $primary-color;
       padding: 17px;
+      @include media-breakpoint-up(md) {
+				font: normal 14px arial, sans-serif;
+      }    
     }
   }
 }
@@ -61,3 +109,4 @@ a {
   content: url('../../../../assets/img/symbol_ok.svg');
   left: 200px;
 }
+

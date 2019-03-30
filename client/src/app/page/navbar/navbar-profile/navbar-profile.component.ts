@@ -31,5 +31,4 @@ export class NavbarProfileComponent implements OnInit {
       links[index].isCurrent = true;
     }
   }
-
 }
