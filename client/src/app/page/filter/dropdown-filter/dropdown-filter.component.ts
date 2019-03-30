@@ -8,7 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class DropdownFilterComponent implements OnInit {
   @Input() filterItem: {isCalendar, defaultValue, options };
   @Input() id: number;
-  @Input() cssClass: string;
+  @Input() cssClassName: string;
   @Output() filterVal = new EventEmitter();
   title: string;
 
