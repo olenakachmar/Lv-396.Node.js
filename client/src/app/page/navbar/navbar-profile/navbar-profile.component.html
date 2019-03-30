@@ -4,14 +4,14 @@
     <span class="notifications__number">({{  notificationsNumber }})</span>
   </div>
   <div class="right-navbar btn-group" dropdown>
-	  <a href="javascript:void(0)" class="right-navbar__btn" dropdownToggle>
-	    <span class="right-navbar__name"> {{ name }} {{ surname }} </span>
-	    <img class="right-navbar__avatar" src="{{ avatar }}" alt="avatar">
-	  </a>
-	  <ul class="right-navbar__menu dropdown-menu" id="dropdown-disabled-item" *dropdownMenu role="menu"
-	    aria-labelledby="button-disabled-item">
-	    <li class="right-navbar__row" role="menuitem" *ngFor="let link of menuRight; let i = index"
-	      [ngClass]="{'current': link.isCurrent}" (click)="changeCurrent(i, menuRight)">
+    <a href="javascript:void(0)" class="right-navbar__btn" dropdownToggle>
+      <span class="right-navbar__name"> {{ name }} {{ surname }} </span>
+      <img class="right-navbar__avatar" src="{{ avatar }}" alt="avatar">
+    </a>
+    <ul class="right-navbar__menu dropdown-menu" id="dropdown-disabled-item" *dropdownMenu role="menu"
+      aria-labelledby="button-disabled-item">
+      <li class="right-navbar__row" role="menuitem" *ngFor="let link of menuRight; let i = index"
+        [ngClass]="{'current': link.isCurrent}" (click)="changeCurrent(i, menuRight)">
         <a class="right-navbar__item dropdown-item" href="{{link.href}}">{{link.title}}</a>
       </li>
     </ul>

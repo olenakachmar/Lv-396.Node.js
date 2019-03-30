@@ -20,7 +20,6 @@ export class PageComponent implements OnInit {
   ngOnInit() {
     this.getFilters();
     this.getTasks();
-
     this.jsonData = {
       userinfo: {
         name: 'Name',

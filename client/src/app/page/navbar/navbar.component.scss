@@ -130,13 +130,13 @@ nav {
 .dropdown-menu li a:hover {
   background: $bg-color!important;
 }
-.dropdown-menu li a{
-  position: relative;
-}
 .dropdown-menu li.current a::after {
   position: absolute;
   content: url('../../../assets/img/symbol_ok.svg');
   left: 190px;
+}
+.dropdown-menu li a{
+  position: relative;
 }
 
 

@@ -4,14 +4,15 @@
       <a href="javascript:void(0)" (click)="isActive = !isActive">
         <img class="btn-menu" src="assets/img/navbar-menu-desk.png" alt="menu">
       </a>
-      <a href="javascript:void(0)"  [routerLink]="[ '/profile' ]" (click)="homePage(); isActive = false">
+      <a href="javascript:void(0)" [routerLink]="[ '/profile' ]" (click)="homePage(); isActive = false">
         <img class="logo" src='assets/img/logo-desk.png' alt="main-page">
       </a>
       <div class="hide-menu" [ngClass]="{'active': isActive}">
         <ul class="hide-menu__list">
           <li class="hide-menu__item" *ngFor="let link of jsonData.menuBurger; let i = index"
             [ngClass]="{'current': link.isCurrent}" (click)="changeCurrent(i, jsonData.menuBurger)">
-            <a href="javascript:void(0)" [routerLink]="[ link.router ]" (click)="isActive = !isActive">{{ link.title }}</a>
+            <a href="javascript:void(0)" [routerLink]="[ link.router ]"
+              (click)="isActive = !isActive">{{ link.title }}</a>
           </li>
         </ul>
       </div>
