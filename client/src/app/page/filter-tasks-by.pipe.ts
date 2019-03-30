@@ -14,18 +14,14 @@ export class FilterTasksByPipe implements PipeTransform {
 
   isTaskMatchesFilters = (task: any, filters: Filter[]) => {
     return filters.every( filter => {
-      let result = false;
       if (filter.defaultValue === -1) {
-        result = true;
-      } else {
-        const meta = filter.name;
-        if (meta === 'date') {
-          result = (filter.defaultValue === task[meta]) ? true : false;
-        } else {
-          result = (filter.defaultValue === task[meta].value) ? true : false;
-        }
+        return true;
       }
-      return result;
+      const meta = filter.name;
+      if (meta === 'date') {
+        return filter.defaultValue === task[meta];
+      }
+      return filter.defaultValue === task[meta].value;
     });
   }
 
