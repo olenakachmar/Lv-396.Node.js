@@ -20,19 +20,8 @@ import { LoggedOutGuard } from './app_guards/logged-out.guard';
 import { CheckDevGuard } from './app_guards/checkDev.guard';
 
 import { PageComponent } from './page/page.component';
-import { ListComponent } from './page/list/list.component';
-import { AccordionComponent } from './page/list/accordion/accordion.component';
-import { ItemComponent } from './page/list/accordion/item/item.component';
-import { FilterTasksByPipe } from './page/filter-tasks-by.pipe';
-import { DropdownFilterComponent } from './page/filter/dropdown-filter/dropdown-filter.component';
-import { FilterComponent } from './page/filter/filter.component';
 import { NavbarComponent } from './page/navbar/navbar.component';
 import { NavbarProfileComponent } from './page/navbar/navbar-profile/navbar-profile.component';
-import { ModalComponent } from './page/modal/modal.component';
-import { UserImageComponent } from './page/user-bar-info/user-image/user-image.component';
-import { LinkToProfileComponent } from './page/user-bar-info/link-to-profile/link-to-profile.component';
-import { UserBarInfoComponent } from './page/user-bar-info/user-bar-info.component';
-
 
 @NgModule({
   declarations: [
@@ -40,18 +29,8 @@ import { UserBarInfoComponent } from './page/user-bar-info/user-bar-info.compone
     PageComponent,
     HomeComponent,
     PageNotFoundComponent,
-    ListComponent,
-    AccordionComponent,
-    ItemComponent,
-    FilterTasksByPipe,
-    DropdownFilterComponent,
-    FilterComponent,
     NavbarComponent,
     NavbarProfileComponent,
-    ModalComponent,
-    UserImageComponent,
-    LinkToProfileComponent,
-    UserBarInfoComponent
   ],
   imports: [
     BrowserModule,

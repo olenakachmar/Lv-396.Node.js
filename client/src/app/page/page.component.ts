@@ -13,9 +13,6 @@ import { TasksService } from './common/tasks.service';
 export class PageComponent implements OnInit {
   filters: Filter[];
   tasks: Task[];
-  item: Task = new Task();
-
-
   jsonData;
 
   constructor(private filtersService: FiltersService, private tasksService: TasksService) { }
@@ -23,48 +20,7 @@ export class PageComponent implements OnInit {
   ngOnInit() {
     this.getFilters();
     this.getTasks();
-
     this.jsonData = {
-      menuRight: [
-        {
-          id: 1,
-          href: '#1',
-          title: 'Log Out',
-          isCurrent: false,
-        },
-        {
-          id: 2,
-          href: '#2',
-          title: 'Edit Profile',
-          isCurrent: false,
-        }
-      ],
-      menuBurger: [
-        {
-          id: 1,
-          href: '#1',
-          title: 'upcoming tasks',
-          isCurrent: true,
-        },
-        {
-          id: 2,
-          href: '#2',
-          title: 'contact info',
-          isCurrent: false,
-        },
-        {
-          id: 3,
-          href: '#3',
-          title: 'my profile',
-          isCurrent: false,
-        },
-        {
-          id: 4,
-          href: '#4',
-          title: 'create user',
-          isCurrent: false,
-        }
-      ],
       userinfo: {
         name: 'Name',
         surname: 'Surname',

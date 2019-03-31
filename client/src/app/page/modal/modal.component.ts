@@ -1,5 +1,6 @@
 import {Component, OnInit, TemplateRef, Input} from '@angular/core';
 import {BsModalService, BsModalRef} from 'ngx-bootstrap/modal';
+import {Task} from "../common/task";
 
 @Component({
   selector: 'app-modal',
