@@ -16,11 +16,11 @@ export class UserService {
     const options = this.getRequestOptions();
     return this.http.get('http://127.0.0.1:3000/api/v1/users', options)
     .map(response => {
-      const users = response.json();
-      return users.map((user) => new User(user));
+      const users : User[] = response.json();
+      return users;
     })
   }
-
+  
   getRequestOptions() {
     const headers = new Headers({
       Authorization: `Bearer ${token}`

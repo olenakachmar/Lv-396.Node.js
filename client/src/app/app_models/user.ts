@@ -1,4 +1,4 @@
-export class User {
+export interface User {
   id: number;
   firstName: string;
   lastName: string;
@@ -12,12 +12,6 @@ export class User {
   photoURL: string;
   hrID: number;
   date: object;
-  
-  constructor(values: Object = {}) {
-    for (const key in values) {
-      this[key] = values[key];
-    }
-  }
 }
   
   
