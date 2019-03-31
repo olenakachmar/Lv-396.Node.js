@@ -8,13 +8,12 @@
         <app-user-bar-info class="user-bar-info" [userinfo]="jsonData.userinfo"></app-user-bar-info>
       </div>
       <main class="col-lg-8 content-wrapper">
-        <app-filter class="container-fluid filter-wrapper {{filterGrids()}}" [cssClass]="filterGrids()" [filters]="filters" (getFilter)="selectFilterOption($event)"></app-filter>
+        <app-filter class="container-fluid filter-wrapper {{filterGrids()}}" [cssClass]="filterGrids()"
+                    [filters]="filters" (getFilter)="selectFilterOption($event)"></app-filter>
         <div class="container-fluid list-wrapper">
           <app-list [tasks]="tasks | filterTasksBy: filters"></app-list>
         </div>
-        <div class="re-assign">
-          <app-modal [modalType]="'CREATE'" [item]="item"></app-modal>
-        </div>
+        <app-modal [modalType]="'CREATE'" [item]="item"></app-modal>
       </main>
     </div>
   </section>

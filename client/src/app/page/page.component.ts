@@ -13,7 +13,7 @@ import { TasksService } from './common/tasks.service';
 export class PageComponent implements OnInit {
   filters: Filter[];
   tasks: Task[];
-  item:object = new Task();
+  item: Task = new Task();
 
 
   jsonData;
