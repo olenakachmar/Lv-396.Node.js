@@ -4,9 +4,9 @@ const Department = require('../../models/department.model');
 const router = express.Router();
 
 
-router.get('/:title', (req, res) => {
+router.get('/:title', async (req, res) => {
   const { title } = req.params;
-  Department.findOne({ title }, (err, department) => {
+  await Department.findOne({ title }, (err, department) => {
     if (err) {
       res.status(500).json({ err });
     } else if (!department) {
