@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { User } from '../app_models/user';
 
 const token = localStorage.getItem('token');
+const api = 'http://127.0.0.1:3000/api/v1';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class UserService {
 
   getAll(): Observable<User[]> {
     const options = this.getRequestOptions();
-    return this.http.get('http://127.0.0.1:3000/api/v1/users', options)
+    return this.http.get(`${api}/users`, options)
     .map(response => {
       const users : User[] = response.json();
       return users;
