@@ -8,11 +8,17 @@ import { Task } from './common/task';
 export class FilterTasksByPipe implements PipeTransform {
 
   transform(tasks: Task[], filters?: Filter[]): Task[] {
-    return (!filters || filters.every(f => f.defaultValue === -1)) ? tasks : tasks.filter(
-      task => this.isTaskMatchesFilters(task, filters));
+    if (!filters || this.isAllFiltersTurnedOff(filters)) {
+      return tasks;
+    }
+    return tasks.filter( task => this.isTaskMatchesFilters(task, filters));
   }
 
-  isTaskMatchesFilters = (task: any, filters: Filter[]) => {
+  private isAllFiltersTurnedOff = (filters: Filter[]) => {
+    return filters.every(filter => filter.defaultValue === -1);
+  }
+
+  private isTaskMatchesFilters = (task: any, filters: Filter[]) => {
     return filters.every( filter => {
       if (filter.defaultValue === -1) {
         return true;
