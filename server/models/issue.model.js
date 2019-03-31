@@ -13,7 +13,7 @@ const issueSchema = new Schema(
       ref: 'User',
       required: true,
     },
-    created: 'Moment',
+    created: { type: Number },
     value: { type: String, required: true },
     ownerID: {
       type: mongoose.Schema.Types.ObjectId,

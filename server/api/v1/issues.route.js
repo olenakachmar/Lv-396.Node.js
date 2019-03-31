@@ -1,36 +1,35 @@
 const express = require('express');
 const url = require('url');
-const Moment = require('moment');
 const Issues = require('../../models/issue.model');
 
 const router = express.Router();
 
-router.get('/list', (req, res) => {
+router.get('/list', async (req, res) => {
   const { query } = url.parse(req.url, true);
-  const { priority, type } = query;
+  const { priority, type, date } = query;
 
-  Issues.find({ $or: [{ priority }, { type }] },
+  await Issues.find({ $or: [{ priority }, { type }, { created: date }] },
     (err, issues) => {
       if (err) {
         res.status(500).json({ err });
-      } else if (!priority && !type) {
+      } else if (!priority && !type && !date) {
         res.status(404).json({ err: 'Issue not found' });
       }
       res.json(issues);
     }).populate(['assignTo', 'ownerID']);
 });
 
-router.post('/add', (req, res) => {
+router.post('/add', async (req, res) => {
   const newIssue = Issues({
     title: req.body.title,
     type: req.body.type,
-    created: new Moment().subtract(10, 'days').calendar(),
     priority: req.body.priority,
+    created: new Date().getTime(),
     assignTo: req.body.assignTo,
     value: req.body.value,
     ownerID: req.body.ownerID,
   });
-  newIssue.save((err) => {
+  await newIssue.save((err) => {
     if (err) {
       res.json({
         error: err,
