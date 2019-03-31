@@ -13,6 +13,3 @@ export interface User {
   hrID: number;
   date: object;
 }
-  
-  
-  
