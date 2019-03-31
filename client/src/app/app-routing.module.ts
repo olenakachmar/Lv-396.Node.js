@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { routes as childRoutes, PageModule } from './page/page.module';
 
 import { PageComponent } from './page/page.component';
 import { HomeComponent } from './home/home.component';
@@ -17,7 +18,8 @@ const routes: Routes = [
   {
     path: 'profile',
     component: PageComponent,
-    canActivate: [LoggedInGuard]
+    canActivate: [LoggedInGuard],
+    children: childRoutes
   },
   {
     path: '**',
@@ -26,7 +28,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), PageModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

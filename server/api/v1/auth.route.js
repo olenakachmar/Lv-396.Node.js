@@ -12,11 +12,11 @@ router.post('/login', (req, res) => {
   const { login } = req.body;
   User.findOne({ login }, (err, user) => {
     if (err || !user) {
-      res.json({ err: 'User not found' });
+      res.status(404).json({ err: 'User not found' });
     } else if (user.checkPassword(req.body.password)) {
       res.json({ token: jwt.sign({ login, type: user.type }, JWT_SECRET, { expiresIn: 3600 }) });
     } else {
-      res.json({ err: 'passwords don\'t match' });
+      res.status(400).json({ err: 'passwords don\'t match' });
     }
   });
 });
