@@ -17,11 +17,11 @@ export class AuthService {
   }
 
   logout(): any {
-    localStorage.removeItem('username');
+    localStorage.removeItem('token');
   }
 
   getUser(): any {
-    return localStorage.getItem('username');
+    return localStorage.getItem('type');
   }
 
   isLoggedIn(): boolean {
