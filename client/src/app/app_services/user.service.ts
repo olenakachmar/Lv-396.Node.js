@@ -3,7 +3,6 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../app_models/user';
 
-const token = localStorage.getItem('token');
 const api = 'http://127.0.0.1:3000/api/v1';
 
 @Injectable({
@@ -17,14 +16,14 @@ export class UserService {
     const options = this.getRequestOptions();
     return this.http.get(`${api}/users`, options)
     .map(response => {
-      const users : User[] = response.json();
+      const users: User[] = response.json();
       return users;
-    })
+    });
   }
   
   getRequestOptions() {
     const headers = new Headers({
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${localStorage.getItem('token')}`
     });
     return new RequestOptions({ headers });
   }
