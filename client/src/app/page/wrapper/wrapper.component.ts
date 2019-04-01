@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Task} from "../common/task";
+import { Task} from '../common/task';
 
 @Component({
   selector: 'app-wrapper',
@@ -10,6 +10,8 @@ export class WrapperComponent implements OnInit {
 
   jsonData;
   item: Task = new Task();
+  // item: TaskInterface [];
+    // = new Task(0, '', '', {name: '', value: ''}, {name: '', value: ''}, '', '', '');
 
   constructor() { }
 

@@ -23,6 +23,10 @@ $primary-color: #2699FB;
   border-bottom:  none;
 }
 
+.re-assign {
+  margin-left: 20%;
+}
+
 .btn-circle {
   background-color: $primary-color;
   width: 90px;
@@ -34,7 +38,9 @@ $primary-color: #2699FB;
   line-height: 1.42857;
   float: right;
   margin-top: -40px;
-  position: relative;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
 }
 
 
