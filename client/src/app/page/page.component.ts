@@ -39,7 +39,7 @@ export class PageComponent implements OnInit {
 
   getTasks(): void {
     this.tasksService.getTasks()
-      .subscribe(tasks => this.tasks = tasks);
+      .subscribe(tasks => {this.tasks = tasks; console.log(this.tasks)} );
   }
 
   filterGrids = () => {

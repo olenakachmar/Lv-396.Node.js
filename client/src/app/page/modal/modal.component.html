@@ -1,3 +1,4 @@
+<div class="re-assign">
 <button type="button" class="btn btn-outline-primary text-reassign" (click)="openModal(template, $event)">RE-ASSIGN</button>
 
 <ng-template #template>
@@ -8,7 +9,7 @@
     </button>
   </div>
   <div class="modal-body" >
-    <form method="POST" #myForm="ngForm" action="">
+    <form method="post" action="">
     <div class="modal-grid">
       <div class="name-grid">
         <input class="no-visible" type="text" value="{{item.id}}" name="id">
@@ -61,3 +62,4 @@
   </form>
   </div>
 </ng-template>
+</div>

@@ -1,3 +1,4 @@
+<accordion>
 <accordion-group #group>
   <div accordion-heading class="heading-grid">
     <span>{{item.id}}</span>
@@ -24,9 +25,7 @@
         <span>From: </span>
         <span class="bold">{{item.author}}</span>
       </div>
-      <div class="re-assign">
         <app-modal [item]="item"></app-modal>
-      </div>
     </div>
   </accordion-group>
 </accordion>
