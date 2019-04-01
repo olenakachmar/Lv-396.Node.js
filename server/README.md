@@ -94,3 +94,85 @@ body:
 **OR if error occures**
 * err: Error object
 ------
+**GET /api/v1/issues/all** <br/>
+## Response
+* Array of all issues objects 
+**OR if error occures**
+* err: Error object
+------
+**GET /api/v1/issues** <br/>
+## Request
+query-parameters: priority, type, date
+## Response
+* issue: Object of issues found by priority, type or date 
+**OR if there is no issue with this priority, type or date**
+* err: 'Issue not found'
+**OR if error occures**
+* err: Error object
+------
+**POST /api/v1/issues** <br/>
+## Request
+body: 
+* title: Title of new issue
+* type: Type of new issue (Task or Issue)
+* priority: Priority name of new issue (Low, Normal or High)
+* value: Value of new issue
+* assignTo: ID of assignTo user
+* ownerID: ID of user that create task
+## Response
+* added: 'Successfully'
+**OR if error occures**
+* err: Error object
+------
+**PUT /api/v1/issues** <br/>
+## Request
+body: 
+* id: ID of the issue to be updated
+* title (optional): New title for issue
+* priority (optional): New priority for issue
+* assignTo (optional): New assignTo for issue
+* value (optional): New value for issue
+* reassigned (optional): ID of person that makes changes
+## Response
+* updated: 'Successfully'
+**OR if there is no issue with this id**
+* err: 'Issue not found'
+**OR if there is no required options**
+* err: You should enter required parameters
+* required: title, priority, assignTo, value, reassigned
+**OR if error occures**
+* err: Error object
+------
+**DELETE /api/v1/issues** <br/>
+## Request
+body: 
+* id: ID of issue to be deleted
+## Response
+* deleted: 'Successfully'
+**OR if there is no issue with this id**
+* err: 'Issue not found'
+**OR if error occures**
+* err: Error object
+------
+**GET /api/v1/departments/:title** <br/>
+## Response
+* department object of department
+**OR if there is no issue with this title**
+* err: 'Department not found'
+**OR if error occures**
+* err: Error object
+------
+**POST /api/v1/departments** <br/>
+## Request
+body: 
+* title: Title of department 
+* employee: ID of employee that should be added to department
+* priority: Priority name of new issue (Low, Normal or High)
+* value: Value of new issue
+* assignTo: ID of assignTo user
+* ownerID: ID of user that create task
+## Response
+* added: 'Successfully'
+**OR if error occures**
+* err: Error object
+------
