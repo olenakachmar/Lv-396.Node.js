@@ -23,6 +23,7 @@ import { PageComponent } from './page/page.component';
 import { NavbarComponent } from './page/navbar/navbar.component';
 import { NavbarProfileComponent } from './page/navbar/navbar-profile/navbar-profile.component';
 import { AddTaskButtonComponent } from './page/add-task-button/add-task-button.component';
+import { BsDatepickerModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { AddTaskButtonComponent } from './page/add-task-button/add-task-button.c
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
     ModalModule.forRoot(),
+    BsDatepickerModule.forRoot(),
   ],
   providers: [AUTH_PROVIDERS, LoggedInGuard, LoggedOutGuard, CheckDevGuard],
   bootstrap: [AppComponent]
