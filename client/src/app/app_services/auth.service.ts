@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { throwError } from 'rxjs';
 
+
 @Injectable()
 export class AuthService {
   constructor(private http: Http) { }
@@ -12,7 +13,7 @@ export class AuthService {
     return this.http.post('http://127.0.0.1:3000/api/v1/auth/login', {
       login,
       password
-    }).map(response => {console.log(response); return response.json(); })
+    }).map(response => response.json())
       .catch(this.handleError);
   }
 

@@ -16,7 +16,6 @@ export class MyProfileComponent implements OnInit {
 
   ngOnInit() {
     this.loadUser();
-
   }
 
   getFullName(): string {

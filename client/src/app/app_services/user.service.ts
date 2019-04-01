@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../app_models/user';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 const api = 'http://127.0.0.1:3000/api/v1';
 
@@ -23,11 +24,19 @@ export class UserService {
 
   getUser(): Observable<User> {
     const options = this.getRequestOptions();
-    return this.http.get(`${api}/users/5c9a06728c40cb0e8cd39d14`, options)
+    const userId = this.getUserId();
+
+    return this.http.get(`${api}/users/${userId}`, options)
       .map(response => {
         const user: User = response.json();
+        console.log("saass");
         return user;
       });
+  }
+
+  getUserId(): any {
+    const helper = new JwtHelperService();
+    return helper.decodeToken(localStorage.token).id;
   }
 
   getRequestOptions() {
@@ -36,4 +45,5 @@ export class UserService {
     });
     return new RequestOptions({ headers });
   }
+
 }
