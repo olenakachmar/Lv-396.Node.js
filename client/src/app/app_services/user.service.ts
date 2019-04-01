@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../app_models/user';
-import { IUser } from '../app_interfaces/user.interface';
 
 const api = 'http://127.0.0.1:3000/api/v1';
 

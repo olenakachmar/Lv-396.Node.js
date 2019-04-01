@@ -12,7 +12,7 @@ export class AuthService {
     return this.http.post('http://127.0.0.1:3000/api/v1/auth/login', {
       login,
       password
-    }).map(response => response.json())
+    }).map(response => {console.log(response); return response.json(); })
       .catch(this.handleError);
   }
 
