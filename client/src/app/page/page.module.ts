@@ -21,6 +21,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
 import { UserListComponent } from './contact-info/user-list/user-list.component';
 import { UserFilterComponent } from './contact-info/user-filter/user-filter.component';
+import { FilterUsersByPipe } from './contact-info/filter-users-by.pipe';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
@@ -43,7 +44,8 @@ export const routes: Routes = [
     ModalComponent,
     ContactInfoComponent,
     UserListComponent,
-    UserFilterComponent
+    UserFilterComponent,
+    FilterUsersByPipe
   ],
   imports: [
     CommonModule,
