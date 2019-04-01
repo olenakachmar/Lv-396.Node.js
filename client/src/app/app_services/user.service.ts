@@ -29,7 +29,6 @@ export class UserService {
     return this.http.get(`${api}/users/${userId}`, options)
       .map(response => {
         const user: User = response.json();
-        console.log("saass");
         return user;
       });
   }
