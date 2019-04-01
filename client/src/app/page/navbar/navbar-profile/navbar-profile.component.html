@@ -1,17 +1,18 @@
-<div class="user-info__wrapper">
-  <div class="user-info__notifications">
-    <img src="assets/img/navbar-notifications-mob.png" alt="notifications">
-    <span>({{  notificationsNumber }})</span>
+<div class="wrapper">
+  <div class="notifications">
+    <img src="assets/img/navbar-notifications-desk.png" alt="notifications" class="notifications__icon">
+    <span class="notifications__number">({{  notificationsNumber }})</span>
   </div>
-  <div class="btn-group user-info__btn" dropdown>
-    <a href="#" dropdownToggle>
-      {{ name }} {{ surname }}
-      <img src="{{ avatar }}" alt="avatar">
+  <div class="right-navbar btn-group" dropdown>
+    <a href="javascript:void(0)" class="right-navbar__btn" dropdownToggle>
+      <span class="right-navbar__name"> {{ name }} {{ surname }} </span>
+      <img class="right-navbar__avatar" src="{{ avatar }}" alt="avatar">
     </a>
-    <ul id="dropdown-disabled-item" *dropdownMenu class="dropdown-menu" role="menu"
-        aria-labelledby="button-disabled-item">
-      <li role="menuitem" *ngFor="let link of menuRight; let i = index" [ngClass]="{'current': link.isCurrent}" (click)="changeCurrent(i, menuRight)">
-        <a class="dropdown-item" href="{{link.href}}">{{link.title}}</a>
+    <ul class="right-navbar__menu dropdown-menu" id="dropdown-disabled-item" *dropdownMenu role="menu"
+      aria-labelledby="button-disabled-item">
+      <li class="right-navbar__row" role="menuitem" *ngFor="let link of menuRight; let i = index"
+        [ngClass]="{'current': link.isCurrent}" (click)="changeCurrent(i, menuRight)">
+        <a class="right-navbar__item dropdown-item" href="{{link.href}}">{{link.title}}</a>
       </li>
     </ul>
   </div>
