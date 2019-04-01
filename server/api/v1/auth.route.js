@@ -14,7 +14,7 @@ router.post('/login', (req, res) => {
     if (err || !user) {
       res.status(404).json({ err: 'User not found' });
     } else if (user.checkPassword(req.body.password)) {
-      res.json({ token: jwt.sign({ login, type: user.type }, JWT_SECRET, { expiresIn: 3600 }) });
+      res.json({ token: jwt.sign({ id: user._id, type: user.type }, JWT_SECRET, { expiresIn: 3600 }) });
     } else {
       res.status(400).json({ err: 'passwords don\'t match' });
     }
