@@ -4,10 +4,10 @@
       <app-user-bar-info class="user-bar-info" [userinfo]="user"></app-user-bar-info>
     </div>
     <main class="col-lg-8 content-wrapper">
-      <div class="row">
+      <div class="row" *ngIf="user">
         <div class="col main-user-info">
           <h1>{{ getFullName() }}</h1>
-          <p>{{user.position}}</p>
+          <p>{{ user.position }}</p>
         </div>
       </div>
       <div class="row second-row">

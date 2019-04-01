@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserInfoService } from '../../app_services/user-info.service';
-import { IUser } from '../../app_interfaces/user.interface';
+import { UserService } from '../../app_services/user.service';
+import { User } from '../../app_models/user';
+// import { IUser } from '../../app_interfaces/user.interface';
 
 
 @Component({
@@ -10,9 +11,9 @@ import { IUser } from '../../app_interfaces/user.interface';
 })
 export class MyProfileComponent implements OnInit {
 
-  constructor(private userInfoService: UserInfoService) { }
+  constructor(private UserInfoService: UserService) { }
 
-   user: IUser;
+   user: User;
 
 
   ngOnInit() {
@@ -25,6 +26,6 @@ export class MyProfileComponent implements OnInit {
   }
 
   loadUser() {
-    this.userInfoService.getUser().subscribe(user => { this.user = user; } );
+    this.UserInfoService.getUser().subscribe(user => { this.user = user; } );
   }
 }
