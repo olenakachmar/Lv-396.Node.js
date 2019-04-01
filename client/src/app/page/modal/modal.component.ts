@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef, Input } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-modal',
@@ -20,5 +21,10 @@ export class ModalComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
     console.log(this.item);
   }
+  submit(form: NgForm) {
+    // let editItem = this.item;
+    // this.item.date = form.value.date.toString();
+    // console.log(form.value);
 
+  }
 }

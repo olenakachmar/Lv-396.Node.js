@@ -8,19 +8,19 @@
     </button>
   </div>
   <div class="modal-body" >
+    <form method="POST" #myForm="ngForm" action="">
     <div class="modal-grid">
       <div class="name-grid">
-        <input class="form-control" type="text" placeholder={{item.name}}>
+        <input class="no-visible" type="text" value="{{item.id}}" name="id">
+        <input class="form-control" type="text" value="{{item.name}}" name="name">
       </div>
-      <div class="btn-group filter-grid" dropdown>
-        <button type="button" dropdownToggle class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{item.status.name}}
-        </button>
-        <div *dropdownMenu class="dropdown-menu">
-          <a class="dropdown-item" href="#">LOW</a>
-          <a class="dropdown-item" href="#">NORMAL</a>
-          <a class="dropdown-item" href="#">HIGHT</a>
-        </div>
+      <div class="filter-grid">
+        <!-- <button type="button"  class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+        <select class="form-control" value="{{item.status.name}}" name="status">
+          <option>LOW</option>
+          <option>NORMAL</option>
+          <option>HIGHT</option>
+        </select>
       </div>
       <div class="btn-group assign-grid" dropdown>
         <button type="button" dropdownToggle class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -33,30 +33,31 @@
         </div>
       </div>
       <div class=" btn-group date-grid">
-        <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{item.date}}
-        </button>
+        <input type="text" disabled value="{{item.date}}" class="btn btn-outline-primary">
       </div>
       <div class="text-grid">
-        <textarea class="form-control" aria-label="With textarea">{{item.content}}</textarea>
+        <textarea class="form-control" aria-label="With textarea" value="{{item.content}}" name="content"></textarea>
       </div>
       <div class="fromName-grid">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">FROM</span>
           </div>
-          <input type="text" disabled class="form-control" placeholder={{item.author}} aria-label="Username" aria-describedby="basic-addon1">
+          <input type="text" disabled placeholder="{{item.author}}" class="form-control" name="author">
         </div>
       </div>
-      <div class="reassignFrom-grid"><div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1">REASSIGN FROM</span>
+      <div class="reassignFrom-grid">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">REASSIGN FROM</span>
+          </div>
+          <input type="text" disabled class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
         </div>
-        <input type="text" disabled class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-      </div></div>
+      </div>
       <div class="addTask-grid">
-        <button type="button" class="btn btn-primary">ADD TASK</button>
+        <button type="submit" (click)="submit(myForm); modalRef.hide()" class="btn btn-primary">ADD TASK</button>
       </div>
     </div>
+  </form>
   </div>
 </ng-template>

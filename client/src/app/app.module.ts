@@ -33,6 +33,7 @@ import { UserImageComponent } from './page/user-bar-info/user-image/user-image.c
 import { LinkToProfileComponent } from './page/user-bar-info/link-to-profile/link-to-profile.component';
 import { UserBarInfoComponent } from './page/user-bar-info/user-bar-info.component';
 import { AddTaskButtonComponent } from './page/add-task-button/add-task-button.component';
+import { BsDatepickerModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { AddTaskButtonComponent } from './page/add-task-button/add-task-button.c
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
     ModalModule.forRoot(),
+    BsDatepickerModule.forRoot(),
   ],
   providers: [AUTH_PROVIDERS, LoggedInGuard, LoggedOutGuard, CheckDevGuard],
   bootstrap: [AppComponent]
