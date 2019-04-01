@@ -9,11 +9,16 @@ import { UserService } from '../../app_services/user.service';
 })
 export class ContactInfoComponent implements OnInit {
   users: User[];
+  filterText: string = "";
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.loadAllUsers();
+  }
+
+  takeFilterValue(text: string) {
+    this.filterText = text;
   }
 
   loadAllUsers() {

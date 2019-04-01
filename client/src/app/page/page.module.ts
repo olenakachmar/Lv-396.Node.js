@@ -19,6 +19,8 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
+import { UserListComponent } from './contact-info/user-list/user-list.component';
+import { UserFilterComponent } from './contact-info/user-filter/user-filter.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
@@ -39,7 +41,9 @@ export const routes: Routes = [
     FilterTasksByPipe,
     ItemComponent,
     ModalComponent,
-    ContactInfoComponent
+    ContactInfoComponent,
+    UserListComponent,
+    UserFilterComponent
   ],
   imports: [
     CommonModule,

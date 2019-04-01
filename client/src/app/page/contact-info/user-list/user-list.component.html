@@ -1,0 +1,11 @@
+<table class="table mt-4">
+  <tbody>
+    <tr *ngFor="let user of users; let i = index">
+      <th scope="row"><a>{{ user.firstName }} {{ user.lastName }}</a></th>
+      <td><a>{{ user.position }}</a></td>
+      <td><a>{{ user.email }}</a></td>
+      <td><a>{{ user.phone }}</a></td>
+      <td><a>{{ user.contacts.skype }}</a></td>
+    </tr>
+  </tbody>
+</table>  
