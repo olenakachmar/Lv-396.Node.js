@@ -1,6 +1,5 @@
-import { IUser } from '../app_interfaces/user.interface';
-
-export class User implements IUser {
+export interface User {
+  id: number;
   firstName: string;
   lastName: string;
   position: string;
@@ -13,18 +12,4 @@ export class User implements IUser {
   photoURL: string;
   hrID: number;
   date: object;
-  constructor() {
-    this.firstName = 'Test';
-    this.lastName = 'Test';
-    this.position = 'Test';
-    this.manager = { field: 'Test' };
-    this.teamlead = { field: 'Test' };
-    this.department = { field: 'Test' };
-    this.email = 'Test';
-    this.phone = 'Test';
-    this.contacts = { field: 'Test' };
-    this.photoURL = 'Test';
-    this.hrID = 0;
-    this.date = { field: 'Test' };
-  }
 }

@@ -50,7 +50,7 @@ export class NavbarComponent implements OnInit {
           href: '#2',
           title: 'contact info',
           isCurrent: false,
-          router: ''
+          router: 'contact-info',
         },
         {
           id: 3,
