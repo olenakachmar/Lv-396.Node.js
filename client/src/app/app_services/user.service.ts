@@ -3,8 +3,8 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../app_models/user';
 
-const token = localStorage.getItem('token');
-const api = 'http://127.0.0.1:3000/api/v1';
+
+export const api = 'http://127.0.0.1:3000/api/v1';
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +21,10 @@ export class UserService {
       return users;
     })
   }
-  
+
   getRequestOptions() {
     const headers = new Headers({
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${localStorage.getItem('token')}`
     });
     return new RequestOptions({ headers });
   }

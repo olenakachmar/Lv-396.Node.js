@@ -25,6 +25,7 @@ import { NavbarProfileComponent } from './page/navbar/navbar-profile/navbar-prof
 import { AddTaskButtonComponent } from './page/add-task-button/add-task-button.component';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
   ],
-  providers: [AUTH_PROVIDERS, LoggedInGuard, LoggedOutGuard, CheckDevGuard],
+  providers: [AUTH_PROVIDERS, LoggedInGuard, LoggedOutGuard, CheckDevGuard] ,
   bootstrap: [AppComponent]
 })
 export class AppModule { }
