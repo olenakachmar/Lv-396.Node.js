@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { WrapperComponent } from './wrapper/wrapper.component';
 import { UserBarInfoComponent } from '../page/user-bar-info/user-bar-info.component';
 import { FilterComponent } from '../page/filter/filter.component';
@@ -20,6 +21,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
+import { UserListComponent } from './contact-info/user-list/user-list.component';
+import { UserFilterComponent } from './contact-info/user-filter/user-filter.component';
+import { FilterUsersByPipe } from './contact-info/filter-users-by.pipe';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
@@ -42,13 +46,17 @@ export const routes: Routes = [
     ItemComponent,
     ModalComponent,
     MyProfileComponent,
-    ContactInfoComponent
+    ContactInfoComponent,
+    UserListComponent,
+    UserFilterComponent,
+    FilterUsersByPipe
   ],
   imports: [
     CommonModule,
     RouterModule,
     BrowserModule,
     HttpModule,
+    FormsModule,
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
     ModalModule.forRoot()

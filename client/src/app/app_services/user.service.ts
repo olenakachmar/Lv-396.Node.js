@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import { User } from '../app_models/user';
 import { IUser } from '../app_interfaces/user.interface';
 
-const token = localStorage.getItem('token');
 const api = 'http://127.0.0.1:3000/api/v1';
 
 @Injectable({
@@ -17,10 +16,10 @@ export class UserService {
   getAll(): Observable<User[]> {
     const options = this.getRequestOptions();
     return this.http.get(`${api}/users`, options)
-      .map(response => {
-        const users: User[] = response.json();
-        return users;
-      });
+    .map(response => {
+      const users: User[] = response.json();
+      return users;
+    });
   }
 
   getUser(): Observable<User> {
@@ -34,7 +33,7 @@ export class UserService {
 
   getRequestOptions() {
     const headers = new Headers({
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${localStorage.getItem('token')}`
     });
     return new RequestOptions({ headers });
   }
