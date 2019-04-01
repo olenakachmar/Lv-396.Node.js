@@ -22,7 +22,7 @@ export class ContactInfoComponent implements OnInit {
   }
 
   loadAllUsers() {
-    this.userService.getAll().subscribe(users => { this.users = users } );
+    this.userService.getAll().subscribe(users => { this.users = users; } );
   }
 
 }
