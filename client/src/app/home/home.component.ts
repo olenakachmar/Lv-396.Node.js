@@ -42,8 +42,6 @@ export class HomeComponent implements OnInit {
       .subscribe(
         (response) => {
           localStorage.setItem('username', response.token);
-          console.log(response);
-          // console.log(helper.decodeToken(response.token));
           this.router.navigate(['/profile']);
         },
         (error) => {

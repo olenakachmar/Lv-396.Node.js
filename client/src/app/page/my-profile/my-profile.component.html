@@ -1,13 +1,13 @@
 <section class="container page-wrapper">
   <div class="row">
     <div class="col-lg-4 sidebar-wrapper">
-      <app-user-bar-info class="user-bar-info" [userinfo]="jsonData.userinfo"></app-user-bar-info>
+      <app-user-bar-info class="user-bar-info" [userinfo]="user"></app-user-bar-info>
     </div>
     <main class="col-lg-8 content-wrapper">
       <div class="row">
         <div class="col main-user-info">
-          <h1>{{this.jsonData.userinfo.name+' '+this.jsonData.userinfo.surname}}</h1>
-          <p>{{this.jsonData.userinfo.position}}</p>
+          <h1>{{ getFullName() }}</h1>
+          <p>{{user.position}}</p>
         </div>
       </div>
       <div class="row second-row">

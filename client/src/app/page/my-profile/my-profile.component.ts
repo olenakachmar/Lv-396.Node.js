@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserInfoService } from '../../app_services/user-info.service';
+import { IUser } from '../../app_interfaces/user.interface';
+
 
 @Component({
   selector: 'app-my-profile',
@@ -7,20 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userInfoService: UserInfoService) { }
 
-  jsonData;
+   user: IUser;
+
 
   ngOnInit() {
-    this.jsonData = {
-      userinfo: {
-        name: 'Name',
-        surname: 'Surname',
-        position: 'position',
-        managerName: 'Manager Has',
-        managerSurname: 'Name',
-        departament: 'Departament Has Name'
-      }
-    };
+    this.loadUser();
+
+  }
+
+  getFullName(): string {
+    return `${this.user.firstName} ${this.user.lastName}`;
+  }
+
+  loadUser() {
+    this.userInfoService.getUser().subscribe(user => { this.user = user; } );
   }
 }
