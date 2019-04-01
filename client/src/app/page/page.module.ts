@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { WrapperComponent } from './wrapper/wrapper.component';
 import { UserBarInfoComponent } from '../page/user-bar-info/user-bar-info.component';
 import { FilterComponent } from '../page/filter/filter.component';
@@ -52,6 +53,7 @@ export const routes: Routes = [
     RouterModule,
     BrowserModule,
     HttpModule,
+    FormsModule,
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
     ModalModule.forRoot()
