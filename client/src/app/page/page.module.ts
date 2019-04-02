@@ -19,16 +19,19 @@ import { ModalComponent } from '../page/modal/modal.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
 import { UserListComponent } from './contact-info/user-list/user-list.component';
 import { UserFilterComponent } from './contact-info/user-filter/user-filter.component';
 import { FilterUsersByPipe } from './contact-info/filter-users-by.pipe';
+import { EditMyProfileComponent } from './edit-my-profile/edit-my-profile.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
   { path: '', component: WrapperComponent },
-  { path: 'contact-info', component: ContactInfoComponent },
-  { path: 'contact-info/:id', component:  }
+  { path: 'my-profile', component: MyProfileComponent },
+  { path: 'edit-my-profile', component: EditMyProfileComponent },
+  { path: 'contact-info', component: ContactInfoComponent }
 ];
 
 @NgModule({
@@ -44,10 +47,12 @@ export const routes: Routes = [
     FilterTasksByPipe,
     ItemComponent,
     ModalComponent,
+    MyProfileComponent,
     ContactInfoComponent,
     UserListComponent,
     UserFilterComponent,
-    FilterUsersByPipe
+    FilterUsersByPipe,
+    EditMyProfileComponent
   ],
   imports: [
     CommonModule,
