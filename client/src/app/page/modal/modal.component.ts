@@ -9,7 +9,7 @@ import { NgForm} from '@angular/forms';
 })
 export class ModalComponent implements OnInit {
 
-  @Input() item: any;
+  @Input() tasks: any;
   modalRef: BsModalRef;
 
   constructor(private modalService: BsModalService) {}
@@ -19,7 +19,7 @@ export class ModalComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
-    console.log(this.item);
+    console.log(this.tasks);
   }
   submit(form: NgForm) {
     // let editItem = this.item;

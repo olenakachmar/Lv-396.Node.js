@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-
 import { Task } from '../../../common/task';
+
 
 @Component({
   selector: 'app-item',
@@ -8,7 +8,7 @@ import { Task } from '../../../common/task';
   styleUrls: ['./item.component.scss']
 })
 export class ItemComponent implements OnInit {
-  @Input() item: Task;
+  @Input() tasks: Task[];
 
   constructor() { }
 

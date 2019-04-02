@@ -17,7 +17,6 @@ router.route('/users')
         if (err) {
           res.status(500).json({ err });
         }
-        console.log(res);
         res.json(users);
       });
   })
