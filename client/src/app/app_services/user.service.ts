@@ -13,6 +13,9 @@ export class UserService {
 
   constructor(private http: Http) { }
 
+  helper = new JwtHelperService();
+
+
   getAll(): Observable<User[]> {
     const options = this.getRequestOptions();
     return this.http.get(`${api}/users`, options)
@@ -34,8 +37,11 @@ export class UserService {
   }
 
   getUserId(): any {
-    const helper = new JwtHelperService();
-    return helper.decodeToken(localStorage.token).id;
+    return this.helper.decodeToken(localStorage.token).id;
+  }
+
+  getUserType(): any {
+    return this.helper.decodeToken(localStorage.token).type;
   }
 
   getRequestOptions() {
