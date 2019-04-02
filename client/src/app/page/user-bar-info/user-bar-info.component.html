@@ -9,9 +9,9 @@
       <div>{{userinfo.firstName}} {{userinfo.lastName}}</div>
       <div>{{userinfo.position}}</div>
     </div>
-    <app-link-to-profile class="additional-info" [info]="userinfo.managerName + ' ' + userinfo.managerSurname"
+    <app-link-to-profile class="additional-info" [info]="userinfo.manager.firstName + ' ' + userinfo.manager.lastName"
                          [label]="'My manager'"></app-link-to-profile>
-    <app-link-to-profile class="additional-info" [info]="userinfo.departament"
+    <app-link-to-profile class="additional-info" [info]="userinfo.department.title"
                          [label]="'My department'"></app-link-to-profile>
     <app-link-to-profile class="additional-info" [info]="userinfo.myTeamlead"
                          [label]="'My Team Lead'"></app-link-to-profile>

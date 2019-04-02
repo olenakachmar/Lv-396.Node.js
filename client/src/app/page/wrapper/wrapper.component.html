@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-lg-4 sidebar-wrapper">
-    <app-user-bar-info class="user-bar-info" [userinfo]="jsonData.userinfo"></app-user-bar-info>
+    <app-user-bar-info class="user-bar-info" [userinfo]="user"></app-user-bar-info>
   </div>
   <main class="col-lg-8 content-wrapper">
     <app-filter class="container-fluid filter-wrapper {{filterGrids()}}" [cssClass]="filterGrids()"
