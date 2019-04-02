@@ -22,6 +22,6 @@ export class MyProfileComponent implements OnInit {
   }
 
   loadUser() {
-    this.UserInfoService.getUser().subscribe(user => { this.user = user; console.log(this.user); });
+    this.UserInfoService.getUser().subscribe(user => { this.user = user; });
   }
 }
