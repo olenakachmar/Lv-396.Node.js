@@ -1,35 +1,43 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../../app_services/auth.service';
+import { Router } from '@angular/router';
+import { NavItemsService } from '../../common/nav-items.service';
+import { NavItem } from '../../common/nav-item';
 
 @Component({
   selector: 'app-navbar-profile',
   templateUrl: './navbar-profile.component.html',
   styleUrls: ['./navbar-profile.component.scss']
 })
-export class NavbarProfileComponent implements OnInit {
-  @Input() menuRight: any;
 
+export class NavbarProfileComponent implements OnInit {
   avatar: string;
   name: string;
   surname: string;
   notificationsNumber: number;
-  isCurrent: boolean;
-  constructor() { }
+  menuList: NavItem[];
+
+  constructor(private authService: AuthService, private router: Router, private navItemsService: NavItemsService) { }
 
   ngOnInit() {
     this.avatar = 'assets/img/navbar-symbol-mob.png';
     this.name = 'Name';
     this.surname = 'Surname';
     this.notificationsNumber = 7;
-    this.isCurrent = false;
+    this.navItemsService.getNavList().subscribe(item => { this.menuList = item });
   }
 
-  changeCurrent(index, links) {
+  logout(): boolean {
+    this.authService.logout();
+    this.router.navigate(['/home']);
+    return false;
+  }
+
+  changeCurrent(index) {
     event.preventDefault();
-    links.forEach(item => {
-      item.isCurrent = false;
+    this.menuList.forEach(item => {
+      item.current = false;
+      item.title !== "Log Out" ? this.menuList[index].current = true : this.logout();
     });
-    if (index !== 0) {
-      links[index].isCurrent = true;
-    }
   }
 }

@@ -9,16 +9,17 @@
       </a>
       <div class="hide-menu" [ngClass]="{'active': isActive}">
         <ul class="hide-menu__list">
-          <li class="hide-menu__item" *ngFor="let link of jsonData.menuBurger; let i = index"
-            [ngClass]="{'current': link.isCurrent}" (click)="changeCurrent(i, jsonData.menuBurger)">
-            <a href="javascript:void(0)" [routerLink]="[ link.router ]"
-              (click)="isActive = !isActive">{{ link.title }}</a>
-          </li>
+          <ng-container *ngFor="let link of menuList; let i = index">
+            <li class="hide-menu__item" *ngIf="link.burgerMenu" [ngClass]="{'current': link.current}">
+              <a href="javascript:void(0)" [routerLink]="[ link.router ]"
+                (click)="isActive = !isActive; changeCurrent(i)">{{ link.title }}</a>
+            </li>
+          </ng-container>
         </ul>
       </div>
     </div>
     <div class="col-5 col-md-4 col-lg-3 d-flex ml-auto">
-      <app-navbar-profile class="user-info" [menuRight]="jsonData.menuRight"></app-navbar-profile>
+      <app-navbar-profile class="user-info"></app-navbar-profile>
     </div>
   </nav>
 </div>

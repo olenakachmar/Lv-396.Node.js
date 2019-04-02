@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { WrapperComponent } from './wrapper/wrapper.component';
@@ -45,6 +46,7 @@ export const routes: Routes = [
     CommonModule,
     RouterModule,
     BrowserModule,
+    FormsModule,
     HttpModule,
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),

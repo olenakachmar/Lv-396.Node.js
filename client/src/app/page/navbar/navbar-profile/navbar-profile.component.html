@@ -10,10 +10,12 @@
     </a>
     <ul class="right-navbar__menu dropdown-menu" id="dropdown-disabled-item" *dropdownMenu role="menu"
       aria-labelledby="button-disabled-item">
-      <li class="right-navbar__row" role="menuitem" *ngFor="let link of menuRight; let i = index"
-        [ngClass]="{'current': link.isCurrent}" (click)="changeCurrent(i, menuRight)">
-        <a class="right-navbar__item dropdown-item" href="{{link.href}}">{{link.title}}</a>
-      </li>
+      <ng-container *ngFor="let link of menuList; let i = index">
+        <li class="right-navbar__row" role="menuitem" *ngIf="link.rightMenu" [ngClass]="{'current': link.current}"
+          (click)="changeCurrent(i)">
+          <a class="right-navbar__item dropdown-item">{{link.title}}</a>
+        </li>
+      </ng-container>
     </ul>
   </div>
 </div>
