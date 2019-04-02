@@ -19,7 +19,6 @@ export class PageComponent implements OnInit {
 
   ngOnInit() {
     this.getFilters();
-    this.getTasks();
     this.jsonData = {
       userinfo: {
         name: 'Name',
@@ -37,10 +36,7 @@ export class PageComponent implements OnInit {
       .subscribe(filters => this.filters = filters);
   }
 
-  getTasks(): void {
-    this.tasksService.getTasks()
-      .subscribe(tasks => {this.tasks = tasks; console.log(this.tasks)} );
-  }
+ 
 
   filterGrids = () => {
     return this.filters.length ? ('filter-col-' + this.filters.length) : '';

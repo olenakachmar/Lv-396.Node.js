@@ -8,7 +8,7 @@ import { Task } from '../../common/task';
   styleUrls: ['./accordion.component.scss']
 })
 export class AccordionComponent implements OnInit {
-  @Input() items: Task[];
+  @Input() tasks: Task[];
   //tasks: Task[];
   isContentOpen: boolean;
 
