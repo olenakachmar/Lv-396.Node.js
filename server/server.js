@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/', usersRouter);
-app.use('/api/v1/issues', issuesRouter);
+app.use('/api/v1/', issuesRouter);
 app.use('/api/v1/departments', departmentsRouter);
 
 app.listen(port, () => {

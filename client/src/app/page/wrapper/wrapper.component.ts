@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../app_services/user.service';
+import { User } from '../../app_models/user';
+
 
 @Component({
   selector: 'app-page',
@@ -10,19 +13,15 @@ import { Component, OnInit } from '@angular/core';
 export class WrapperComponent implements OnInit {
 
   jsonData;
+  user = new User();
 
-  constructor() { }
+
+  constructor(private UserInfoService: UserService) { }
 
   ngOnInit() {
+
+    this.loadUser();
     this.jsonData = {
-      userinfo: {
-        name: 'Name',
-        surname: 'Surname',
-        position: 'position',
-        managerName: 'Manager Has',
-        managerSurname: 'Name',
-        departament: 'Departament Has Name'
-      },
       tasks: [
         {
           id: 1,
@@ -109,6 +108,10 @@ export class WrapperComponent implements OnInit {
         }
       ]
     };
+  }
+
+  loadUser() {
+    this.UserInfoService.getUser().subscribe(user => { this.user = user; });
   }
 
   filterGrids = () => {
