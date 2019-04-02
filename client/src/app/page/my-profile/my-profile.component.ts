@@ -11,7 +11,7 @@ export class MyProfileComponent implements OnInit {
 
   constructor(private UserInfoService: UserService) { }
 
-   user: User;
+  user = new User();
 
 
   ngOnInit() {
@@ -23,6 +23,6 @@ export class MyProfileComponent implements OnInit {
   }
 
   loadUser() {
-    this.UserInfoService.getUser().subscribe(user => { this.user = user; } );
+    this.UserInfoService.getUser().subscribe(user => { this.user = user; });
   }
 }
