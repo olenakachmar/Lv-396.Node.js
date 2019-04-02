@@ -20,8 +20,7 @@ export class DropdownFilterComponent implements OnInit {
 
   ngOnInit() {
     let titleObj: {name, value};
-    titleObj = this.filterItem.options.filter(
-        (item: {value, name}) => this.filterItem.defaultValue === item.value )[0];
+    titleObj = this.filterItem.options.filter((item: {value, name}) => this.filterItem.defaultValue === item.value )[0];
     this.title = titleObj.name;
     this.getDropDownPositionClassNames();
   }

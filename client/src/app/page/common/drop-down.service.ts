@@ -22,7 +22,7 @@ export class DropDownService {
     });
   }
 
-  changeDropDownPosition = (dropDownEl, wrapperEl) => {
+   private changeDropDownPosition = (dropDownEl, wrapperEl) => {
     let cssClassName = '';
     if ( this.isSpaceBelowElSmallerElHeight(dropDownEl, wrapperEl)) {
       const isSmaller = this.isSpaceBelowElSmallerElHeight(dropDownEl, wrapperEl, true);
@@ -31,13 +31,13 @@ export class DropDownService {
     return cssClassName;
   }
 
-  isSpaceBelowElSmallerElHeight = (dropDownEl, wrapperEl, getHeightHalf = false) => {
+  private isSpaceBelowElSmallerElHeight = (dropDownEl, wrapperEl, getHeightHalf = false) => {
     const heightBelow = this.offsetBelowEl(wrapperEl);
     const height = (getHeightHalf) ? (dropDownEl.offsetHeight / 2) : dropDownEl.offsetHeight;
     return heightBelow <= height;
   }
 
-  offsetBelowEl = (el) => {
+  private offsetBelowEl = (el) => {
     const rect = el.getBoundingClientRect();
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     return document.documentElement.offsetHeight - (rect.top + scrollTop + el.offsetHeight);

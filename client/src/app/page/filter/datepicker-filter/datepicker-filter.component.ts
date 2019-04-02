@@ -24,21 +24,20 @@ export class DatepickerFilterComponent implements OnInit {
 
   ngOnInit() {
     const titleObj = this.getTitleObject(this.filterItem.options);
-    this.title = (titleObj.value === -1) ? titleObj.name : titleObj.value;
-    this.dateDefault = (this.filterItem.defaultValue === -1) ? new Date() : this.convertStringToDate(titleObj.value);
+    this.title = titleObj.value === -1 ? titleObj.name : titleObj.value;
+    this.dateDefault = this.filterItem.defaultValue === -1 ? new Date() : this.convertStringToDate(titleObj.value);
     this.isDropup = false;
     this.collectEvents = [];
     this.getDropDownPositionClassNames();
   }
 
   getTitleObject = (options: []): {name, value} => {
-    return options.filter(
-      (item: {value, name}) => item.value === this.filterItem.defaultValue )[0];
+    return options.filter((item: {value, name}) => item.value === this.filterItem.defaultValue )[0];
   }
 
   convertStringToDate = (dateStr: string) => {
     const dateParts = dateStr.split('/');
-    return new Date(+dateParts[2], (+ dateParts[1]) - 1, +dateParts[0]);
+    return new Date(+ dateParts[2], (+ dateParts[1]) - 1, + dateParts[0]);
   }
 
   choiceReady = () => {
