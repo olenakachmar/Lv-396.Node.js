@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 const issueSchema = new Schema(
   {
     name: { type: String, required: true },
-    excerpt: { type: String, required: true },
+    excerpt: { type: String, maxlength: 100, required: true },
     status: { type: String, required: true },
     type: { type: String, required: true },
     date: { type: Number },
@@ -20,10 +20,7 @@ const issueSchema = new Schema(
       ref: 'User',
       required: true,
     },
-
-
     reassigned: { type: String },
-
   },
 );
 
