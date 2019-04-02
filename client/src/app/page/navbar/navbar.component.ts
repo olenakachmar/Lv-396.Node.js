@@ -64,7 +64,7 @@ export class NavbarComponent implements OnInit {
           href: '#4',
           title: 'create user',
           isCurrent: false,
-          router: ''
+          router: 'create-user'
         }
       ],
     };

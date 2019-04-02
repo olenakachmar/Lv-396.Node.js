@@ -24,12 +24,15 @@ import { ContactInfoComponent } from './contact-info/contact-info.component';
 import { UserListComponent } from './contact-info/user-list/user-list.component';
 import { UserFilterComponent } from './contact-info/user-filter/user-filter.component';
 import { FilterUsersByPipe } from './contact-info/filter-users-by.pipe';
+import {CreateUserPageComponent} from "./create-user-page/create-user-page.component";
+import {CreateSideBarInfoComponent} from "./create-user-page/create-side-bar-info/create-side-bar-info.component";
 
 export const routes: Routes = [
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
   { path: '', component: WrapperComponent },
   { path: 'my-profile', component: MyProfileComponent },
-  { path: 'contact-info', component: ContactInfoComponent }
+  { path: 'contact-info', component: ContactInfoComponent },
+  { path: 'create-user', component: CreateUserPageComponent }
 ];
 
 @NgModule({
@@ -49,7 +52,9 @@ export const routes: Routes = [
     ContactInfoComponent,
     UserListComponent,
     UserFilterComponent,
-    FilterUsersByPipe
+    FilterUsersByPipe,
+    CreateUserPageComponent,
+    CreateSideBarInfoComponent
   ],
   imports: [
     CommonModule,

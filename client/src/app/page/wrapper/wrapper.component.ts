@@ -23,7 +23,8 @@ export class WrapperComponent implements OnInit {
         position: 'position',
         managerName: 'Manager Has',
         managerSurname: 'Name',
-        departament: 'Departament Has Name'
+        departament: 'Departament Has Name',
+        myTeamlead: 'Teamlead Has Name'
       },
       tasks: [
         {

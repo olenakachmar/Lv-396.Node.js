@@ -1,5 +1,4 @@
 import {Component, OnInit, Input} from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-bar-info',
@@ -12,11 +11,6 @@ export class UserBarInfoComponent implements OnInit {
   constructor() {
   }
 
-  // get(){
-  //   this.http.get("/users/1");
-  // }
-
-  // private http: HttpClient
   ngOnInit() {
   }
 }
