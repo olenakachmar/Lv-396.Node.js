@@ -13,7 +13,6 @@ export class MyProfileComponent implements OnInit {
 
   user = new User();
 
-
   ngOnInit() {
     this.loadUser();
   }
