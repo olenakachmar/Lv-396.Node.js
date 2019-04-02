@@ -25,7 +25,9 @@ router.post('', async (req, res) => {
       });
       res.end();
     }
-    res.status(201).send('User added to department');
+    res.json({
+      added: 'Successfully',
+    });
   });
 });
 
