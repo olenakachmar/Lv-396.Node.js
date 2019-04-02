@@ -1,5 +1,6 @@
 import { NavItem } from './nav-item';
 
+
 export const NAVBAR_LIST: NavItem[] = [
   {
     id: 1,
@@ -8,9 +9,8 @@ export const NAVBAR_LIST: NavItem[] = [
     router: '/profile',
     rightMenu: false,
     burgerMenu: true,
-    hr: true,
-    developer: true
-    
+    hr: 'hr',
+    dev: ''
   },
   {
     id: 2,
@@ -19,8 +19,8 @@ export const NAVBAR_LIST: NavItem[] = [
     router: '',
     rightMenu: false,
     burgerMenu: true,
-    hr: false,
-    developer: true
+    hr: '',
+    dev: 'dev'
   },
   {
     id: 3,
@@ -29,8 +29,8 @@ export const NAVBAR_LIST: NavItem[] = [
     router: 'contact-info',
     rightMenu: false,
     burgerMenu: true,
-    hr: true,
-    developer: true
+    hr: 'hr',
+    dev: 'dev'
   },
   {
     id: 4,
@@ -39,18 +39,19 @@ export const NAVBAR_LIST: NavItem[] = [
     router: '',
     rightMenu: true,
     burgerMenu: false,
-    hr: true,
-    developer: true
+    hr: 'hr',
+    dev: 'dev',
+    logout: true
   },
   {
     id: 5,
-    title: 'My profile',
+    title: 'My Profile',
     current: false,
     router: '',
     rightMenu: true,
     burgerMenu: true,
-    hr: false,
-    developer: true
+    hr: '',
+    dev: 'dev'
   },
   {
     id: 6,
@@ -59,8 +60,8 @@ export const NAVBAR_LIST: NavItem[] = [
     router: '',
     rightMenu: true,
     burgerMenu: false,
-    hr: true,
-    developer: false
+    hr: 'hr',
+    dev: ''
   },
   {
     id: 7,
@@ -69,7 +70,7 @@ export const NAVBAR_LIST: NavItem[] = [
     router: '',
     rightMenu: false,
     burgerMenu: true,
-    hr: true,
-    developer: true
+    hr: 'hr',
+    dev: ''
   }
 ];

@@ -16,6 +16,7 @@ export class NavbarProfileComponent implements OnInit {
   surname: string;
   notificationsNumber: number;
   menuList: NavItem[];
+  user: string;
 
   constructor(private authService: AuthService, private router: Router, private navItemsService: NavItemsService) { }
 
@@ -24,7 +25,8 @@ export class NavbarProfileComponent implements OnInit {
     this.name = 'Name';
     this.surname = 'Surname';
     this.notificationsNumber = 7;
-    this.navItemsService.getNavList().subscribe(item => { this.menuList = item });
+    this.navItemsService.getNavList().subscribe(list => { this.menuList = list });
+    this.user = 'hr';
   }
 
   logout(): boolean {
@@ -35,9 +37,9 @@ export class NavbarProfileComponent implements OnInit {
 
   changeCurrent(index) {
     event.preventDefault();
-    this.menuList.forEach(item => {
+    this.menuList.map(item => {
       item.current = false;
-      item.title !== "Log Out" ? this.menuList[index].current = true : this.logout();
     });
+    this.menuList[index].title !== "Log Out" ? this.menuList[index].current = true : this.logout();
   }
 }

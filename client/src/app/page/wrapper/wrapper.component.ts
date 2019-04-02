@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-wrapper',
+  selector: 'app-page',
   templateUrl: './wrapper.component.html',
   styleUrls: ['./wrapper.component.scss']
 })
+
+
 export class WrapperComponent implements OnInit {
 
   jsonData;
@@ -108,6 +110,7 @@ export class WrapperComponent implements OnInit {
       ]
     };
   }
+
   filterGrids = () => {
     return this.jsonData.filters.length ? ('filter-col-' + this.jsonData.filters.length) : '';
   }

@@ -1,18 +1,18 @@
-<div class="container-fluid p-0">
+<div class="container-fluid p-0" (clickOutside)="close()">
   <nav class="navbar navbar-dark bg-primary p-0">
     <div class="col-3 d-flex">
-      <a href="javascript:void(0)" (click)="isActive = !isActive">
+      <a href (click)="toggleIsActive()">
         <img class="btn-menu" src="assets/img/navbar-menu-desk.png" alt="menu">
       </a>
-      <a href="javascript:void(0)" [routerLink]="[ '/profile' ]" (click)="homePage(); isActive = false">
+      <a [routerLink]="[ '/profile' ]" (click)="homePage(); isActive = false">
         <img class="logo" src='assets/img/logo-desk.png' alt="main-page">
       </a>
       <div class="hide-menu" [ngClass]="{'active': isActive}">
         <ul class="hide-menu__list">
           <ng-container *ngFor="let link of menuList; let i = index">
-            <li class="hide-menu__item" *ngIf="link.burgerMenu" [ngClass]="{'current': link.current}">
-              <a href="javascript:void(0)" [routerLink]="[ link.router ]"
-                (click)="isActive = !isActive; changeCurrent(i)">{{ link.title }}</a>
+            <li class="hide-menu__item" *ngIf="link.burgerMenu && (user === link.hr || user === link.dev)"
+              [ngClass]="{'current': link.current}">
+              <a href [routerLink]="[ link.router ]" (click)="isActive = !isActive; changeCurrent(i)">{{ link.title }}</a>
             </li>
           </ng-container>
         </ul>

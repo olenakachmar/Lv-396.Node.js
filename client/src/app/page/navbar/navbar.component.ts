@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { NavItemsService } from '../common/nav-items.service';
 import { NavItem } from '../common/nav-item';
 
@@ -7,27 +7,33 @@ import { NavItem } from '../common/nav-item';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
+
 export class NavbarComponent implements OnInit {
+  @HostListener('mouseleave') onMouseLeave() {
+    this.isActive = false;
+  }
   name: string;
   surname: string;
   avatar: string;
-  isActiv: boolean;
+  isActive: boolean;
   menuList: NavItem[];
+  user: string;
 
   constructor(private navItemsService: NavItemsService) { }
 
   ngOnInit() {
-    this.isActiv = false;
-    this.name  = 'Name';
+    this.isActive = false;
+    this.name = 'Name';
     this.surname = 'Surname';
     this.avatar = 'assets/img/navbar-symbol-desk.png';
     this.navItemsService.getNavList().subscribe(item => { this.menuList = item });
+    this.user = 'hr';
   }
 
-   homePage() {
+  homePage() {
     event.preventDefault();
-     this.menuList.map((item, i) => {
-       i === 0 ? item.current = true : item.current = false;
+    this.menuList.map((item, i) => {
+      i === 0 ? item.current = true : item.current = false;
     });
   }
 
@@ -37,6 +43,11 @@ export class NavbarComponent implements OnInit {
       item.current = false;
     });
     this.menuList[index].current = true;
-    this.isActiv = false;
+    this.isActive = false;
+  }
+
+  toggleIsActive() {
+    event.preventDefault();
+    this.isActive = !this.isActive;
   }
 }

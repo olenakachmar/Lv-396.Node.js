@@ -4,15 +4,15 @@
     <span class="notifications__number">({{  notificationsNumber }})</span>
   </div>
   <div class="right-navbar btn-group" dropdown>
-    <a href="javascript:void(0)" class="right-navbar__btn" dropdownToggle>
+    <div class="right-navbar__btn" dropdownToggle>
       <span class="right-navbar__name"> {{ name }} {{ surname }} </span>
       <img class="right-navbar__avatar" src="{{ avatar }}" alt="avatar">
-    </a>
+    </div>
     <ul class="right-navbar__menu dropdown-menu" id="dropdown-disabled-item" *dropdownMenu role="menu"
       aria-labelledby="button-disabled-item">
       <ng-container *ngFor="let link of menuList; let i = index">
-        <li class="right-navbar__row" role="menuitem" *ngIf="link.rightMenu" [ngClass]="{'current': link.current}"
-          (click)="changeCurrent(i)">
+        <li class="right-navbar__row" role="menuitem" *ngIf="link.rightMenu && (user === link.hr || user === link.dev)"
+          [ngClass]="{'current': link.current}" (click)="changeCurrent(i)">
           <a class="right-navbar__item dropdown-item">{{link.title}}</a>
         </li>
       </ng-container>

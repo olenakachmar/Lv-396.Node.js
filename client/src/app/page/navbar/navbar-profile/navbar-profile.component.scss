@@ -55,6 +55,7 @@ a {
       justify-content: flex-end;
       align-items: center;
       width: 100%;
+      cursor: pointer;
       @include media-breakpoint-up(md) {
         justify-content: space-between;
       }
@@ -91,6 +92,7 @@ a {
       font: normal 12px arial, sans-serif;
       color: $primary-color;
       padding: 17px;
+      cursor: pointer;
       @include media-breakpoint-up(md) {
         font: normal 14px arial, sans-serif;
       }
