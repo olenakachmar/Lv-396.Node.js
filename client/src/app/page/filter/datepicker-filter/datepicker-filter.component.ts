@@ -14,11 +14,11 @@ export class DatepickerFilterComponent implements OnInit {
   @Output() filterVal = new EventEmitter();
   @ViewChild('dropDownWrapper') dropDownWrapperView: ElementRef;
   dateDefault: Date;
-  collectEvents: any[];
   filterResult: any;
   isDropup: boolean;
   title: string;
   dropDownPositionClassNames: any;
+  choiseReadyFlag: number;
 
   constructor(private dropDownService: DropDownService) { }
 
@@ -27,8 +27,8 @@ export class DatepickerFilterComponent implements OnInit {
     this.title = titleObj.value === -1 ? titleObj.name : titleObj.value;
     this.dateDefault = this.filterItem.defaultValue === -1 ? new Date() : this.convertStringToDate(titleObj.value);
     this.isDropup = false;
-    this.collectEvents = [];
     this.getDropDownPositionClassNames();
+    this.choiseReadyFlag = 0;
   }
 
   getTitleObject = (options: []): {name, value} => {
@@ -41,17 +41,17 @@ export class DatepickerFilterComponent implements OnInit {
   }
 
   choiceReady = () => {
-    (this.collectEvents.length - 1) ? this.filterVal.emit(this.filterResult) : this.filterVal.emit(-1);
+    (this.choiseReadyFlag - 1) ? this.filterVal.emit(this.filterResult) : this.filterVal.emit(-1);
   }
 
   cancelFilter = (i, event) => {
-    this.collectEvents = [...this.collectEvents, 'cancelFilter'];
+    this.choiseReadyFlag ++;
     this.filterResult = i;
     event.preventDefault();
   }
 
   selectDate = (event) => {
-    this.collectEvents = [...this.collectEvents, 'selectDate'];
+    this.choiseReadyFlag ++;
     this.filterResult = this.convertDateToString(event);
   }
 
