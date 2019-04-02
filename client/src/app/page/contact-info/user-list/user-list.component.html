@@ -1,11 +1,11 @@
 <table class="table mt-4">
   <tbody>
-    <tr *ngFor="let user of users | filterUsersBy: filterText;">
-      <th scope="row"><a>{{ user.firstName }} {{ user.lastName }}</a></th>
-      <td><a>{{ user.position }}</a></td>
-      <td><a>{{ user.email }}</a></td>
-      <td><a>{{ user.phone }}</a></td>
-      <td><a>{{ user.contacts.skype }}</a></td>
+    <tr *ngFor="let user of users | filterUsersBy: filterText; let i = index">
+      <th scope="row"><a (click)="selectUser(i)">{{ user.firstName }} {{ user.lastName }}</a></th>
+      <td><a (click)="selectUser(i)">{{ user.position }}</a></td>
+      <td><a (click)="selectUser(i)">{{ user.email }}</a></td>
+      <td><a (click)="selectUser(i)">{{ user.phone }}</a></td>
+      <td><a (click)="selectUser(i)">{{ user.contacts.skype }}</a></td>
     </tr>
   </tbody>
 </table>  
