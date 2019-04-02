@@ -24,5 +24,15 @@ export const FILTERS: Filter[] = [
       { name: 'Normal', value: 1 },
       { name: 'Low', value: 2 },
     ],
+  },
+  {
+    id: 2,
+    name: 'date',
+    isCalendar: true,
+    defaultValue: -1,
+    options: [
+      { name: 'Filter by Date', value: -1 },
+      { name: 'date', value: 0 },
+    ],
   }
 ];
