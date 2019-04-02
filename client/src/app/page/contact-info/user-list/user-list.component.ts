@@ -12,6 +12,7 @@ export class UserListComponent implements OnInit {
 
 
   ngOnInit() {
+    console.log(this.users);
   }
 
 }
