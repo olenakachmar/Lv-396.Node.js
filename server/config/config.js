@@ -3,4 +3,5 @@ module.exports = {
   port: process.argv[3] || process.env.PORT || 3000,
   JWT_SECRET: process.env.JWT_SECRET,
   arrKeys: ['login', 'password', 'firstName', 'lastName', 'position', 'email', 'phone', 'type', 'manager', 'teamlead', 'department', 'photoURL', 'hr'],
+  arrKeysIssues: ['name', 'excerpt', 'status', 'content', 'assignTo', 'reassigned'],
 };

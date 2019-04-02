@@ -140,8 +140,7 @@ body:
 **OR if there is no issue with this id**
 * err: 'Issue not found'
 **OR if there is no required options**
-* err: You should enter required parameters
-* required: name, status, assignTo, content, reassigned, excerpt
+* err: You should enter assignTo and reassigned options
 **OR if error occures**
 * err: Error object
 ------

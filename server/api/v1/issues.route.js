@@ -1,8 +1,11 @@
 const express = require('express');
 const url = require('url');
 const Issues = require('../../models/issue.model');
+const config = require('../../config/config');
 
 const router = express.Router();
+
+const arrKeys = config.arrKeysIssues;
 
 router.route('/issues')
   .get(async (req, res) => {
@@ -46,23 +49,25 @@ router.route('/issues')
   })
   .put(async (req, res) => {
     const { id } = req.body;
-    await Issues.findByIdAndUpdate(id, {
-      name: req.body.name,
-      excerpt: req.body.excerpt,
-      status: req.body.status,
-      content: req.body.content,
-      assignTo: req.body.assignTo,
-      reassigned: req.body.reassigned,
-    }, { new: true }, (err) => {
+    const user = arrKeys.reduce((obj, el) => {
+      if (req.body[el]) {
+        return {
+          ...obj,
+          [el]: req.body[el],
+        };
+      }
+      return {
+        ...obj,
+      };
+    }, {});
+    await Issues.findByIdAndUpdate(id, user, { new: true }, (err) => {
       if (err) {
         res.status(500).json({ err });
       } else if (!id) {
         res.status(404).json({ err: 'Issue not found' });
-      } else if (!req.body.name || !req.body.status || !req.body.excerpt
-          || !req.body.assignTo || !req.body.content || !req.body.reassigned) {
+      } else if (!req.body.assignTo || !req.body.reassigned) {
         res.json({
-          err: 'You should enter required parameters',
-          required: 'name, status, assignTo, content, reassigned, excerpt',
+          err: 'You should enter assignTo and reassigned options',
         });
       }
       res.json({
