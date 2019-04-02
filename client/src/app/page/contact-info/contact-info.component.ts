@@ -9,6 +9,7 @@ import { UserService } from '../../app_services/user.service';
 })
 export class ContactInfoComponent implements OnInit {
   users: User[];
+  filterText: string = "";
 
   constructor(private userService: UserService) { }
 
@@ -16,8 +17,12 @@ export class ContactInfoComponent implements OnInit {
     this.loadAllUsers();
   }
 
+  takeFilterValue(text: string) {
+    this.filterText = text;
+  }
+
   loadAllUsers() {
-    this.userService.getAll().subscribe(users => { this.users = users } );
+    this.userService.getAll().subscribe(users => { this.users = users; } );
   }
 
 }
