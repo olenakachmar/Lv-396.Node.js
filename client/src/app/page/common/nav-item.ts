@@ -5,8 +5,6 @@ export class NavItem {
   router: string;
   rightMenu: boolean;
   burgerMenu: boolean;
-  // hr: boolean;
-  // developer: boolean;
   hr: string;
   dev: string;
   logout?: boolean;

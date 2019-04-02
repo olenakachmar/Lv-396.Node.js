@@ -4,7 +4,7 @@ import { User } from '../../app_models/user';
 
 
 @Component({
-  selector: 'app-page',
+  selector: 'app-wrapper',
   templateUrl: './wrapper.component.html',
   styleUrls: ['./wrapper.component.scss']
 })

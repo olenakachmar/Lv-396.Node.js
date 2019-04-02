@@ -25,7 +25,7 @@ export class NavbarProfileComponent implements OnInit {
     this.name = 'Name';
     this.surname = 'Surname';
     this.notificationsNumber = 7;
-    this.navItemsService.getNavList().subscribe(list => { this.menuList = list });
+    this.navItemsService.getNavList().subscribe(list => { this.menuList = list; });
     this.user = 'hr';
   }
 
@@ -37,9 +37,7 @@ export class NavbarProfileComponent implements OnInit {
 
   changeCurrent(index) {
     event.preventDefault();
-    this.menuList.map(item => {
-      item.current = false;
-    });
-    this.menuList[index].title !== "Log Out" ? this.menuList[index].current = true : this.logout();
+    this.menuList.map((item, i) => item.current = i === 0);
+    this.menuList[index].title !== 'Log Out' ? this.menuList[index].current = true : this.logout();
   }
 }
