@@ -32,14 +32,12 @@ export class NavbarComponent implements OnInit {
 
   homePage() {
     event.preventDefault();
-    this.menuList.map((item, i) => {
-      item.current = (i === 0) ? true : false;
-    });
+    this.menuList.map((item, index) => item.current = index === 0);
   }
 
   changeCurrent(i) {
     event.preventDefault();
-    this.menuList.map((item, index) => item.current = (i === index) ? true : false);
+    this.menuList.map((item, index) => item.current = index === i);
     this.current = false;
   }
 

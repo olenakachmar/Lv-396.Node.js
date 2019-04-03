@@ -45,10 +45,8 @@ export class NavbarProfileComponent implements OnInit {
 
   changeCurrent(i) {
     event.preventDefault();
-    this.menuList.map(item => item.current = false);
-    if (!this.menuList[i].logout) {
-      this.menuList[i].current = true;
-    } else {
+    this.menuList.map((item, index) => item.current = index === i);
+    if (this.menuList[i].logout) {
       this.logout();
     }
   }
