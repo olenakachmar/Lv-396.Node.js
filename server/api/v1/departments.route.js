@@ -42,8 +42,15 @@ router.get('/departments/:id', async (req, res) => {
 });
 router.post('/departments/users', async (req, res) => {
   const { id } = req.body;
+  let added = false;
   const department = await Departments.findById(id);
-  department.employees = [...department.employees, req.body.employees];
+  department.employees.forEach((item) => {
+    if (item._id.toString() === req.body.employees) {
+      added = true;
+      res.status(404).json({ err: 'User already added' });
+    }
+  });
+  if (!added) department.employees = [...department.employees, req.body.employees];
   department.save((err) => {
     if (err) {
       res.status(500).json({ err });
