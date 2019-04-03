@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+// import {DepartmentService} from "../../app_services/department.service";
+// import {Department} from "../../app_models/department";
 
 
 @Component({
@@ -8,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateUserPageComponent implements OnInit {
 
-  constructor() { }
+  // department: Department;
+
+  constructor(
+    // private departmentService: DepartmentService
+  ) {
+  }
 
   ngOnInit() {
+    // this.departmentService.getDepartmentById(123).subscribe(d => this.department = d);
   }
 
 }

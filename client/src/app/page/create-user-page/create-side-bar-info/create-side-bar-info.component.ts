@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DepartmentService } from '../../../app_services/department.service';
+import { Department } from "../../../app_models/department";
 
 @Component({
   selector: 'app-create-side-bar-info',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateSideBarInfoComponent implements OnInit {
 
-  constructor() { }
+  departments: Department = new Department();
+
+  constructor( private departmentService: DepartmentService ) { }
 
   ngOnInit() {
+    this.loadDepartments();
+  }
+
+  loadDepartments() {
+    this.departmentService.getAllDepartments().subscribe(departments => { this.departments = departments; });
   }
 
 }
