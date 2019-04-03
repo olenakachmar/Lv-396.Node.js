@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WrapperComponent } from './wrapper/wrapper.component';
 import { UserBarInfoComponent } from '../page/user-bar-info/user-bar-info.component';
 import { FilterComponent } from '../page/filter/filter.component';
@@ -18,11 +19,15 @@ import { ModalComponent } from '../page/modal/modal.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
-
+import { UserListComponent } from './contact-info/user-list/user-list.component';
+import { UserFilterComponent } from './contact-info/user-filter/user-filter.component';
+import { FilterUsersByPipe } from './contact-info/filter-users-by.pipe';
 export const routes: Routes = [
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
   { path: '', component: WrapperComponent },
+  { path: 'my-profile', component: MyProfileComponent },
   { path: 'contact-info', component: ContactInfoComponent }
 ];
 
@@ -39,13 +44,19 @@ export const routes: Routes = [
     FilterTasksByPipe,
     ItemComponent,
     ModalComponent,
-    ContactInfoComponent
+    MyProfileComponent,
+    ContactInfoComponent,
+    UserListComponent,
+    UserFilterComponent,
+    FilterUsersByPipe
   ],
   imports: [
     CommonModule,
     RouterModule,
     BrowserModule,
     HttpModule,
+    FormsModule,
+    ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
     ModalModule.forRoot()

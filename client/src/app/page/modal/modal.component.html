@@ -1,5 +1,5 @@
 <div class="re-assign">
-<button type="button" class="btn btn-outline-primary text-reassign" (click)="openModal(template, $event)">RE-ASSIGN</button>
+<button type="button" class="btn btn-outline-primary text-reassign" (click)="openModal(template)">RE-ASSIGN</button>
 
 <ng-template #template>
   <div class="modal-header">
@@ -9,15 +9,14 @@
     </button>
   </div>
   <div class="modal-body" >
-    <form method="post" action="">
+    <form [formGroup]="modalForm" (submit)="onSubmit(tasks)">
     <div class="modal-grid">
       <div class="name-grid">
         <input class="no-visible" type="text" value="{{tasks.id}}" name="id">
-        <input class="form-control" type="text" value="{{tasks.title}}" name="name">
+        <input class="form-control" type="text" name="name" value="{{tasks.name}}" formControlName="name" #name>
       </div>
       <div class="filter-grid">
-        <!-- <button type="button"  class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
-        <select class="form-control" value={{tasks.priority}} name="status">
+        <select class="form-control" name="status">
           <option>LOW</option>
           <option>NORMAL</option>
           <option>HIGH</option>
@@ -34,17 +33,17 @@
         </div>
       </div>
       <div class=" btn-group date-grid">
-        <input type="text" disabled value="{{tasks.created}}" class="btn btn-outline-primary">
+        <input type="text" disabled value="{{ tasks.date }}" class="btn btn-outline-primary" name="date">
       </div>
       <div class="text-grid">
-        <textarea class="form-control" aria-label="With textarea" value="{{tasks.value}}" name="content"></textarea>
+        <textarea class="form-control" aria-label="With textarea" value="{{tasks.content}}" name="content" formControlName="content" #content></textarea>
       </div>
       <div class="fromName-grid">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">FROM</span>
           </div>
-          <input type="text" disabled placeholder="{{tasks.assignTo}}" class="form-control" name="author">
+          <input type="text" disabled placeholder="{{tasks.author}}" class="form-control" name="author">
         </div>
       </div>
       <div class="reassignFrom-grid">
@@ -56,7 +55,7 @@
         </div>
       </div>
       <div class="addTask-grid">
-        <button type="submit" (click)="submit(myForm); modalRef.hide()" class="btn btn-primary">ADD TASK</button>
+        <button type="submit" class="btn btn-primary">ADD TASK</button>
       </div>
     </div>
   </form>

@@ -3,29 +3,29 @@
   <div accordion-heading class="heading-grid">
     <span>{{tasks.id}}</span>
     <div class="heading-text">
-      <h5>{{tasks.title}}</h5>
+      <h5>{{tasks.name}}</h5>
       </div>
       <div class="heading-excerpt">
-        <p>{{tasks.value}}</p>
+        <p>{{tasks.excerpt}}</p>
       </div>
       <div class="heading-filter">
-        <p>{{tasks.priority}}</p>
+        <p>{{tasks.status.name}}</p>
       </div>
       <div class="heading-date">
-        <p>{{tasks.created}}</p>
+        <p>{{ tasks.date }}</p>
       </div>
       <div class="heading-icon">
       </div>
     </div>
     <div class="body-text">
-      <p>{{tasks.value}}</p>
+      <p>{{tasks.content}}</p>
     </div>
     <div class="body-grid">
       <div class="body-from">
         <span>From: </span>
-        <span class="bold">{{tasks.ownerID}}</span>
+        <span class="bold">{{tasks.author}}</span>
       </div>
-        <app-modal [tasks]="tasks"></app-modal>
+      <app-modal [tasks]="tasks"></app-modal>
     </div>
   </accordion-group>
 </accordion>

@@ -4,6 +4,9 @@ import { Task } from './task';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { UserService, api } from '../../app_services/user.service';
 import * as moment from 'moment';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,20 +20,45 @@ export class TasksService {
     const options = this.userService.getRequestOptions();
     return this.http.get(`${api}/issues/all`, options)
     .map(response => {
-      const tasks : Task[] = response.json();
+      const getTask = response.json();
+      const tasks: Task[] = getTask.map( (item: any) => {
+        return {
+          id: item._id,
+          name: item.title,
+          excerpt: '',
+          status: {name: item.priority, value: this.getStatusValue(item.priority)},
+          type: {name: item.type, value: this.getTaskType(item.type)},
+          date: this.convertDate(item.created),
+          author: '',
+          content: item.value
+        };
+      });
       return tasks;
-    })
+    });
   }
 
-  convertDate(date) {
+  getStatusValue = (status: string): number => {
+    if (status.toLowerCase() === 'high') {
+      return 0;
+    }
+    if (status.toLowerCase() === 'normal') {
+      return 1;
+    }
+    return 2;
+  }
+
+  getTaskType = (type: string): number => {
+    if (status === 'issue') {
+      return 1;
+    }
+    return 0;
+  }
+
+  convertDate(date: number): string {
     return moment(date).format('L');
   }
-  // editTasks(body) {
-  //   return this.http.put('http://127.0.0.1:3000/api/v1/issues/update', {
-  //     login,
-  //     password
-  //   }).map(response => response.json())
-  //     .catch(this.handleError);
-  // }
-  //}
+
+   handleError(err: Response | any) {
+    return throwError(err);
+  }
 }
