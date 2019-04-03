@@ -58,8 +58,7 @@ export class TasksService {
   }
 
   convertDate(date: number): string {
-    // return moment(date).format('L');
-    return '';
+    return moment(date).format('L');
   }
 
   handleError(err: Response | any) {
