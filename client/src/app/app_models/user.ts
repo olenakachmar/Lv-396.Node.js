@@ -3,9 +3,9 @@ export  class User {
   firstName: string;
   lastName: string;
   position: string;
-  manager: object = {};
+  manager?: any;
   teamlead: object;
-  department: object = {};
+  department?: any;
   email: string;
   phone: string;
   contacts: object;
