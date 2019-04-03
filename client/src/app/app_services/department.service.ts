@@ -14,11 +14,10 @@ export class DepartmentService {
 
   getAllDepartments(): Observable<Department>{
     const options = this.getRequestOptions();
-    return this.http.get(`${api}/departments`, options)
+    return this.http.get(`${api}/departments/`, options)
       .map(response => {
         console.log(response);
         const departments: Department = response.json();
-        console.log(departments);
         return departments;
       });
   }

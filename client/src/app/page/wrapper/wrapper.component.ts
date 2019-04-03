@@ -13,8 +13,6 @@ export class WrapperComponent implements OnInit {
 
   jsonData;
   item: Task = new Task();
-  // item: TaskInterface [];
-    // = new Task(0, '', '', {name: '', value: ''}, {name: '', value: ''}, '', '', '');
   user = new User();
 
 

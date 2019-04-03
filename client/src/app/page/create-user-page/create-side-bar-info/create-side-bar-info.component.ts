@@ -9,7 +9,7 @@ import { Department } from "../../../app_models/department";
 })
 export class CreateSideBarInfoComponent implements OnInit {
 
-  departments: Department = new Department();
+  departments: Department[];
 
   constructor( private departmentService: DepartmentService ) { }
 
