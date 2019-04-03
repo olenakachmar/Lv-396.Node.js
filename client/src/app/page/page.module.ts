@@ -31,7 +31,8 @@ export const routes: Routes = [
   { path: '', component: WrapperComponent },
   { path: 'my-profile', component: MyProfileComponent },
   { path: 'edit-my-profile', component: EditMyProfileComponent },
-  { path: 'contact-info', component: ContactInfoComponent }
+  { path: 'contact-info', component: ContactInfoComponent },
+  { path: 'my-profile/:id', component: MyProfileComponent }
 ];
 
 @NgModule({
