@@ -53,10 +53,17 @@ export class WrapperComponent implements OnInit {
           name: item.name,
           isCalendar: item.isCalendar,
           defaultValue: data.optionId,
-          options: item.isCalendar ? this.updateDataFilterOptions(item.options, data.optionId) : item.options
+          options: this.setOptions(item.isCalendar, item.options, data.optionId)
         } : item
       );
     }
+  }
+
+  setOptions = (isCalendar: boolean, options: [], data: any) => {
+    if (isCalendar) {
+      return this.updateDataFilterOptions(options, data);
+    }
+    return options;
   }
 
   updateDataFilterOptions = (options: any, dateValue: any): [] => {
