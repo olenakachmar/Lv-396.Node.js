@@ -84,7 +84,10 @@ $primary-color: #2699FB;
   margin-left: 34px;
 }
 
-.name-grid input, .filter-grid button, .assign-grid button, .date-grid button,
+.no-visible{
+  display: none;
+}
+.name-grid input, .filter-grid select, .assign-grid button, .date-grid input,
 .text-grid textarea {
   height: 50px;
   border: $modal-border-color 1px solid;
@@ -94,14 +97,18 @@ $primary-color: #2699FB;
   font-size: 14px;
   text-align: left;
 }
-
+.filter-grid select option{
+  margin: 30px;
+}
 .input-group-prepend, .form-control {
   height: 50px;
   border-radius: 0%;
   background-color: #fff;
   color: $modal-text-color;
   border: #BCE0FD solid 1px;
+  float: left;
 }
+
 
 .input-group-prepend span{
   width: 138px;
@@ -113,7 +120,7 @@ $primary-color: #2699FB;
   border:none;
 }
 
-.name-grid input::placeholder {
+.name-grid input::placeholder, .date-grid input::placeholder {
   color:$modal-text-color;
 }
 
@@ -184,4 +191,7 @@ $primary-color: #2699FB;
     right: 25px;
     background-color: transparent;
   }
+}
+.re-assign {
+  margin-left: 20%;
 }

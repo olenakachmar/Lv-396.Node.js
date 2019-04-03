@@ -35,5 +35,4 @@ export class MyProfileComponent implements OnInit {
   loadAll() {
     this.UserInfoService.getAll().subscribe(users => { this.users = users; });
   }
-
 }

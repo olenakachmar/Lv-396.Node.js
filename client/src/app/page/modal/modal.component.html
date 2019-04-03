@@ -15,63 +15,50 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
+  <div class="modal-body" >
+    <form [formGroup]="modalForm" (submit)="onSubmit($event, s.value, a.value)">
     <div class="modal-grid">
       <div class="name-grid">
-        <input class="form-control" type="text" placeholder={{item.name}}>
+        <input class="no-visible" type="text" value="{{tasks.id}}" name="id">
+        <input class="form-control" type="text" name="name" value="{{tasks.name}}" formControlName="name" #name>
       </div>
-      <div class="btn-group filter-grid" dropdown>
-        <button type="button" dropdownToggle class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-          {{item.status.name}}
-        </button>
-        <div *dropdownMenu class="dropdown-menu">
-          <a class="dropdown-item" href="#">LOW</a>
-          <a class="dropdown-item" href="#">NORMAL</a>
-          <a class="dropdown-item" href="#">HIGHT</a>
-        </div>
+      <div class="filter-grid">
+        <select class="form-control" #s >
+          <option selected>{{tasks.status.name}}</option>
+        </select>
       </div>
       <div class="btn-group assign-grid" dropdown>
-        <button type="button" dropdownToggle class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-          Assign To
-        </button>
-        <div *dropdownMenu class="dropdown-menu">
-          <a class="dropdown-item" href="#">1</a>
-          <a class="dropdown-item" href="#">2</a>
-          <a class="dropdown-item" href="#">3</a>
-        </div>
+        <select class="form-control" #a>
+          <option *ngFor="let user of users" value="{{user._id}}"> {{user.firstName}} {{user.lastName}} </option>
+        </select>
       </div>
       <div class=" btn-group date-grid">
-        <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-          {{item.date}}
-        </button>
+        <input type="text" disabled value="{{ tasks.date }}" class="btn btn-outline-primary" name="date">
       </div>
       <div class="text-grid">
-        <textarea class="form-control" aria-label="With textarea">{{item.content}}</textarea>
+        <textarea class="form-control" aria-label="With textarea" value="{{tasks.content}}" name="content" formControlName="content" #content></textarea>
       </div>
       <div *ngIf="modalType === 'RE-ASSIGNE'" class="fromName-grid">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">FROM</span>
           </div>
-          <input type="text" disabled class="form-control" placeholder={{item.author}} aria-label="Username"
-                 aria-describedby="basic-addon1">
+          <input type="text" disabled placeholder="{{tasks.author}}" class="form-control" name="author">
         </div>
-        <div *ngIf="modalType === 'RE-ASSIGNE'" class="reassignFrom-grid">
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">REASSIGN FROM</span>
-            </div>
-            <input type="text" disabled class="form-control" placeholder="Username" aria-label="Username"
-                   aria-describedby="basic-addon1">
+      </div>
+      <div *ngIf="modalType === 'RE-ASSIGNE'" class="reassignFrom-grid">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">REASSIGN FROM</span>
           </div>
+          <input type="text" disabled class="form-control" placeholder="{{user.firstName}} {{user.lastName}}" aria-label="Username" aria-describedby="basic-addon1">
         </div>
       </div>
       <div class="addTask-grid">
-        <button type="button" class="btn btn-primary">ADD TASK</button>
+        <button type="submit"(click)="modalRef.hide()" class="btn btn-primary">ADD TASK</button>
       </div>
     </div>
+  </form>
   </div>
 </ng-template>
+</div>
