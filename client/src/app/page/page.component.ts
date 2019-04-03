@@ -42,30 +42,4 @@ export class PageComponent implements OnInit {
       .subscribe(tasks => this.tasks = tasks);
   }
 
-  filterGrids = () => {
-    return this.filters.length ? ('filter-col-' + this.filters.length) : '';
-  }
-
-  selectFilterOption = (data: any) => {
-    if (this.filters.length) {
-      this.filters = this.filters.map(
-          (item, index) => index === data.filterId ? {
-            id: item.id,
-            name: item.name,
-            isCalendar: item.isCalendar,
-            defaultValue: data.optionId,
-            options: item.isCalendar ? this.updateDataFilterOptions(item.options, data.optionId) : item.options
-          } : item
-      );
-    }
-  }
-
-  updateDataFilterOptions = (options: any, dateValue: any): [] => {
-    if (dateValue === -1) {
-      return options;
-    }
-    return options.map(opt => {
-      return opt.name === 'date' ? {name: opt.name, value: dateValue} : opt;
-    });
-  }
 }

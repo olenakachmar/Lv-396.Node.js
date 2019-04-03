@@ -24,18 +24,32 @@ export class DatepickerFilterComponent implements OnInit {
 
   ngOnInit() {
     const titleObj = this.getTitleObject(this.filterItem.options);
-    this.title = titleObj.value === -1 ? titleObj.name : titleObj.value;
-    this.dateDefault = this.filterItem.defaultValue === -1 ? new Date() : this.convertStringToDate(titleObj.value);
+    this.title = this.getTitle(titleObj);
+    this.dateDefault = this.getDateDefault(titleObj.value);
     this.isDropup = false;
     this.getDropDownPositionClassNames();
     this.choiseReadyFlag = 0;
   }
 
-  getTitleObject = (options: []): {name, value} => {
+  private getTitle = (titleObj: any) => {
+    if (titleObj.value === -1) {
+      return titleObj.name;
+    }
+    return titleObj.value;
+  }
+
+  private getDateDefault = (title: any) => {
+    if (this.filterItem.defaultValue === -1) {
+      return new Date();
+    }
+    return this.convertStringToDate(title);
+  }
+
+  private getTitleObject = (options: []): {name, value} => {
     return options.filter((item: {value, name}) => item.value === this.filterItem.defaultValue )[0];
   }
 
-  convertStringToDate = (dateStr: string) => {
+  private convertStringToDate = (dateStr: string) => {
     const dateParts = dateStr.split('/');
     return new Date(+ dateParts[2], (+ dateParts[1]) - 1, + dateParts[0]);
   }
@@ -55,11 +69,27 @@ export class DatepickerFilterComponent implements OnInit {
     this.filterResult = this.convertDateToString(event);
   }
 
-  convertDateToString = (date: Date) => {
-    const dd = (date.getDate() < 10) ? ('0' + date.getDate()) : date.getDate();
-    const mm = ((date.getMonth() + 1) < 10) ? ('0' + (date.getMonth() + 1)) : (date.getMonth() + 1);
+  private convertDateToString = (date: Date) => {
+    const dd = this.getDayStr(date);
+    const mm = this.getMonthStr(date);
     const yyyy = date.getFullYear();
     return dd + '/' + mm + '/' + yyyy;
+  }
+
+  private getDayStr = (date: Date) => {
+    const day = date.getDate();
+    if (day < 10) {
+      return '0' + day;
+    }
+    return day;
+  }
+
+  private getMonthStr = (date: Date) => {
+    const month = date.getMonth() + 1;
+    if (month < 10) {
+      return '0' + month;
+    }
+    return month;
   }
 
   getDropDownPositionClassNames(): void {
