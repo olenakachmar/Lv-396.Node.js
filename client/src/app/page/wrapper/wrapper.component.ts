@@ -3,7 +3,7 @@ import { UserService } from '../../app_services/user.service';
 import { User } from '../../app_models/user';
 import { Filter } from '../common/filter';
 import { FiltersService } from '../common/filters.service';
-import { Task } from '../common/task';
+import {Task, TaskImpl} from '../common/task';
 import { TasksService } from '../common/tasks.service';
 
 @Component({
@@ -12,12 +12,9 @@ import { TasksService } from '../common/tasks.service';
   styleUrls: ['./wrapper.component.scss']
 })
 
-
-
 export class WrapperComponent implements OnInit {
 
-  jsonData;
-  item: Task = new Task();
+  emptyTask: TaskImpl = new TaskImpl();
   user = new User();
   filters: Filter[];
   tasks: Task[];

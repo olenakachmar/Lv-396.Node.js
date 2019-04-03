@@ -67,7 +67,7 @@ export const NAVBAR_LIST: NavItem[] = [
     id: 7,
     title: 'create user',
     current: false,
-    router: '',
+    router: 'create-user',
     rightMenu: false,
     burgerMenu: true,
     hr: 'hr',
