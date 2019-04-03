@@ -23,6 +23,8 @@ import { PageComponent } from './page/page.component';
 import { NavbarComponent } from './page/navbar/navbar.component';
 import { NavbarProfileComponent } from './page/navbar/navbar-profile/navbar-profile.component';
 import { AddTaskButtonComponent } from './page/add-task-button/add-task-button.component';
+import { SocialNetworksComponent } from './page/navbar/social-networks/social-networks.component';
+
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { AddTaskButtonComponent } from './page/add-task-button/add-task-button.c
     NavbarComponent,
     NavbarProfileComponent,
     AddTaskButtonComponent,
+    SocialNetworksComponent
   ],
   imports: [
     BrowserModule,
