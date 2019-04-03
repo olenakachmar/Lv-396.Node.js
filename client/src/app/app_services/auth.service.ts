@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { throwError } from 'rxjs';
 
+
 @Injectable()
 export class AuthService {
   constructor(private http: Http) { }
@@ -17,11 +18,11 @@ export class AuthService {
   }
 
   logout(): any {
-    localStorage.removeItem('username');
+    localStorage.removeItem('token');
   }
 
   getUser(): any {
-    return localStorage.getItem('username');
+    return localStorage.getItem('type');
   }
 
   isLoggedIn(): boolean {

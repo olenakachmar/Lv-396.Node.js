@@ -12,7 +12,7 @@ export class NavbarProfileComponent implements OnInit {
   name: string;
   surname: string;
   notificationsNumber: number;
-
+  isCurrent: boolean;
   constructor() { }
 
   ngOnInit() {
@@ -20,6 +20,7 @@ export class NavbarProfileComponent implements OnInit {
     this.name = 'Name';
     this.surname = 'Surname';
     this.notificationsNumber = 7;
+    this.isCurrent = false;
   }
 
   changeCurrent(index, links) {
@@ -31,5 +32,4 @@ export class NavbarProfileComponent implements OnInit {
       links[index].isCurrent = true;
     }
   }
-
 }
