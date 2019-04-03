@@ -10,7 +10,6 @@ const api = 'http://127.0.0.1:3000/api/v1';
 })
 export class DepartmentService {
 
-
   constructor( private http: Http ) { }
 
   getAllDepartments(): Observable<Department>{
@@ -24,20 +23,6 @@ export class DepartmentService {
       });
   }
 
-  // getAllDepartments(): string{return this.http.get("http://127.0.0.1:3000/api/v1/departments");}
-  // getDepartmentById(id: number): Observable<Department> {
-  //   const options = this.getRequestOptions();
-  //   return this.http.get("http://127.0.0.1:3000/api/v1/departments/" + id)
-  //     .map(response => {
-  //       const department: Department = response.json();
-  //       return department;
-  //     });
-  // }
-  //
-  // getMockData(){
-  //   return [{id:1}, {id:2}]
-  // }
-  //
   getRequestOptions() {
     const headers = new Headers({
       Authorization: `Bearer ${localStorage.getItem('token')}`
