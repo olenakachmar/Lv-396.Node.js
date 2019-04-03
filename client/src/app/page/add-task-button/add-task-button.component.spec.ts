@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AddTaskButtonComponent } from './add-task-button.component';
 
@@ -8,6 +9,9 @@ describe('AddTaskButtonComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        ModalModule.forRoot()
+      ],
       declarations: [ AddTaskButtonComponent ]
     })
     .compileComponents();

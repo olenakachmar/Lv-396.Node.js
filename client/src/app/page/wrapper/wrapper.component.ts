@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../app_services/user.service';
 import { User } from '../../app_models/user';
+import { Filter } from '../common/filter';
+import { FiltersService } from '../common/filters.service';
+import { Task } from '../common/task';
+import { TasksService } from '../common/tasks.service';
 
 
 @Component({
@@ -10,121 +14,64 @@ import { User } from '../../app_models/user';
 })
 export class WrapperComponent implements OnInit {
 
-  jsonData;
   user = new User();
+  filters: Filter[];
+  tasks: Task[];
 
-
-  constructor(private UserInfoService: UserService) { }
+  constructor(private UserInfoService: UserService, private filtersService: FiltersService, private tasksService: TasksService) { }
 
   ngOnInit() {
 
     this.loadUser();
-    this.jsonData = {
-      tasks: [
-        {
-          id: 1,
-          name: 'Upcoming task name',
-          excerpt: 'This content is straight in the template.',
-          status: { name: 'LOW', value: 2 },
-          type: { name: 'issue', value: 1 },
-          date: '22/03/2019',
-          author: 'Alex Somename',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ' +
-              'tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ' +
-              'ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis',
-        },
-        {
-          id: 2,
-          name: 'Upcoming task name2',
-          excerpt: 'This content is straight in the template2.',
-          status: { name: 'HIGHT', value: 0 },
-          type: { name: 'issue', value: 1 },
-          date: '23/03/2019',
-          author: 'Alex3 Somename',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ' +
-              'tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ' +
-              'ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis',
-        },
-        {
-          id: 3,
-          name: 'Upcoming task name3',
-          excerpt: 'This content is straight in the template3.',
-          status: { name: 'LOW', value: 2 },
-          type: { name: 'task', value: 0 },
-          date: '24/03/2019',
-          author: 'Alex2 Somename',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ' +
-              'incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ' +
-              'exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis',
-        },
-        {
-          id: 4,
-          name: 'Upcoming task name4',
-          excerpt: 'This content is straight in the template4.',
-          status: { name: 'NORMAL', value: 1 },
-          type: { name: 'task', value: 0 },
-          date: '25/03/2019',
-          author: 'Alex1 Somename',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ' +
-              'incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ' +
-              'exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis',
-        },
-        {
-          id: 5,
-          name: 'Upcoming task name5',
-          excerpt: 'This content is straight in the template5.',
-          status: { name: 'LOW', value: 2 },
-          type: { name: 'task', value: 0 },
-          date: '26/03/2019',
-          author: 'Alex2 Somename',
-          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ' +
-              'incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud ' +
-              'exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis',
-        }
-      ],
-      filters: [
-        {
-          name: 'type',
-          isCalendar: false,
-          defaultValue: -1,
-          options: [
-            { name: 'Show all tasks', value: -1 },
-            { name: 'Show delegates tasks only', value: 0 },
-            { name: 'Show issues only', value: 1 },
-          ],
-        },
-        {
-          name: 'status',
-          isCalendar: false,
-          defaultValue: -1,
-          options: [
-            { name: 'Filter by Status', value: -1 },
-            { name: 'High', value: 0 },
-            { name: 'Normal', value: 1 },
-            { name: 'Low', value: 2 },
-          ],
-        }
-      ]
-    };
+    this.getFilters();
+    this.getTasks();
   }
+
   loadUser() {
     this.UserInfoService.getUser().subscribe(user => { this.user = user; });
   }
 
+  getFilters(): void {
+    this.filtersService.getFilters()
+      .subscribe(filters => this.filters = filters);
+  }
+
+  getTasks(): void {
+    this.tasksService.getTasks()
+      .subscribe(tasks => this.tasks = tasks);
+  }
+
   filterGrids = () => {
-    return this.jsonData.filters.length ? ('filter-col-' + this.jsonData.filters.length) : '';
+    return this.filters.length ? ('filter-col-' + this.filters.length) : '';
   }
 
   selectFilterOption = (data: any) => {
-    if (this.jsonData.filters.length) {
-      this.jsonData.filters = this.jsonData.filters.map(
-          (item, index) => index === data.filterId ? {
-            name: item.name,
-            isCalendar: item.isCalendar,
-            defaultValue: data.optionId,
-            options: item.options
-          } : item
+    if (this.filters.length) {
+      this.filters = this.filters.map(
+        (item, index) => index === data.filterId ? {
+          id: item.id,
+          name: item.name,
+          isCalendar: item.isCalendar,
+          defaultValue: data.optionId,
+          options: this.setOptions(item.isCalendar, item.options, data.optionId)
+        } : item
       );
     }
+  }
+
+  private setOptions = (isCalendar: boolean, options: [], data: any) => {
+    if (isCalendar) {
+      return this.updateOptions(options, data);
+    }
+    return options;
+  }
+
+  private updateOptions = (options: any, dateValue: any): [] => {
+    if (dateValue === -1) {
+      return options;
+    }
+    return options.map(opt => {
+      return opt.name === 'date' ? {name: opt.name, value: dateValue} : opt;
+    });
   }
 }
