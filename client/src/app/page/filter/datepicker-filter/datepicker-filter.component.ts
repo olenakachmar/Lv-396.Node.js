@@ -56,10 +56,26 @@ export class DatepickerFilterComponent implements OnInit {
   }
 
   convertDateToString = (date: Date) => {
-    const dd = (date.getDate() < 10) ? ('0' + date.getDate()) : date.getDate();
-    const mm = ((date.getMonth() + 1) < 10) ? ('0' + (date.getMonth() + 1)) : (date.getMonth() + 1);
+    const dd = this.getDayStr(date);
+    const mm = this.getMonthStr(date);
     const yyyy = date.getFullYear();
     return dd + '/' + mm + '/' + yyyy;
+  }
+
+  private getDayStr = (date: Date) => {
+    const day = date.getDate();
+    if (day < 10) {
+      return '0' + day;
+    }
+    return day;
+  }
+
+  private getMonthStr = (date: Date) => {
+    const month = date.getMonth() + 1;
+    if (month < 10) {
+      return '0' + month;
+    }
+    return month;
   }
 
   getDropDownPositionClassNames(): void {
