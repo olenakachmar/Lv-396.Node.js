@@ -9,7 +9,7 @@ import { UserService } from '../../app_services/user.service';
 })
 export class ContactInfoComponent implements OnInit {
   users: User[];
-  filterText: string = "";
+  filterText = '';
 
   constructor(private userService: UserService) { }
 
