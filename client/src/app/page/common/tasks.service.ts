@@ -22,22 +22,22 @@ export class TasksService {
   getTasks(): Observable<Task[]> {
     const options = this.userService.getRequestOptions();
     return this.http.get(`${api}/issues/all`, options)
-    .map(response => {
-      const getTask = response.json();
-      const tasks: Task[] = getTask.map( (item: any) => {
-        return {
-          id: item._id,
-          name: item.name,
-          excerpt: '',
-          status: {name: item.status, value: this.getStatusValue(item.status)},
-          type: {name: item.type, value: this.getTaskType(item.type)},
-          date: this.convertDate(item.date),
-          author: '',
-          content: item.content
-        };
+      .map(response => {
+        const getTask = response.json();
+        const tasks: Task[] = getTask.map( (item: any) => {
+          return {
+            id: item._id,
+            name: item.name,
+            excerpt: '',
+            status: {name: item.status, value: this.getStatusValue(item.status)},
+            type: {name: item.type, value: this.getTaskType(item.type)},
+            date: this.convertDate(item.date),
+            author: '',
+            content: item.content
+          };
+        });
+        return tasks;
       });
-      return tasks;
-    });
   }
 
   getStatusValue = (status: string): number => {
