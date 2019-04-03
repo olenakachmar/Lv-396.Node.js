@@ -13,10 +13,12 @@ import { TasksService } from '../common/tasks.service';
 })
 
 
+
 export class WrapperComponent implements OnInit {
+
+  user = new User();
   filters: Filter[];
   tasks: Task[];
-  user = new User();
 
   constructor(private UserInfoService: UserService, private filtersService: FiltersService, private tasksService: TasksService) { }
 

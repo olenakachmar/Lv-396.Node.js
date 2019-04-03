@@ -18,7 +18,6 @@ export class MyProfileComponent implements OnInit {
   users: User[] = [];
   id: any;
 
-
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.id ? this.loadUser(this.id) : this.loadUser();
@@ -36,5 +35,4 @@ export class MyProfileComponent implements OnInit {
   loadAll() {
     this.UserInfoService.getAll().subscribe(users => { this.users = users; });
   }
-
 }
