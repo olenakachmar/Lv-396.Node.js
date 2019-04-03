@@ -65,5 +65,9 @@ export class TasksService {
     return throwError(err);
   }
 
+  update(task: any) {
+    const options = this.userService.getRequestOptions();
+    return this.http.put(`${api}/issues`, task, options);
+  }
 }
 

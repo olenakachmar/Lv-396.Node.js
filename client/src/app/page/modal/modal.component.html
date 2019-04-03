@@ -9,28 +9,21 @@
     </button>
   </div>
   <div class="modal-body" >
-    <form [formGroup]="modalForm" (submit)="onSubmit()">
+    <form [formGroup]="modalForm" (submit)="onSubmit($event, s.value, a.value)">
     <div class="modal-grid">
       <div class="name-grid">
         <input class="no-visible" type="text" value="{{tasks.id}}" name="id">
         <input class="form-control" type="text" name="name" value="{{tasks.name}}" formControlName="name" #name>
       </div>
       <div class="filter-grid">
-        <select class="form-control" name="status">
-          <option>LOW</option>
-          <option>NORMAL</option>
-          <option>HIGH</option>
+        <select class="form-control" #s > 
+          <option selected>{{tasks.status.name}}</option>          
         </select>
       </div>
       <div class="btn-group assign-grid" dropdown>
-        <button type="button" dropdownToggle class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Assign To
-        </button>
-        <div *dropdownMenu class="dropdown-menu">
-          <a class="dropdown-item" href="#">1</a>
-          <a class="dropdown-item" href="#">2</a>
-          <a class="dropdown-item" href="#">3</a>
-        </div>
+        <select class="form-control" #a>
+          <option *ngFor="let user of users" value="{{user._id}}"> {{user.firstName}} {{user.lastName}} </option>
+        </select>
       </div>
       <div class=" btn-group date-grid">
         <input type="text" disabled value="{{ tasks.date }}" class="btn btn-outline-primary" name="date">
@@ -51,11 +44,11 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">REASSIGN FROM</span>
           </div>
-          <input type="text" disabled class="form-control" placeholder="ownerID" aria-label="Username" aria-describedby="basic-addon1">
+          <input type="text" disabled class="form-control" placeholder="{{user.firstName}} {{user.lastName}}" aria-label="Username" aria-describedby="basic-addon1">
         </div>
       </div>
       <div class="addTask-grid">
-        <button type="submit" class="btn btn-primary">ADD TASK</button>
+        <button type="submit"(click)="modalRef.hide()" class="btn btn-primary">ADD TASK</button>
       </div>
     </div>
   </form>
