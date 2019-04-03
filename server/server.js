@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/', usersRouter);
 app.use('/api/v1/', issuesRouter);
-app.use('/api/v1/departments', departmentsRouter);
+app.use('/api/v1/', departmentsRouter);
 
 app.listen(port, () => {
   console.log(`Server running at port ${port}/`);

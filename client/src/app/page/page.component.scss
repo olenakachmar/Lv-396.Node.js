@@ -95,17 +95,3 @@ $base-line-height: 16px;
   padding: 0;
   z-index: 1000;
 }
-
-
-@media(max-width: 860px) {
-  .filter-wrapper.filter-col-3 {
-    grid-template-columns: repeat(2, 1fr);
-    grid-row-gap: 20px;
-  }
-
-  @media(max-width: 670px) {
-    .filter-wrapper.filter-col-3 {
-      grid-template-columns: 1fr;
-    }
-  }
-}
