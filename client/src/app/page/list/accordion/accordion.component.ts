@@ -9,7 +9,6 @@ import { Task } from '../../common/task';
 })
 export class AccordionComponent implements OnInit {
   @Input() tasks: Task[];
-  //tasks: Task[];
   isContentOpen: boolean;
 
   constructor() { }
