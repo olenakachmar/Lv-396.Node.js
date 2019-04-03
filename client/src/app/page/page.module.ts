@@ -32,6 +32,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
   { path: '', component: WrapperComponent },
   { path: 'my-profile', component: MyProfileComponent },
+  { path: 'my-profile/:id', component: MyProfileComponent },
   { path: 'edit-my-profile', component: EditMyProfileComponent },
   { path: 'contact-info', component: ContactInfoComponent }
 ];

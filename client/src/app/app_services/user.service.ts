@@ -25,11 +25,11 @@ export class UserService {
     });
   }
 
-  getUser(): Observable<User> {
+  getUser(id?: string): Observable<User> {
     const options = this.getRequestOptions();
     const userId = this.getUserId();
 
-    return this.http.get(`${api}/users/${userId}`, options)
+    return this.http.get(`${api}/users/${id || userId}`, options)
       .map(response => {
         const user: User = response.json();
         return user;
