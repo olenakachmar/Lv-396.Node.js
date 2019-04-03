@@ -2,6 +2,6 @@ export class Filter {
   id: number;
   name: string;
   isCalendar: boolean;
-  defaultValue: number;
+  defaultValue: any;
   options: any;
 }
