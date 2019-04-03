@@ -16,7 +16,6 @@ export class DepartmentService {
     const options = this.getRequestOptions();
     return this.http.get(`${api}/departments/`, options)
       .map(response => {
-        console.log(response);
         const departments: Department = response.json();
         return departments;
       });

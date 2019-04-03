@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { DepartmentService } from '../../../app_services/department.service';
-import { Department } from "../../../app_models/department";
+import {Component, OnInit} from '@angular/core';
+import {Department} from "../../../app_models/department";
+import data from '../../../../assets/data/data.json';
 
 @Component({
   selector: 'app-create-side-bar-info',
@@ -9,16 +9,10 @@ import { Department } from "../../../app_models/department";
 })
 export class CreateSideBarInfoComponent implements OnInit {
 
-  departments: Department = new Department();
+  departments: Department[] = data;
 
-  constructor( private departmentService: DepartmentService ) { }
+  constructor() { }
 
-  ngOnInit() {
-    this.loadDepartments();
-  }
-
-  loadDepartments() {
-    this.departmentService.getAllDepartments().subscribe(departments => { this.departments = departments; });
-  }
+  ngOnInit() { }
 
 }

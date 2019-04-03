@@ -1,4 +1,7 @@
+import {User} from "./user";
+
 export class Department{
-  id: string;
+  _id: string;
   name: string;
+  employees: User[];
 }
