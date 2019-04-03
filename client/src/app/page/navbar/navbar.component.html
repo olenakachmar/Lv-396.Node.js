@@ -1,24 +1,26 @@
 <div class="container-fluid p-0">
   <nav class="navbar navbar-dark bg-primary p-0">
     <div class="col-3 d-flex">
-      <a href="javascript:void(0)" (click)="isActive = !isActive">
+      <a href (click)="toggleIsActive()">
         <img class="btn-menu" src="assets/img/navbar-menu-desk.png" alt="menu">
       </a>
-      <a href="javascript:void(0)" [routerLink]="[ '/profile' ]" (click)="homePage(); isActive = false">
+      <a [routerLink]="[ '/profile' ]" (click)="homePage(); current = false">
         <img class="logo" src='assets/img/logo-desk.png' alt="main-page">
       </a>
-      <div class="hide-menu" [ngClass]="{'active': isActive}">
+      <div class="hide-menu" [ngClass]="{'active': current}">
         <ul class="hide-menu__list">
-          <li class="hide-menu__item" *ngFor="let link of jsonData.menuBurger; let i = index"
-            [ngClass]="{'current': link.isCurrent}" (click)="changeCurrent(i, jsonData.menuBurger)">
-            <a href="javascript:void(0)" [routerLink]="[ link.router ]"
-              (click)="isActive = !isActive">{{ link.title }}</a>
-          </li>
+          <ng-container *ngFor="let link of menuList; let i = index">
+            <li class="hide-menu__item" *ngIf="link.burgerMenu && (userType === link.hr || userType === link.dev)"
+              [ngClass]="{'current': link.current}">
+              <a href [routerLink]="[ link.router ]" (click)="current = !current; changeCurrent(i)">{{ link.title }}</a>
+            </li>
+          </ng-container>
         </ul>
+        <app-social-networks></app-social-networks>
       </div>
     </div>
-    <div class="col-5 col-md-4 col-lg-3 d-flex ml-auto">
-      <app-navbar-profile class="user-info" [menuRight]="jsonData.menuRight"></app-navbar-profile>
+    <div>
+      <app-navbar-profile></app-navbar-profile>
     </div>
   </nav>
 </div>

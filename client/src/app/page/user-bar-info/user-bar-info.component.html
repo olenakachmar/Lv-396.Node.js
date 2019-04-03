@@ -1,4 +1,4 @@
-<div class="user-bar-info">
+<div class="user-bar-info" *ngIf="userinfo.manager">
   <div class="photo">
     <app-user-image></app-user-image>
   </div>
@@ -11,7 +11,7 @@
     </div>
     <app-link-to-profile class="additional-info" [info]="userinfo.manager.firstName + ' ' + userinfo.manager.lastName"
                          [label]="'My manager'"></app-link-to-profile>
-    <app-link-to-profile class="additional-info"
+    <app-link-to-profile class="additional-info" [info]="userinfo.department.name"
                          [label]="'My department'"></app-link-to-profile>
   </div>
 </div>

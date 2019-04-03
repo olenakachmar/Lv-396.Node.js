@@ -1,86 +1,48 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { NavItemsService } from '../common/nav-items.service';
+import { UserService } from '../../app_services/user.service';
+import { NavItem } from '../common/nav-item';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
+
 export class NavbarComponent implements OnInit {
-  @Input() menuBurger: [];
-  @Input() menuRight: [];
+
+  constructor(private navItemsService: NavItemsService, private userService: UserService) { }
   name: string;
   surname: string;
   avatar: string;
-  isActiv: boolean;
+  current: boolean;
+  menuList: NavItem[];
+  userType: string;
 
-  jsonData;
-
-  constructor() { }
+  @HostListener('mouseleave') onMouseLeave() {
+    this.current = false;
+  }
 
   ngOnInit() {
-    this.isActiv = false;
-    this.name  = 'Name';
-    this.surname = 'Surname';
+    this.navItemsService.getNavList().subscribe(list => this.menuList = list);
+    this.userType = this.userService.getUserType();
+    this.current = false;
     this.avatar = 'assets/img/navbar-symbol-desk.png';
-    this.jsonData = {
-      menuRight: [
-        {
-          id: 1,
-          href: '#1',
-          title: 'Log Out',
-          isCurrent: false,
-        },
-        {
-          id: 2,
-          href: '#2',
-          title: 'Edit Profile',
-          isCurrent: false,
-        }
-      ],
-      menuBurger: [
-        {
-          id: 1,
-          href: '#1',
-          title: 'upcoming tasks',
-          isCurrent: true,
-          router: '/profile'
-        },
-        {
-          id: 2,
-          href: '#2',
-          title: 'contact info',
-          isCurrent: false,
-          router: 'contact-info',
-        },
-        {
-          id: 3,
-          href: '#3',
-          title: 'my profile',
-          isCurrent: false,
-          router: '/profile/my-profile'
-        },
-        {
-          id: 4,
-          href: '#4',
-          title: 'create user',
-          isCurrent: false,
-          router: ''
-        }
-      ],
-    };
   }
+
   homePage() {
     event.preventDefault();
-    this.jsonData.menuBurger.map((item, i) => {
-      i === 0 ? item.isCurrent = true : item.isCurrent = false;
-    });
+    this.menuList.map((item, index) => item.current = index === 0);
   }
-  changeCurrent(index, links) {
+
+  changeCurrent(i) {
     event.preventDefault();
-    links.forEach(item => {
-      item.isCurrent = false;
-    });
-    links[index].isCurrent = true;
-    this.isActiv = false;
+    this.menuList.map((item, index) => item.current = index === i);
+    this.current = false;
+  }
+
+  toggleIsActive() {
+    event.preventDefault();
+    this.current = !this.current;
   }
 }
