@@ -22,6 +22,8 @@ import { CheckDevGuard } from './app_guards/checkDev.guard';
 import { PageComponent } from './page/page.component';
 import { NavbarComponent } from './page/navbar/navbar.component';
 import { NavbarProfileComponent } from './page/navbar/navbar-profile/navbar-profile.component';
+import { SocialNetworksComponent } from './page/navbar/social-networks/social-networks.component';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { NavbarProfileComponent } from './page/navbar/navbar-profile/navbar-prof
     PageNotFoundComponent,
     NavbarComponent,
     NavbarProfileComponent,
+    SocialNetworksComponent
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,

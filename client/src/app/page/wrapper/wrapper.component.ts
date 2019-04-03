@@ -12,6 +12,8 @@ import { TasksService } from '../common/tasks.service';
   templateUrl: './wrapper.component.html',
   styleUrls: ['./wrapper.component.scss']
 })
+
+
 export class WrapperComponent implements OnInit {
 
   jsonData;
