@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../app_services/user.service';
+import { User } from '../../app_models/user';
 import { Task } from '../../page/common/task';
 import { TasksService } from '../../page/common/tasks.service';
 import { Filter } from '../common/filter';
 import { FiltersService } from '../common/filters.service';
-
 
 @Component({
   selector: 'app-wrapper',
@@ -15,12 +16,16 @@ export class WrapperComponent implements OnInit {
   tasks: Task[];
 
   jsonData;
+  user = new User();
 
-  constructor(private filtersService: FiltersService, private tasksService: TasksService) { }
+
+  constructor(private filtersService: FiltersService, private UserInfoService: UserService, private tasksService: TasksService) { }
 
   ngOnInit() {
     this.getFilters();
     this.getTasks();
+    this.loadUser();
+
     this.jsonData = {
       userinfo: {
         name: 'Name',
@@ -32,21 +37,21 @@ export class WrapperComponent implements OnInit {
       }
     };
   }
-
   getFilters(): void {
     this.filtersService.getFilters()
       .subscribe(filters => this.filters = filters);
   }
-  
   getTasks(): void {
     this.tasksService.getTasks()
-      .subscribe(tasks => { this.tasks = tasks } );
+      .subscribe(tasks => { this.tasks = tasks; } );
+  }
+  loadUser() {
+    this.UserInfoService.getUser().subscribe(user => { this.user = user; });
   }
 
   filterGrids = () => {
     return this.filters.length ? ('filter-col-' + this.filters.length) : '';
   }
-
   selectFilterOption = (data: any) => {
     if (this.filters.length) {
       this.filters = this.filters.map(
@@ -60,5 +65,4 @@ export class WrapperComponent implements OnInit {
       );
     }
   }
-
 }

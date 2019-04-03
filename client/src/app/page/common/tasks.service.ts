@@ -33,6 +33,7 @@ export class TasksService {
           content: item.value
         };
       });
+
       return tasks;
     });
   }

@@ -2,6 +2,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FilterComponent } from './filter.component';
 import { DropdownFilterComponent } from './dropdown-filter/dropdown-filter.component';
+import { DatepickerFilterComponent } from './datepicker-filter/datepicker-filter.component';
+
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { Filter } from '../common/filter';
 
@@ -37,8 +41,15 @@ describe('FilterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FilterComponent,
-        DropdownFilterComponent ]
+      imports: [
+        BsDatepickerModule.forRoot(),
+        BsDropdownModule.forRoot()
+      ],
+      declarations: [
+        FilterComponent,
+        DropdownFilterComponent,
+        DatepickerFilterComponent
+      ]
     })
     .compileComponents();
   }));

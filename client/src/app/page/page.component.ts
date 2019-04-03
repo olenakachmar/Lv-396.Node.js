@@ -25,4 +25,12 @@ export class PageComponent implements OnInit {
     };
   }
 
+  updateDataFilterOptions = (options: any, dateValue: any): [] => {
+    if (dateValue === -1) {
+      return options;
+    }
+    return options.map(opt => {
+      return opt.name === 'date' ? {name: opt.name, value: dateValue} : opt;
+    });
+  }
 }
