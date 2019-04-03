@@ -59,14 +59,14 @@ export class WrapperComponent implements OnInit {
     }
   }
 
-  setOptions = (isCalendar: boolean, options: [], data: any) => {
+  private setOptions = (isCalendar: boolean, options: [], data: any) => {
     if (isCalendar) {
-      return this.updateDataFilterOptions(options, data);
+      return this.updateOptions(options, data);
     }
     return options;
   }
 
-  updateDataFilterOptions = (options: any, dateValue: any): [] => {
+  private updateOptions = (options: any, dateValue: any): [] => {
     if (dateValue === -1) {
       return options;
     }
