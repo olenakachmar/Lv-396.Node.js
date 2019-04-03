@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';;
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WrapperComponent } from './wrapper/wrapper.component';
 import { UserBarInfoComponent } from './user-bar-info/user-bar-info.component';
 import { FilterComponent } from './filter/filter.component';
@@ -65,10 +65,12 @@ export const routes: Routes = [
     FormsModule,
     HttpModule,
     FormsModule,
+    ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ],
   bootstrap: [WrapperComponent]
 })
