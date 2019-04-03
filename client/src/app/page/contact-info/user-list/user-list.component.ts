@@ -11,16 +11,15 @@ import { UserService } from '../../../app_services/user.service';
 export class UserListComponent implements OnInit {
   @Input() users: User[];
   @Input() filterText: string;
-  user = new User();
+  user: User;
 
-  constructor(private router: Router, private route: ActivatedRoute, private UserInfoService: UserService) { }
+    constructor(private router: Router, private route: ActivatedRoute, private userService: UserService) {}
 
   ngOnInit() {
   }
 
-  selectUser(id: string, _id: number): void {
-    this.UserInfoService.getUser(_id).subscribe(user => { this.user = user; console.log(this.user) });
-    this.router.navigate(['/profile/my-profile/', id], { relativeTo: this.route });
+  selectUser(uid: number) {
+    this.router.navigate(['/profile/my-profile/', uid], {relativeTo: this.route} );
   }
 
 }

@@ -1,4 +1,3 @@
-// #docregion
 import { Filter } from './filter';
 
 export const FILTERS: Filter[] = [
@@ -23,6 +22,16 @@ export const FILTERS: Filter[] = [
       { name: 'High', value: 0 },
       { name: 'Normal', value: 1 },
       { name: 'Low', value: 2 },
+    ],
+  },
+  {
+    id: 2,
+    name: 'date',
+    isCalendar: true,
+    defaultValue: -1,
+    options: [
+      { name: 'Filter by Date', value: -1 },
+      { name: 'date', value: 0 },
     ],
   }
 ];
