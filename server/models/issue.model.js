@@ -1,21 +1,37 @@
 const mongoose = require('mongoose');
-require('mongoose-moment')(mongoose);
 
 const { Schema } = mongoose;
 
 const issueSchema = new Schema(
   {
-    title: { type: String, required: true },
-    type: { type: String, required: true },
-    priority: { type: String, required: true },
-    assignTo: {
+    name: {
+      type: String,
+      required: true,
+    },
+    excerpt: {
+      type: String,
+      maxlength: 100,
+      required: true,
+    },
+    status: {
+      type: String,
+      required: true,
+    },
+    type: {
+      type: String,
+      required: true,
+    },
+    date: { type: Number },
+    author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },
-    created: { type: Number },
-    value: { type: String, required: true },
-    ownerID: {
+    content: {
+      type: String,
+      required: true,
+    },
+    assignTo: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true,
@@ -24,6 +40,13 @@ const issueSchema = new Schema(
   },
 );
 
+issueSchema.set('toJSON', {
+  transform(doc, ret) {
+    const object = ret;
+    delete object.__v;
+    return object;
+  },
+});
 
 const Issue = mongoose.model('Issue', issueSchema);
 

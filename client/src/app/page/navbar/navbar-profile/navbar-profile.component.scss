@@ -19,9 +19,12 @@ a {
 .wrapper {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 25vw;
   height: 70px;
   line-height: 70px;
+  @include media-breakpoint-up(lg) {
+    width: 20vw;
+  }
   .notifications {
     width: 100%;
     text-align: right;
