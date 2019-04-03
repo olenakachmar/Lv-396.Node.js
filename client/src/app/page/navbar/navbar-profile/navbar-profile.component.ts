@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../app_services/auth.service';
 import { Router } from '@angular/router';
+import { UserService } from '../../../app_services/user.service';
+import { User } from '../../../app_models/user';
 import { NavItemsService } from '../../common/nav-items.service';
 import { NavItem } from '../../common/nav-item';
 
@@ -11,22 +13,28 @@ import { NavItem } from '../../common/nav-item';
 })
 
 export class NavbarProfileComponent implements OnInit {
+  user = new User();
   avatar: string;
-  name: string;
-  surname: string;
   notificationsNumber: number;
   menuList: NavItem[];
-  user: string;
+  userType: string;
 
-  constructor(private authService: AuthService, private router: Router, private navItemsService: NavItemsService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private navItemsService: NavItemsService,
+    private userService: UserService) { }
 
   ngOnInit() {
-    this.avatar = 'assets/img/navbar-symbol-mob.png';
-    this.name = 'Name';
-    this.surname = 'Surname';
-    this.notificationsNumber = 7;
+    this.loadUser();
     this.navItemsService.getNavList().subscribe(list => { this.menuList = list; });
-    this.user = 'hr';
+    this.userType = this.userService.getUserType();
+    this.avatar = 'assets/img/userimg.jpg';
+    this.notificationsNumber = 7;
+  }
+
+  loadUser() {
+    this.userService.getUser().subscribe(user => { this.user = user; });
   }
 
   logout(): boolean {
@@ -35,9 +43,13 @@ export class NavbarProfileComponent implements OnInit {
     return false;
   }
 
-  changeCurrent(index) {
+  changeCurrent(i) {
     event.preventDefault();
-    this.menuList.map((item, i) => item.current = i === 0);
-    this.menuList[index].title !== 'Log Out' ? this.menuList[index].current = true : this.logout();
+    this.menuList.map(item => item.current = false);
+    if (!this.menuList[i].logout) {
+      this.menuList[i].current = true;
+    } else {
+      this.logout();
+    }
   }
 }

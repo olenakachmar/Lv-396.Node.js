@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { NavItemsService } from '../common/nav-items.service';
+import { UserService } from '../../app_services/user.service';
 import { NavItem } from '../common/nav-item';
 
 @Component({
@@ -10,42 +11,40 @@ import { NavItem } from '../common/nav-item';
 
 export class NavbarComponent implements OnInit {
 
-  constructor(private navItemsService: NavItemsService) { }
+  constructor(private navItemsService: NavItemsService, private userService: UserService) { }
   name: string;
   surname: string;
   avatar: string;
-  isActive: boolean;
+  current: boolean;
   menuList: NavItem[];
-  user: string;
+  userType: string;
+
   @HostListener('mouseleave') onMouseLeave() {
-    this.isActive = false;
+    this.current = false;
   }
 
   ngOnInit() {
-    this.isActive = false;
-    this.name = 'Name';
-    this.surname = 'Surname';
+    this.navItemsService.getNavList().subscribe(list => { this.menuList = list; });
+    this.userType = this.userService.getUserType();
+    this.current = false;
     this.avatar = 'assets/img/navbar-symbol-desk.png';
-    this.navItemsService.getNavList().subscribe(item => { this.menuList = item; });
-    this.user = 'hr';
   }
 
   homePage() {
     event.preventDefault();
     this.menuList.map((item, i) => {
-      i === 0 ? item.current = true : item.current = false;
+      item.current = (i === 0) ? true : false;
     });
   }
 
-  changeCurrent(index) {
+  changeCurrent(i) {
     event.preventDefault();
-    this.menuList.map((item, i) => item.current = i === 0);
-    this.menuList[index].current = true;
-    this.isActive = false;
+    this.menuList.map((item, index) => item.current = (i === index) ? true : false);
+    this.current = false;
   }
 
   toggleIsActive() {
     event.preventDefault();
-    this.isActive = !this.isActive;
+    this.current = !this.current;
   }
 }

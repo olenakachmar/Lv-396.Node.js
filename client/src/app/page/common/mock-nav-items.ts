@@ -34,7 +34,7 @@ export const NAVBAR_LIST: NavItem[] = [
   },
   {
     id: 4,
-    title: 'Log Out',
+    title: 'log out',
     current: false,
     router: '',
     rightMenu: true,
@@ -45,7 +45,7 @@ export const NAVBAR_LIST: NavItem[] = [
   },
   {
     id: 5,
-    title: 'My Profile',
+    title: 'my profile',
     current: false,
     router: '',
     rightMenu: true,
@@ -55,7 +55,7 @@ export const NAVBAR_LIST: NavItem[] = [
   },
   {
     id: 6,
-    title: 'Edit Profile',
+    title: 'edit profile',
     current: false,
     router: '',
     rightMenu: true,
