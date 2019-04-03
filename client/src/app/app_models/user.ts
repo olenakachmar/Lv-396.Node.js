@@ -1,11 +1,11 @@
-export interface User {
+export  class User {
   id: number;
   firstName: string;
   lastName: string;
   position: string;
-  manager: object;
+  manager: object = {};
   teamlead: object;
-  department: object;
+  department: object = {};
   email: string;
   phone: string;
   contacts: object;

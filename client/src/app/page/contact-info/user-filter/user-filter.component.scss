@@ -1,0 +1,23 @@
+$font-stack: Arial, sans-serif;
+$primary-color: #2699FB;
+$case-color: #BCE0FD;
+$bg-color: #F1F9FF;
+$bg2-color: #fff;
+$base-font-size: 14px;
+$base-line-height: 16px;
+
+input {
+  width: 459px;
+  height: 50px;
+  border: 1px solid $case-color;
+  background-image: url("../../../../assets/img/search.svg");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-origin: content-box;
+  border-radius: 0;
+
+    &::placeholder {
+      color: $primary-color;
+      font-size: $base-font-size;
+    }
+}

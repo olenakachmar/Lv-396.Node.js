@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../app_services/user.service';
+import { User } from '../../app_models/user';
 import { Task } from '../../page/common/task';
 import { TasksService } from '../../page/common/tasks.service';
-
 
 @Component({
   selector: 'app-wrapper',
@@ -12,10 +13,15 @@ export class WrapperComponent implements OnInit {
 tasks: Task[];
 
   jsonData;
+  user = new User();
 
-  constructor(private tasksService: TasksService) { }
+
+  constructor(private UserInfoService: UserService, private tasksService: TasksService) { }
+
 
   ngOnInit() {
+
+    this.loadUser();
     this.jsonData = {
       userinfo: {
         name: 'Name',
@@ -51,6 +57,10 @@ tasks: Task[];
     };
     this.getTasks();
   }
+  loadUser() {
+    this.UserInfoService.getUser().subscribe(user => { this.user = user; });
+  }
+
   filterGrids = () => {
     return this.jsonData.filters.length ? ('filter-col-' + this.jsonData.filters.length) : '';
   }
@@ -69,7 +79,7 @@ tasks: Task[];
   }
   getTasks(): void {
     this.tasksService.getTasks()
-      .subscribe(tasks => {this.tasks = tasks; console.log(this.tasks)} );
+      .subscribe(tasks => {this.tasks = tasks; } );
   }
 
 }

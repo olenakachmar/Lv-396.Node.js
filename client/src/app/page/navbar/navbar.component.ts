@@ -57,7 +57,7 @@ export class NavbarComponent implements OnInit {
           href: '#3',
           title: 'my profile',
           isCurrent: false,
-          router: ''
+          router: '/profile/my-profile'
         },
         {
           id: 4,

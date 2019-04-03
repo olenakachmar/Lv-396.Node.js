@@ -4,7 +4,7 @@ const Issues = require('../../models/issue.model');
 
 const router = express.Router();
 
-router.route('')
+router.route('/issues')
   .get(async (req, res) => {
     const { query } = url.parse(req.url, true);
     const { priority, type, date } = query;
@@ -36,7 +36,9 @@ router.route('')
         });
         res.end();
       }
-      res.status(201).send('Issue added');
+      res.json({
+        added: 'Successfully',
+      });
     });
   })
   .put(async (req, res) => {
@@ -59,7 +61,9 @@ router.route('')
           required: 'title, priority, assignTo, value, reassigned',
         });
       }
-      res.status(201).send('Issue updated');
+      res.json({
+        updated: 'Successfully',
+      });
     });
   })
   .delete(async (req, res) => {
@@ -67,11 +71,15 @@ router.route('')
     await Issues.findByIdAndDelete(id, (err) => {
       if (err) {
         res.status(500).json({ err });
+      } else if (!id) {
+        res.status(404).json({ err: 'Issue not found' });
       }
-      res.status(201).send('Issue deleted');
+      res.json({
+        deleted: 'Successfully',
+      });
     });
   });
-router.get('/all', async (req, res) => {
+router.get('/issues/all', async (req, res) => {
   await Issues.find().populate(['assignTo', 'ownerID'])
     .exec((err, issues) => {
       if (err) {
