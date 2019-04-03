@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.navItemsService.getNavList().subscribe(list => { this.menuList = list; });
+    this.navItemsService.getNavList().subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
     this.current = false;
     this.avatar = 'assets/img/navbar-symbol-desk.png';

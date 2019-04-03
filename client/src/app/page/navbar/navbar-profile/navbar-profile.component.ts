@@ -27,14 +27,14 @@ export class NavbarProfileComponent implements OnInit {
 
   ngOnInit() {
     this.loadUser();
-    this.navItemsService.getNavList().subscribe(list => { this.menuList = list; });
+    this.navItemsService.getNavList().subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
     this.avatar = 'assets/img/userimg.jpg';
     this.notificationsNumber = 7;
   }
 
   loadUser() {
-    this.userService.getUser().subscribe(user => { this.user = user; });
+    this.userService.getUser().subscribe(user => this.user = user);
   }
 
   logout(): boolean {

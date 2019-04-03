@@ -36,7 +36,6 @@ import { SocialNetworksComponent } from './page/navbar/social-networks/social-ne
     NavbarProfileComponent,
     AddTaskButtonComponent,
     SocialNetworksComponent
-
   ],
   imports: [
     BrowserModule,
