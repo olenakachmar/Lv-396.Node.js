@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../app_services/user.service';
 import { User } from '../../app_models/user';
-import { Task } from '../../page/common/task';
-import { TasksService } from '../../page/common/tasks.service';
+import { Task } from '../common/task';
+import { TasksService } from '../common/tasks.service';
 import { Filter } from '../common/filter';
 import { FiltersService } from '../common/filters.service';
 
@@ -52,17 +52,28 @@ export class WrapperComponent implements OnInit {
   filterGrids = () => {
     return this.filters.length ? ('filter-col-' + this.filters.length) : '';
   }
+
   selectFilterOption = (data: any) => {
     if (this.filters.length) {
       this.filters = this.filters.map(
-          (item, index) => index === data.filterId ? {
-            id: item.id,
-            name: item.name,
-            isCalendar: item.isCalendar,
-            defaultValue: data.optionId,
-            options: item.options
-          } : item
+        (item, index) => index === data.filterId ? {
+          id: item.id,
+          name: item.name,
+          isCalendar: item.isCalendar,
+          defaultValue: data.optionId,
+          options: item.isCalendar ? this.updateDataFilterOptions(item.options, data.optionId) : item.options
+        } : item
       );
     }
   }
+
+  updateDataFilterOptions = (options: any, dateValue: any): [] => {
+    if (dateValue === -1) {
+      return options;
+    }
+    return options.map(opt => {
+      return opt.name === 'date' ? {name: opt.name, value: dateValue} : opt;
+    });
+  }
+
 }

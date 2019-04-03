@@ -9,7 +9,7 @@
     </button>
   </div>
   <div class="modal-body" >
-    <form [formGroup]="modalForm" (submit)="onSubmit(tasks)">
+    <form [formGroup]="modalForm" (submit)="onSubmit()">
     <div class="modal-grid">
       <div class="name-grid">
         <input class="no-visible" type="text" value="{{tasks.id}}" name="id">

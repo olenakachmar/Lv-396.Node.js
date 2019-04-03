@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AccordionModule } from 'ngx-bootstrap/accordion';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
@@ -24,7 +23,7 @@ import { PageComponent } from './page/page.component';
 import { NavbarComponent } from './page/navbar/navbar.component';
 import { NavbarProfileComponent } from './page/navbar/navbar-profile/navbar-profile.component';
 import { AddTaskButtonComponent } from './page/add-task-button/add-task-button.component';
-import { DatepickerFilterComponent } from './page/filter/datepicker-filter/datepicker-filter.component';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +34,6 @@ import { DatepickerFilterComponent } from './page/filter/datepicker-filter/datep
     NavbarComponent,
     NavbarProfileComponent,
     AddTaskButtonComponent,
-    DatepickerFilterComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,11 +41,9 @@ import { DatepickerFilterComponent } from './page/filter/datepicker-filter/datep
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
-    BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
     ModalModule.forRoot(),
-    BsDatepickerModule.forRoot(),
   ],
   providers: [AUTH_PROVIDERS, LoggedInGuard, LoggedOutGuard, CheckDevGuard] ,
   bootstrap: [AppComponent]
