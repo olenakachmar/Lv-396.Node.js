@@ -2,17 +2,20 @@ import { Injectable } from '@angular/core';
 import { Observable, of} from 'rxjs';
 import { Task } from './task';
 import { Http, RequestOptions, Headers } from '@angular/http';
-import { UserService, api } from '../../app_services/user.service';
+import { UserService } from '../../app_services/user.service';
+import { api } from './consts';
 import * as moment from 'moment';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { throwError } from 'rxjs';
+import { Status, Type } from './statusOptions.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class TasksService {
+  statusOptions: { Status, Type };
 
   constructor(private http: Http, private userService: UserService) {}
 
@@ -24,32 +27,31 @@ export class TasksService {
       const tasks: Task[] = getTask.map( (item: any) => {
         return {
           id: item._id,
-          name: item.title,
+          name: item.name,
           excerpt: '',
-          status: {name: item.priority, value: this.getStatusValue(item.priority)},
+          status: {name: item.status, value: this.getStatusValue(item.status)},
           type: {name: item.type, value: this.getTaskType(item.type)},
-          date: this.convertDate(item.created),
+          date: this.convertDate(item.date),
           author: '',
-          content: item.value
+          content: item.content
         };
       });
-
       return tasks;
     });
   }
 
   getStatusValue = (status: string): number => {
-    if (status.toLowerCase() === 'high') {
+    if (status === Status.high) {
       return 0;
     }
-    if (status.toLowerCase() === 'normal') {
+    if (status === Status.normal) {
       return 1;
     }
     return 2;
   }
 
   getTaskType = (type: string): number => {
-    if (status === 'issue') {
+    if (type === Type.issue) {
       return 1;
     }
     return 0;
@@ -59,7 +61,9 @@ export class TasksService {
     return moment(date).format('L');
   }
 
-   handleError(err: Response | any) {
+  handleError(err: Response | any) {
     return throwError(err);
   }
+
 }
+

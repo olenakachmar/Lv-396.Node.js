@@ -25,8 +25,7 @@ export class ModalComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
-    console.log(this.tasks);
   }
 
-  onSubmit(tasks: Task) {}
+  onSubmit() {}
 }
