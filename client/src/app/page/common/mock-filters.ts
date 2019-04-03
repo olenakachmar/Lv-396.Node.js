@@ -1,4 +1,3 @@
-// #docregion
 import { Filter } from './filter';
 
 export const FILTERS: Filter[] = [
