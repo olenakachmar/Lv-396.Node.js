@@ -96,16 +96,16 @@ body:
 ------
 **GET /api/v1/issues/all** <br/>
 ## Response
-* Array of all issues objects 
+* Array of all issues objects
 **OR if error occures**
 * err: Error object
 ------
 **GET /api/v1/issues** <br/>
 ## Request
-query-parameters: priority, type, date
+query-parameters: status, type, date
 ## Response
 * issue: Object of issues found by priority, type or date 
-**OR if there is no issue with this priority, type or date**
+**OR if there is no issue with this status, type or date**
 * err: 'Issue not found'
 **OR if error occures**
 * err: Error object
@@ -113,12 +113,13 @@ query-parameters: priority, type, date
 **POST /api/v1/issues** <br/>
 ## Request
 body: 
-* title: Title of new issue
+* name: Title of new issue
+* excerpt: Title of new excerpt
+* status: Status name of new issue (Low, Normal or High)
 * type: Type of new issue (Task or Issue)
-* priority: Priority name of new issue (Low, Normal or High)
-* value: Value of new issue
+* author: ID of user that create task
+* content: Content of new issue
 * assignTo: ID of assignTo user
-* ownerID: ID of user that create task
 ## Response
 * added: 'Successfully'
 **OR if error occures**
@@ -128,18 +129,18 @@ body:
 ## Request
 body: 
 * id: ID of the issue to be updated
-* title (optional): New title for issue
-* priority (optional): New priority for issue
+* name (optional): New name for issue
+* excerpt (optional): New excerpt for issue
+* status (optional): New status for issue
+* content (optional): New value for content
 * assignTo (optional): New assignTo for issue
-* value (optional): New value for issue
 * reassigned (optional): ID of person that makes changes
 ## Response
-* updated: 'Successfully'
+* updated: 'Successfully'   
 **OR if there is no issue with this id**
 * err: 'Issue not found'
 **OR if there is no required options**
-* err: You should enter required parameters
-* required: title, priority, assignTo, value, reassigned
+* err: You should enter assignTo and reassigned options
 **OR if error occures**
 * err: Error object
 ------
@@ -154,25 +155,41 @@ body:
 **OR if error occures**
 * err: Error object
 ------
-**GET /api/v1/departments/:title** <br/>
+**GET /api/v1/departments** <br/>
 ## Response
-* department object of department
-**OR if there is no issue with this title**
-* err: 'Department not found'
+* Array of all departments objects 
 **OR if error occures**
 * err: Error object
 ------
 **POST /api/v1/departments** <br/>
 ## Request
 body: 
-* title: Title of department 
-* employee: ID of employee that should be added to department
-* priority: Priority name of new issue (Low, Normal or High)
-* value: Value of new issue
-* assignTo: ID of assignTo user
-* ownerID: ID of user that create task
+* title: Title of new title
 ## Response
 * added: 'Successfully'
+**OR if error occures**
+* err: Error object
+------
+**GET /api/v1/departments/:id** <br/>
+## Response
+* department object of department
+**OR if there is no issue with this id**
+* err: 'Department not found'
+**OR if error occures**
+* err: Error object
+------
+**POST /api/v1/departments/users** <br/>
+## Request
+body: 
+* id: Id of department 
+* employee: ID of employee that should be added to department
+
+## Response
+* added: 'Successfully'
+**OR if there is no department with this id**
+* err: 'Department not found'
+**OR if there is no id of employee**
+* err: You should enter id of employee
 **OR if error occures**
 * err: Error object
 ------
