@@ -1,1 +1,1 @@
-export const api = 'https://ita-hrms.herokuapp.com';
+export const api = 'https://ita-hrms.herokuapp.com/api/v1/';
