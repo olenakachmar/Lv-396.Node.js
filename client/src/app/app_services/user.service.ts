@@ -37,7 +37,8 @@ export class UserService {
   }
 
   getUserId(): any {
-    return this.helper.decodeToken(localStorage.token).id;
+    const helper = new JwtHelperService();
+    return helper.decodeToken(localStorage.token).id;
   }
 
   getUserType(): any {

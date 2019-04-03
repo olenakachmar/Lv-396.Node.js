@@ -6,7 +6,9 @@ $bg2-color: #fff;
   grid-template-columns: auto 150px 150px 2%;
   grid-template-rows: 1fr 1fr;
 }
-
+.heading-grid span {
+  display: none;
+}
 .heading-filter, .heading-date {
   margin-top: auto;
   margin-bottom: auto;
@@ -49,10 +51,6 @@ $bg2-color: #fff;
 .body-from {
   margin-left: 55%;
   margin-top: 2%;
-}
-
-.re-assign {
-  margin-left: 20%;
 }
 
 .heading-text > h5 {

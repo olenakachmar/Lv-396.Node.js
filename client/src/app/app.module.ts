@@ -25,7 +25,6 @@ import { NavbarProfileComponent } from './page/navbar/navbar-profile/navbar-prof
 import { AddTaskButtonComponent } from './page/add-task-button/add-task-button.component';
 import { SocialNetworksComponent } from './page/navbar/social-networks/social-networks.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +46,7 @@ import { SocialNetworksComponent } from './page/navbar/social-networks/social-ne
     AccordionModule.forRoot(),
     ModalModule.forRoot(),
   ],
-  providers: [AUTH_PROVIDERS, LoggedInGuard, LoggedOutGuard, CheckDevGuard],
+  providers: [AUTH_PROVIDERS, LoggedInGuard, LoggedOutGuard, CheckDevGuard] ,
   bootstrap: [AppComponent]
 })
 export class AppModule { }
