@@ -136,7 +136,7 @@ body:
 * assignTo (optional): New assignTo for issue
 * reassigned (optional): ID of person that makes changes
 ## Response
-* updated: 'Successfully'
+* updated: 'Successfully'   
 **OR if there is no issue with this id**
 * err: 'Issue not found'
 **OR if there is no required options**

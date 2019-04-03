@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.route('/departments')
   .get(async (req, res) => {
-    await Departments.find().populate('employees')
+    await Departments.find().populate('employees', ['firstName', 'lastName'])
       .exec((err, departments) => {
         if (err) {
           res.status(500).json({ err });
@@ -15,7 +15,7 @@ router.route('/departments')
   })
   .post(async (req, res) => {
     const newDepartment = Departments({
-      title: req.body.title,
+      name: req.body.name,
     });
     await newDepartment.save((err) => {
       if (err) {

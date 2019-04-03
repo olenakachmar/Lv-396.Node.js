@@ -4,15 +4,25 @@ const { Schema } = mongoose;
 
 const departmentSchema = new Schema(
   {
-    title: { type: String, required: true },
+    name: {
+      type: String,
+      required: true,
+    },
     employees: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true,
-    }]
+    }],
   },
 );
 
+departmentSchema.set('toJSON', {
+  transform(doc, ret) {
+    const object = ret;
+    delete object.__v;
+    return object;
+  },
+});
 
 const Department = mongoose.model('Department', departmentSchema);
 
