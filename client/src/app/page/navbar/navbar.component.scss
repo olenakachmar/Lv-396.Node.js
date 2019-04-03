@@ -43,7 +43,7 @@ nav {
     }
   }
 }
-.hide-menu {
+.burger-menu {
   position: absolute;
   top: 57px;
   left: -100vw;
@@ -151,7 +151,7 @@ nav {
   }
 }
 
-.hide-menu.active {
+.burger-menu.active {
   left: -15px;
 }
 .current {

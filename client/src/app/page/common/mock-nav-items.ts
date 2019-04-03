@@ -47,10 +47,10 @@ export const NAVBAR_LIST: NavItem[] = [
     id: 5,
     title: 'my profile',
     current: false,
-    router: '',
-    rightMenu: true,
+    router: 'my-profile',
+    rightMenu: false,
     burgerMenu: true,
-    hr: '',
+    hr: 'hr',
     dev: 'dev'
   },
   {
