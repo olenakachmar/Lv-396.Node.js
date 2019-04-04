@@ -4,7 +4,7 @@
     <div class="card-body">
       <form *ngIf="!authService.getUser()" [formGroup]="frm">
         <div class="form-group">
-          <label for="login">EMAIL:</label>
+          <label for="login">LOGIN:</label>
           <input class="form-control" formControlName="login" name="login" #login>
         </div>
         <div class="alert alert-danger"
