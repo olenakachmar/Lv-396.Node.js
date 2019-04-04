@@ -1,0 +1,20 @@
+$font-stack: Arial, sans-serif;
+$primary-color: #2699FB;
+$case-color: #BCE0FD;
+$bg-color: #F1F9FF;
+$bg2-color: #fff;
+$base-font-size: 14px;
+$base-line-height: 16px;
+
+.create-user-bar-info {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  height: auto;
+  background-color: white;
+  align-items: center;
+  padding: 10px 10px 10px 10px;
+  color: $primary-color;
+  text-align: center;
+  justify-content: space-between;
+}

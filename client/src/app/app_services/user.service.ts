@@ -3,7 +3,8 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../app_models/user';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { api } from '../page/common/consts';
+import { api } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class UserService {
 
   getAll(): Observable<User[]> {
     const options = this.getRequestOptions();
-    return this.http.get(`${api}/users`, options)
+    return this.http.get(`${api}users`, options)
     .map(response => {
       const users: User[] = response.json();
       return users;
@@ -28,7 +29,7 @@ export class UserService {
     const options = this.getRequestOptions();
     const userId = this.getUserId();
 
-    return this.http.get(`${api}/users/${id || userId}`, options)
+    return this.http.get(`${api}users/${id || userId}`, options)
       .map(response => {
         const user: User = response.json();
         return user;

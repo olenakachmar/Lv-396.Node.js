@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';;
+import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -25,16 +25,18 @@ import { ContactInfoComponent } from './contact-info/contact-info.component';
 import { UserListComponent } from './contact-info/user-list/user-list.component';
 import { UserFilterComponent } from './contact-info/user-filter/user-filter.component';
 import { FilterUsersByPipe } from './contact-info/filter-users-by.pipe';
-import { EditMyProfileComponent } from './edit-my-profile/edit-my-profile.component';
-import { DatepickerFilterComponent } from './filter/datepicker-filter/datepicker-filter.component';
+import {CreateUserPageComponent} from "./create-user-page/create-user-page.component";
+import {CreateSideBarInfoComponent} from "./create-user-page/create-side-bar-info/create-side-bar-info.component";
+import { DropdownInfoComponent } from './create-user-page/create-side-bar-info/dropdown-info/dropdown-info.component';
+import {DatepickerFilterComponent} from "./filter/datepicker-filter/datepicker-filter.component";
 
 export const routes: Routes = [
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
   { path: '', component: WrapperComponent },
   { path: 'my-profile', component: MyProfileComponent },
   { path: 'my-profile/:id', component: MyProfileComponent },
-  { path: 'edit-my-profile', component: EditMyProfileComponent },
-  { path: 'contact-info', component: ContactInfoComponent }
+  { path: 'contact-info', component: ContactInfoComponent },
+  { path: 'create-user', component: CreateUserPageComponent }
 ];
 
 @NgModule({
@@ -55,8 +57,10 @@ export const routes: Routes = [
     UserListComponent,
     UserFilterComponent,
     FilterUsersByPipe,
-    EditMyProfileComponent,
-    DatepickerFilterComponent
+    CreateUserPageComponent,
+    CreateSideBarInfoComponent,
+    DatepickerFilterComponent,
+    DropdownInfoComponent
   ],
   imports: [
     CommonModule,
@@ -69,8 +73,7 @@ export const routes: Routes = [
     BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
-    ModalModule.forRoot(),
-    BsDatepickerModule.forRoot()
+    ModalModule.forRoot()
   ],
   bootstrap: [WrapperComponent]
 })
