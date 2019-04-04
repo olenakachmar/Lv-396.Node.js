@@ -54,6 +54,7 @@ const UserSchema = new Schema({
       contact_name: {
         type: String,
         required: true,
+        unique: true,
       },
       contact_value: {
         type: String,
@@ -106,16 +107,16 @@ function checkPassword(passwordToCheck) {
 
 UserSchema.methods.checkPassword = checkPassword;
 
-UserSchema.set('toObject', {
-  transform(doc, ret) {
-    const object = ret;
-    delete object.password;
-    delete object.login;
-    delete object.type;
-    delete object.__v;
-    return object;
-  },
-});
+// UserSchema.set('toObject', {
+//   transform(doc, ret) {
+//     const object = ret;
+//     delete object.password;
+//     delete object.login;
+//     delete object.type;
+//     delete object.__v;
+//     return object;
+//   },
+// });
 
 UserSchema.set('toJSON', {
   transform(doc, ret) {
