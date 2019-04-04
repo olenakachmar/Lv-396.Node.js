@@ -6,12 +6,14 @@ import { FiltersService } from '../common/filters.service';
 import { Task } from '../common/task';
 import { TasksService } from '../common/tasks.service';
 
-
 @Component({
   selector: 'app-wrapper',
   templateUrl: './wrapper.component.html',
   styleUrls: ['./wrapper.component.scss']
 })
+
+
+
 export class WrapperComponent implements OnInit {
 
   user = new User();
@@ -21,10 +23,9 @@ export class WrapperComponent implements OnInit {
   constructor(private UserInfoService: UserService, private filtersService: FiltersService, private tasksService: TasksService) { }
 
   ngOnInit() {
-
-    this.loadUser();
     this.getFilters();
     this.getTasks();
+    this.loadUser();
   }
 
   loadUser() {

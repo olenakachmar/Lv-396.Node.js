@@ -3,8 +3,7 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../app_models/user';
 import { JwtHelperService } from '@auth0/angular-jwt';
-
-const api = 'http://127.0.0.1:3000/api/v1';
+import { api } from '../page/common/consts';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +36,8 @@ export class UserService {
   }
 
   getUserId(): any {
-    return this.helper.decodeToken(localStorage.token).id;
+    const helper = new JwtHelperService();
+    return helper.decodeToken(localStorage.token).id;
   }
 
   getUserType(): any {

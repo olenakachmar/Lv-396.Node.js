@@ -1,32 +1,31 @@
 <accordion>
-  <accordion-group #group>
-    <div accordion-heading class="heading-grid">
-      <div class="heading-text">
-        <h5>{{item.name}}</h5>
+<accordion-group #group>
+  <div accordion-heading class="heading-grid">
+    <span>{{tasks.id}}</span>
+    <div class="heading-text">
+      <h5>{{tasks.name}}</h5>
       </div>
       <div class="heading-excerpt">
-        <p>{{item.excerpt}}</p>
+        <p>{{tasks.excerpt}}</p>
       </div>
       <div class="heading-filter">
-        <p>{{item.status.name}}</p>
+        <p>{{tasks.status.name}}</p>
       </div>
       <div class="heading-date">
-        <p>{{item.date}}</p>
+        <p>{{ tasks.date }}</p>
       </div>
       <div class="heading-icon">
       </div>
     </div>
     <div class="body-text">
-      <p>{{item.content}}</p>
+      <p>{{tasks.content}}</p>
     </div>
     <div class="body-grid">
       <div class="body-from">
         <span>From: </span>
-        <span class="bold">{{item.author}}</span>
+        <span class="bold">{{tasks.author}}</span>
       </div>
-      <div class="re-assign">
-        <app-modal [item]="item"></app-modal>
-      </div>
+      <app-modal [tasks]="tasks"></app-modal>
     </div>
   </accordion-group>
 </accordion>
