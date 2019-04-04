@@ -90,6 +90,7 @@ $base-line-height: 16px;
           margin: 40px 0 30px 0;
           :first-child {
             font-size: 30px;
+            margin: 15px;
           }
           :last-child {
             font-size: 20px;
@@ -97,20 +98,11 @@ $base-line-height: 16px;
         }
       }
     }
-    @media (min-width: 1200px) {
-      .main-user-info {
-        :first-child {
-          font-size: 80px;
-        }
-        :last-child {
-          font-size: 25px;
-        }
-      }
-    }
   }
   @media (min-width: 1200px) {
     padding-top: 20px;
     .main-user-info {
+      line-height: normal;
       margin: 40px 0 30px 0;
       :first-child {
         font-size: 35px;
