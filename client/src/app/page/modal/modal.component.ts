@@ -14,6 +14,10 @@ import { Task } from '../common/task';
 export class ModalComponent implements OnInit {
   public modalForm: FormGroup;
   @Input() tasks: any;
+
+  @Input() item: any;
+  @Input() modalType: string;
+
   modalRef: BsModalRef;
   selectedStatus: {};
   users: User[];
