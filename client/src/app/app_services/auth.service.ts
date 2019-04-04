@@ -3,6 +3,8 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { throwError } from 'rxjs';
+import { api } from '../../environments/environment';
+
 
 
 @Injectable()
@@ -10,7 +12,7 @@ export class AuthService {
   constructor(private http: Http) { }
 
   auth(login: string, password: string) {
-    return this.http.post('http://127.0.0.1:3000/api/v1/auth/login', {
+    return this.http.post(`${api}auth/login`, {
       login,
       password
     }).map(response => response.json())
@@ -19,6 +21,7 @@ export class AuthService {
 
   logout(): any {
     localStorage.removeItem('token');
+    localStorage.removeItem('type');
   }
 
   getUser(): any {

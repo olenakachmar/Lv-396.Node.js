@@ -22,7 +22,7 @@ import { CheckDevGuard } from './app_guards/checkDev.guard';
 import { PageComponent } from './page/page.component';
 import { NavbarComponent } from './page/navbar/navbar.component';
 import { NavbarProfileComponent } from './page/navbar/navbar-profile/navbar-profile.component';
-import { AddTaskButtonComponent } from './page/add-task-button/add-task-button.component';
+import { SocialNetworksComponent } from './page/navbar/social-networks/social-networks.component';
 
 @NgModule({
   declarations: [
@@ -32,8 +32,9 @@ import { AddTaskButtonComponent } from './page/add-task-button/add-task-button.c
     PageNotFoundComponent,
     NavbarComponent,
     NavbarProfileComponent,
-    AddTaskButtonComponent,
+    SocialNetworksComponent
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -44,7 +45,7 @@ import { AddTaskButtonComponent } from './page/add-task-button/add-task-button.c
     AccordionModule.forRoot(),
     ModalModule.forRoot(),
   ],
-  providers: [AUTH_PROVIDERS, LoggedInGuard, LoggedOutGuard, CheckDevGuard],
+  providers: [AUTH_PROVIDERS, LoggedInGuard, LoggedOutGuard, CheckDevGuard] ,
   bootstrap: [AppComponent]
 })
 export class AppModule { }

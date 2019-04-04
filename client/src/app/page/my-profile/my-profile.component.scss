@@ -63,6 +63,16 @@
     }
   }
 
+  .date_up {
+    :first-child {
+      margin-bottom: 4px;
+    }
+
+    :last-child {
+      margin-top: 16px;
+    }
+  }
+
 
   .label {
     text-transform: uppercase;
@@ -71,11 +81,9 @@
 
   .info {
     font-size: 30px;
-    margin-top: 4px;
+    margin-top: 16px;
   }
-
 }
-
 
 .button_wrapper {
   background-color: #2699FB;
