@@ -4,7 +4,7 @@ import { Task } from './task';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { UserService } from '../../app_services/user.service';
 import { api } from './consts';
-import * as moment from 'moment';
+import moment from 'moment';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { throwError } from 'rxjs';

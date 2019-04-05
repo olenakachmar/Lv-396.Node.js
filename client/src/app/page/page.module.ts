@@ -35,14 +35,8 @@ export const routes: Routes = [
   { path: '', component: WrapperComponent },
   { path: 'my-profile', component: MyProfileComponent },
   { path: 'my-profile/:id', component: MyProfileComponent },
-<<<<<<< HEAD
-  { path: 'edit-my-profile', component: EditMyProfileComponent },
-  { path: 'contact-info', component: ContactInfoComponent },
-  { path: 'my-profile/:id', component: MyProfileComponent }
-=======
   { path: 'contact-info', component: ContactInfoComponent },
   { path: 'create-user', component: CreateUserPageComponent }
->>>>>>> d61b321da694360b4e1a69ee0415cc0e8ef4185c
 ];
 
 @NgModule({
