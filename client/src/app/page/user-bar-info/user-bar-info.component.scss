@@ -40,7 +40,7 @@ $base-line-height: 16px;
 
   .main-user-info {
     margin: 20px 0 15px 0;
-    line-height: 1.6em;
+    line-height: normal;
     :first-child {
       margin-bottom: 3px;
       font-size: 1.5rem;
@@ -90,6 +90,7 @@ $base-line-height: 16px;
           margin: 40px 0 30px 0;
           :first-child {
             font-size: 30px;
+            margin: 15px;
           }
           :last-child {
             font-size: 20px;
@@ -98,26 +99,16 @@ $base-line-height: 16px;
       }
     }
     @media (min-width: 1200px) {
+      padding-top: 20px;
       .main-user-info {
+        margin: 40px 0 30px 0;
         :first-child {
-          font-size: 80px;
+          font-size: 35px;
+          margin-bottom: 15px;
         }
         :last-child {
-          font-size: 25px;
+          font-size: 20px;
         }
-      }
-    }
-  }
-  @media (min-width: 1200px) {
-    padding-top: 20px;
-    .main-user-info {
-      margin: 40px 0 30px 0;
-      :first-child {
-        font-size: 35px;
-        margin-bottom: 15px;
-      }
-      :last-child {
-        font-size: 20px;
       }
     }
   }

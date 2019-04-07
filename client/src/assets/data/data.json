@@ -3,12 +3,14 @@
     "employees": [
       {
         "_id": "5c9a06728c40cb0e8cd39d14",
+        "position": "junior angular developer",
         "firstName": "Гріша",
         "lastName": "Пияк"
       }
     ],
     "_id": "5ca47f14de63ed1f6849605d",
-    "name": "Development"
+    "name": "Development",
+    "positions":["junior angular developer", "junior react developer"]
   },
   {
     "employees": [],

@@ -5,6 +5,9 @@
       <td>{{ user.position }}</td>
       <td>{{ user.email }}</td>
       <td>{{ user.phone }}</td>
-      <td>{{ user.contacts[0].contact_value }} </td>
+      <td *ngIf="user.contacts[0].contact_name">{{ user.contacts[0].contact_value }}</td>
+      <template *ngIf="!user.contacts[0].contact_name">
+        <td> - </td>
+      </template>
   </tbody>
 </table>  
