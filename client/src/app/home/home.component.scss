@@ -9,13 +9,19 @@ $primary-color: #2699FB;
 }
 
 .card {
+  width: 27rem;
   background: #F1F9FF;
   font-family: $font-stack;
+  border-radius: 0;
 
   .card-title {
-    padding: 30px 180px 0 25px;
+    padding: 30px 0 0 30px;
     color: $primary-color;
     font-size: 20px;
+  }
+
+  .card-body {
+    padding-top: 0;
   }
 }
 
@@ -32,16 +38,17 @@ input {
 .form-button {
 
  .login-button {
-    width: 117px;
+    width: 100%;
+    position: relative;
     font-size: 12px;
     border-radius: 0;
     padding: 12px 0;
-    margin-left: 48px;
     cursor: pointer;
  }
 
  .forgotpsw-button {
-   width: 229px;
+   width: 100%;
+   position: relative;
    background: #BCE0FD;
    color: $primary-color;
    font-size: 12px;
@@ -53,7 +60,7 @@ input {
 
 .card {
   @media (max-width: 450px) {
-    width: 20rem;
+    width: 23rem;
   }
 }
 
