@@ -5,12 +5,13 @@ $primary-color: #2699FB;
 
 
 .text-reassign {
-  font-size: 14px;
+  font-size: 11px;
+  font-weight: bold;
 }
 
 ::ng-deep .modal-content {
   background-color: $modal-back-color;
-  border-radius: 0%;
+  border-radius: 0;
   color: $modal-text-color;
   font-family: Arial, Regular;
 }
@@ -20,7 +21,7 @@ $primary-color: #2699FB;
 }
 
 .modal-header {
-  border-bottom:  none;
+  border-bottom: none;
 }
 
 .re-assign {
@@ -91,7 +92,7 @@ $primary-color: #2699FB;
 .text-grid textarea {
   height: 50px;
   border: $modal-border-color 1px solid;
-  border-radius: 0%;
+  border-radius: 0;
   background-color: #fff;
   width: 100%;
   font-size: 14px;
@@ -108,7 +109,6 @@ $primary-color: #2699FB;
   border: #BCE0FD solid 1px;
   float: left;
 }
-
 
 .input-group-prepend span{
   width: 138px;
@@ -136,7 +136,7 @@ $primary-color: #2699FB;
 .addTask-grid button {
   font-size: 12px;
   height: 50px;
-  border-radius: 0%;
+  border-radius: 0;
   padding-left: 28px;
   padding-right: 28px;
 }
@@ -149,6 +149,7 @@ $primary-color: #2699FB;
 .btn-outline-primary:hover {
   color:$modal-text-color;
 }
+
 .dropdown-toggle::after {
   position: absolute;
   display: block;
@@ -159,12 +160,15 @@ $primary-color: #2699FB;
   border: 0;
   background: url('../../../assets/img/arrow_down.svg') center center no-repeat;
 }
+
 .dropdown-toggle[aria-expanded='true']::after{
   background: url('../../../assets/img/arrow_up.svg') center center no-repeat;
 }
+
 ::ng-deep .modal-dialog {
   top: 30px;
 }
+
 .close {
   position: absolute;
   top: -25px;
@@ -193,5 +197,11 @@ $primary-color: #2699FB;
   }
 }
 .re-assign {
-  margin-left: 20%;
+  float: right;
 }
+
+.re-assign button {
+  border-radius: 0;
+  padding: 15px;
+}
+

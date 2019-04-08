@@ -23,7 +23,12 @@
     <div class="body-grid">
       <div class="body-from">
         <span>From: </span>
-        <span class="bold">{{tasks.author.firstName}} {{tasks.author.lastName}}</span>
+        <span class="bold" (click)="selectUser(user._id)">{{tasks.author.firstName}} {{tasks.author.lastName}}</span>
+      </div>
+      <div class="body-resolve">
+        <button type="button" class="btn btn-outline-primary mark-resolve">
+          MARK AS RESOLVE
+        </button>
       </div>
       <app-modal [modalType]="'RE-ASSIGNE'" [tasks]="tasks"></app-modal>
     </div>
