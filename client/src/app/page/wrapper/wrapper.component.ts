@@ -4,7 +4,9 @@ import { User } from '../../app_models/user';
 import { Filter } from '../common/filter';
 import { FiltersService } from '../common/filters.service';
 import { Task, TaskImpl } from '../common/task';
+import moment from 'moment';
 import { TasksService } from '../common/tasks.service';
+import { Status, Type } from '../common/statusOptions.enum';
 
 @Component({
   selector: 'app-wrapper',
@@ -13,6 +15,7 @@ import { TasksService } from '../common/tasks.service';
 })
 
 export class WrapperComponent implements OnInit {
+  statusOptions: { Status, Type };
 
   emptyTask: TaskImpl = new TaskImpl();
   user = new User();
@@ -38,7 +41,41 @@ export class WrapperComponent implements OnInit {
 
   getTasks(): void {
     this.tasksService.getTasks()
-      .subscribe(tasks => this.tasks = tasks);
+      .subscribe(tasks => {
+        this.tasks = tasks.map( (item: any) => {
+          return {
+            id: item._id,
+            name: item.name,
+            excerpt: '',
+            status: {name: item.status, value: this.getStatusValue(item.status)},
+            type: {name: item.type, value: this.getTaskType(item.type)},
+            date: this.convertDate(item.date),
+            author: '',
+            content: item.content
+          };
+        });
+      });
+  }
+
+  getStatusValue = (status: string): number => {
+    if (status === Status.high) {
+      return 0;
+    }
+    if (status === Status.normal) {
+      return 1;
+    }
+    return 2;
+  }
+
+  getTaskType = (type: string): number => {
+    if (type === Type.issue) {
+      return 1;
+    }
+    return 0;
+  }
+
+  convertDate(date: number): string {
+    return moment(date).format('L');
   }
 
   filterGrids = () => {
