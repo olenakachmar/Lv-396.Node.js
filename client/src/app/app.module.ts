@@ -6,7 +6,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,8 +22,9 @@ import { CheckDevGuard } from './app_guards/checkDev.guard';
 import { PageComponent } from './page/page.component';
 import { NavbarComponent } from './page/navbar/navbar.component';
 import { NavbarProfileComponent } from './page/navbar/navbar-profile/navbar-profile.component';
-import { AddTaskButtonComponent } from './page/add-task-button/add-task-button.component';
 import { SocialNetworksComponent } from './page/navbar/social-networks/social-networks.component';
+import { ForgotPasswordComponent } from './home/common/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './home/common/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -33,14 +34,16 @@ import { SocialNetworksComponent } from './page/navbar/social-networks/social-ne
     PageNotFoundComponent,
     NavbarComponent,
     NavbarProfileComponent,
-    AddTaskButtonComponent,
-    SocialNetworksComponent
+    SocialNetworksComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),

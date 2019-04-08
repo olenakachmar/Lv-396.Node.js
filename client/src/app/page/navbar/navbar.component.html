@@ -4,19 +4,19 @@
       <a href (click)="toggleIsActive()">
         <img class="btn-menu" src="assets/img/navbar-menu-desk.png" alt="menu">
       </a>
-      <a [routerLink]="[ '/profile' ]" (click)="homePage(); current = false">
+      <a [routerLink]="[ '/profile' ]" (click)="homePage(); active = false">
         <img class="logo" src='assets/img/logo-desk.png' alt="main-page">
       </a>
-      <div class="hide-menu" [ngClass]="{'active': current}">
-        <ul class="hide-menu__list">
+      <div class="burger-menu" [ngClass]="{'active': active}">
+        <ul class="burger-menu__list">
           <ng-container *ngFor="let link of menuList; let i = index">
-            <li class="hide-menu__item" *ngIf="link.burgerMenu && (userType === link.hr || userType === link.dev)"
+            <li class="burger-menu__item" *ngIf="link.burgerMenu && (userType === link.hr || userType === link.dev)"
               [ngClass]="{'current': link.current}">
-              <a href [routerLink]="[ link.router ]" (click)="current = !current; changeCurrent(i)">{{ link.title }}</a>
+              <a href [routerLink]="[ link.router ]" (click)="active = !active; changeCurrent(i)">{{ link.title }}</a>
             </li>
           </ng-container>
         </ul>
-        <app-social-networks></app-social-networks>
+        <!--<app-social-networks></app-social-networks>-->
       </div>
     </div>
     <div>
