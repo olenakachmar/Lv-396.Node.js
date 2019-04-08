@@ -1,10 +1,10 @@
 export enum Status {
-  high = 'High',
-  normal = 'Normal',
-  low = 'Low'
+  High = 0,
+  Normal = 1,
+  Low = 2
 }
 
 export enum Type {
-  issue = 'Issue',
-  task = 'Task'
+  Issue = 0,
+  Task = 1
 }

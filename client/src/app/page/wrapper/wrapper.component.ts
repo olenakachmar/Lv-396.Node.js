@@ -21,6 +21,7 @@ export class WrapperComponent implements OnInit {
   user = new User();
   filters: Filter[];
   tasks: Task[];
+  users: User[];
 
   constructor(private UserInfoService: UserService, private filtersService: FiltersService, private tasksService: TasksService) { }
 
@@ -46,11 +47,11 @@ export class WrapperComponent implements OnInit {
           return {
             id: item._id,
             name: item.name,
-            excerpt: '',
+            excerpt: item.excerpt,
             status: {name: item.status, value: this.getStatusValue(item.status)},
             type: {name: item.type, value: this.getTaskType(item.type)},
             date: this.convertDate(item.date),
-            author: '',
+            author: item.author,
             content: item.content
           };
         });
@@ -58,22 +59,13 @@ export class WrapperComponent implements OnInit {
   }
 
   getStatusValue = (status: string): number => {
-    if (status === Status.high) {
-      return 0;
-    }
-    if (status === Status.normal) {
-      return 1;
-    }
-    return 2;
+    return Status[status];
   }
 
   getTaskType = (type: string): number => {
-    if (type === Type.issue) {
-      return 1;
-    }
-    return 0;
+    return Type[type];
   }
-
+  /* Example: from server date looks like '1554287225073' (in millisecond); after convertDate it looks like '04/03/2019' */
   convertDate(date: number): string {
     return moment(date).format('L');
   }
