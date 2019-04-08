@@ -52,7 +52,7 @@ nav {
   height: 100vh;
   background-color: #2699fb;
   z-index: 2;
-  transition: all 0.5s linear;
+  transition: all 0.5s;
   padding-bottom: 100px;
   @include media-breakpoint-up(lg) {
     width: 300px;
