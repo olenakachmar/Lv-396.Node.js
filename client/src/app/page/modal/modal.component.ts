@@ -12,7 +12,7 @@ import { Task } from '../common/task';
   styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent implements OnInit {
-  public modalForm: FormGroup;
+  modalForm: FormGroup;
   @Input() tasks: any;
 
   @Input() item: any;
@@ -23,8 +23,8 @@ export class ModalComponent implements OnInit {
   users: User[];
   user: User;
   editTask: {};
-  constructor(private modalService: BsModalService, private tasksService: TasksService,
-              private fb: FormBuilder, private userService: UserService) {
+  constructor(private readonly modalService: BsModalService, private readonly tasksService: TasksService,
+              private readonly fb: FormBuilder, private readonly userService: UserService) {
     this.modalForm = fb.group({
       name: ['', Validators.required],
       content: ['', Validators.required],

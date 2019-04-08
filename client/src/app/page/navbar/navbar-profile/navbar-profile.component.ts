@@ -20,10 +20,10 @@ export class NavbarProfileComponent implements OnInit {
   userType: string;
 
   constructor(
-    private authService: AuthService,
-    private router: Router,
-    private navItemsService: NavItemsService,
-    private userService: UserService) { }
+    private readonly authService: AuthService,
+    private readonly router: Router,
+    private readonly navItemsService: NavItemsService,
+    private readonly userService: UserService) { }
 
   ngOnInit() {
     this.loadUser();

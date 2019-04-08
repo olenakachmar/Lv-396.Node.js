@@ -9,7 +9,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { LoggedInGuard } from './app_guards/logged-in.guard';
 import { LoggedOutGuard } from './app_guards/logged-out.guard';
 
-import { CheckDevGuard } from './app_guards/checkDev.guard';
+import { CheckDevGuard } from './app_guards/check-dev.guard';
 import { ForgotPasswordComponent } from './home/common/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './home/common/reset-password/reset-password.component';
 

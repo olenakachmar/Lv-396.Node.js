@@ -9,9 +9,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ForgotPasswordComponent implements OnInit {
 
-  public frm: FormGroup;
+  frm: FormGroup;
 
-  constructor(private router: Router, private fb: FormBuilder) { 
+  constructor(private readonly router: Router, private readonly fb: FormBuilder) {
     this.frm = fb.group({
       email: ['', Validators.required],
     });

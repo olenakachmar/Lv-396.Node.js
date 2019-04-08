@@ -10,8 +10,6 @@ export class PageComponent implements OnInit {
 
   jsonData;
 
-  constructor() { }
-
   ngOnInit() {
     this.jsonData = {
       userinfo: {
@@ -29,8 +27,7 @@ export class PageComponent implements OnInit {
     if (dateValue === -1) {
       return options;
     }
-    return options.map(opt => {
-      return opt.name === 'date' ? {name: opt.name, value: dateValue} : opt;
-    });
-  }
+    return options.map(opt =>
+      opt.name === 'date' ? {name: opt.name, value: dateValue} : opt);
+  };
 }

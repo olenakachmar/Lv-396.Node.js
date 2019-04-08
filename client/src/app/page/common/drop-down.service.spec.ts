@@ -7,6 +7,7 @@ describe('DropDownService', () => {
 
   it('should be created', () => {
     const service: DropDownService = TestBed.get(DropDownService);
-    expect(service).toBeTruthy();
+    expect(service)
+      .toBeTruthy();
   });
 });
