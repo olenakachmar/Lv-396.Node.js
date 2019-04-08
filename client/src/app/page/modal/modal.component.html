@@ -24,12 +24,12 @@
       </div>
       <div class="filter-grid">
         <select class="form-control" #s >
-          <option selected>{{tasks.status.name}}</option>
+          <option selected>{{ tasks.status.name }}</option>
         </select>
       </div>
       <div class="btn-group assign-grid" dropdown>
         <select class="form-control" #a>
-          <option *ngFor="let user of users" value="{{user._id}}"> {{user.firstName}} {{user.lastName}} </option>
+          <option *ngFor="let user of users" value="{{user._id}}"> {{ user.firstName }} {{ user.lastName }} </option>
         </select>
       </div>
       <div class=" btn-group date-grid">

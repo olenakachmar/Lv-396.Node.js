@@ -8,8 +8,6 @@ import { FILTERS } from './mock-filters';
 })
 export class FiltersService {
 
-  constructor() { }
-
   getFilters(): Observable<Filter[]> {
     return of(FILTERS);
   }
