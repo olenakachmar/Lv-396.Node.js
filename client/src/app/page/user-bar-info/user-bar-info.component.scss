@@ -1,10 +1,4 @@
-$font-stack: Arial, sans-serif;
-$primary-color: #2699FB;
-$case-color: #BCE0FD;
-$bg-color: #F1F9FF;
-$bg2-color: #fff;
-$base-font-size: 14px;
-$base-line-height: 16px;
+@import '../../common/theme';
 
 .user-bar-info {
   display: flex;
@@ -137,7 +131,3 @@ $base-line-height: 16px;
 
   }
 }
-
-
-
-
