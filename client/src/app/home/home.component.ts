@@ -13,12 +13,12 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class HomeComponent implements OnInit {
 
-  public frm: FormGroup;
-  public hasFailed = false;
-  public showInputErrorslogin = false;
-  public showInputErrorsPassword = false;
+  frm: FormGroup;
+  hasFailed = false;
+  showInputErrorslogin = false;
+  showInputErrorsPassword = false;
 
-  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
+  constructor(private readonly authService: AuthService, private readonly router: Router, private readonly fb: FormBuilder) {
     this.frm = fb.group({
       login: ['', Validators.required],
       password: ['', Validators.required]

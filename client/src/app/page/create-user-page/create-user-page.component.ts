@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-create-user-page',
@@ -7,8 +7,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class CreateUserPageComponent implements OnInit {
 
-  constructor( ) { }
+  constructor() { }
 
-  ngOnInit( ) { }
+  ngOnInit() { }
 
 }
