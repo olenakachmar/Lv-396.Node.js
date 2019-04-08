@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ElementRef, ViewChild } from '@angular/core';
-import { Options } from '../../common/filter-options';
+import { FilterOptions } from '../../common/filter-options';
 import { Filter } from '../../common/filter';
 import { DropDownService } from '../../common/drop-down.service';
 
@@ -16,7 +16,7 @@ export class DatepickerFilterComponent implements OnInit {
   dateDefault: Date;
   filterResult: any;
   isDropup: boolean;
-  titleObj: Options;
+  titleObj: FilterOptions;
   title: string;
   dropDownPositionClassNames: any;
   choiseReadyFlag: number;
@@ -50,8 +50,8 @@ export class DatepickerFilterComponent implements OnInit {
     return this.convertStringToDate(title);
   };
 
-  private readonly getTitleObject = (options: Options[]): {name: string, value: any} =>
-    options.filter((item: {name: string, value: any}) => item.value === this.filterItem.defaultValue)[0];
+  private readonly getTitleObject = (options: FilterOptions[]): FilterOptions =>
+    options.filter((item: FilterOptions) => item.value === this.filterItem.defaultValue)[0];
 
   private readonly convertStringToDate = (dateStr: string) => {
     const dateParts = dateStr.split('/');

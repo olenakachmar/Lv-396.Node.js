@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
-import { Options } from '../../common/filter-options';
+import { FilterOptions } from '../../common/filter-options';
 import { Filter } from '../../common/filter';
 import { DropDownService } from '../../common/drop-down.service';
 
@@ -13,7 +13,7 @@ export class DropdownFilterComponent implements OnInit {
   @Input() cssClassName: string;
   @Output() readonly filterVal = new EventEmitter();
   @ViewChild('dropDownWrapper') dropDownWrapperView: ElementRef;
-  options: Options[];
+  options: FilterOptions[];
   title: string;
   dropDownPositionClassNames: any;
 
@@ -21,11 +21,8 @@ export class DropdownFilterComponent implements OnInit {
 
   ngOnInit(): void {
     this.options = this.filterItem.options;
-    let titleObj: {
-      name: string,
-      value: any
-    };
-    titleObj = this.filterItem.options.filter((item: {name: string, value: any}) => this.filterItem.defaultValue === item.value)[0];
+    let titleObj: FilterOptions;
+    titleObj = this.filterItem.options.filter((item: FilterOptions) => this.filterItem.defaultValue === item.value)[0];
     this.title = titleObj.name;
     this.getDropDownPositionClassNames();
   }

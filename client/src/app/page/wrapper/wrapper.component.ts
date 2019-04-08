@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../app_services/user.service';
 import { User } from '../../app_models/user';
-import { Options } from '../common/filter-options';
+import { FilterOptions } from '../common/filter-options';
 import { Filter } from '../common/filter';
 import { FiltersService } from '../common/filters.service';
 import { Task, TaskImpl } from '../common/task';
@@ -104,7 +104,7 @@ export class WrapperComponent implements OnInit {
     }
   };
 
-  private readonly setOptions = (isCalendar: boolean, options: Options[], data: any) => {
+  private readonly setOptions = (isCalendar: boolean, options: FilterOptions[], data: any) => {
     if (isCalendar) {
       return this.updateOptions(options, data);
     }
