@@ -1,6 +1,6 @@
 <table class="table mt-4">
   <tbody>
-    <tr *ngFor="let user of users | filterUsersBy: filterText; let i = index" (click)="selectUser(user._id)">
+    <tr *ngFor="let user of users | filterUsersBy: filterText; let i = index" (click)="selectUser(i)">
       <th scope="row">{{ user.firstName }} {{ user.lastName }}</th>
       <td>{{ user.position }}</td>
       <td>{{ user.email }}</td>

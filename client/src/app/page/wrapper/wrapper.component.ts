@@ -18,7 +18,7 @@ export class WrapperComponent implements OnInit {
   statusOptions: { Status, Type };
 
   emptyTask: TaskImpl = new TaskImpl();
-  user = new User();
+  user: User;
   filters: Filter[];
   tasks: Task[];
 

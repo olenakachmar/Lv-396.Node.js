@@ -13,7 +13,7 @@ export class UserListComponent implements OnInit {
   @Input() filterText: string;
   user: User;
 
-    constructor(private router: Router, private route: ActivatedRoute, private userService: UserService) {}
+  constructor(private router: Router, private route: ActivatedRoute, private userService: UserService) {}
 
   ngOnInit() {
   }
