@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import { Task } from './task';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../app_services/user.service';
@@ -16,7 +16,7 @@ import { httpOptions } from '../../app_services/user.service';
 export class TasksService {
   statusOptions: { Status, Type };
 
-  constructor(private http: HttpClient, private userService: UserService) {}
+  constructor(private readonly http: HttpClient, private readonly userService: UserService) {}
 
   getTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(`${api}/issues/all`, httpOptions);

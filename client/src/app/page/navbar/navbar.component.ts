@@ -11,7 +11,7 @@ import { NavItem } from '../common/nav-item';
 
 export class NavbarComponent implements OnInit {
 
-  constructor(private navItemsService: NavItemsService, private userService: UserService) { }
+  constructor(private readonly navItemsService: NavItemsService, private readonly userService: UserService) { }
   name: string;
   surname: string;
   avatar: string;

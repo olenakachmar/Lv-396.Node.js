@@ -1,15 +1,15 @@
 <accordion>
   <accordion-group #group>
     <div accordion-heading class="heading-grid">
-      <span>{{tasks.id}}</span>
+      <span>{{ tasks.id }}</span>
       <div class="heading-text">
-        <h5>{{tasks.name}}</h5>
+        <h5>{{ tasks.name }}</h5>
       </div>
       <div class="heading-excerpt">
-        <p>{{tasks.excerpt}}</p>
+        <p>{{ tasks.excerpt }}</p>
       </div>
       <div class="heading-filter">
-        <p>{{tasks.status.name}}</p>
+        <p>{{ tasks.status.name }}</p>
       </div>
       <div class="heading-date">
         <p>{{ tasks.date }}</p>
@@ -18,12 +18,12 @@
       </div>
     </div>
     <div class="body-text">
-      <p>{{tasks.content}}</p>
+      <p>{{ tasks.content }}</p>
     </div>
     <div class="body-grid">
       <div class="body-from">
         <span>From: </span>
-        <span class="bold" (click)="selectUser(user._id)">{{tasks.author.firstName}} {{tasks.author.lastName}}</span>
+        <span class="bold" (click)="selectUser(user._id)">{{ tasks.author.firstName }} {{ tasks.author.lastName }}</span>
       </div>
       <div class="body-resolve">
         <button type="button" class="btn btn-outline-primary mark-resolve">
