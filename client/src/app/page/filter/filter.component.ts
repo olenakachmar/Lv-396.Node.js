@@ -19,4 +19,5 @@ export class FilterComponent implements OnInit {
   makeFullWidth = () => {
     return this.cssClass.length ? 'width-100' : '';
   }
+
 }

@@ -1,33 +1,4 @@
-$grid-columns: 12 !default;
-$grid-gutter-width: 20px !default;
-
-.col,
-[class*="col-"],
-.container-fluid,
-.container,
-.row {
-  padding-right: 10px;
-  padding-left: 10px;
-}
-
-.row{
-  margin-right: -10px;
-  margin-left: -10px;
-}
-
-$container-max-widths: (
-  sm: 420px,
-  md: 720px,
-  lg: 1280px
-);
-
-$font-stack: Arial, sans-serif;
-$primary-color: #2699FB;
-$case-color: #BCE0FD;
-$bg-color: #F1F9FF;
-$bg2-color: #fff;
-$base-font-size: 14px;
-$base-line-height: 16px;
+@import '../common/theme';
 
 .main-wrapper {
   padding: 90px 0 20px 0;

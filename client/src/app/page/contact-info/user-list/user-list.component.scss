@@ -1,26 +1,15 @@
-$font-stack: Arial, sans-serif;
-$primary-color: #2699FB;
-$case-color: #BCE0FD;
-$bg-color: #F1F9FF;
-$bg2-color: #fff;
-$base-font-size: 14px;
-$base-line-height: 16px;
+@import '../../../common/theme';
 
 table {
   border: 1px solid $case-color;
   font-size: 20px;
   color: $primary-color;
-
-  a {
-    text-decoration: none;
-    color: $primary-color;
-    cursor: pointer;
-  }
     
   tbody tr th, td {
     padding: 20px 0;
     position: relative;
     text-align: center;
+    cursor: pointer;
   }
   
   tbody td {
@@ -31,7 +20,7 @@ table {
         right: 300px;
         left: 0;
         color: $case-color;
-        font-weight: 100px;
+        font-weight: 100;
         content: "|";
       }
   }

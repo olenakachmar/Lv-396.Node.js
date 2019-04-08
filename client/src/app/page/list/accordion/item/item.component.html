@@ -1,9 +1,9 @@
 <accordion>
-<accordion-group #group>
-  <div accordion-heading class="heading-grid">
-    <span>{{tasks.id}}</span>
-    <div class="heading-text">
-      <h5>{{tasks.name}}</h5>
+  <accordion-group #group>
+    <div accordion-heading class="heading-grid">
+      <span>{{tasks.id}}</span>
+      <div class="heading-text">
+        <h5>{{tasks.name}}</h5>
       </div>
       <div class="heading-excerpt">
         <p>{{tasks.excerpt}}</p>
@@ -25,7 +25,7 @@
         <span>From: </span>
         <span class="bold">{{tasks.author}}</span>
       </div>
-      <app-modal [tasks]="tasks"></app-modal>
+      <app-modal [modalType]="'RE-ASSIGNE'" [tasks]="tasks"></app-modal>
     </div>
   </accordion-group>
 </accordion>

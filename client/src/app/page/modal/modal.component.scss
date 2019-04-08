@@ -1,16 +1,14 @@
-$modal-back-color: #F1F9FF;
-$modal-text-color: #2699FB;
-$modal-border-color: #7FC4FD;
+@import '../../common/theme';
 
 .text-reassign {
-  font-size: 14px;
+  font-size: $base-font-size;
 }
 
 ::ng-deep .modal-content {
-  background-color: $modal-back-color;
-  border-radius: 0%;
-  color: $modal-text-color;
-  font-family: Arial, Regular;
+  background-color: $bg2-color;
+  border-radius: 0;
+  color: $primary-color;
+  font-family: $font-stack;
 }
 
 ::ng-deep .modal-content {
@@ -19,6 +17,26 @@ $modal-border-color: #7FC4FD;
 
 .modal-header {
   border-bottom:  none;
+}
+
+.re-assign {
+  margin-left: 20%;
+}
+
+.btn-circle {
+  background-color: $primary-color;
+  width: 90px;
+  height: 90px;
+  padding: 6px 0;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
+  float: right;
+  margin-top: -40px;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
 }
 
 .modal-grid {
@@ -64,46 +82,53 @@ $modal-border-color: #7FC4FD;
 .no-visible{
   display: none;
 }
-.name-grid input, .filter-grid select, .assign-grid button, .date-grid input,
+.name-grid input,
+.filter-grid select,
+.assign-grid button,
+.date-grid input,
 .text-grid textarea {
   height: 50px;
-  border: $modal-border-color 1px solid;
-  border-radius: 0%;
-  background-color: #fff;
+  border: $border-color 1px solid;
+  border-radius: 0;
+  background-color: $bg2-color;
   width: 100%;
-  font-size: 14px;
+  font-size: $base-font-size;
   text-align: left;
 }
+
 .filter-grid select option{
   margin: 30px;
 }
-.input-group-prepend, .form-control {
+
+.input-group-prepend,
+.form-control {
   height: 50px;
-  border-radius: 0%;
+  border-radius: 0;
   background-color: #fff;
-  color: $modal-text-color;
-  border: #BCE0FD solid 1px;
+  color: $primary-color;
+  border: $case-color solid 1px;
   float: left;
 }
 
-
 .input-group-prepend span{
   width: 138px;
-  background-color: #BCE0FD;
-  border-radius: 0%;
-  color: $modal-text-color;
+  background-color: $case-color;
+  border-radius: 0;
+  color: $primary-color;
   font-size: 12px;
   font-weight: bold;
   border:none;
 }
 
-.name-grid input::placeholder, .date-grid input::placeholder {
-  color:$modal-text-color;
+.name-grid input::placeholder,
+.date-grid input::placeholder {
+  color: $primary-color;
 }
 
-.fromName-grid input::placeholder, .reassignFrom-grid input::placeholder{
-  color: #BCE0FD;
-  font-size: 14px;
+.fromName-grid input::placeholder,
+.reassignFrom-grid input::placeholder {
+  color: $case-color;
+  font-size: $base-font-size;
 }
 
 .text-grid textarea {
@@ -113,19 +138,20 @@ $modal-border-color: #7FC4FD;
 .addTask-grid button {
   font-size: 12px;
   height: 50px;
-  border-radius: 0%;
+  border-radius: 0;
   padding-left: 28px;
   padding-right: 28px;
 }
 
 .dropdown-item{
-  color: $modal-text-color;
-  font-size: 14px;
+  color: $primary-color;
+  font-size: $base-font-size;
 }
 
 .btn-outline-primary:hover {
-  color:$modal-text-color;
+  color: $primary-color;
 }
+
 .dropdown-toggle::after {
   position: absolute;
   display: block;
@@ -136,17 +162,20 @@ $modal-border-color: #7FC4FD;
   border: 0;
   background: url('../../../assets/img/arrow_down.svg') center center no-repeat;
 }
+
 .dropdown-toggle[aria-expanded='true']::after{
   background: url('../../../assets/img/arrow_up.svg') center center no-repeat;
 }
+
 ::ng-deep .modal-dialog {
   top: 30px;
 }
+
 .close {
   position: absolute;
   top: -25px;
   right: -25px;
-  background-color: $modal-back-color;
+  background-color: $bg2-color;
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -157,7 +186,7 @@ $modal-border-color: #7FC4FD;
   position: absolute;
   top: 5px;
   left: 11px;
-  color: $modal-border-color;
+  color: $border-color;
   font-size: 32px;
 }
 
@@ -169,6 +198,7 @@ $modal-border-color: #7FC4FD;
     background-color: transparent;
   }
 }
+
 .re-assign {
   margin-left: 20%;
 }
