@@ -17,7 +17,7 @@ import { Status, Type } from '../common/statusOptions.enum';
 
 export class WrapperComponent implements OnInit {
   emptyTask: TaskImpl = new TaskImpl();
-  user = new User();
+  user: User;
   filters: Filter[];
   tasks: Task[];
   filterCssClassPrefix: string;

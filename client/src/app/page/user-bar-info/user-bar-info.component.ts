@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { User } from '../../app_models/user';
 
 @Component({
   selector: 'app-user-bar-info',
@@ -6,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./user-bar-info.component.scss']
 })
 export class UserBarInfoComponent implements OnInit {
-  @Input() userinfo;
+  @Input() userinfo: User;
 
   constructor() {
   }
