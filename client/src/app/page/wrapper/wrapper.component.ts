@@ -65,7 +65,7 @@ export class WrapperComponent implements OnInit {
   getTaskType = (type: string): number => {
     return Type[type];
   }
-  /* Example DD/MM/YYYY */
+  /* Example: from server date looks like '1554287225073' (in millisecond); after convertDate it looks like '04/03/2019' */
   convertDate(date: number): string {
     return moment(date).format('L');
   }
