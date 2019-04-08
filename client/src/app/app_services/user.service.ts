@@ -23,12 +23,12 @@ export class UserService {
 
 
   getAll(): Observable<User[]> {
-    return this.http.get<User[]>(`${api}users`, httpOptions)
+    return this.http.get<User[]>(`${api}users`, httpOptions);
   }
 
   getUser(id?: string): Observable<User> {
     const userId = this.getUserId();
-    return this.http.get<User>(`${api}users/${id || userId}`, httpOptions)
+    return this.http.get<User>(`${api}users/${id || userId}`, httpOptions);
   }
 
   getUserId(): any {
