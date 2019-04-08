@@ -2,10 +2,7 @@
 @import "./node_modules/bootstrap/scss/functions";
 @import "./node_modules/bootstrap/scss/variables";
 
-$textColor: #ffff;
-$primary-color: #2699fb;
-$case-color: #bce0fd;
-$bg-color: #f1f9ff;
+@import '../../common/theme';
 
 p {
   margin: 0;
@@ -23,7 +20,7 @@ nav {
   display: flex;
   align-items: center;
   height: 70px;
-  color: $textColor;
+  color: $bg2-color;
   background-color: rgba(38, 152, 251, 0.918) !important;
   padding: 0 10px !important;
   .btn-menu {
@@ -55,7 +52,7 @@ nav {
   height: 100vh;
   background-color: #2699fb;
   z-index: 2;
-  transition: all 0.5s linear;
+  transition: all 0.5s;
   padding-bottom: 100px;
   @include media-breakpoint-up(lg) {
     width: 300px;
@@ -76,7 +73,7 @@ nav {
       text-transform: uppercase;
       font-weight: normal;
       width: 100%;
-      color: $textColor;
+      color: $bg2-color;
       margin: 0;
       @include media-breakpoint-up(lg) {
         font: 14px Arial, sans-serif;
@@ -85,7 +82,7 @@ nav {
     &:active,
     &:focus,
     &:hover {
-      border-bottom: 1px solid $textColor;
+      border-bottom: 1px solid $bg2-color;
       margin-bottom: -1px;
     }
   }
@@ -108,7 +105,7 @@ nav {
   }
   &__name {
     font: normal 12px arial, sans-serif;
-    color: $textColor;
+    color: $bg2-color;
   }
   &__avatar {
     height: 35px;
@@ -155,6 +152,6 @@ nav {
   left: -15px;
 }
 .current {
-  border-bottom: 1px solid $textColor;
+  border-bottom: 1px solid $bg2-color;
   margin-bottom: -1px;
 }

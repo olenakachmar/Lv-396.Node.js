@@ -1,5 +1,4 @@
-$case-color: #BCE0FD;
-$bg2-color: #fff;
+@import '../../../../common/theme';
 
 .heading-grid {
   display: grid;
@@ -34,7 +33,7 @@ $bg2-color: #fff;
 }
 ::ng-deep .card-header {
   border-bottom: none;
-  background-color:$bg2-color !important;
+  background-color: $bg2-color !important;
   cursor: pointer;
 }
 
@@ -74,7 +73,7 @@ p {
     grid-gap: 30px;
   }
   .re-assign {
-    margin-left: 0px;
+    margin-left: 0;
   }
 }
 
@@ -118,7 +117,7 @@ p {
     margin-left: 85%;
   }
   .body-from {
-    margin-left: 0px;
+    margin-left: 0;
   }
   .panel-open .heading-date, .panel-open .heading-filter, .panel-open .body-text {
     margin-top: -25px;
