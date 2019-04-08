@@ -46,11 +46,11 @@ export class WrapperComponent implements OnInit {
           return {
             id: item._id,
             name: item.name,
-            excerpt: '',
+            excerpt: item.excerpt,
             status: {name: item.status, value: this.getStatusValue(item.status)},
             type: {name: item.type, value: this.getTaskType(item.type)},
             date: this.convertDate(item.date),
-            author: '',
+            author: item.author,
             content: item.content
           };
         });
@@ -58,22 +58,13 @@ export class WrapperComponent implements OnInit {
   }
 
   getStatusValue = (status: string): number => {
-    if (status === Status.high) {
-      return 0;
-    }
-    if (status === Status.normal) {
-      return 1;
-    }
-    return 2;
+    return Status[status];
   }
 
   getTaskType = (type: string): number => {
-    if (type === Type.issue) {
-      return 1;
-    }
-    return 0;
+    return Type[type];
   }
-
+  /* Example DD/MM/YYYY */
   convertDate(date: number): string {
     return moment(date).format('L');
   }
