@@ -13,7 +13,6 @@ export class MyProfileComponent implements OnInit {
   constructor(private readonly UserInfoService: UserService, private readonly route: ActivatedRoute) { }
 
   user: User;
-  users: User[];
   id: any;
 
   ngOnInit() {
@@ -22,19 +21,15 @@ export class MyProfileComponent implements OnInit {
 
   checkIdParam(): void {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.id ? this.loadFromArray(this.id) : this.loadUser(this.id);
+    this.loadUser(this.id);
   }
-
 
   getFullName(): string {
     return `${this.user.firstName} ${this.user.lastName}`;
   }
 
-  loadUser(id?: any) {
-    this.UserInfoService.getUser(id).subscribe(user => { this.user = user; });
+  loadUser(id: string) {
+    this.UserInfoService.getUser(this.id).subscribe(user => { this.user = user; });
   }
 
-  loadFromArray(id) {
-    this.UserInfoService.getAll().subscribe(users => { this.user = users[id]; });
-  }
 }
