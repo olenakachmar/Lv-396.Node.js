@@ -4,7 +4,8 @@
       <app-user-bar-info class="user-bar-info" [userinfo]="user"></app-user-bar-info>
     </div>
     <main class="col-lg-8 content-wrapper">
-      <div class="row">
+      <div class="row" *ngIf="user">
+
         <div class="col main-user-info">
           <h1>{{ getFullName() }}</h1>
           <p>{{ user.position }}</p>
@@ -24,7 +25,7 @@
               <div>
                 <span class="label">phone</span><br>
               </div>
-              <span class="info">+380 123 45 67 890</span>
+              <span class="info">+380 123 45 67 880</span>
             </div>
           </div>
 

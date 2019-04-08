@@ -90,7 +90,7 @@ $base-line-height: 16px;
 }
 
 .container-fluid.header-navbar {
-  position: fixed;
+  position: absolute;
   top: 0;
   padding: 0;
   z-index: 1000;
