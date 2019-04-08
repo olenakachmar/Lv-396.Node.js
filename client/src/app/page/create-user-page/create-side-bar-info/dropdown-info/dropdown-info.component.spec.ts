@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddTaskButtonComponent } from './add-task-button.component';
+import { DropdownInfoComponent } from './dropdown-info.component';
 
-describe('AddTaskButtonComponent', () => {
-  let component: AddTaskButtonComponent;
-  let fixture: ComponentFixture<AddTaskButtonComponent>;
+describe('DropdownInfoComponent', () => {
+  let component: DropdownInfoComponent;
+  let fixture: ComponentFixture<DropdownInfoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddTaskButtonComponent ]
+      declarations: [ DropdownInfoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddTaskButtonComponent);
+    fixture = TestBed.createComponent(DropdownInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

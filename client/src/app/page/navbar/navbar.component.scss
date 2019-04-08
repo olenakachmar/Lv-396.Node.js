@@ -2,12 +2,10 @@
 @import "./node_modules/bootstrap/scss/functions";
 @import "./node_modules/bootstrap/scss/variables";
 
-
 $textColor: #ffff;
-$primary-color: #2699FB;
-$case-color: #BCE0FD;
-$bg-color: #F1F9FF;
-
+$primary-color: #2699fb;
+$case-color: #bce0fd;
+$bg-color: #f1f9ff;
 
 p {
   margin: 0;
@@ -17,8 +15,8 @@ p {
 a {
   line-height: 45px;
   margin-right: 28px;
-  border:0;
-  text-decoration:none;
+  border: 0;
+  text-decoration: none;
 }
 
 nav {
@@ -26,15 +24,15 @@ nav {
   align-items: center;
   height: 70px;
   color: $textColor;
-  background-color: rgba(38, 152, 251, 0.918)!important;
-  padding: 0 10px!important;
+  background-color: rgba(38, 152, 251, 0.918) !important;
+  padding: 0 10px !important;
   .btn-menu {
     height: 15px;
     width: 15px;
     @include media-breakpoint-up(md) {
       height: 20px;
       width: 20px;
-    }    
+    }
   }
   .logo {
     height: 20px;
@@ -42,22 +40,23 @@ nav {
     @include media-breakpoint-up(md) {
       height: auto;
       width: auto;
-    }  
+    }
   }
 }
-.hide-menu {
+.burger-menu {
   position: absolute;
   top: 57px;
   left: -100vw;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   width: 260px;
   height: 100vh;
-  background-color: #2699FB;
+  background-color: #2699fb;
   z-index: 2;
-  transition: all .3s linear;
+  transition: all 0.5s linear;
+  padding-bottom: 100px;
   @include media-breakpoint-up(lg) {
     width: 300px;
   }
@@ -67,9 +66,9 @@ nav {
     list-style-type: none;
     @include media-breakpoint-up(md) {
       padding: 95px 20px 0 40px;
-    } 
+    }
   }
-  &__item { 
+  &__item {
     display: flex;
     padding-top: 30px;
     a {
@@ -83,16 +82,18 @@ nav {
         font: 14px Arial, sans-serif;
       }
     }
-    &:active, &:focus, &:hover {
+    &:active,
+    &:focus,
+    &:hover {
       border-bottom: 1px solid $textColor;
-      margin-bottom:-1px;
+      margin-bottom: -1px;
     }
   }
 }
 
 .right-navbar {
   display: flex;
-  padding-top: 15px; 
+  padding-top: 15px;
   width: 70%;
   @include media-breakpoint-up(md) {
     display: none;
@@ -115,7 +116,7 @@ nav {
     border-radius: 50%;
   }
   &__menu {
-    margin-top: 10px!important;
+    margin-top: 10px !important;
     padding: 0;
     width: 230px;
     border-color: $case-color;
@@ -124,32 +125,36 @@ nav {
   &__item {
     font: normal 14px arial, sans-serif;
     color: $primary-color;
-    padding: 17px;  
+    padding: 17px;
   }
 }
 .dropdown-menu li a:hover {
-  background: $bg-color!important;
+  background: $bg-color !important;
 }
 .dropdown-menu li.current a::after {
   position: absolute;
-  content: url('../../../assets/img/symbol_ok.svg');
+  content: url("../../../assets/img/symbol_ok.svg");
   left: 190px;
 }
-.dropdown-menu li a{
+.dropdown-menu li a {
   position: relative;
 }
 
-
 .user-info {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-width: 25vw;
   height: 100%;
+  @include media-breakpoint-up(lg) {
+    min-width: 20vw;
+  }
 }
 
-.active {
+.burger-menu.active {
   left: -15px;
 }
 .current {
   border-bottom: 1px solid $textColor;
-  margin-bottom:-1px;
+  margin-bottom: -1px;
 }
-

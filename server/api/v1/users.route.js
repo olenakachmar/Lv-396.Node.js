@@ -24,6 +24,7 @@ router.route('/users')
         res.json(users);
       });
   })
+
   .delete(passport.authenticate('jwt', {
     session: false,
   }), (req, res) => {
@@ -48,6 +49,7 @@ router.route('/users')
       }
     });
   })
+
   .put(passport.authenticate('jwt', {
     session: false,
   }), (req, res) => {
@@ -72,10 +74,7 @@ router.route('/users')
           err: 'User not found',
         });
       } else {
-        doc = {
-          ...doc,
-          ...user,
-        };
+        Object.assign(doc, user);
         doc.save();
         res.json(doc);
       }
@@ -101,5 +100,60 @@ router.get('/users/:id', passport.authenticate('jwt', {
       }
     });
 });
+
+const updateContacts = (req, res) => {
+  const {
+    id,
+  } = req.body;
+  User.findById(id)
+    .then((user) => {
+      if (!user) {
+        res.status(404).json({
+          err: 'User not found ',
+        });
+      }
+
+      let {
+        contactName,
+        contactValue,
+      } = req.body;
+
+      if (contactName && contactValue) {
+        contactValue = Array.isArray(contactValue) ? contactValue : Array(contactValue);
+        contactName = Array.isArray(contactName) ? contactName : Array(contactName);
+
+        const contacts = contactName.reduce((obj, el, idx) => {
+          let changed = 0;
+          if (contactValue[idx]) {
+            user.contacts.map((contact) => {
+              if (contact.contact_name === el) {
+                contact.contact_value = contactValue[idx];
+                changed = 1;
+              }
+              return contact;
+            });
+            if (changed) {
+              return [...obj];
+            }
+            return [...obj, { contact_name: el, contact_value: contactValue[idx] }];
+          }
+          return [...obj];
+        }, []);
+
+        user.contacts = [...user.contacts, ...contacts];
+        user.save();
+        res.json(user);
+      } else {
+        res.status(400).json({
+          err: 'Contact value or contact name not specified',
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json(err);
+    });
+};
+
+router.put('/users/contacts', passport.authenticate('jwt', { session: false }), updateContacts);
 
 module.exports = router;
