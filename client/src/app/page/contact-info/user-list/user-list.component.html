@@ -1,4 +1,4 @@
-<table class="table mt-4">
+<!-- <table class="table mt-4">
   <tbody>
     <tr *ngFor="let user of users | filterUsersBy: filterText; let i = index" (click)="selectUser(user._id)">
       <th scope="row">{{ user.firstName }} {{ user.lastName }}</th>
@@ -8,4 +8,28 @@
       <td *ngIf="user.contacts[0].contact_value">{{ user.contacts[0].contact_value }}</td>
       <td *ngIf="!user.contacts[0].contact_value"> - </td>
   </tbody>
-</table>  
+</table>   -->
+
+<div class="row">
+  <ng-container *ngFor="let user of users | filterUsersBy: filterText; let i = index" (click)="selectUser(user._id)">
+    <div class="col head font-weight-bold">
+      {{ user.firstName }} {{ user.lastName }}
+    </div>
+    <div class="col">
+      {{ user.position }}
+    </div>
+    <div class="col">
+      {{ user.email }}
+    </div>
+    <div class="col">
+      {{ user.phone }}
+    </div>
+    <div class="col" *ngIf="user.contacts[0].contact_value">
+      {{ user.contacts[0].contact_value }}
+    </div>
+    <div class="col" *ngIf="!user.contacts[0].contact_value">
+      -
+    </div>
+    <div class="w-100"></div>
+  </ng-container>
+</div>

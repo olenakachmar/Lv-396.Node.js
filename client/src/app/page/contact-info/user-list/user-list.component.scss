@@ -28,3 +28,33 @@ table {
   tbody tr:nth-child(even) { background: $bg-color }
   tbody tr:nth-child(odd) { background: #FFF }
 }
+
+.row {
+  border: 1px solid $case-color;
+  font-size: 20px;
+  color: $primary-color;
+
+  .col:not(:nth-last-child(6n)) {
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    padding: 20px 0;
+    &:before {
+        display: inline;
+        position: absolute;
+        right: 300px;
+        left: 0;
+        color: $case-color;
+        font-weight: 100;
+        content: "|";
+      }
+  }
+
+  .head {
+    position: relative;
+    text-align: center;
+    padding: 20px 15px;
+    cursor: pointer;
+  }
+
+}
