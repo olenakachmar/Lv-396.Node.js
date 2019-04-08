@@ -43,7 +43,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">FROM</span>
           </div>
-          <input type="text" disabled placeholder="{{tasks.author}}" class="form-control" name="author">
+          <input type="text" disabled placeholder="{{tasks.author.firstName}} {{tasks.author.lastName}}" class="form-control" name="author">
         </div>
       </div>
       <div *ngIf="modalType === 'RE-ASSIGNE'" class="reassignFrom-grid">
