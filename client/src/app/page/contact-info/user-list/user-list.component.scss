@@ -10,17 +10,12 @@ table {
   border: 1px solid $case-color;
   font-size: 20px;
   color: $primary-color;
-
-  a {
-    text-decoration: none;
-    color: $primary-color;
-    cursor: pointer;
-  }
     
   tbody tr th, td {
     padding: 20px 0;
     position: relative;
     text-align: center;
+    cursor: pointer;
   }
   
   tbody td {
