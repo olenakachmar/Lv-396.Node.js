@@ -10,7 +10,7 @@ import { User } from '../../app_models/user';
 })
 export class MyProfileComponent implements OnInit {
 
-  constructor(private UserInfoService: UserService, private route: ActivatedRoute) { }
+  constructor(private readonly UserInfoService: UserService, private readonly route: ActivatedRoute) { }
 
   user: User;
   users: User[];

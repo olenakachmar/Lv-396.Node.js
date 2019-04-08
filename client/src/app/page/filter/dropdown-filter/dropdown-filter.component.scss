@@ -80,6 +80,7 @@
   color: $primary-color;
   font-size: $base-font-size;
   line-height: $base-line-height;
+  white-space: initial;
 }
 
 .dropdown-menu.filter-el li a:hover{

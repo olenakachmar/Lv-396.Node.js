@@ -6,8 +6,8 @@
   <label class="check-button" for="bt">Show more</label>
   <div class="toggle-show">
     <div class="main-user-info">
-      <div>{{userinfo.firstName}} {{userinfo.lastName}}</div>
-      <div>{{userinfo.position}}</div>
+      <div>{{ userinfo.firstName }} {{ userinfo.lastName }}</div>
+      <div>{{ userinfo.position }}</div>
     </div>
     <app-link-to-profile class="additional-info" [info]="userinfo.manager.firstName + ' ' + userinfo.manager.lastName"
                          [label]="'My manager'"></app-link-to-profile>
