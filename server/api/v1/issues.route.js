@@ -11,13 +11,16 @@ router.route('/issues')
   .get(async (req, res) => {
     const { query } = url.parse(req.url, true);
     const { status, type, date } = query;
-
     await Issues.find({ $or: [{ status }, { type }, { date }] },
       (err, issues) => {
         if (err) {
-          res.status(500).json({ err });
+          res.status(500).json({
+            err,
+          });
         } else if (!status && !type && !date) {
-          res.status(404).json({ err: 'Issue not found' });
+          res.status(404).json({
+            err: 'Issue not found',
+          });
         }
         res.json(issues);
       })
@@ -60,11 +63,17 @@ router.route('/issues')
         ...obj,
       };
     }, {});
-    await Issues.findByIdAndUpdate(id, user, { new: true }, (err) => {
+    await Issues.findByIdAndUpdate(id, user, {
+      new: true,
+    }, (err) => {
       if (err) {
-        res.status(500).json({ err });
+        res.status(500).json({
+          err,
+        });
       } else if (!id) {
-        res.status(404).json({ err: 'Issue not found' });
+        res.status(404).json({
+          err: 'Issue not found',
+        });
       } else if (!req.body.assignTo || !req.body.reassigned) {
         res.json({
           err: 'You should enter assignTo and reassigned options',
@@ -79,9 +88,13 @@ router.route('/issues')
     const { id } = req.body;
     await Issues.findByIdAndDelete(id, (err) => {
       if (err) {
-        res.status(500).json({ err });
+        res.status(500).json({
+          err,
+        });
       } else if (!id) {
-        res.status(404).json({ err: 'Issue not found' });
+        res.status(404).json({
+          err: 'Issue not found',
+        });
       }
       res.json({
         deleted: 'Successfully',
@@ -94,7 +107,9 @@ router.get('/issues/all', async (req, res) => {
     .populate('author', ['firstName', 'lastName'])
     .exec((err, issues) => {
       if (err) {
-        res.status(500).json({ err });
+        res.status(500).json({
+          err,
+        });
       }
       res.json(issues);
     });
