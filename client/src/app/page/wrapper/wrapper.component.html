@@ -8,5 +8,6 @@
     <div class="container-fluid list-wrapper">
       <app-list [tasks]="tasks | filterTasksBy: filters"></app-list>
     </div>
+    <app-modal [modalType]="'CREATE'" [tasks]="emptyTask"></app-modal>
   </main>
 </div>

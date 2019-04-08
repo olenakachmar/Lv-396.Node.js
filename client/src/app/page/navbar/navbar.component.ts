@@ -15,18 +15,18 @@ export class NavbarComponent implements OnInit {
   name: string;
   surname: string;
   avatar: string;
-  current: boolean;
+  active: boolean;
   menuList: NavItem[];
   userType: string;
 
   @HostListener('mouseleave') onMouseLeave() {
-    this.current = false;
+    this.active = false;
   }
 
   ngOnInit() {
     this.navItemsService.getNavList().subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
-    this.current = false;
+    this.active = false;
     this.avatar = 'assets/img/navbar-symbol-desk.png';
   }
 
@@ -38,11 +38,11 @@ export class NavbarComponent implements OnInit {
   changeCurrent(i) {
     event.preventDefault();
     this.menuList.map((item, index) => item.current = index === i);
-    this.current = false;
+    this.active = false;
   }
 
   toggleIsActive() {
     event.preventDefault();
-    this.current = !this.current;
+    this.active = !this.active;
   }
 }

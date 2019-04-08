@@ -9,13 +9,19 @@ $primary-color: #2699FB;
 }
 
 .card {
+  width: 27rem;
   background: #F1F9FF;
   font-family: $font-stack;
+  border-radius: 0;
 
   .card-title {
-    padding: 30px 180px 0 25px;
+    padding: 30px 0 0 30px;
     color: $primary-color;
     font-size: 20px;
+  }
+
+  .card-body {
+    padding-top: 0;
   }
 }
 
@@ -29,17 +35,32 @@ input {
   border-radius: 0;
 }
 
-a {
-  width: 117px;
-  font-size: 12px;
-  border-radius: 0;
-  padding: 12px 0;
-  cursor: pointer;
+.form-button {
+
+ .login-button {
+    width: 100%;
+    position: relative;
+    font-size: 12px;
+    border-radius: 0;
+    padding: 12px 0;
+    cursor: pointer;
+ }
+
+ .forgotpsw-button {
+   width: 100%;
+   position: relative;
+   background: #BCE0FD;
+   color: $primary-color;
+   font-size: 12px;
+   padding: 12px;
+   border-radius: 0;
+   cursor: pointer;
+ }
 }
 
 .card {
   @media (max-width: 450px) {
-    width: 20rem;
+    width: 23rem;
   }
 }
 
