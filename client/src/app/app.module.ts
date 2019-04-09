@@ -17,7 +17,7 @@ import { AUTH_PROVIDERS } from './app_services/auth.service';
 
 import { LoggedInGuard } from './app_guards/logged-in.guard';
 import { LoggedOutGuard } from './app_guards/logged-out.guard';
-import { CheckDevGuard } from './app_guards/checkDev.guard';
+import { CheckDevGuard } from './app_guards/check-dev.guard';
 
 import { PageComponent } from './page/page.component';
 import { NavbarComponent } from './page/navbar/navbar.component';
@@ -49,7 +49,12 @@ import { ResetPasswordComponent } from './home/common/reset-password/reset-passw
     AccordionModule.forRoot(),
     ModalModule.forRoot(),
   ],
-  providers: [AUTH_PROVIDERS, LoggedInGuard, LoggedOutGuard, CheckDevGuard] ,
+  providers: [
+    AUTH_PROVIDERS,
+    LoggedInGuard,
+    LoggedOutGuard,
+    CheckDevGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

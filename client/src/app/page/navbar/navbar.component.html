@@ -5,7 +5,7 @@
         <img class="btn-menu" src="assets/img/navbar-menu-desk.png" alt="menu">
       </a>
       <a [routerLink]="[ '/profile' ]" (click)="homePage(); active = false">
-        <img class="logo" src='assets/img/logo-desk.png' alt="main-page">
+        <img class="logo" src='assets/img/logo-desk.png' alt="logo/main-page">
       </a>
       <div class="burger-menu" [ngClass]="{'active': active}">
         <ul class="burger-menu__list">
@@ -16,7 +16,7 @@
             </li>
           </ng-container>
         </ul>
-        <!--<app-social-networks></app-social-networks>-->
+        <app-social-networks></app-social-networks>
       </div>
     </div>
     <div>

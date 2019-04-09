@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class LoggedInGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private readonly authService: AuthService, private readonly router: Router) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,

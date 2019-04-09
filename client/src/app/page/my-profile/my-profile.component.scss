@@ -1,3 +1,5 @@
+@import '../../common/theme';
+
 .sidebar-wrapper {
   padding: 0 10px;
 }
@@ -20,7 +22,7 @@
     width: 295px;
     padding: 25px;;
     margin-left: 130px;
-    background-color: #fff;
+    background-color: $bg2-color;
   }
 
   .contact-info {
@@ -73,7 +75,6 @@
     }
   }
 
-
   .label {
     text-transform: uppercase;
     font-size: 10px;
@@ -86,11 +87,11 @@
 }
 
 .button_wrapper {
-  background-color: #2699FB;
+  background-color: $primary-color;
   padding: 10px;
   margin-top: 190px;
   cursor: pointer;
   text-align: center;
   text-transform: uppercase;
-  color: #fff;
+  color: $bg2-color;
 }
