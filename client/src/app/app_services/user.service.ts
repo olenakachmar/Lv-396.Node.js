@@ -17,7 +17,7 @@ export const httpOptions = {
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
   helper = new JwtHelperService();
 

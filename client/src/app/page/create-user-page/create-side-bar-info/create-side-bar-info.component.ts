@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {Department} from "../../../app_models/department";
+import { Component, OnInit } from '@angular/core';
+import { Department } from '../../../app_models/department';
 import data from '../../../../assets/data/data.json';
 
 @Component({
