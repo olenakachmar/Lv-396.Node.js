@@ -8,11 +8,13 @@ const router = express.Router();
 const arrKeys = config.arrKeysIssues;
 
 router.route('/issues')
-  .get(async (req, res) => {
+  .get((req, res) => {
     const { query } = url.parse(req.url, true);
     const { status, type, date } = query;
-    await Issues.find({ $or: [{ status }, { type }, { date }] },
-      (err, issues) => {
+    Issues.find({ $or: [{ status }, { type }, { date }] })
+      .populate('assignTo', ['firstName', 'lastName'])
+      .populate('author', ['firstName', 'lastName'])
+      .exec((err, issues) => {
         if (err) {
           res.status(500).json({
             err,
@@ -23,9 +25,7 @@ router.route('/issues')
           });
         }
         res.json(issues);
-      })
-      .populate('assignTo', ['firstName', 'lastName'])
-      .populate('author', ['firstName', 'lastName']);
+      });
   })
   .post(async (req, res) => {
     const newIssue = Issues({
@@ -50,7 +50,7 @@ router.route('/issues')
       });
     });
   })
-  .put(async (req, res) => {
+  .put((req, res) => {
     const { id } = req.body;
     const user = arrKeys.reduce((obj, el) => {
       if (req.body[el]) {
@@ -63,48 +63,49 @@ router.route('/issues')
         ...obj,
       };
     }, {});
-    await Issues.findByIdAndUpdate(id, user, {
-      new: true,
-    }, (err) => {
-      if (err) {
-        res.status(500).json({
-          err,
-        });
-      } else if (!id) {
-        res.status(404).json({
-          err: 'Issue not found',
-        });
-      } else if (!req.body.assignTo || !req.body.reassigned) {
+    Issues.findByIdAndUpdate(id, user, { new: true })
+      .exec((err, issue) => {
+        if (err) {
+          res.status(500).json({
+            err,
+          });
+        } else if (!issue) {
+          res.status(404).json({
+            err: 'Issue not found',
+          });
+        } else if (!req.body.assignTo || !req.body.reassigned) {
+          res.json({
+            err: 'You should enter assignTo and reassigned options',
+          });
+        }
         res.json({
-          err: 'You should enter assignTo and reassigned options',
+          updated: 'Successfully',
         });
-      }
-      res.json({
-        updated: 'Successfully',
       });
-    });
   })
-  .delete(async (req, res) => {
+  .delete((req, res) => {
     const { id } = req.body;
-    await Issues.findByIdAndDelete(id, (err) => {
-      if (err) {
-        res.status(500).json({
-          err,
+    Issues.findByIdAndDelete(id)
+      .exec((err, issue) => {
+        if (err) {
+          res.status(500).json({
+            err,
+          });
+        } else if (!issue) {
+          res.status(404).json({
+            err: 'Issue not found',
+          });
+        }
+        res.json({
+          deleted: 'Successfully',
         });
-      } else if (!id) {
-        res.status(404).json({
-          err: 'Issue not found',
-        });
-      }
-      res.json({
-        deleted: 'Successfully',
       });
-    });
   });
-router.get('/issues/all', async (req, res) => {
-  await Issues.find()
+router.get('/issues/all', (req, res) => {
+  Issues.find()
     .populate('assignTo', ['firstName', 'lastName'])
     .populate('author', ['firstName', 'lastName'])
+    .populate('reassigned', ['firstName', 'lastName'])
     .exec((err, issues) => {
       if (err) {
         res.status(500).json({

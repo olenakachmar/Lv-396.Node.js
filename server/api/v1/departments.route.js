@@ -4,8 +4,8 @@ const Departments = require('../../models/department.model');
 const router = express.Router();
 
 router.route('/departments')
-  .get(async (req, res) => {
-    await Departments.find()
+  .get((req, res) => {
+    Departments.find()
       .populate('employees', ['firstName', 'lastName'])
       .exec((err, departments) => {
         if (err) {
@@ -33,38 +33,40 @@ router.route('/departments')
       });
     });
   })
-  .delete(async (req, res) => {
+  .delete((req, res) => {
     const { id } = req.body;
-    await Departments.findByIdAndDelete(id, (err) => {
+    Departments.findByIdAndDelete(id)
+      .exec((err, department) => {
+        if (err) {
+          res.status(500).json({
+            err,
+          });
+        } else if (!department) {
+          res.status(404).json({
+            err: 'Department not found',
+          });
+        }
+        res.json({
+          deleted: 'Successfully',
+        });
+      });
+  });
+router.get('/departments/:id', (req, res) => {
+  const { id } = req.params;
+  Departments.findById(id)
+    .populate('employees', ['firstName', 'lastName'])
+    .exec((err, department) => {
       if (err) {
         res.status(500).json({
           err,
         });
-      } else if (!id) {
+      } else if (!department) {
         res.status(404).json({
           err: 'Department not found',
         });
       }
-      res.json({
-        deleted: 'Successfully',
-      });
+      res.json(department);
     });
-  });
-router.get('/departments/:id', async (req, res) => {
-  const { id } = req.params;
-  await Departments.findById(id, (err, department) => {
-    if (err) {
-      res.status(500).json({
-        err,
-      });
-    } else if (!department) {
-      res.status(404).json({
-        err: 'Department not found',
-      });
-    }
-    res.json(department);
-  })
-    .populate('employees', ['firstName', 'lastName']);
 });
 router.post('/departments/users', async (req, res) => {
   const { id } = req.body;
