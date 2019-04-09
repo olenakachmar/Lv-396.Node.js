@@ -42,13 +42,13 @@ export class WrapperComponent implements OnInit {
   getTasks(): void {
     this.tasksService.getTasks()
       .subscribe(tasks => {
-        this.tasks = tasks.map( (item: any) => {
+        this.tasks = tasks.map((item: any) => {
           return {
             id: item._id,
             name: item.name,
             excerpt: '',
-            status: {name: item.status, value: this.getStatusValue(item.status)},
-            type: {name: item.type, value: this.getTaskType(item.type)},
+            status: { name: item.status, value: this.getStatusValue(item.status) },
+            type: { name: item.type, value: this.getTaskType(item.type) },
             date: this.convertDate(item.date),
             author: '',
             content: item.content
@@ -108,7 +108,7 @@ export class WrapperComponent implements OnInit {
       return options;
     }
     return options.map(opt => {
-      return opt.name === 'date' ? {name: opt.name, value: dateValue} : opt;
+      return opt.name === 'date' ? { name: opt.name, value: dateValue } : opt;
     });
   }
 }

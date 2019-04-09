@@ -4,23 +4,22 @@
 
 .wrapper {
   display: flex;
-  justify-content: space-around;
-  margin-right: 115px;
-  @include media-breakpoint-up(lg) {
-    margin-right: 105px;
-  }
-  &__link {
-    margin: 5px;
-    @include media-breakpoint-up(md) {
+  justify-content: flex-start;
+  padding-left: 35px;
+  &__item {
+    height: 4vmin;
+    width: 4vmin;
+    margin: 25px;
+    @include media-breakpoint-up(sm) {
+      height: 3vmin;
+      width: 3vmin;
+    }
+    @include media-breakpoint-up(lg) {
       margin: 10px;
     }
   }
   &__img {
-    width: 15px;
-    height: 15px;
-    @include media-breakpoint-up(md) {
-      width: 20px;
-      height: 20px;
-    }
+    height: auto;
+    max-width: 100%;
   }
 }
