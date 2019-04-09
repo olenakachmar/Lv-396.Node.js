@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {IDepartment} from "../../../app_models/department";
 import {DepartmentService} from "../../../app_services/department.service";
 import {OptionPair} from "../../../app_models/option-pair";
+import data from '../../../../assets/data/data.json';
 
 @Component({
   selector: 'app-create-side-bar-info',

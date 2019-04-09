@@ -16,7 +16,6 @@ describe('DropdownFilterComponent', () => {
         { name: 'Show issues only', value: 1 },
       ],
     };
-  const id = 0;
   const cssClassName = 'width-100';
 
   beforeEach(async(() => {
@@ -30,12 +29,12 @@ describe('DropdownFilterComponent', () => {
     fixture = TestBed.createComponent(DropdownFilterComponent);
     component = fixture.componentInstance;
     component.filterItem = filterItem;
-    component.id = id;
     component.cssClassName = cssClassName;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component)
+      .toBeTruthy();
   });
 });

@@ -1,10 +1,4 @@
-$font-stack: Arial, sans-serif;
-$primary-color: #2699FB;
-$case-color: #BCE0FD;
-$bg-color: #F1F9FF;
-$bg2-color: #fff;
-$base-font-size: 14px;
-$base-line-height: 16px;
+@import '../../../common/theme';
 
 .btn-group.width-100 {
   width: 100%;
@@ -86,6 +80,7 @@ $base-line-height: 16px;
   color: $primary-color;
   font-size: $base-font-size;
   line-height: $base-line-height;
+  white-space: initial;
 }
 
 .dropdown-menu.filter-el li a:hover{

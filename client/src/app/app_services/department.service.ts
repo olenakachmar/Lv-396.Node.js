@@ -10,7 +10,7 @@ import { api } from '../../environments/environment';
 })
 export class DepartmentService {
 
-  constructor( private http: HttpClient ) { }
+  constructor(private readonly http: HttpClient) { }
 
   getAllDepartments(): Observable<IDepartment[]>{
     return this.http.get<IDepartment[]>(`${api}/departments/`, httpOptions);
