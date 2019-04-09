@@ -2,10 +2,7 @@
 @import "./node_modules/bootstrap/scss/functions";
 @import "./node_modules/bootstrap/scss/variables";
 
-$case-color: #bce0fd;
-$bg-color: #f1f9ff;
-$textColor: #ffff;
-$primary-color: #2699fb;
+@import '../../../common/theme';
 
 p {
   padding: 0;

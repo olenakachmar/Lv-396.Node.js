@@ -1,10 +1,4 @@
-$font-stack: Arial, sans-serif;
-$primary-color: #2699FB;
-$case-color: #BCE0FD;
-$bg-color: #F1F9FF;
-$bg2-color: #fff;
-$base-font-size: 14px;
-$base-line-height: 16px;
+@import '../../../common/theme';
 
 .btn-group.width-100 {
   width: 100%;
@@ -84,6 +78,8 @@ $base-line-height: 16px;
 ::ng-deep bs-datepicker-inline-container,
 ::ng-deep bs-calendar-layout,
 ::ng-deep bs-days-calendar-view,
+::ng-deep bs-month-calendar-view,
+::ng-deep bs-years-calendar-view,
 ::ng-deep .bs-datepicker,
 ::ng-deep .bs-calendar-container,
 ::ng-deep .bs-datepicker-container,

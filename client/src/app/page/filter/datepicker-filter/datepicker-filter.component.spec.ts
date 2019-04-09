@@ -19,7 +19,6 @@ describe('DatepickerFilterComponent', () => {
         { name: 'date', value: 0 },
       ],
     };
-  const id = 2;
   const cssClassName = '';
 
   beforeEach(async(() => {
@@ -39,12 +38,12 @@ describe('DatepickerFilterComponent', () => {
     fixture = TestBed.createComponent(DatepickerFilterComponent);
     component = fixture.componentInstance;
     component.filterItem = filterItem;
-    component.id = id;
     component.cssClassName = cssClassName;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component)
+      .toBeTruthy();
   });
 });

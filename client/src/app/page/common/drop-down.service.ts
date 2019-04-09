@@ -1,12 +1,10 @@
 import { Injectable, ElementRef } from '@angular/core';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DropDownService {
-
-  constructor() { }
 
   checkDropDownElPosition(el: ElementRef): Observable<string> {
     return new Observable(observer => {
@@ -22,24 +20,27 @@ export class DropDownService {
     });
   }
 
-   private changeDropDownPosition = (dropDownEl, wrapperEl) => {
+  private readonly changeDropDownPosition = (dropDownEl, wrapperEl) => {
     let cssClassName = '';
-    if ( this.isSpaceBelowElSmallerElHeight(dropDownEl, wrapperEl)) {
+    if (this.isSpaceBelowElSmallerElHeight(dropDownEl, wrapperEl)) {
       const isSmaller = this.isSpaceBelowElSmallerElHeight(dropDownEl, wrapperEl, true);
       cssClassName = (isSmaller) ? ' full-top' : ' popup-to-left half-top';
     }
-    return cssClassName;
-  }
 
-  private isSpaceBelowElSmallerElHeight = (dropDownEl, wrapperEl, getHeightHalf = false) => {
+    return cssClassName;
+  };
+
+  private readonly isSpaceBelowElSmallerElHeight = (dropDownEl, wrapperEl, getHeightHalf = false) => {
     const heightBelow = this.offsetBelowEl(wrapperEl);
     const height = (getHeightHalf) ? (dropDownEl.offsetHeight / 2) : dropDownEl.offsetHeight;
-    return heightBelow <= height;
-  }
 
-  private offsetBelowEl = (el) => {
+    return heightBelow <= height;
+  };
+
+  private readonly offsetBelowEl = (el) => {
     const rect = el.getBoundingClientRect();
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
     return document.documentElement.offsetHeight - (rect.top + scrollTop + el.offsetHeight);
-  }
+  };
 }
