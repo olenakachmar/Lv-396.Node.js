@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Department} from "../../../app_models/department";
-import data from '../../../../assets/data/data.json';
+import {IDepartment} from "../../../app_models/department";
+import {DepartmentService} from "../../../app_services/department.service";
+import {OptionPair} from "../../../app_models/option-pair";
 
 @Component({
   selector: 'app-create-side-bar-info',
@@ -9,10 +10,25 @@ import data from '../../../../assets/data/data.json';
 })
 export class CreateSideBarInfoComponent implements OnInit {
 
-  departments: Department[] = data;
+  public departmentsOptionPair: OptionPair[] = [];
+  public departments: IDepartment[] = [];
+  public positions: OptionPair[] = [];
+  public departmentId: any;
 
-  constructor() { }
+  constructor(private departmentService: DepartmentService) {
+  }
 
-  ngOnInit() { }
+  retrieveSelected($event) {
+    this.departmentId = $event;
+    this.positions = this.departments.filter( elem => elem._id==$event)[0].position.map(e=>new OptionPair(e,e));
+  }
+
+  ngOnInit() {
+    this.departmentService.getAllDepartments().subscribe(data => {
+      this.departmentsOptionPair = data.map(o => new OptionPair(o._id, o.name));
+      this.departments=data;
+      // console.log(this.departments);
+    });
+  }
 
 }

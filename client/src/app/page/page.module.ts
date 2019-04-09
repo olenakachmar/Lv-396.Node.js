@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
+import {HttpClientModule} from "@angular/common/http";
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WrapperComponent } from './wrapper/wrapper.component';
@@ -67,7 +67,7 @@ export const routes: Routes = [
     RouterModule,
     BrowserModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),

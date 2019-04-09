@@ -1,7 +1,5 @@
-import {User} from "./user";
-
-export class Department{
+export interface IDepartment{
   _id: string;
   name: string;
-  employees: User[];
+  position: [];
 }

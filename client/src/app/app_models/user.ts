@@ -1,3 +1,5 @@
+import {IDepartment} from "./department";
+
 export  class User {
   id: number;
   firstName: string;
@@ -5,7 +7,7 @@ export  class User {
   position: string;
   manager?: any;
   teamlead: object;
-  department?: any;
+  department?: IDepartment;
   email: string;
   phone: string;
   contacts: object;

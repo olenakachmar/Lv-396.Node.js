@@ -26,6 +26,10 @@ export class UserService {
     return this.http.get<User[]>(`${api}users`, httpOptions)
   }
 
+  getAllTeamLeads(): Observable<User[]> {
+    return this.http.get<User[]>(`${api}users?position=TEAM_LEAD`, httpOptions)
+  }
+
   getUser(id?: string): Observable<User> {
     const userId = this.getUserId();
     return this.http.get<User>(`${api}users/${id || userId}`, httpOptions)

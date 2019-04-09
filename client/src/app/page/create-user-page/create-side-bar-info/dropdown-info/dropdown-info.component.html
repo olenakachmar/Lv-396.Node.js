@@ -1,13 +1,6 @@
-<div class="btn-group" dropdown [insideClick]="true">
-  <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-    Button dropdown <span class="caret"></span>
-  </button>
-  <ul *dropdownMenu class="dropdown-menu" role="menu">
-    <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
-    <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
-    <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
-    <li class="divider dropdown-divider"></li>
-    <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a>
-    </li>
-  </ul>
+<div class="btn-group assign-grid" dropdown>
+  <select class="form-control" (change)="selectedOption($event)">
+    <option *ngFor="let pair of pairList" value={{pair._id}}> {{pair.name}} </option>
+  </select>
 </div>
+
