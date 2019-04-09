@@ -29,32 +29,21 @@ table {
   tbody tr:nth-child(odd) { background: #FFF }
 }
 
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(50px, 1fr));
+  background-color: #fff;
+  max-width: 1090px;
+}
+
 .row {
-  border: 1px solid $case-color;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(50px, 1fr));
+}
+
+.box {
+  border-radius: 0;
+  padding: 20px;
   font-size: 20px;
-  color: $primary-color;
-
-  .col:not(:nth-last-child(6n)) {
-    position: relative;
-    text-align: center;
-    cursor: pointer;
-    padding: 20px 0;
-    &:before {
-        display: inline;
-        position: absolute;
-        right: 300px;
-        left: 0;
-        color: $case-color;
-        font-weight: 100;
-        content: "|";
-      }
-  }
-
-  .head {
-    position: relative;
-    text-align: center;
-    padding: 20px 15px;
-    cursor: pointer;
-  }
-
 }

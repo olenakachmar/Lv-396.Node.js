@@ -10,26 +10,27 @@
   </tbody>
 </table>   -->
 
-<div class="row">
-  <ng-container *ngFor="let user of users | filterUsersBy: filterText; let i = index" (click)="selectUser(user._id)">
-    <div class="col head font-weight-bold">
-      {{ user.firstName }} {{ user.lastName }}
-    </div>
-    <div class="col">
-      {{ user.position }}
-    </div>
-    <div class="col">
-      {{ user.email }}
-    </div>
-    <div class="col">
-      {{ user.phone }}
-    </div>
-    <div class="col" *ngIf="user.contacts[0].contact_value">
-      {{ user.contacts[0].contact_value }}
-    </div>
-    <div class="col" *ngIf="!user.contacts[0].contact_value">
-      -
-    </div>
-    <div class="w-100"></div>
-  </ng-container>
+<div class="wrapper">
+  <div class="row">
+    <ng-container *ngFor="let user of users | filterUsersBy: filterText; let i = index" (click)="selectUser(user._id)">
+      <div class="box head font-weight-bold">
+        {{ user.firstName }} {{ user.lastName }}
+      </div>
+      <div class="box">
+        {{ user.position }}
+      </div>
+      <div class="box">
+        {{ user.email }}
+      </div>
+      <div class="box">
+        {{ user.phone }}
+      </div>
+      <div class="box" *ngIf="user.contacts[0].contact_value">
+        {{ user.contacts[0].contact_value }}
+      </div>
+      <div class="box" *ngIf="!user.contacts[0].contact_value">
+        -
+      </div>
+    </ng-container>
+  </div>
 </div>
