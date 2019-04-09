@@ -60,13 +60,15 @@ describe('FilterTasksByPipe', () => {
 
   it('create an instance', () => {
     const pipe = new FilterTasksByPipe();
-    expect(pipe).toBeTruthy();
+    expect(pipe)
+      .toBeTruthy();
   });
 
   it('if there is no filters return all tasks', () => {
     const pipe = new FilterTasksByPipe();
     filters = [];
-    expect(pipe.transform(tasks, filters)).toBe(tasks);
+    expect(pipe.transform(tasks, filters))
+      .toBe(tasks);
   });
 
   it('if all filters set on show all option return all tasks', () => {
@@ -96,7 +98,8 @@ describe('FilterTasksByPipe', () => {
         ],
       }
     ];
-    expect(pipe.transform(tasks, filters)).toBe(tasks);
+    expect(pipe.transform(tasks, filters))
+      .toBe(tasks);
   });
 
   it('filter tasks by status HIGHT', () => {
@@ -126,7 +129,8 @@ describe('FilterTasksByPipe', () => {
         ],
       }
     ];
-    expect(pipe.transform(tasks, filters)).toEqual(tasks.filter(item => item.id === 1));
+    expect(pipe.transform(tasks, filters))
+      .toEqual(tasks.filter(item => item.id === 1));
   });
 
   it('filter tasks by status LOW and type TASK', () => {
@@ -178,7 +182,8 @@ describe('FilterTasksByPipe', () => {
         content: '',
       }
     ];
-    expect(pipe.transform(tasks, filters)).toEqual(expectedResult);
+    expect(pipe.transform(tasks, filters))
+      .toEqual(expectedResult);
   });
 
   it('filter tasks by status LOW and type ISSUE', () => {
@@ -220,7 +225,8 @@ describe('FilterTasksByPipe', () => {
         content: '',
       }
     ];
-    expect(pipe.transform(tasks, filters)).toEqual(expectedResult);
+    expect(pipe.transform(tasks, filters))
+      .toEqual(expectedResult);
   });
 
   it('filter tasks by status NORMAL and any type', () => {
@@ -262,7 +268,8 @@ describe('FilterTasksByPipe', () => {
         content: '',
       }
     ];
-    expect(pipe.transform(tasks, filters)).toEqual(expectedResult);
+    expect(pipe.transform(tasks, filters))
+      .toEqual(expectedResult);
   });
 
   it('filter tasks by status NORMAL and type ISSUE', () => {
@@ -292,7 +299,8 @@ describe('FilterTasksByPipe', () => {
         ],
       }
     ];
-    expect(pipe.transform(tasks, filters).length).toEqual(0);
+    expect(pipe.transform(tasks, filters).length)
+      .toEqual(0);
   });
 
   it('filter tasks by status NORMAL and type TASK', () => {
@@ -322,6 +330,7 @@ describe('FilterTasksByPipe', () => {
         ],
       }
     ];
-    expect(pipe.transform(tasks, filters)).toEqual(tasks.filter(item => item.id === 3));
+    expect(pipe.transform(tasks, filters))
+      .toEqual(tasks.filter(item => item.id === 3));
   });
 });

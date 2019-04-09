@@ -17,18 +17,18 @@ export const httpOptions = {
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
   helper = new JwtHelperService();
 
 
   getAll(): Observable<User[]> {
-    return this.http.get<User[]>(`${api}users`, httpOptions)
+    return this.http.get<User[]>(`${api}users`, httpOptions);
   }
 
   getUser(id?: string): Observable<User> {
     const userId = this.getUserId();
-    return this.http.get<User>(`${api}users/${id || userId}`, httpOptions)
+    return this.http.get<User>(`${api}users/${id || userId}`, httpOptions);
   }
 
   getUserId(): any {

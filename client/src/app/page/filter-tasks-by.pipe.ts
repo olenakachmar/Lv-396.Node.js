@@ -11,15 +11,15 @@ export class FilterTasksByPipe implements PipeTransform {
     if (!filters || this.isAllFiltersTurnedOff(filters)) {
       return tasks;
     }
-    return tasks.filter( task => this.isTaskMatchesFilters(task, filters));
+
+    return tasks.filter(task => this.isTaskMatchesFilters(task, filters));
   }
 
-  private isAllFiltersTurnedOff = (filters: Filter[]) => {
-    return filters.every(filter => filter.defaultValue === -1);
-  }
+  private readonly isAllFiltersTurnedOff = (filters: Filter[]) =>
+    filters.every(filter => filter.defaultValue === -1);
 
-  private isTaskMatchesFilters = (task: any, filters: Filter[]) => {
-    return filters.every( filter => {
+  private readonly isTaskMatchesFilters = (task: any, filters: Filter[]) =>
+    filters.every(filter => {
       if (filter.defaultValue === -1) {
         return true;
       }
@@ -27,8 +27,8 @@ export class FilterTasksByPipe implements PipeTransform {
       if (meta === 'date') {
         return filter.defaultValue === task[meta];
       }
+
       return filter.defaultValue === task[meta].value;
     });
-  }
 
 }
