@@ -64,12 +64,12 @@ a {
       @include media-breakpoint-up(md) {
         display: flex;
         justify-content: center;
-        font: 12px Arial, sans-serif;
-        color: #ffff;
+        font: $base-font-size $font-stack;
+        color: $bg2-color;
       }
       a {
         text-decoration: none;
-        color: #ffff;
+        color: $bg2-color;
       }
     }
     &__avatar {
@@ -94,13 +94,13 @@ a {
       }
     }
     &__elem {
-      font: normal 12px arial, sans-serif;
+      font: normal 12px $font-stack;
       color: $primary-color;
       padding: 17px;
       text-transform: capitalize;
       cursor: pointer;
       @include media-breakpoint-up(md) {
-        font: normal 14px arial, sans-serif;
+        font: $base-font-size $font-stack;
       }
     }
   }

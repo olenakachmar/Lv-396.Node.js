@@ -65,7 +65,7 @@ a {
   align-items: center;
   width: 260px;
   height: 100vh;
-  background-color: #2699fb;
+  background-color: $primary-color;
   z-index: 2;
   transition: all 0.5s;
   padding-bottom: 100px;
@@ -84,14 +84,14 @@ a {
     display: flex;
     padding-top: 30px;
     a {
-      font: 12px Arial, sans-serif;
+      font: 12px $font-stack;
       text-transform: uppercase;
       font-weight: normal;
       width: 100%;
       color: $bg2-color;
       margin: 0;
       @include media-breakpoint-up(lg) {
-        font: 14px Arial, sans-serif;
+        font: $base-font-size $font-stack;
       }
     }
     &:active,
