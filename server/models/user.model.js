@@ -2,7 +2,9 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-const { Schema } = mongoose;
+const {
+  Schema,
+} = mongoose;
 
 const UserSchema = new Schema({
   login: {
@@ -49,18 +51,17 @@ const UserSchema = new Schema({
     required: true,
     unique: true,
   },
-  contacts: [
-    {
-      contact_name: {
-        type: String,
-        required: true,
-        unique: true,
-      },
-      contact_value: {
-        type: String,
-        required: true,
-      },
+  contacts: [{
+    contact_name: {
+      type: String,
+      required: true,
+      unique: true,
     },
+    contact_value: {
+      type: String,
+      required: true,
+    },
+  },
   ],
   photoURL: {
     type: String,
@@ -73,18 +74,23 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  dates: [
-    {
-      topic: {
-        type: String,
-        required: true,
-      },
-      date: {
-        type: Date,
-        required: true,
-      },
+  dates: [{
+    topic: {
+      type: String,
+      required: true,
     },
+    date: {
+      type: Date,
+      required: true,
+    },
+  },
   ],
+  reset_password_token: {
+    type: String,
+  },
+  reset_password_expires: {
+    type: Date,
+  },
 });
 
 function hashPassword(next) {
@@ -107,16 +113,16 @@ function checkPassword(passwordToCheck) {
 
 UserSchema.methods.checkPassword = checkPassword;
 
-// UserSchema.set('toObject', {
-//   transform(doc, ret) {
-//     const object = ret;
-//     delete object.password;
-//     delete object.login;
-//     delete object.type;
-//     delete object.__v;
-//     return object;
-//   },
-// });
+UserSchema.set('toObject', {
+  transform(doc, ret) {
+    const object = ret;
+    delete object.password;
+    delete object.login;
+    delete object.type;
+    delete object.__v;
+    return object;
+  },
+});
 
 UserSchema.set('toJSON', {
   transform(doc, ret) {
