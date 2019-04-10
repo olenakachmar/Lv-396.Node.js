@@ -36,7 +36,7 @@ export class DatepickerFilterComponent implements OnInit {
     this.choiseReadyFlag = 0;
   }
 
-  get defaultTitle(): string {
+  private get defaultTitle(): string {
     this._defaultTitle = this.filterItem.options.filter((item: FilterOptions) => item.value === -1)[0].name;
 
     return this._defaultTitle;
