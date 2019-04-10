@@ -292,14 +292,18 @@
   background-color: $bg-color;
 }
 
+::ng-deep .theme-green .bs-datepicker-body table td span.selected {
+  color: $primary-color !important;
+  background-color: $case-color !important;
+}
+
 ::ng-deep .bs-datepicker-body table td.is-highlighted,
 ::ng-deep .bs-datepicker-body table.days span:hover,
 ::ng-deep .bs-datepicker-body table.days span.is-highlighted,
-::ng-deep .bs-datepicker-body table td span.is-highlighted:not(.disabled):not(.selected),
-::ng-deep .theme-green .bs-datepicker-body table td span.selected {
+::ng-deep .bs-datepicker-body table td span.is-highlighted:not(.disabled):not(.selected) {
   color: $primary-color;
   background-color: $case-color;
-  opacity: .5;
+  opacity: .5 !important;
 }
 
 ::ng-deep .bs-datepicker-body table td.is-highlighted span {
@@ -343,6 +347,10 @@
     .btn-group.width-100 .dropdown-menu.filter-el {
       position: relative !important;
       width: 100%;
+    }
+
+    .btn-group.width-100.half-top .dropdown-menu.filter-el {
+      transform: none !important;
     }
   }
 

@@ -1,4 +1,4 @@
-<div class="btn-group {{cssClassName}} {{dropDownPositionClassNames}}" dropdown (onHidden)="choiceReady()" [dropup]="isDropup"
+<div class="btn-group {{cssClassName}} {{dropDownPositionClassNames}}" dropdown (onHidden)="dropDownClosed()" [dropup]="isDropup"
      #dropDownWrapper>
   <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle filter-el"
           aria-controls="dropdown-basic">

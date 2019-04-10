@@ -59,20 +59,23 @@ export class DatepickerFilterComponent implements OnInit {
     return new Date(+ dateParts[2], (+ dateParts[1]) - 1, + dateParts[0]);
   };
 
-  choiceReady = () => {
-    (this.choiseReadyFlag - 1) ? this.filterVal.emit(this.filterResult) : this.filterVal.emit(-1);
-  };
-
   cancelFilter = (i: any, event: any): void => {
     this.choiseReadyFlag ++;
     this.filterResult = i;
+    this.updateTitle();
     event.preventDefault();
   };
 
   selectDate = (event) => {
     this.choiseReadyFlag ++;
     this.filterResult = this.convertDateToString(event);
+    if (this.isCalendarReady()) {
+      this.title = this.filterResult;
+    }
   };
+
+  private readonly isCalendarReady = (): boolean =>
+    (this.choiseReadyFlag - 1) > 0;
 
   private readonly convertDateToString = (date: Date): string => {
     const dd = this.getDayStr(date);
@@ -112,5 +115,18 @@ export class DatepickerFilterComponent implements OnInit {
         this.dropDownPositionClassNames = cssClassNames;
     });
   }
+
+  dropDownClosed = () => {
+    const val = (this.isCalendarReady()) ? this.filterResult : -1;
+    this.filterVal.emit(val);
+    this.updateTitle(this.isCalendarReady());
+  };
+
+  private readonly updateTitle = (takeDateToTitle: boolean = false): void => {
+    this.title = takeDateToTitle ? this.filterResult : this.getDefaultTitle();
+  };
+
+  private readonly getDefaultTitle = (): string =>
+    this.filterItem.options.filter((item: FilterOptions) => item.value === -1)[0].name;
 
 }
