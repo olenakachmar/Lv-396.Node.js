@@ -15,3 +15,7 @@ input {
       font-size: $base-font-size;
     }
 }
+
+.mr-sm-2, .mx-sm-2 {
+  margin-right: -0.5rem !important;
+}
