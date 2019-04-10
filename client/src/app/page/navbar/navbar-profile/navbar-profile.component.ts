@@ -45,7 +45,7 @@ export class NavbarProfileComponent implements OnInit {
 
   currentPage() {
     event.preventDefault();
-    this.menuList.map(item => item.current = item.id === 5);
+    this.menuList.map(item => item.current = item.id === 'my-profile');
   }
 
   changeCurrent(i) {
