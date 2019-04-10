@@ -7,6 +7,7 @@ const {
   JWT_SECRET,
   smtpEmail,
   arrKeys,
+  frontURI,
 } = require('../../config/config');
 
 const router = express.Router();
@@ -146,7 +147,7 @@ router.post('/forgot_password', async (req, res) => {
       template: 'forgot-password-email',
       subject: 'Password help has arrived!',
       context: {
-        url: `http://localhost:4200/reset-password?token=${token}`,
+        url: `${frontURI}/reset-password?token=${token}`,
         name: user.firstName,
       },
     };
