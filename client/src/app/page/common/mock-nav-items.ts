@@ -3,7 +3,7 @@ import { NavItem } from './nav-item';
 
 export const NAVBAR_LIST: NavItem[] = [
   {
-    id: 1,
+    id: 'upcoming-tasks',
     title: 'upcoming tasks',
     current: true,
     router: '/profile',
@@ -13,7 +13,7 @@ export const NAVBAR_LIST: NavItem[] = [
     dev: ''
   },
   {
-    id: 2,
+    id: 'issues',
     title: 'issues',
     current: false,
     router: '',
@@ -23,7 +23,7 @@ export const NAVBAR_LIST: NavItem[] = [
     dev: 'dev'
   },
   {
-    id: 3,
+    id: 'contact-info',
     title: 'contact info',
     current: false,
     router: 'contact-info',
@@ -33,7 +33,7 @@ export const NAVBAR_LIST: NavItem[] = [
     dev: 'dev'
   },
   {
-    id: 4,
+    id: 'log-out',
     title: 'log out',
     current: false,
     router: '',
@@ -44,7 +44,7 @@ export const NAVBAR_LIST: NavItem[] = [
     logout: true
   },
   {
-    id: 5,
+    id: 'my-profile',
     title: 'my profile',
     current: false,
     router: 'my-profile',
@@ -54,7 +54,7 @@ export const NAVBAR_LIST: NavItem[] = [
     dev: 'dev'
   },
   {
-    id: 6,
+    id: 'edit-profile',
     title: 'edit profile',
     current: false,
     router: '',
@@ -64,7 +64,7 @@ export const NAVBAR_LIST: NavItem[] = [
     dev: ''
   },
   {
-    id: 7,
+    id: 'create-user',
     title: 'create user',
     current: false,
     router: 'create-user',
