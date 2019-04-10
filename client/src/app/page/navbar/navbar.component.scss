@@ -2,7 +2,7 @@
 @import "./node_modules/bootstrap/scss/functions";
 @import "./node_modules/bootstrap/scss/variables";
 
-@import '../../common/theme';
+@import "../../common/theme";
 
 p {
   margin: 0;
@@ -21,13 +21,13 @@ a {
   color: $bg2-color;
   background-color: rgba(38, 152, 251, 0.918) !important;
   padding: 0 10px !important;
-  .wrapper {
+  .navbar-block {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     height: 100%;
     max-width: 100%;
-    &  div:first-child {
+    & div:first-child {
       justify-content: flex-start;
       margin-right: 20px;
     }

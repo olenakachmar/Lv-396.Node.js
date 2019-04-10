@@ -2,14 +2,14 @@
 @import "./node_modules/bootstrap/scss/functions";
 @import "./node_modules/bootstrap/scss/variables";
 
-.wrapper {
+:host {
   display: flex;
   justify-content: flex-start;
   padding-left: 15px;
   @include media-breakpoint-up(lg) {
     padding-left: 35px;
   }
-  &__item {
+  .item {
     height: 4vmin;
     width: 4vmin;
     margin: 25px;
@@ -21,7 +21,7 @@
       margin: 10px;
     }
   }
-  &__img {
+  .icon {
     height: auto;
     max-width: 100%;
   }
