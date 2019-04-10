@@ -1,12 +1,18 @@
 <div class="container-fluid p-0">
   <nav class="navbar navbar-dark bg-primary p-0">
-    <div class="col-3 d-flex">
-      <a href (click)="toggleIsActive()">
-        <img class="btn-menu" src="assets/img/navbar-menu-desk.png" alt="menu">
-      </a>
-      <a [routerLink]="[ '/profile' ]" (click)="homePage(); active = false">
-        <img class="logo" src='assets/img/logo-desk.png' alt="main-page">
-      </a>
+    <div class="col-5 col-sm-2 col-md-3 col-lg-2 d-flex justify-content-between pr-0 h-100">
+      <div class="navbar-block">
+        <div class="navbar-item">
+          <a href (click)="toggleIsActive()" class="navbar-item__btn-menu">
+            <img src="assets/img/navbar-menu-desk.png" alt="menu">
+          </a>
+        </div>
+        <div class="navbar-item">
+          <a [routerLink]="[ '/profile' ]" (click)="currentPage(); active = false" class="navbar-item__logo">
+            <img src='assets/img/logo-desk.png' alt="logo/main-page">
+          </a>
+        </div>
+      </div>
       <div class="burger-menu" [ngClass]="{'active': active}">
         <ul class="burger-menu__list">
           <ng-container *ngFor="let link of menuList; let i = index">
@@ -16,11 +22,11 @@
             </li>
           </ng-container>
         </ul>
-        <!--<app-social-networks></app-social-networks>-->
+        <app-social-networks class="w-100"></app-social-networks>
       </div>
     </div>
-    <div>
-      <app-navbar-profile></app-navbar-profile>
+    <div class="col-7 col-lg-7 d-flex pl-0 h-100">
+      <app-navbar-profile class="flex-grow-1 h-100"></app-navbar-profile>
     </div>
   </nav>
 </div>

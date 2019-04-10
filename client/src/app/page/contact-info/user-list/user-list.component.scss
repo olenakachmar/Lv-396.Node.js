@@ -1,36 +1,87 @@
-$font-stack: Arial, sans-serif;
-$primary-color: #2699FB;
-$case-color: #BCE0FD;
-$bg-color: #F1F9FF;
-$bg2-color: #fff;
-$base-font-size: 14px;
-$base-line-height: 16px;
+@import "../../../common/theme";
 
-table {
+.list-users {
+  padding-left: 0;
+  padding-right: 0;
   border: 1px solid $case-color;
   font-size: 20px;
   color: $primary-color;
-    
-  tbody tr th, td {
-    padding: 20px 0;
+
+  .box {
     position: relative;
-    text-align: center;
+    padding: 20px 10px;
     cursor: pointer;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    text-align: center;
+    line-height: 1.2em;
   }
-  
-  tbody td {
-    padding: 20px 15px;
+
+  .box:not(:last-child) {
     &:before {
-        display: inline;
-        position: absolute;
-        right: 300px;
-        left: 0;
-        color: $case-color;
-        font-weight: 100px;
-        content: "|";
-      }
+      position: absolute;
+      top: 25%;
+      right: 0;
+      display: block;
+      height: 40px;
+      width: 2px;
+      background: $case-color;
+      content: "";
+    }
   }
-  
-  tbody tr:nth-child(even) { background: $bg-color }
-  tbody tr:nth-child(odd) { background: #FFF }
+}
+
+.box-wrapper > * {
+  float: left;
+}
+
+.box-wrapper:after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
+@media (max-width: 970px) {
+  .box {
+    text-align: left;
+  }
+}
+
+.box-wrapper {
+  @media (max-width: 970px) {
+    padding: 20px 10px;
+
+    .box {
+      float: none;
+      padding: 5px 0;
+      max-width: 100%;
+      width: 100%;
+      flex: 1;
+    }
+
+    .box:not(:last-child) {
+      &:before {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 680px) {
+  .box-wrapper {
+    max-width: 100%;
+    width: 100%;
+    flex: 1;
+
+    .box {
+      text-align: center;
+    }
+  }
+}
+
+.wrapper .row:nth-child(even) {
+  background: $bg-color;
+}
+.wrapper .row:nth-child(odd) {
+  background: #fff;
 }

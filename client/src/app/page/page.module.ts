@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WrapperComponent } from './wrapper/wrapper.component';
@@ -25,10 +25,10 @@ import { ContactInfoComponent } from './contact-info/contact-info.component';
 import { UserListComponent } from './contact-info/user-list/user-list.component';
 import { UserFilterComponent } from './contact-info/user-filter/user-filter.component';
 import { FilterUsersByPipe } from './contact-info/filter-users-by.pipe';
-import {CreateUserPageComponent} from "./create-user-page/create-user-page.component";
-import {CreateSideBarInfoComponent} from "./create-user-page/create-side-bar-info/create-side-bar-info.component";
+import { CreateUserPageComponent } from './create-user-page/create-user-page.component';
+import { CreateSideBarInfoComponent } from './create-user-page/create-side-bar-info/create-side-bar-info.component';
 import { DropdownInfoComponent } from './create-user-page/create-side-bar-info/dropdown-info/dropdown-info.component';
-import {DatepickerFilterComponent} from "./filter/datepicker-filter/datepicker-filter.component";
+import { DatepickerFilterComponent } from './filter/datepicker-filter/datepicker-filter.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
@@ -67,7 +67,7 @@ export const routes: Routes = [
     RouterModule,
     BrowserModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),

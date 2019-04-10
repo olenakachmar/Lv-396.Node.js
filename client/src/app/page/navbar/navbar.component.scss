@@ -2,10 +2,7 @@
 @import "./node_modules/bootstrap/scss/functions";
 @import "./node_modules/bootstrap/scss/variables";
 
-$textColor: #ffff;
-$primary-color: #2699fb;
-$case-color: #bce0fd;
-$bg-color: #f1f9ff;
+@import "../../common/theme";
 
 p {
   margin: 0;
@@ -13,39 +10,54 @@ p {
 }
 
 a {
-  line-height: 45px;
-  margin-right: 28px;
   border: 0;
   text-decoration: none;
 }
 
-nav {
+.navbar {
   display: flex;
   align-items: center;
   height: 70px;
-  color: $textColor;
+  color: $bg2-color;
   background-color: rgba(38, 152, 251, 0.918) !important;
   padding: 0 10px !important;
-  .btn-menu {
-    height: 15px;
-    width: 15px;
-    @include media-breakpoint-up(md) {
-      height: 20px;
-      width: 20px;
+  .navbar-block {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    max-width: 100%;
+    & div:first-child {
+      justify-content: flex-start;
+      margin-right: 20px;
     }
   }
-  .logo {
-    height: 20px;
-    width: 70px;
-    @include media-breakpoint-up(md) {
-      height: auto;
-      width: auto;
+  .navbar-item {
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    &__btn-menu {
+      display: flex;
+      align-items: center;
+      width: 4vmin;
+      @include media-breakpoint-up(md) {
+        width: 3vmin;
+      }
     }
+    &__logo {
+      display: flex;
+      align-items: center;
+      width: 20vmin;
+    }
+  }
+  img {
+    height: auto;
+    max-width: 100%;
   }
 }
 .burger-menu {
   position: absolute;
-  top: 57px;
+  top: 69px;
   left: -100vw;
   display: flex;
   flex-direction: column;
@@ -53,9 +65,9 @@ nav {
   align-items: center;
   width: 260px;
   height: 100vh;
-  background-color: #2699fb;
+  background-color: $primary-color;
   z-index: 2;
-  transition: all 0.5s linear;
+  transition: all 0.5s;
   padding-bottom: 100px;
   @include media-breakpoint-up(lg) {
     width: 300px;
@@ -72,82 +84,22 @@ nav {
     display: flex;
     padding-top: 30px;
     a {
-      font: 12px Arial, sans-serif;
+      font: 12px $font-stack;
       text-transform: uppercase;
       font-weight: normal;
       width: 100%;
-      color: $textColor;
+      color: $bg2-color;
       margin: 0;
       @include media-breakpoint-up(lg) {
-        font: 14px Arial, sans-serif;
+        font: $base-font-size $font-stack;
       }
     }
     &:active,
     &:focus,
     &:hover {
-      border-bottom: 1px solid $textColor;
+      border-bottom: 1px solid $bg2-color;
       margin-bottom: -1px;
     }
-  }
-}
-
-.right-navbar {
-  display: flex;
-  padding-top: 15px;
-  width: 70%;
-  @include media-breakpoint-up(md) {
-    display: none;
-  }
-  &__btn {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin: 0;
-  }
-  &__name {
-    font: normal 12px arial, sans-serif;
-    color: $textColor;
-  }
-  &__avatar {
-    height: 35px;
-    width: 35px;
-    border-radius: 50%;
-  }
-  &__menu {
-    margin-top: 10px !important;
-    padding: 0;
-    width: 230px;
-    border-color: $case-color;
-    border-radius: 1px;
-  }
-  &__item {
-    font: normal 14px arial, sans-serif;
-    color: $primary-color;
-    padding: 17px;
-  }
-}
-.dropdown-menu li a:hover {
-  background: $bg-color !important;
-}
-.dropdown-menu li.current a::after {
-  position: absolute;
-  content: url("../../../assets/img/symbol_ok.svg");
-  left: 190px;
-}
-.dropdown-menu li a {
-  position: relative;
-}
-
-.user-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  min-width: 25vw;
-  height: 100%;
-  @include media-breakpoint-up(lg) {
-    min-width: 20vw;
   }
 }
 
@@ -155,6 +107,6 @@ nav {
   left: -15px;
 }
 .current {
-  border-bottom: 1px solid $textColor;
+  border-bottom: 1px solid $bg2-color;
   margin-bottom: -1px;
 }
