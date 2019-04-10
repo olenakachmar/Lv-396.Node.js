@@ -2,7 +2,7 @@
 @import "./node_modules/bootstrap/scss/functions";
 @import "./node_modules/bootstrap/scss/variables";
 
-@import '../../../common/theme';
+@import "../../../common/theme";
 
 p {
   padding: 0;
@@ -13,71 +13,63 @@ a {
   text-decoration: none;
 }
 
-.wrapper {
+:host {
   display: flex;
-  justify-content: space-between;
-  max-width: 30vw;
-  height: 70px;
-  line-height: 70px;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
   @include media-breakpoint-up(md) {
-    max-width: 50vw;
+    min-width: 20vmin;
+  }
+  .user-bar__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-left: 30px;
+  }
+  & :first-child {
+    justify-content: flex-start;
+  }
+  & :last-child {
+    justify-content: flex-end;
   }
   .notifications {
-    text-align: right;
-    margin-right: 10px;
+    display: flex;
+    align-items: center;
     cursor: default;
-    @include media-breakpoint-up(lg) {
-      text-align: left;
-      margin-right: 0;
-    }
     &__icon {
-      height: 16px;
-      width: 16px;
+      height: auto;
+      width: 4vmin;
+      margin-right: 5px;
       @include media-breakpoint-up(md) {
-        height: 20px;
-        width: 20px;
+        width: 3vmin;
       }
     }
     &__number {
-      font: normal 14px arial, sans-serif;
-      @include media-breakpoint-up(md) {
-        font: 16px Arial, sans-serif;
-      }
+      font: normal 12px arial, sans-serif;
     }
   }
-  .right-navbar {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-content: center;
-    height: 100%;
-    padding-right: 15px;
-    @include media-breakpoint-up(lg) {
-      justify-content: space-around;
-      flex-grow: 1;
-      padding-right: 0;
-    }
+  .user-bar {
     &__btn {
       display: flex;
       flex-direction: row;
-      justify-content: center !important;
+      justify-content: flex-end !important;
       align-items: center;
       width: 100%;
       cursor: pointer;
-      @include media-breakpoint-up(md) {
-        justify-content: space-between;
-        padding-right: 10px;
-      }
     }
     &__name {
       display: none;
-      @include media-breakpoint-up(lg) {
+      @include media-breakpoint-up(md) {
         display: flex;
         justify-content: center;
-        font: 18px Arial, sans-serif;
-        color: #ffff;
-        flex-grow: 1;
-        padding: 0 15px;
+        font: $base-font-size $font-stack;
+        color: $bg2-color;
+      }
+      a {
+        text-decoration: none;
+        color: $bg2-color;
       }
     }
     &__avatar {
@@ -94,18 +86,21 @@ a {
       padding: 0;
       right: 0 !important;
       left: auto !important;
-      width: 240px;
+      width: 180px;
       border-color: $case-color;
       border-radius: 1px;
+      @include media-breakpoint-up(md) {
+        width: 240px;
+      }
     }
-    &__item {
-      font: normal 12px arial, sans-serif;
+    &__elem {
+      font: normal 12px $font-stack;
       color: $primary-color;
       padding: 17px;
       text-transform: capitalize;
       cursor: pointer;
       @include media-breakpoint-up(md) {
-        font: normal 14px arial, sans-serif;
+        font: $base-font-size $font-stack;
       }
     }
   }
@@ -120,5 +115,8 @@ a {
 .dropdown-menu li.current a::after {
   position: absolute;
   content: url("../../../../assets/img/symbol_ok.svg");
-  left: 200px;
+  left: 140px;
+  @include media-breakpoint-up(md) {
+    left: 200px;
+  }
 }
