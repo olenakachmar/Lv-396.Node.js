@@ -1,6 +1,19 @@
-<div class="btn-group assign-grid" dropdown>
-  <select class="form-control" (change)="selectedOption($event)">
+<div class="btn-group assign-grid dropdown-option" dropdown>
+  <select class="form-control" (change)="selectedElement($event)">
+    <option value="" hidden disabled>Choose</option>
     <option *ngFor="let pair of pairList" value={{pair._id}}> {{pair.name}} </option>
   </select>
 </div>
 
+<!--<div class="btn-group" dropdown>-->
+  <!--<button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle filter-el"-->
+          <!--aria-controls="dropdown-basic">-->
+    <!--Choose <span class="caret"></span>-->
+  <!--</button>-->
+  <!--<ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu"-->
+      <!--aria-labelledby="button-basic">-->
+    <!--<li role="menuitem">-->
+      <!--<a *ngFor="let pair of pairList" class="dropdown-item" href="#" (click)="selectedElement($event)">{{pair.name}}</a>-->
+    <!--</li>-->
+  <!--</ul>-->
+<!--</div>-->

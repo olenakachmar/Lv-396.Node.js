@@ -1,7 +1,7 @@
 import {IDepartment} from "./department";
 
 export  class User {
-  id: number;
+  id: any;
   firstName: string;
   lastName: string;
   position: string;

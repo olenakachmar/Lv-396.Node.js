@@ -1,5 +1,5 @@
 export class OptionPair {
-  _id: string;
+  _id: any;
   private name: string;
   constructor(_id: string,
               name: string) {

@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {BsModalService, BsModalRef} from 'ngx-bootstrap/modal';
-import {OptionPair} from "../../../../app_models/option-pair";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { OptionPair } from "../../../../app_models/option-pair";
 
 @Component({
   selector: 'app-dropdown-info',
@@ -9,20 +9,17 @@ import {OptionPair} from "../../../../app_models/option-pair";
 })
 export class DropdownInfoComponent implements OnInit {
   @Input() pairList: OptionPair[];
-  @Output() selected = new EventEmitter<string>();
+  @Output() selected = new EventEmitter<any>();
 
 
   constructor() {
   }
 
   ngOnInit() {
-    // console.log(this.selected);
   }
 
-  selectedOption(event){
-    console.log(event.target.value);
+  selectedElement(event){
     this.selected.emit(event.target.value);
-    // event.preventDefault();
   }
 
 }

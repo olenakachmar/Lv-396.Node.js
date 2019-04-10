@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {Observable} from "rxjs/Rx";
-import {IDepartment} from "../app_models/department";
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { IDepartment } from '../app_models/department';
 import { HttpClient } from '@angular/common/http';
 import { httpOptions } from './user.service';
 import { api } from '../../environments/environment';

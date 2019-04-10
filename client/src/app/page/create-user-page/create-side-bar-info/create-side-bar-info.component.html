@@ -1,30 +1,41 @@
 <div class="create-user-bar-info">
-  <div class="photo">
-    <app-user-image></app-user-image>
+  <div class="upload-image">
+    <app-user-image class="photo"></app-user-image>
+    <button class="update-photo-button">Update Image</button>
   </div>
-  <button>Update Image</button>
   <div class="fillInfo">
-    <div class="input-group">
-      <label for="first-name">First Name</label>
-      <input type="text" class="form-control" placeholder="Name" id='first-name' aria-label="Username">
+    <div class="info-form">
+      <div class="input-label"><label for="first-name">First Name</label></div>
+      <input class="form-control" type="text" placeholder="Name" id='first-name' aria-label="Username">
     </div>
-    <div class="input-group">
-      <label for="last-name">First Name</label>
-      <input type="text" class="form-control" placeholder="Surname" id='last-name' aria-label="UserSurname"
+    <div class="info-form">
+      <div class="input-label"><label for="last-name">First Name</label></div>
+      <input class="form-control" type="text" placeholder="Surname" id='last-name' aria-label="UserSurname"
              aria-describedby="addon-wrapping">
     </div>
-    <div>
-      <app-dropdown-info [pairList]='departmentsOptionPair' (selected)="retrieveSelected($event)"></app-dropdown-info>
+    <div class="info-form">
+      <div class="input-label"><label for="department">Department</label></div>
+      <app-dropdown-info class="info-input-area" id="department" [pairList]='departmentsOptionPair'
+                         (selected)="retrieveSelectedDepartment($event)"></app-dropdown-info>
     </div>
-    <div>
-      <app-dropdown-info disabled [pairList]='positions' ></app-dropdown-info>
+    <div class="info-form">
+      <div class="input-label"><label for="position">Position</label></div>
+      <app-dropdown-info class="info-input-area" id="position" disabled [pairList]='positions'
+                         (selected)="retrieveSelectedPosition($event)"></app-dropdown-info>
     </div>
-    <!--<div>-->
-      <!--<app-dropdown-info [pairList]='departments'></app-dropdown-info>-->
-    <!--</div>-->
-    <!--<div>-->
-      <!--<app-dropdown-info [pairList]='departments'></app-dropdown-info>-->
-    <!--</div>-->
-
+    <div class="info-form">
+      <div class="input-label"><label for="teamLead">Teamlead</label></div>
+      <app-dropdown-info class="info-input-area" id="teamLead" [pairList]='teamLeads'
+                         (selected)="retrieveSelectedTeamleadId($event)"></app-dropdown-info>
+    </div>
+    <div class="info-form">
+      <div class="input-label"><label for="role">Role</label></div>
+      <app-dropdown-info class="info-input-area" id="role" [pairList]='roles'
+                         (selected)="retrieveSelectedTeamleadId($event)"></app-dropdown-info>
+    </div>
+    <div class="info-form">
+      <div class="input-label"><label for="manager">Manager</label></div>
+      <app-dropdown-info class="info-input-area" id="manager" [pairList]='managers'></app-dropdown-info>
+    </div>
   </div>
 </div>

@@ -1,0 +1,27 @@
+@import '../../../../common/theme';
+
+.dropdown-option {
+  width: 100%;
+  .form-control {
+    height: 50px;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 0;
+    background-color: #fff;
+    color: $primary-color;
+    border: $case-color solid 1px;
+  }
+
+  select {
+    height: 50px;
+    font-size: 14px;
+    border-radius: 0;
+    background-color: #fff;
+    color: $primary-color;
+    border: $case-color solid 1px;
+
+    option{
+      padding: 5px;
+    }
+  }
+}
