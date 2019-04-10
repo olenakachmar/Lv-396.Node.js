@@ -40,6 +40,12 @@ const issueSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },
+    resolvedByAuthor: {
+      type: Boolean,
+    },
+    resolvedByPerformer: {
+      type: Boolean,
+    },
   },
 );
 
