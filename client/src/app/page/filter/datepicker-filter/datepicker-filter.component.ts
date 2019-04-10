@@ -22,8 +22,6 @@ export class DatepickerFilterComponent implements OnInit {
   choiseReadyFlag: number;
   cancelLinkText: string;
 
-  private _defaultTitle: string;
-
   constructor(private readonly dropDownService: DropDownService) { }
 
   ngOnInit(): void {
@@ -37,9 +35,7 @@ export class DatepickerFilterComponent implements OnInit {
   }
 
   private get defaultTitle(): string {
-    this._defaultTitle = this.filterItem.options.filter((item: FilterOptions) => item.value === -1)[0].name;
-
-    return this._defaultTitle;
+    return this.filterItem.options.filter((item: FilterOptions) => item.value === -1)[0].name;
   }
 
   private readonly getTitle = (titleObj: any) => {
