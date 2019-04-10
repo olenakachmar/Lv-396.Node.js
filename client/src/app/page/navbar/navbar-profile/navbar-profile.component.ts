@@ -20,16 +20,16 @@ export class NavbarProfileComponent implements OnInit {
   userType: string;
 
   constructor(
-    private authService: AuthService,
-    private router: Router,
-    private navItemsService: NavItemsService,
-    private userService: UserService) { }
+    private readonly authService: AuthService,
+    private readonly router: Router,
+    private readonly navItemsService: NavItemsService,
+    private readonly userService: UserService) { }
 
   ngOnInit() {
     this.loadUser();
     this.navItemsService.getNavList().subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
-    this.avatar = 'assets/img/userimg.jpg';
+    this.avatar = this.user.photoURL || 'assets/img/photo_hr.jpg' || 'assets/img/userimg.jpg';
     this.notificationsNumber = 7;
   }
 
@@ -41,6 +41,11 @@ export class NavbarProfileComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['/home']);
     return false;
+  }
+
+  currentPage() {
+    event.preventDefault();
+    this.menuList.map(item => item.current = item.id === 5);
   }
 
   changeCurrent(i) {

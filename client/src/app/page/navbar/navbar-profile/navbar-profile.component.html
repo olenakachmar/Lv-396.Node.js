@@ -1,21 +1,22 @@
-<div class="wrapper">
-  <div class="notifications">
-    <img src="assets/img/navbar-notifications-desk.png" alt="notifications" class="notifications__icon">
-    <span class="notifications__number">({{  notificationsNumber }})</span>
+<div class="user-bar__item notifications" *ngIf="notificationsNumber">
+  <img src="assets/img/navbar-notifications-desk.png" alt="notifications" class="notifications__icon">
+  <span class="notifications__number">({{ notificationsNumber }})</span>
+</div>
+<div class="user-bar__item user-bar__name">
+  <a href [routerLink]="[ 'my-profile' ]" (click)="currentPage()"> {{ user.firstName }} {{ user.lastName }} </a>
+</div>
+<div class="user-bar__item btn-group" dropdown>
+  <div class="user-bar__btn" dropdownToggle>
+    <img class="user-bar__avatar" src="{{ avatar }}" alt="avatar">
   </div>
-  <div class="right-navbar btn-group" dropdown>
-    <div class="right-navbar__btn" dropdownToggle>
-      <span class="right-navbar__name"> {{ user.firstName }} {{ user.lastName }} </span>
-      <img class="right-navbar__avatar" src="{{ avatar }}" alt="avatar">
-    </div>
-    <ul class="right-navbar__menu dropdown-menu" id="dropdown-disabled-item" *dropdownMenu role="menu"
-      aria-labelledby="button-disabled-item">
-      <ng-container *ngFor="let link of menuList; let i = index">
-        <li class="right-navbar__row" role="menuitem" *ngIf="link.rightMenu && (userType === link.hr || userType === link.dev)"
-          [ngClass]="{'current': link.current}" (click)="changeCurrent(i)">
-          <a class="right-navbar__item dropdown-item">{{ link.title }}</a>
-        </li>
-      </ng-container>
-    </ul>
-  </div>
+  <ul class="user-bar__menu dropdown-menu" id="dropdown-disabled-item" *dropdownMenu role="menu"
+    aria-labelledby="button-disabled-item">
+    <ng-container *ngFor="let link of menuList; let i = index">
+      <li class="user-bar__row" role="menuitem"
+        *ngIf="link.rightMenu && (userType === link.hr || userType === link.dev)" [ngClass]="{'current': link.current}"
+        (click)="changeCurrent(i)">
+        <a href [routerLink]="[ link.router ]" class="user-bar__elem dropdown-item">{{ link.title }}</a>
+      </li>
+    </ng-container>
+  </ul>
 </div>

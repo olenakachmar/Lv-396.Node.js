@@ -11,7 +11,7 @@ import { NavItem } from '../common/nav-item';
 
 export class NavbarComponent implements OnInit {
 
-  constructor(private navItemsService: NavItemsService, private userService: UserService) { }
+  constructor(private readonly navItemsService: NavItemsService, private readonly userService: UserService) { }
   name: string;
   surname: string;
   avatar: string;
@@ -30,9 +30,9 @@ export class NavbarComponent implements OnInit {
     this.avatar = 'assets/img/navbar-symbol-desk.png';
   }
 
-  homePage() {
+  currentPage() {
     event.preventDefault();
-    this.menuList.map((item, index) => item.current = index === 0);
+    this.menuList.map(item => item.current = item.id === 1);
   }
 
   changeCurrent(i) {

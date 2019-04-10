@@ -1,10 +1,4 @@
-$font-stack: Arial, sans-serif;
-$primary-color: #2699FB;
-$case-color: #BCE0FD;
-$bg-color: #F1F9FF;
-$bg2-color: #fff;
-$base-font-size: 14px;
-$base-line-height: 16px;
+@import '../../../common/theme';
 
 input {
   width: 459px;
@@ -20,4 +14,8 @@ input {
       color: $primary-color;
       font-size: $base-font-size;
     }
+}
+
+.mr-sm-2, .mx-sm-2 {
+  margin-right: -0.5rem !important;
 }

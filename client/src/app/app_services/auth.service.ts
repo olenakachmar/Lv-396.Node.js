@@ -9,13 +9,14 @@ import { api } from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
   auth(login: string, password: string) {
     return this.http.post(`${api}auth/login`, {
       login,
       password
-    }).catch(this.handleError);
+    })
+      .catch(this.handleError);
   }
 
   logout(): any {

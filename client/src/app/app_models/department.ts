@@ -1,6 +1,6 @@
-import {User} from "./user";
+import { User } from './user';
 
-export class Department{
+export class Department {
   _id: string;
   name: string;
   employees: User[];
