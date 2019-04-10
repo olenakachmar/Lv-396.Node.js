@@ -29,7 +29,7 @@ export class WrapperComponent implements OnInit {
     private readonly userInfoService: UserService,
     private readonly filtersService: FiltersService,
     private readonly tasksService: TasksService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.filterCssClassPrefix = 'filter-col-';
@@ -58,8 +58,8 @@ export class WrapperComponent implements OnInit {
             id: item._id,
             name: item.name,
             excerpt: item.excerpt,
-            status: {name: item.status, value: this.getStatusValue(item.status)},
-            type: {name: item.type, value: this.getTaskType(item.type)},
+            status: { name: item.status, value: this.getStatusValue(item.status) },
+            type: { name: item.type, value: this.getTaskType(item.type) },
             date: this.convertDate(item.date),
             author: item.author,
             content: item.content
@@ -109,6 +109,6 @@ export class WrapperComponent implements OnInit {
     }
 
     return options.map(opt =>
-      opt.name === 'date' ? {name: opt.name, value: dateValue} : opt);
+      opt.name === 'date' ? { name: opt.name, value: dateValue } : opt);
   };
 }
