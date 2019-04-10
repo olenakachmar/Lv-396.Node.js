@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditMyProfileComponent } from './edit-my-profile.component';
+import { DropdownInfoComponent } from './dropdown-info.component';
 
-describe('EditMyProfileComponent', () => {
-  let component: EditMyProfileComponent;
-  let fixture: ComponentFixture<EditMyProfileComponent>;
+describe('DropdownInfoComponent', () => {
+  let component: DropdownInfoComponent;
+  let fixture: ComponentFixture<DropdownInfoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditMyProfileComponent ]
+      declarations: [ DropdownInfoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditMyProfileComponent);
+    fixture = TestBed.createComponent(DropdownInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -6,11 +6,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FilterUsersByPipe implements PipeTransform {
 
   transform(users: any, filterText: any): any {
-    if(!filterText) {
+    if (!filterText) {
       return users;
     }
-    return users.filter(user => user.firstName.toLowerCase().startsWith(filterText.toLowerCase()) 
-    || user.lastName.toLowerCase().startsWith(filterText.toLowerCase()));
+    return users.filter(user => user.firstName.toLowerCase().startsWith(filterText.toLowerCase())
+      || user.lastName.toLowerCase().startsWith(filterText.toLowerCase()));
   }
-
 }

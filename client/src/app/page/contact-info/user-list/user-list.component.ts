@@ -3,7 +3,6 @@ import { User } from '../../../app_models/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../app_services/user.service';
 
-
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -14,13 +13,13 @@ export class UserListComponent implements OnInit {
   @Input() filterText: string;
   user: User;
 
-    constructor(private router: Router, private route: ActivatedRoute, private userService: UserService) {}
+  constructor(private readonly router: Router, private readonly route: ActivatedRoute, private readonly userService: UserService) {}
 
   ngOnInit() {
   }
 
   selectUser(uid: number) {
-    this.router.navigate(['/profile/my-profile/', uid], {relativeTo: this.route} );
+    this.router.navigate(['/profile/my-profile/', uid], {relativeTo: this.route});
   }
 
 }

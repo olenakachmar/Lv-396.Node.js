@@ -1,3 +1,5 @@
+@import '../../common/theme';
+
 .sidebar-wrapper {
   padding: 0 10px;
 }
@@ -20,7 +22,7 @@
     width: 295px;
     padding: 25px;;
     margin-left: 130px;
-    background-color: #fff;
+    background-color: $bg2-color;
   }
 
   .contact-info {
@@ -63,6 +65,15 @@
     }
   }
 
+  .date_up {
+    :first-child {
+      margin-bottom: 4px;
+    }
+
+    :last-child {
+      margin-top: 16px;
+    }
+  }
 
   .label {
     text-transform: uppercase;
@@ -71,18 +82,16 @@
 
   .info {
     font-size: 30px;
-    margin-top: 4px;
+    margin-top: 16px;
   }
-
 }
 
-
 .button_wrapper {
-  background-color: #2699FB;
+  background-color: $primary-color;
   padding: 10px;
   margin-top: 190px;
   cursor: pointer;
   text-align: center;
   text-transform: uppercase;
-  color: #fff;
+  color: $bg2-color;
 }

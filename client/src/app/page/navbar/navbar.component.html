@@ -1,24 +1,32 @@
 <div class="container-fluid p-0">
   <nav class="navbar navbar-dark bg-primary p-0">
-    <div class="col-3 d-flex">
-      <a href="javascript:void(0)" (click)="isActive = !isActive">
-        <img class="btn-menu" src="assets/img/navbar-menu-desk.png" alt="menu">
-      </a>
-      <a href="javascript:void(0)" [routerLink]="[ '/profile' ]" (click)="homePage(); isActive = false">
-        <img class="logo" src='assets/img/logo-desk.png' alt="main-page">
-      </a>
-      <div class="hide-menu" [ngClass]="{'active': isActive}">
-        <ul class="hide-menu__list">
-          <li class="hide-menu__item" *ngFor="let link of jsonData.menuBurger; let i = index"
-            [ngClass]="{'current': link.isCurrent}" (click)="changeCurrent(i, jsonData.menuBurger)">
-            <a href="javascript:void(0)" [routerLink]="[ link.router ]"
-              (click)="isActive = !isActive">{{ link.title }}</a>
-          </li>
+    <div class="col-5 col-sm-2 col-md-3 col-lg-2 d-flex justify-content-between pr-0 h-100">
+      <div class="navbar-block">
+        <div class="navbar-item">
+          <a href (click)="toggleIsActive()" class="navbar-item__btn-menu">
+            <img src="assets/img/navbar-menu-desk.png" alt="menu">
+          </a>
+        </div>
+        <div class="navbar-item">
+          <a [routerLink]="[ '/profile' ]" (click)="currentPage(); active = false" class="navbar-item__logo">
+            <img src='assets/img/logo-desk.png' alt="logo/main-page">
+          </a>
+        </div>
+      </div>
+      <div class="burger-menu" [ngClass]="{'active': active}">
+        <ul class="burger-menu__list">
+          <ng-container *ngFor="let link of menuList; let i = index">
+            <li class="burger-menu__item" *ngIf="link.burgerMenu && (userType === link.hr || userType === link.dev)"
+              [ngClass]="{'current': link.current}">
+              <a href [routerLink]="[ link.router ]" (click)="active = !active; changeCurrent(i)">{{ link.title }}</a>
+            </li>
+          </ng-container>
         </ul>
+        <app-social-networks class="w-100"></app-social-networks>
       </div>
     </div>
-    <div class="col-5 col-md-4 col-lg-3 d-flex ml-auto">
-      <app-navbar-profile class="user-info" [menuRight]="jsonData.menuRight"></app-navbar-profile>
+    <div class="col-7 col-lg-7 d-flex pl-0 h-100">
+      <app-navbar-profile class="flex-grow-1 h-100"></app-navbar-profile>
     </div>
   </nav>
 </div>

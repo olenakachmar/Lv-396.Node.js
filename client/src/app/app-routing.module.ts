@@ -9,12 +9,16 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { LoggedInGuard } from './app_guards/logged-in.guard';
 import { LoggedOutGuard } from './app_guards/logged-out.guard';
 
-import { CheckDevGuard } from './app_guards/checkDev.guard';
+import { CheckDevGuard } from './app_guards/check-dev.guard';
+import { ForgotPasswordComponent } from './home/common/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './home/common/reset-password/reset-password.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [LoggedOutGuard, CheckDevGuard] },
+  { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [LoggedOutGuard, CheckDevGuard] },
+  { path: 'reset-password', component: ResetPasswordComponent, canActivate: [LoggedOutGuard, CheckDevGuard] },
   {
     path: 'profile',
     component: PageComponent,

@@ -1,10 +1,10 @@
 <div class="main-wrapper">
-	<div class="card" style="width: 27rem;">
+  <div class="card">
     <p class="card-title">LOGIN TO <span class="font-weight-bold">HRMS</span></p>
     <div class="card-body">
-      <form *ngIf="!authService.getUser()" [formGroup]="frm">
+      <form class="container" *ngIf="!authService.getUser()" [formGroup]="frm">
         <div class="form-group">
-          <label for="login">EMAIL:</label>
+          <label for="login">LOGIN:</label>
           <input class="form-control" formControlName="login" name="login" #login>
         </div>
         <div class="alert alert-danger"
@@ -25,7 +25,14 @@
           </div>
         </div>
 
-        <a class="btn btn-primary text-white" (click)="auth(login.value, password.value)">LOGIN</a>
+        <div class="row form-button mt-4">
+          <div class="col-7">
+            <a [routerLink]="[ '/forgot-password' ]" class="btn btn-outline-primary forgotpsw-button font-weight-bold">FORGOT PASSWORD</a>
+          </div>
+          <div class="col-5">
+            <a class="btn btn-primary text-white login-button font-weight-bold" (click)="auth(login.value, password.value)">LOGIN</a>
+          </div>
+        </div>
 
     		<div class="alert alert-danger" *ngIf="hasFailed">
           Invalid login or password.
