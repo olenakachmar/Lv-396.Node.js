@@ -13,6 +13,10 @@ const departmentSchema = new Schema(
       ref: 'User',
       required: true,
     }],
+    position: [{
+      type: String,
+      required: true,
+    }],
   },
 );
 
