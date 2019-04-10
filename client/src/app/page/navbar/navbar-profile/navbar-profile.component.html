@@ -4,9 +4,7 @@
     <span class="notifications__number">({{ notificationsNumber }})</span>
   </div>
   <div class="user-bar__item user-bar__name">
-    <div>
-      <span> {{ user.firstName }} {{ user.lastName }} </span>
-    </div>
+    <a href [routerLink]="[ 'my-profile' ]" (click)="currentPage()"> {{ user.firstName }} {{ user.lastName }} </a>
   </div>
   <div class="user-bar__item btn-group" dropdown>
     <div class="user-bar__btn" dropdownToggle>
@@ -18,7 +16,7 @@
         <li class="user-bar__row" role="menuitem"
           *ngIf="link.rightMenu && (userType === link.hr || userType === link.dev)"
           [ngClass]="{'current': link.current}" (click)="changeCurrent(i)">
-          <a class="user-bar__elem dropdown-item">{{ link.title }}</a>
+          <a href [routerLink]="[ link.router ]" class="user-bar__elem dropdown-item">{{ link.title }}</a>
         </li>
       </ng-container>
     </ul>

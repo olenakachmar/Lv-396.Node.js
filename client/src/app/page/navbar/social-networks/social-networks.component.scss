@@ -5,7 +5,10 @@
 .wrapper {
   display: flex;
   justify-content: flex-start;
-  padding-left: 35px;
+  padding-left: 15px;
+  @include media-breakpoint-up(lg) {
+    padding-left: 35px;
+  }
   &__item {
     height: 4vmin;
     width: 4vmin;
