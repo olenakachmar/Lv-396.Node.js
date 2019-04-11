@@ -1,7 +1,11 @@
 @import '../../common/theme';
 
-.sidebar-wrapper{
-  @media (max-width: 991px){
+main {
+  background-color: white;
+}
+
+.sidebar-wrapper {
+  @media (max-width: 991px) {
     margin-bottom: 40px;
   }
 }

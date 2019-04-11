@@ -7,9 +7,6 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class NavItemsService {
-
-  constructor() { }
-
   getNavList(): Observable<NavItem[]> {
     return of(NAVBAR_LIST);
   }
