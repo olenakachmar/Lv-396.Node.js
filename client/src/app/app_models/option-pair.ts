@@ -5,6 +5,5 @@ export class OptionPair {
               name: string) {
     this._id = _id;
     this.name = name;
-
   }
 }

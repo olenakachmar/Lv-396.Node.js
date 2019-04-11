@@ -21,7 +21,6 @@ export class UserService {
 
   helper = new JwtHelperService();
 
-
   getAll(): Observable<User[]> {
     httpOptions.headers = this.getHeader();
     return this.http.get<User[]>(`${api}users`, httpOptions);
