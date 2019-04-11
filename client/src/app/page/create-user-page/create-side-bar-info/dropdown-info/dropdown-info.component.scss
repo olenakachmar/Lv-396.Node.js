@@ -1,27 +1,35 @@
 @import '../../../../common/theme';
 
-.dropdown-option {
+.btn-group{
   width: 100%;
-  .form-control {
-    height: 50px;
-    width: 100%;
-    font-size: 16px;
-    border-radius: 0;
-    background-color: #fff;
-    color: $primary-color;
-    border: $case-color solid 1px;
-  }
-
-  select {
-    height: 50px;
-    font-size: 14px;
-    border-radius: 0;
-    background-color: #fff;
-    color: $primary-color;
-    border: $case-color solid 1px;
-
-    option{
-      padding: 5px;
-    }
-  }
 }
+
+.btn.dropdown-toggle.option-el{
+  border-radius: 0;
+  border-color: $case-color;
+  color: $primary-color;
+  background: $bg2-color;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  text-align: left;
+  height: 50px;
+}
+
+.dropdown-menu.option-el li a.active:after{
+  position: absolute;
+  display: block;
+  right: 20px;
+  top: 17px;
+  width: 16px;
+  height: 16px;
+  background-size: contain;
+  content: "";
+}
+
+.dropdown-item{
+  position: relative;
+}
+#top{
+  top: -130px;
+}
+

@@ -21,25 +21,22 @@ export class CreateSideBarInfoComponent implements OnInit {
   roles: OptionPair[] = [];
   managers: OptionPair[] = [];
   positionId: string;
-  // id = _id;
+
 
   constructor(private departmentService: DepartmentService, private userService: UserService) {
   }
 
   retrieveSelectedDepartment($event) {
     this.departmentId = $event;
-    console.log(this.departmentId);
     this.positions = this.departments.filter(elem => elem._id == $event)[0].position.map(e => new OptionPair(e, e));
   }
 
   retrieveSelectedTeamleadId($event) {
     this.teamLeadId = $event;
-    console.log(this.teamLeadId);
   }
 
   retrieveSelectedPosition($event) {
     this.positionId = $event;
-    console.log(this.positionId);
   }
 
   ngOnInit() {
@@ -49,15 +46,9 @@ export class CreateSideBarInfoComponent implements OnInit {
     });
 
     this.userService.getAll().subscribe( data => {
-      this. teamLeads = data.map( elem => new OptionPair(elem.id, elem.firstName + ' ' + elem.lastName));
-    });
-
-    this.userService.getAll().subscribe( data => {
-      this. roles = data.map( elem => new OptionPair(elem.id, elem.firstName))
-    });
-
-    this.userService.getAll().subscribe( data => {
-      this. managers = data.map( elem => new OptionPair(elem.id, elem.position))
+      this. teamLeads = data.map( elem => new OptionPair(elem._id, elem.firstName + ' ' + elem.lastName));
+      this. roles = data.map( elem => new OptionPair(elem._id, elem.firstName));
+      this. managers = data.map( elem => new OptionPair(elem._id, elem.position));
     });
   }
 

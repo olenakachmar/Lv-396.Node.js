@@ -1,21 +1,27 @@
-export interface Task {
-  id: number;
-  name: string;
-  excerpt: string;
-  status: { name: string, value: number };
-  type: { name: string, value: number };
-  date: string;
-  author: string;
-  content: string;
+export class TaskStatus {
+  constructor(
+    public name?: string,
+    public value?: number
+  ) {}
 }
 
-export class TaskImpl {
-  id: number;
-  name: string;
-  excerpt: string;
-  status: { name: string, value: number } = {name: '', value: 0};
-  type: { name: string, value: number } = {name: '', value: 0};
-  date: string;
-  author: string;
-  content: string;
+export class TaskType {
+  constructor(
+    public name?: string,
+    public value?: number
+  ) {}
+}
+
+export class Task {
+  constructor(
+    public id?: number,
+    public name?: string,
+    public excerpt?: string,
+    public status: TaskStatus = new TaskStatus(),
+    public type: TaskType = new TaskType(),
+    public date?: string,
+    public author?: string,
+    public content?: string
+  ) {
+  }
 }

@@ -4,7 +4,7 @@ import { User } from '../../app_models/user';
 import { FilterOptions } from '../common/filter-options';
 import { Filter } from '../common/filter';
 import { FiltersService } from '../common/filters.service';
-import { Task, TaskImpl } from '../common/task';
+import { Task } from '../common/task';
 import moment from 'moment';
 import { TasksService } from '../common/tasks.service';
 import { Status, Type } from '../common/statusOptions.enum';
@@ -16,7 +16,7 @@ import { Status, Type } from '../common/statusOptions.enum';
 })
 
 export class WrapperComponent implements OnInit {
-  emptyTask: TaskImpl = new TaskImpl();
+  emptyTask: Task = new Task();
   user: User;
   filters: Filter[];
   tasks: Task[];
