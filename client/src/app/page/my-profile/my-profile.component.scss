@@ -81,6 +81,7 @@
   }
 
   .info {
+    white-space: nowrap;
     font-size: 30px;
     margin-top: 16px;
   }
@@ -95,3 +96,48 @@
   text-transform: uppercase;
   color: $bg2-color;
 }
+
+@media(max-width:767px){
+  @media (min-width: 576px) {
+    .second-row{
+      .contact-info {
+        padding: 0 10px;
+        height: 300px;
+      }
+
+      .date-info {
+        margin-left: 0;
+        height: inherit;
+      }
+      display: inline;
+    }
+
+    .third-row {
+      .button_wrapper {
+        margin-top: 0;
+      }
+    }
+
+  }
+}
+
+@media (max-width: 576px) {
+  .second-row{
+    .contact-info {
+      padding: 0 10px;
+      height: 300px;
+    }
+    .date-info {
+      margin-left: 0;
+      height: inherit;
+    }
+    display: inline;
+  }
+
+  .third-row {
+    .button_wrapper {
+      margin-top: 0;
+    }
+  }
+}
+

@@ -36,7 +36,16 @@ const issueSchema = new Schema(
       ref: 'User',
       required: true,
     },
-    reassigned: { type: String },
+    reassigned: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
+    resolvedByAuthor: {
+      type: Boolean,
+    },
+    resolvedByPerformer: {
+      type: Boolean,
+    },
   },
 );
 

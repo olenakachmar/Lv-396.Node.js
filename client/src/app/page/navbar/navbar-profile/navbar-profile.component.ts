@@ -29,7 +29,7 @@ export class NavbarProfileComponent implements OnInit {
     this.loadUser();
     this.navItemsService.getNavList().subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
-    this.avatar = 'assets/img/userimg.jpg';
+    this.avatar = this.user.photoURL || 'assets/img/photo_hr.jpg' || 'assets/img/userimg.jpg';
     this.notificationsNumber = 7;
   }
 
@@ -41,6 +41,11 @@ export class NavbarProfileComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['/home']);
     return false;
+  }
+
+  currentPage() {
+    event.preventDefault();
+    this.menuList.map(item => item.current = item.id === 'my-profile');
   }
 
   changeCurrent(i) {
