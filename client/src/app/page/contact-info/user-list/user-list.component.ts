@@ -28,7 +28,6 @@ export class UserListComponent implements OnInit {
 
   checkIdParam(): void {
     this.id = this.route.snapshot.paramMap.get('id');
-    console.log(this.id);
   }
 
   loadDepartments() {
