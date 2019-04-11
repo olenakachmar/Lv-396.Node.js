@@ -1,5 +1,5 @@
 export class NavItem {
-  id: number;
+  id: string;
   title: string;
   current: boolean;
   router: string;
