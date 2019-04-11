@@ -1,10 +1,10 @@
-<section class="container page-wrapper">
+<section class="container-fluid page-wrapper">
   <div class="row">
     <div class="col-lg-4 sidebar-wrapper">
       <app-user-bar-info class="user-bar-info" [userinfo]="user"></app-user-bar-info>
     </div>
     <main class="col-lg-8 content-wrapper">
-      <div class="row" *ngIf="user">
+      <div class="row first-row" *ngIf="user">
 
         <div class="col main-user-info">
           <h1>{{ getFullName() }}</h1>
@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="row second-row">
-        <div class="col contact-info">
+        <div class="col-lg-4 col-md-4 contact-info">
           <div class="contact_up">
             <div class="email">
               <div>
@@ -46,7 +46,7 @@
           </div>
         </div>
 
-        <div class="col date-info">
+        <div class="col-lg-5 col-md-5 date-info">
           <div class="date_up">
             <div class="upcoming-review">
               <div>
@@ -79,7 +79,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row third-row">
         <div class="col">
           <div class="button_wrapper" [routerLink]="[ '/profile/edit-my-profile' ]">
             <a class="edit_button">Edit Profile</a>
