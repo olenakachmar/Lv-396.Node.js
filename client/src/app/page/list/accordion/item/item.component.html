@@ -22,12 +22,12 @@
     </div>
     <div class="body-grid">
       <div class="body-from">
-        <span>{{ text.from }}</span>
+        <span i18n>From: </span>
         <span class="bold" (click)="selectUser(user._id)">{{ task.author.firstName }} {{ task.author.lastName }}</span>
       </div>
       <div class="body-resolve">
-        <button type="button" class="btn btn-outline-primary mark-resolve">
-          {{ text.mark }}
+        <button i18n type="submit" (click)="resolveClick()" class="btn btn-outline-primary mark-resolve">
+          MARK AS RESOLVED
         </button>
       </div>
       <app-modal [modalType]="'RE-ASSIGNE'" [task]="task"></app-modal>

@@ -62,7 +62,9 @@ export class WrapperComponent implements OnInit {
             type: { name: item.type, value: this.getTaskType(item.type) },
             date: this.convertDate(item.date),
             author: item.author,
-            content: item.content
+            content: item.content,
+            resolveByAuthor: true,
+            resolveByDev: true,
           }));
       });
   }
