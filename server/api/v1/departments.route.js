@@ -6,7 +6,7 @@ const router = express.Router();
 router.route('/departments')
   .get((req, res) => {
     Departments.find()
-      .populate('employees', ['firstName', 'lastName'])
+      .populate('employees', ['firstName', 'lastName', 'position', 'email', 'phone', 'contacts'])
       .exec((err, departments) => {
         if (err) {
           res.status(500).json({
