@@ -13,16 +13,22 @@ import { Task } from '../common/task';
 })
 export class ModalComponent implements OnInit {
   modalForm: FormGroup;
-  @Input() tasks: any;
+  @Input() task: any;
 
   @Input() item: any;
   @Input() modalType: string;
-
   modalRef: BsModalRef;
   selectedStatus: {};
   users: User[];
   user: User;
   editTask: {};
+  text = {
+    reassign: 'RE-ASSIGN',
+    create: 'CREATE TASK',
+    reassignFrom: 'RE-ASSIGN FROM',
+    from: 'FROM',
+    addTask: 'ADD TASK',
+  };
   constructor(private readonly modalService: BsModalService, private readonly tasksService: TasksService,
               private readonly fb: FormBuilder, private readonly userService: UserService) {
     this.modalForm = fb.group({
@@ -37,15 +43,17 @@ export class ModalComponent implements OnInit {
     {name: 'Low', value: 2}
   ];
 
-  ngOnInit() {
-    this.userService.getAll().subscribe(users => this.users = users);
-    this.userService.getUser().subscribe(user => this.user = user);
+  ngOnInit(): void {
+    this.userService.getAll()
+    .subscribe(users => this.users = users);
+    this.userService.getUser()
+    .subscribe(user => this.user = user);
   }
 
-  openModal(template: TemplateRef<any>) {
+  openModal(template: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(template);
   }
-  onSubmit(event: any, s: any, a: any) {
+  onSubmit(event: any, s: any, a: any): void {
     const newname = event.target.name.value;
     const newcontent = event.target.content.value;
     this.editTask = {
@@ -54,10 +62,14 @@ export class ModalComponent implements OnInit {
       content: newcontent,
       status: s,
       assignTo: `${this.user.firstName} ${this.user.lastName}`,
-      excerpt: this.tasks.excerpt,
-      date: this.tasks.date,
-      author: this.tasks.author
+      excerpt: this.task.excerpt,
+      date: this.task.date,
+      author: this.task.author
     };
     this.tasksService.update(this.editTask);
+  }
+
+  trackElement(index: number, element: any): any {
+    return element ? element.guid : 0;
   }
 }

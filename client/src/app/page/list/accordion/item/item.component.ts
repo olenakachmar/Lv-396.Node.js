@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Injectable } from '@angular/core';
 import { Task } from '../../../common/task';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../../app_services/user.service';
 import { User } from '../../../../app_models/user';
+
 
 @Component({
   selector: 'app-item',
@@ -10,13 +11,20 @@ import { User } from '../../../../app_models/user';
   styleUrls: ['./item.component.scss']
 })
 export class ItemComponent implements OnInit {
-  @Input() tasks: Task[];
+  @Input() task: Task;
   user: User[];
-  constructor(private router: Router, private route: ActivatedRoute, private userService: UserService) {}
+  text = {
+    from: 'From: ',
+    mark: 'MARK AS RESOLVE'
+  };
+  component: Task;
+  item: Task;
 
-  ngOnInit() {}
+  constructor(private readonly router: Router, private readonly route: ActivatedRoute, private readonly userService: UserService) {}
 
-  selectUser(uid: number) {
-    this.router.navigate(['/profile/my-profile/', uid], {relativeTo: this.route} );
+  ngOnInit(): void {}
+
+  selectUser(uid: number): void {
+    this.router.navigate(['/profile/my-profile/', uid], {relativeTo: this.route});
   }
 }
