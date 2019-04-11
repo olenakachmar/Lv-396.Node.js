@@ -10,21 +10,25 @@ import { ResetPasswordService } from '../../../app_services/reset-password.servi
 })
 export class ResetPasswordComponent implements OnInit {
 
-  frm: FormGroup;
-  matchFailed: boolean;
-  resetFailed: boolean;
-  resetSuccess: boolean;
-  getResponse: boolean;
-  message: any;
-  error: string;
-  token: string;
+  private frm: FormGroup;
+  private matchFailed: boolean;
+  private resetFailed: boolean;
+  private resetSuccess: boolean;
+  private getResponse: boolean;
+  private message: any;
+  private error: string;
+  private token: string;
 
-  constructor(private readonly router: Router, private readonly fb: FormBuilder,
-              private resetPassword: ResetPasswordService, private readonly snap: ActivatedRoute) {
+  constructor(private readonly router: Router,
+              private readonly fb: FormBuilder,
+              private resetPassword: ResetPasswordService,
+              private readonly snap: ActivatedRoute) {
+
     this.frm = fb.group({
       password: ['', Validators.required],
       confpassword: ['', Validators.required],
     });
+
     this.matchFailed = false;
     this.getResponse = false;
     this.resetFailed = false;
