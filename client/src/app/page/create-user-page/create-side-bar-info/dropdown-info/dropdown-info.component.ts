@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {OptionPair} from "../../../../app_models/option-pair";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { OptionPair } from '../../../../app_models/option-pair';
 
 @Component({
   selector: 'app-dropdown-info',
@@ -8,20 +8,16 @@ import {OptionPair} from "../../../../app_models/option-pair";
 })
 export class DropdownInfoComponent implements OnInit {
   @Input() pairList: OptionPair[];
-  @Output() selected = new EventEmitter<any>();
-
-
-  constructor() {
-  }
+  @Output() readonly selected = new EventEmitter<any>();
 
   ngOnInit() {
   }
 
-  selectIt = (event) => {
+  selectIt = (event: any) => {
     event.preventDefault();
   };
 
-  selectedElement(event) {
+  selectedElement(event: any) {
     this.selected.emit(event.target.value);
   }
 

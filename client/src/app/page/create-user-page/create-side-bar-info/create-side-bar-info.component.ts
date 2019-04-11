@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IDepartment } from '../../../app_models/department';
 import { DepartmentService } from '../../../app_services/department.service';
 import { OptionPair } from '../../../app_models/option-pair';
-import data from '../../../../assets/data/data.json';
-import { UserService } from "../../../app_services/user.service";
+import { UserService } from '../../../app_services/user.service';
 
 @Component({
   selector: 'app-create-side-bar-info',
@@ -23,32 +22,32 @@ export class CreateSideBarInfoComponent implements OnInit {
   positionId: string;
 
 
-  constructor(private departmentService: DepartmentService, private userService: UserService) {
+  constructor(readonly departmentService: DepartmentService, readonly userService: UserService) {
   }
 
-  retrieveSelectedDepartment($event) {
+  retrieveSelectedDepartment($event: any) {
     this.departmentId = $event;
-    this.positions = this.departments.filter(elem => elem._id == $event)[0].position.map(e => new OptionPair(e, e));
+    this.positions = this.departments.filter(elem => elem._id === $event)[0].position.map(e => new OptionPair(e, e));
   }
 
-  retrieveSelectedTeamleadId($event) {
+  retrieveSelectedTeamleadId($event: any) {
     this.teamLeadId = $event;
   }
 
-  retrieveSelectedPosition($event) {
+  retrieveSelectedPosition($event: any) {
     this.positionId = $event;
   }
 
   ngOnInit() {
     this.departmentService.getAllDepartments().subscribe(data => {
       this.departmentsOptionPair = data.map(o => new OptionPair(o._id, o.name));
-      this.departments=data;
+      this.departments = data;
     });
 
     this.userService.getAll().subscribe( data => {
-      this. teamLeads = data.map( elem => new OptionPair(elem._id, elem.firstName + ' ' + elem.lastName));
-      this. roles = data.map( elem => new OptionPair(elem._id, elem.firstName));
-      this. managers = data.map( elem => new OptionPair(elem._id, elem.position));
+      this.teamLeads = data.map( elem => new OptionPair(elem._id, `${elem.firstName} ${elem.lastName}`));
+      this.roles = data.map( elem => new OptionPair(elem._id, elem.firstName));
+      this.managers = data.map( elem => new OptionPair(elem._id, elem.position));
     });
   }
 
