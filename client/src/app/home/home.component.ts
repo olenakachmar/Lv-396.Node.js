@@ -14,7 +14,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class HomeComponent implements OnInit {
 
   frm: FormGroup;
-  hasFailed = false;
+  hasFailed: boolean;
   showInputErrorslogin = false;
   showInputErrorsPassword = false;
 
@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
       login: ['', Validators.required],
       password: ['', Validators.required]
     });
+    this.hasFailed = false;
   }
 
   auth(login: string, password: string): boolean {
@@ -39,8 +40,8 @@ export class HomeComponent implements OnInit {
       .auth(login, password)
       .subscribe(
         (response) => {
-          localStorage.setItem('token', response['token']);
-          localStorage.setItem('type', helper.decodeToken(response['token']).type);
+          localStorage.setItem('token', response.token);
+          // localStorage.setItem('type', helper.decodeToken(response.token).type);
           this.router.navigate(['/profile']);
         },
         (error) => {

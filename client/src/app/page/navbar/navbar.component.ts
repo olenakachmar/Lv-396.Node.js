@@ -19,30 +19,35 @@ export class NavbarComponent implements OnInit {
   menuList: NavItem[];
   userType: string;
 
-  @HostListener('mouseleave') onMouseLeave() {
+  @HostListener('mouseleave') onMouseLeave(): void {
     this.active = false;
   }
 
-  ngOnInit() {
-    this.navItemsService.getNavList().subscribe(list => this.menuList = list);
+  ngOnInit(): void {
+    this.navItemsService.getNavList()
+      .subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
     this.active = false;
     this.avatar = 'assets/img/navbar-symbol-desk.png';
   }
 
-  currentPage() {
-    event.preventDefault();
+  currentPage(): boolean {
     this.menuList.map(item => item.current = item.id === 'upcoming-tasks');
+    console.log(this.menuList);
+
+    return false;
   }
 
-  changeCurrent(i) {
-    event.preventDefault();
+  changeCurrent(i): boolean {
     this.menuList.map((item, index) => item.current = index === i);
     this.active = false;
+
+    return false;
   }
 
-  toggleIsActive() {
-    event.preventDefault();
+  toggleIsActive(): boolean {
     this.active = !this.active;
+
+    return false;
   }
 }

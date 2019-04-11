@@ -12,7 +12,7 @@ import { User } from '../../../../app_models/user';
 export class ItemComponent implements OnInit {
   @Input() tasks: Task[];
   user: User[];
-  constructor(private router: Router, private route: ActivatedRoute, private userService: UserService) {}
+  constructor(private readonly router: Router, private readonly route: ActivatedRoute, private readonly userService: UserService) {}
 
   ngOnInit() {}
 
