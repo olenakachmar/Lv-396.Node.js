@@ -7,8 +7,6 @@ client/.idea/
 
 .idea
 
-tslint.json
-
 # compiled output
 client/dist
 client/tmp
