@@ -13,9 +13,6 @@ import { User } from '../../../../app_models/user';
 export class ItemComponent implements OnInit {
   @Input() task: Task;
   user: User[];
-  component: Task;
-  item: Task;
-
   constructor(private readonly router: Router, private readonly route: ActivatedRoute, private readonly userService: UserService) {}
 
   ngOnInit(): void {}

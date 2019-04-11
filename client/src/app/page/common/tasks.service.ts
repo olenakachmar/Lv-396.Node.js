@@ -4,6 +4,8 @@ import { Task } from './task';
 import { HttpClient } from '@angular/common/http';
 import { UserService, httpOptions } from '../../app_services/user.service';
 import { api } from '../../../environments/environment';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 @Injectable({
   providedIn: 'root'

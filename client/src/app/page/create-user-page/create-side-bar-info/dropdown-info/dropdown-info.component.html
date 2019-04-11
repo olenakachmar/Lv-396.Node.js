@@ -1,13 +1,13 @@
-<div class="btn-group" dropdown [insideClick]="true">
-  <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-    Button dropdown <span class="caret"></span>
+<div class="btn-group" dropdown placement="bottom right">
+  <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle option-el"
+          aria-controls="dropdown-basic"> Choose
+    <span class="caret"></span>
   </button>
-  <ul *dropdownMenu class="dropdown-menu" role="menu">
-    <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
-    <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
-    <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
-    <li class="divider dropdown-divider"></li>
-    <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a>
+  <ul id="dropdown-basic top" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic"
+      (click)="selectedElement($event)">
+    <li role="menuitem">
+      <a *ngFor="let pair of pairList" class="dropdown-item" href="#" (click)="selectIt($event)"> {{pair.name}}</a>
     </li>
   </ul>
 </div>
+
