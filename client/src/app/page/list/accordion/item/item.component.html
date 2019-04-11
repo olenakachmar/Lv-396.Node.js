@@ -22,11 +22,11 @@
     </div>
     <div class="body-grid">
       <div class="body-from">
-        <span i18n>From: </span>
+        <span>From: </span>
         <span class="bold" (click)="selectUser(user._id)">{{ task.author.firstName }} {{ task.author.lastName }}</span>
       </div>
       <div class="body-resolve">
-        <button i18n type="submit" (click)="resolveClick()" class="btn btn-outline-primary mark-resolve">
+        <button type="submit" (click)="resolveClick()" class="btn btn-outline-primary mark-resolve">
           MARK AS RESOLVED
         </button>
       </div>
