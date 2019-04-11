@@ -11,7 +11,7 @@ import { DepartmentService } from '../../../app_services/department.service';
 export class UserListComponent implements OnInit {
   @Input() users: User[];
   @Input() filterText: string;
-  departmentsName: any;
+  departments: any;
   user: User;
   id: any;
 
@@ -31,11 +31,7 @@ export class UserListComponent implements OnInit {
   }
 
   loadDepartments() {
-    this.departmentService.getAllDepartments().subscribe(department => {
-      for(let i in department) {
-        this.departmentsName = department[i].name;
-      }
-    });
+    this.departmentService.getAllDepartments().subscribe(department => this.departments = department);
   }
 
 }

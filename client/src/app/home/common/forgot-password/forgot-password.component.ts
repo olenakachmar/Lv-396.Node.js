@@ -11,8 +11,8 @@ import { RecoverPasswordService } from '../../../app_services/recover-password.s
 export class ForgotPasswordComponent implements OnInit {
 
   frm: FormGroup;
-  hasFailed = false;
-  getResponse = false;
+  hasFailed: boolean;
+  getResponse: boolean;
   message: any;
   error: string;
 
@@ -20,6 +20,8 @@ export class ForgotPasswordComponent implements OnInit {
     this.frm = fb.group({
       email: ['', Validators.required],
     });
+    this.hasFailed = false;
+    this.getResponse = false;
   }
 
   ngOnInit() {
