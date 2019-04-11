@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit {
 
   currentPage() {
     event.preventDefault();
-    this.menuList.map(item => item.current = item.id === 1);
+    this.menuList.map(item => item.current = item.id === 'upcoming-tasks');
   }
 
   changeCurrent(i) {
