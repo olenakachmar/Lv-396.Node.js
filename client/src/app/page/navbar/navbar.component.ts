@@ -25,20 +25,21 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.navItemsService.getNavList()
-    .subscribe(list => this.menuList = list);
+      .subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
     this.active = false;
     this.avatar = 'assets/img/navbar-symbol-desk.png';
   }
 
   currentPage(): boolean {
-    this.menuList.find(item => item.current = item.id === 'upcoming-tasks');
+    this.menuList.map(item => item.current = item.id === 'upcoming-tasks');
+    console.log(this.menuList);
 
     return false;
   }
 
   changeCurrent(i): boolean {
-    this.menuList.find((item, index) => item.current = index === i);
+    this.menuList.map((item, index) => item.current = index === i);
     this.active = false;
 
     return false;
