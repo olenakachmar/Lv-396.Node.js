@@ -36,6 +36,7 @@ export const routes: Routes = [
   { path: 'my-profile', component: MyProfileComponent },
   { path: 'my-profile/:id', component: MyProfileComponent },
   { path: 'contact-info', component: ContactInfoComponent },
+  { path: 'contact-info/:id', component: ContactInfoComponent },
   { path: 'create-user', component: CreateUserPageComponent }
 ];
 

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-link-to-profile',
@@ -9,9 +10,10 @@ export class LinkToProfileComponent implements OnInit {
   @Input() label: string;
   @Input() info: string;
 
-  constructor() {
+  constructor(private readonly router: Router, private readonly route: ActivatedRoute) {
   }
-  onClickEvent(): boolean {
+  selectDepartment(info): boolean {
+    this.router.navigate(['/profile/contact-info/', info], {relativeTo: this.route});
     return false;
   }
 
