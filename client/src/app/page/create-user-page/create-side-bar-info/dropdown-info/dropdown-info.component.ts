@@ -17,7 +17,7 @@ export class DropdownInfoComponent implements OnInit {
     event.preventDefault();
   };
 
-  selectedElement(event: any) {
+  selectedElement(event: any): void {
     this.selected.emit(event.target.value);
   }
 

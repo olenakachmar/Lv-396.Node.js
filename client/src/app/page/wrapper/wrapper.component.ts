@@ -93,7 +93,7 @@ export class WrapperComponent implements OnInit {
         } : item
       );
     }
-  };
+  }
 
   private readonly setOptions = (isCalendar: boolean, options: FilterOptions[], data: any) => {
     if (isCalendar) {
@@ -101,7 +101,7 @@ export class WrapperComponent implements OnInit {
     }
 
     return options;
-  };
+  }
 
   private readonly updateOptions = (options: any, dateValue: any): [] => {
     if (dateValue === -1) {
@@ -110,5 +110,5 @@ export class WrapperComponent implements OnInit {
 
     return options.map(opt =>
       opt.name === 'date' ? { name: opt.name, value: dateValue } : opt);
-  };
+  }
 }

@@ -27,7 +27,7 @@ export class UserService {
   }
 
   getAllTeamLeads(): Observable<User[]> {
-    return this.http.get<User[]>(`${api}users?position=TEAM_LEAD`, httpOptions)
+    return this.http.get<User[]>(`${api}users?position=TEAM_LEAD`, httpOptions);
   }
 
   getUser(id?: string): Observable<User> {
@@ -46,7 +46,7 @@ export class UserService {
     return this.helper.decodeToken(localStorage.token).type;
   }
 
-  private getHeader = () => {
+  private readonly getHeader = () => {
     return httpOptions.headers.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
   }
 

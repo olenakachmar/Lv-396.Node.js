@@ -1,4 +1,4 @@
-import {IDepartment} from "./department";
+import {IDepartment} from './department';
 
 export  class User {
   _id: any;
