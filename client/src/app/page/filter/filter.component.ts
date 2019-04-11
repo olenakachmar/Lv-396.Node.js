@@ -28,8 +28,4 @@ export class FilterComponent implements OnInit {
     this.getFilter.emit(this.obj);
   };
 
-  trackElement(index: number, element: any): any {
-    return element ? element.guid : 0;
-  }
-
 }
