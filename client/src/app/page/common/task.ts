@@ -7,6 +7,8 @@ export interface Task {
   date: string;
   author: string;
   content: string;
+  resolveByAuthor: boolean;
+  resolveByDev: boolean;
 }
 
 export class TaskImpl {
@@ -18,4 +20,6 @@ export class TaskImpl {
   date: string;
   author: string;
   content: string;
+  resolveByAuthor: boolean;
+  resolveByDev: boolean;
 }

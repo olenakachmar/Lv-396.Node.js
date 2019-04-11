@@ -22,13 +22,6 @@ export class ModalComponent implements OnInit {
   users: User[];
   user: User;
   editTask: {};
-  text = {
-    reassign: 'RE-ASSIGN',
-    create: 'CREATE TASK',
-    reassignFrom: 'RE-ASSIGN FROM',
-    from: 'FROM',
-    addTask: 'ADD TASK',
-  };
   constructor(private readonly modalService: BsModalService, private readonly tasksService: TasksService,
               private readonly fb: FormBuilder, private readonly userService: UserService) {
     this.modalForm = fb.group({
@@ -45,9 +38,9 @@ export class ModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getAll()
-    .subscribe(users => this.users = users);
+      .subscribe(users => this.users = users);
     this.userService.getUser()
-    .subscribe(user => this.user = user);
+      .subscribe(user => this.user = user);
   }
 
   openModal(template: TemplateRef<any>): void {
