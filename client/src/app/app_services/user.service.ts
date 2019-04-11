@@ -23,6 +23,8 @@ export class UserService {
 
 
   getAll(): Observable<User[]> {
+    httpOptions.headers =
+      httpOptions.headers.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
     return this.http.get<User[]>(`${api}users`, httpOptions);
   }
 
@@ -31,11 +33,15 @@ export class UserService {
   }
 
   getUser(id?: string): Observable<User> {
+    httpOptions.headers =
+      httpOptions.headers.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
     const userId = this.getUserId();
     return this.http.get<User>(`${api}users/${id || userId}`, httpOptions);
   }
 
   getUserId(): any {
+    httpOptions.headers =
+      httpOptions.headers.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
     const helper = new JwtHelperService();
     return helper.decodeToken(localStorage.token).id;
   }
