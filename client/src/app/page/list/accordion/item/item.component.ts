@@ -20,10 +20,5 @@ export class ItemComponent implements OnInit {
   selectUser(uid: number): void {
     this.router.navigate(['/profile/my-profile/', uid], {relativeTo: this.route});
   }
-  resolveClick(): void {
-    if (this.task.resolveByAuthor === true && this.task.resolveByDev === true) {
-
-      console.log(this.task);
-     }
   }
 }
