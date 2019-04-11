@@ -68,7 +68,6 @@ export class WrapperComponent implements OnInit {
   }
 
   getStatusValue = (status: string): number => {
-    
     return Status[status];
   }
 
