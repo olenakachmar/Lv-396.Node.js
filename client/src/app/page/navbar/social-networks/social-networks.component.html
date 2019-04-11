@@ -1,15 +1,5 @@
-<div class="item">
-  <a href="#" target="_blank">
-    <img src="assets/img/instagram.svg" alt="instagram" class="icon">
-  </a>
-</div>
-<div class="item">
-  <a href="#" target="_blank">
-    <img src="assets/img/twitter.svg" alt="twitter" class="icon">
-  </a>
-</div>
-<div class="item">
-  <a href="#" target="_blank">
-    <img src="assets/img/facebook.svg" alt="facebook" class="icon">
+<div class="item" *ngFor="let link of links">
+  <a href="{{ link.link }}" target="_blank">
+    <img src="{{ link.icon }}" alt="{{ link.title }}" class="icon">
   </a>
 </div>

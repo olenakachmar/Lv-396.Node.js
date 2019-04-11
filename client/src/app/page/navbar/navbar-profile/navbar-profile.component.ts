@@ -29,7 +29,7 @@ export class NavbarProfileComponent implements OnInit {
     this.loadUser();
     this.navItemsService.getNavList().subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
-    this.avatar = this.user.photoURL || 'assets/img/photo_hr.jpg' || 'assets/img/userimg.jpg';
+    this.avatar = this.user.photoURL || 'assets/img/userimg.jpg';
     this.notificationsNumber = 7;
   }
 
@@ -45,12 +45,12 @@ export class NavbarProfileComponent implements OnInit {
 
   currentPage() {
     event.preventDefault();
-    this.menuList.map(item => item.current = item.id === 'my-profile');
+    this.menuList.find(item => item.current = item.id === 'my-profile');
   }
 
   changeCurrent(i) {
     event.preventDefault();
-    this.menuList.map((item, index) => item.current = index === i);
+    this.menuList.find((item, index) => item.current = index === i);
     if (this.menuList[i].logout) {
       this.logout();
     }
