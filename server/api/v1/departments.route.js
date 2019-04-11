@@ -4,11 +4,14 @@ const Departments = require('../../models/department.model');
 const router = express.Router();
 
 router.route('/departments')
-  .get(async (req, res) => {
-    await Departments.find().populate('employees', ['firstName', 'lastName'])
+  .get((req, res) => {
+    Departments.find()
+      .populate('employees', ['firstName', 'lastName'])
       .exec((err, departments) => {
         if (err) {
-          res.status(500).json({ err });
+          res.status(500).json({
+            err,
+          });
         }
         res.json(departments);
       });
@@ -16,6 +19,7 @@ router.route('/departments')
   .post(async (req, res) => {
     const newDepartment = Departments({
       name: req.body.name,
+      position: req.body.position,
     });
     await newDepartment.save((err) => {
       if (err) {
@@ -28,17 +32,41 @@ router.route('/departments')
         added: 'Successfully',
       });
     });
+  })
+  .delete((req, res) => {
+    const { id } = req.body;
+    Departments.findByIdAndDelete(id)
+      .exec((err, department) => {
+        if (err) {
+          res.status(500).json({
+            err,
+          });
+        } else if (!department) {
+          res.status(404).json({
+            err: 'Department not found',
+          });
+        }
+        res.json({
+          deleted: 'Successfully',
+        });
+      });
   });
-router.get('/departments/:id', async (req, res) => {
+router.get('/departments/:id', (req, res) => {
   const { id } = req.params;
-  await Departments.findById(id, (err, department) => {
-    if (err) {
-      res.status(500).json({ err });
-    } else if (!department) {
-      res.status(404).json({ err: 'Department not found' });
-    }
-    res.json(department);
-  }).populate('employees');
+  Departments.findById(id)
+    .populate('employees', ['firstName', 'lastName'])
+    .exec((err, department) => {
+      if (err) {
+        res.status(500).json({
+          err,
+        });
+      } else if (!department) {
+        res.status(404).json({
+          err: 'Department not found',
+        });
+      }
+      res.json(department);
+    });
 });
 router.post('/departments/users', async (req, res) => {
   const { id } = req.body;
@@ -47,15 +75,21 @@ router.post('/departments/users', async (req, res) => {
   department.employees.forEach((item) => {
     if (item._id.toString() === req.body.employees) {
       added = true;
-      res.status(404).json({ err: 'User already added' });
+      res.status(404).json({
+        err: 'User already added',
+      });
     }
   });
   if (!added) department.employees = [...department.employees, req.body.employees];
   department.save((err) => {
     if (err) {
-      res.status(500).json({ err });
+      res.status(500).json({
+        err,
+      });
     } else if (!req.body.id) {
-      res.status(404).json({ err: 'Department not found' });
+      res.status(404).json({
+        err: 'Department not found',
+      });
     } else if (!req.body.employees) {
       res.json({
         err: 'You should enter id of employee',

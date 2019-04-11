@@ -3,9 +3,7 @@ const passport = require('../../config/passport');
 const User = require('../../models/user.model');
 const config = require('../../config/config');
 
-const {
-  arrKeys,
-} = config;
+const { arrKeys } = config;
 
 const router = express.Router();
 

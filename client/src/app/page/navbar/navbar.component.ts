@@ -30,9 +30,9 @@ export class NavbarComponent implements OnInit {
     this.avatar = 'assets/img/navbar-symbol-desk.png';
   }
 
-  homePage() {
+  currentPage() {
     event.preventDefault();
-    this.menuList.map((item, index) => item.current = index === 0);
+    this.menuList.map(item => item.current = item.id === 'upcoming-tasks');
   }
 
   changeCurrent(i) {
