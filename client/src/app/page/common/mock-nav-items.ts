@@ -20,7 +20,7 @@ export const NAVBAR_LIST: NavItem[] = [
     rightMenu: false,
     burgerMenu: true,
     hr: '',
-    dev: 'dev'
+    dev: 'development'
   },
   {
     id: 'contact-info',
@@ -30,7 +30,7 @@ export const NAVBAR_LIST: NavItem[] = [
     rightMenu: false,
     burgerMenu: true,
     hr: 'hr',
-    dev: 'dev'
+    dev: 'development'
   },
   {
     id: 'log-out',
@@ -40,7 +40,7 @@ export const NAVBAR_LIST: NavItem[] = [
     rightMenu: true,
     burgerMenu: false,
     hr: 'hr',
-    dev: 'dev',
+    dev: 'development',
     logout: true
   },
   {
@@ -48,10 +48,10 @@ export const NAVBAR_LIST: NavItem[] = [
     title: 'my profile',
     current: false,
     router: 'my-profile',
-    rightMenu: false,
-    burgerMenu: true,
+    rightMenu: true,
+    burgerMenu: false,
     hr: 'hr',
-    dev: 'dev'
+    dev: 'development'
   },
   {
     id: 'edit-profile',

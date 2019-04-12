@@ -59,7 +59,6 @@ export class ModalComponent implements OnInit {
       date: this.task.date,
       author: this.task.author
     };
-    this.tasksService.update(this.editTask);
   }
 
   trackElement(index: number, element: any): any {

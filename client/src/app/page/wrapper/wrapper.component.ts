@@ -18,6 +18,7 @@ import { Status, Type } from '../common/statusOptions.enum';
 export class WrapperComponent implements OnInit {
   emptyTask: Task = new Task();
   user: User;
+  task: Task;
   filters: Filter[];
   tasks: Task[];
   filterCssClassPrefix: string;
@@ -50,6 +51,11 @@ export class WrapperComponent implements OnInit {
       .subscribe(filters => this.filters = filters);
   }
 
+  updateResolve(): void {
+    this.tasksService.updateResolvedBy(this.user._id, this.task.id)
+      .subscribe(tasks => this.tasks = tasks);
+  }
+
   getTasks(): void {
     this.tasksService.getTasks()
       .subscribe(tasks => {
@@ -63,9 +69,10 @@ export class WrapperComponent implements OnInit {
             date: this.convertDate(item.date),
             author: item.author,
             content: item.content,
-            resolveByAuthor: true,
-            resolveByDev: true,
-          }));
+            resolvedByAuthor: item.resolvedByAuthor,
+            resolvedByPerformer: item.resolvedByPerformer,
+          }
+          ));
       });
   }
 
