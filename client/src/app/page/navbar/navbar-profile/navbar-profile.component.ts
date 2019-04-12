@@ -15,7 +15,7 @@ import { NavItem } from '../../common/nav-item';
 export class NavbarProfileComponent implements OnInit {
   user = new User();
   avatar: string;
-  notificationsNumber: number;
+  newTasksCount: number;
   menuList: NavItem[];
   userType: string;
 
@@ -25,34 +25,41 @@ export class NavbarProfileComponent implements OnInit {
     private readonly navItemsService: NavItemsService,
     private readonly userService: UserService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadUser();
-    this.navItemsService.getNavList().subscribe(list => this.menuList = list);
+    this.navItemsService.getNavList()
+      .subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
-    this.avatar = this.user.photoURL || 'assets/img/photo_hr.jpg' || 'assets/img/userimg.jpg';
-    this.notificationsNumber = 7;
+    this.avatar = this.user.photoURL || 'assets/img/userimg.jpg';
+    this.newTasksCount = 7;
   }
 
-  loadUser() {
-    this.userService.getUser().subscribe(user => this.user = user);
+  loadUser(): boolean {
+    this.userService.getUser()
+      .subscribe(user => this.user = user);
+
+    return false;
   }
 
   logout(): boolean {
     this.authService.logout();
     this.router.navigate(['/home']);
+
     return false;
   }
 
-  currentPage() {
-    event.preventDefault();
-    this.menuList.map(item => item.current = item.id === 5);
+  currentPage(): boolean {
+    this.menuList.map(item => item.current = item.id === 'my-profile');
+
+    return false;
   }
 
-  changeCurrent(i) {
-    event.preventDefault();
+  changeCurrent(i): boolean {
     this.menuList.map((item, index) => item.current = index === i);
     if (this.menuList[i].logout) {
       this.logout();
     }
+
+    return false;
   }
 }

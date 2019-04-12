@@ -1,14 +1,59 @@
 @import '../../../common/theme';
 
 .create-user-bar-info {
-  display: flex;
-  flex-flow: row wrap;
+  background-color: white;
   width: 100%;
   height: auto;
-  background-color: white;
-  align-items: center;
-  padding: 10px 10px 10px 10px;
+  padding: 15px;
   color: $primary-color;
-  text-align: center;
-  justify-content: space-between;
+  font-family: $font-stack;
+
+  .upload-image{
+    display: flex;
+    padding-bottom: 20px;
+    .photo{
+      flex: 2 70%;
+      max-width: 160px;
+    }
+    .update-photo-button{
+      padding: 10px;
+      align-self: center;
+      flex: 2 30%;
+      height: 48px;
+      border: none;
+      background-color: $primary-color;
+      color: white;
+      text-transform: uppercase;
+      line-height: normal;
+      font-weight: bold;
+      font-size: 12px;
+    }
+  }
+
+  .info-form {
+    padding: 10px 0 10px 0;
+    .input-label {
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      label{
+        margin-bottom: 0;
+      }
+    }
+
+    .form-control {
+      height: 50px;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 0;
+      background-color: #fff;
+      color: $primary-color;
+      border: $case-color solid 1px;
+    }
+
+    ::placeholder{
+      color: $primary-color;
+    }
+  }
 }

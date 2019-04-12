@@ -1,36 +1,36 @@
 <accordion>
   <accordion-group #group>
     <div accordion-heading class="heading-grid">
-      <span>{{ tasks.id }}</span>
+      <span>{{ task.id }}</span>
       <div class="heading-text">
-        <h5>{{ tasks.name }}</h5>
+        <h5>{{ task.name }}</h5>
       </div>
       <div class="heading-excerpt">
-        <p>{{ tasks.excerpt }}</p>
+        <p>{{ task.excerpt }}</p>
       </div>
       <div class="heading-filter">
-        <p>{{ tasks.status.name }}</p>
+        <p>{{ task.status.name }}</p>
       </div>
       <div class="heading-date">
-        <p>{{ tasks.date }}</p>
+        <p>{{ task.date }}</p>
       </div>
       <div class="heading-icon">
       </div>
     </div>
     <div class="body-text">
-      <p>{{ tasks.content }}</p>
+      <p>{{ task.content }}</p>
     </div>
     <div class="body-grid">
       <div class="body-from">
         <span>From: </span>
-        <span class="bold" (click)="selectUser(user._id)">{{ tasks.author.firstName }} {{ tasks.author.lastName }}</span>
+        <span class="bold" (click)="selectUser(user._id)">{{ task.author.firstName }} {{ task.author.lastName }}</span>
       </div>
       <div class="body-resolve">
-        <button type="button" class="btn btn-outline-primary mark-resolve">
-          MARK AS RESOLVE
+        <button type="submit" (click)="resolveClick()" class="btn btn-outline-primary mark-resolve">
+          MARK AS RESOLVED
         </button>
       </div>
-      <app-modal [modalType]="'RE-ASSIGNE'" [tasks]="tasks"></app-modal>
+      <app-modal [modalType]="'RE-ASSIGNE'" [task]="task"></app-modal>
     </div>
   </accordion-group>
 </accordion>

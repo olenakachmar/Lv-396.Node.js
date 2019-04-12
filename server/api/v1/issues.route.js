@@ -115,5 +115,35 @@ router.get('/issues/all', (req, res) => {
       res.json(issues);
     });
 });
+router.put('/issues/resolve', async (req, res) => {
+  const { id } = req.body;
+  const { userId } = req.body;
+  const issues = await Issues.findById(id);
+  let resolve;
+  if (userId === issues.author.toString()) {
+    resolve = { resolvedByAuthor: true };
+  } else if (userId === issues.assignTo.toString()) {
+    resolve = { resolvedByPerformer: true };
+  }
+  Issues.findByIdAndUpdate(id, resolve, { new: true })
+    .exec((err, issue) => {
+      if (err) {
+        res.status(500).json({
+          err,
+        });
+      } else if (!issue) {
+        res.status(404).json({
+          err: 'Issue not found',
+        });
+      } else if (!req.body.userId) {
+        res.json({
+          err: 'You should enter userId',
+        });
+      }
+      res.json({
+        updated: 'Successfully',
+      });
+    });
+});
 
 module.exports = router;
