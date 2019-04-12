@@ -4,7 +4,7 @@ import { User } from '../../app_models/user';
 import { FilterOptions } from '../common/filter-options';
 import { Filter } from '../common/filter';
 import { FiltersService } from '../common/filters.service';
-import { Task, TaskImpl } from '../common/task';
+import { Task } from '../common/task';
 import moment from 'moment';
 import { TasksService } from '../common/tasks.service';
 import { Status, Type } from '../common/statusOptions.enum';
@@ -16,7 +16,7 @@ import { Status, Type } from '../common/statusOptions.enum';
 })
 
 export class WrapperComponent implements OnInit {
-  emptyTask: TaskImpl = new TaskImpl();
+  emptyTask: Task = new Task();
   user: User;
   filters: Filter[];
   tasks: Task[];
@@ -62,7 +62,9 @@ export class WrapperComponent implements OnInit {
             type: { name: item.type, value: this.getTaskType(item.type) },
             date: this.convertDate(item.date),
             author: item.author,
-            content: item.content
+            content: item.content,
+            resolveByAuthor: true,
+            resolveByDev: true,
           }));
       });
   }
@@ -74,9 +76,10 @@ export class WrapperComponent implements OnInit {
   getTaskType = (type: string): number => {
     return Type[type];
   }
-  /* Example: from server date looks like '1554287225073' (in millisecond); after convertDate it looks like '04/03/2019' */
+  /** Example: from server date looks like '1554287225073' (in millisecond); after convertDate it looks like '03/04/2019' */
 
   convertDate(date: number): string {
+    moment.locale('en-gb');
     return moment(date)
       .format('L');
   }
@@ -93,7 +96,7 @@ export class WrapperComponent implements OnInit {
         } : item
       );
     }
-  };
+  }
 
   private readonly setOptions = (isCalendar: boolean, options: FilterOptions[], data: any) => {
     if (isCalendar) {
@@ -101,7 +104,7 @@ export class WrapperComponent implements OnInit {
     }
 
     return options;
-  };
+  }
 
   private readonly updateOptions = (options: any, dateValue: any): [] => {
     if (dateValue === -1) {
@@ -110,5 +113,5 @@ export class WrapperComponent implements OnInit {
 
     return options.map(opt =>
       opt.name === 'date' ? { name: opt.name, value: dateValue } : opt);
-  };
+  }
 }

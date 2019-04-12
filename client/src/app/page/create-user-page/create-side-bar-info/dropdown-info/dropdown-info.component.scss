@@ -1,0 +1,35 @@
+@import '../../../../common/theme';
+
+.btn-group{
+  width: 100%;
+}
+
+.btn.dropdown-toggle.option-el{
+  border-radius: 0;
+  border-color: $case-color;
+  color: $primary-color;
+  background: $bg2-color;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  text-align: left;
+  height: 50px;
+}
+
+.dropdown-menu.option-el li a.active:after{
+  position: absolute;
+  display: block;
+  right: 20px;
+  top: 17px;
+  width: 16px;
+  height: 16px;
+  background-size: contain;
+  content: "";
+}
+
+.dropdown-item{
+  position: relative;
+}
+#top{
+  top: -130px;
+}
+
