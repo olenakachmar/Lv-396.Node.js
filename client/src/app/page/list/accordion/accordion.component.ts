@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-
 import { Task } from '../../common/task';
 
 @Component({
@@ -9,12 +8,10 @@ import { Task } from '../../common/task';
 })
 export class AccordionComponent implements OnInit {
   @Input() tasks: Task[];
-  isContentOpen: boolean;
 
-  constructor() { }
+  ngOnInit(): void {}
 
-  ngOnInit() {
-    this.isContentOpen = false;
+  trackElement(index: number, element: any): any {
+    return element ? element.guid : 0;
   }
-
 }

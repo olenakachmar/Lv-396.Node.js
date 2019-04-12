@@ -9,9 +9,7 @@ import { Task } from '../common/task';
 })
 export class ListComponent implements OnInit {
   @Input() tasks: Task[];
-  constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit(): void {}
 
 }

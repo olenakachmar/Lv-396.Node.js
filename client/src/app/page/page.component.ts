@@ -29,5 +29,5 @@ export class PageComponent implements OnInit {
     }
     return options.map(opt =>
       opt.name === 'date' ? {name: opt.name, value: dateValue} : opt);
-  };
+  }
 }

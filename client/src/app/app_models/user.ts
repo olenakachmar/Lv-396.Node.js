@@ -1,11 +1,13 @@
+import {IDepartment} from './department';
+
 export  class User {
-  id: number;
+  _id: any;
   firstName: string;
   lastName: string;
   position: string;
   manager?: any;
   teamlead: object;
-  department?: any;
+  department?: IDepartment;
   email: string;
   phone: string;
   contacts: object;

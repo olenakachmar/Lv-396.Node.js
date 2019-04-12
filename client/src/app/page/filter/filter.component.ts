@@ -26,6 +26,6 @@ export class FilterComponent implements OnInit {
       optionId: event
     };
     this.getFilter.emit(this.obj);
-  };
+  }
 
 }
