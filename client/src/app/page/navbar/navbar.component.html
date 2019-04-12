@@ -8,12 +8,12 @@
           </a>
         </div>
         <div class="navbar-item">
-          <a [routerLink]="[ '/profile' ]" (click)="currentPage(); active = false" class="navbar-item__logo">
+          <a [routerLink]="[ '/profile' ]" (click)="currentPage('/profile'); active = false" class="navbar-item__logo">
             <img src='assets/img/logo-desk.png' alt="logo/main-page">
           </a>
         </div>
       </div>
-      <div class="burger-menu" [ngClass]="{'active': active}">
+      <div class="burger-menu collapse" [ngClass]="{'active': active}" (clickOutside)="test()">
         <ul class="burger-menu__list">
           <ng-container *ngFor="let link of menuList; let i = index">
             <li class="burger-menu__item" *ngIf="link.burgerMenu && (userType === link.hr || userType === link.dev)"

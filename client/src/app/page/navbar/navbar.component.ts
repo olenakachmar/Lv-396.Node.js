@@ -27,13 +27,12 @@ export class NavbarComponent implements OnInit {
     this.navItemsService.getNavList()
       .subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
-    this.active = false;
     this.avatar = 'assets/img/navbar-symbol-desk.png';
   }
 
-  currentPage(): boolean {
-    this.menuList.map(item => item.current = item.id === 'upcoming-tasks');
-    console.log(this.menuList);
+  currentPage(currentRouter): boolean {
+    this.menuList.map(item => item.current = item.router === currentRouter);
+    this.active = false;
 
     return false;
   }
@@ -49,5 +48,9 @@ export class NavbarComponent implements OnInit {
     this.active = !this.active;
 
     return false;
+  }
+
+  test(): void {
+    console.log('!!!!!!!!!!')
   }
 }
