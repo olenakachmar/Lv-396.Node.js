@@ -16,10 +16,6 @@ export class TasksService {
     return this.http.get<Task[]>(`${api}/issues/all`, httpOptions);
   }
 
-  handleError(err: Response | any): any {
-    return throwError(err);
-  }
-
   updateResolvedBy(userId: string, taskId: number): any {
     const body = {
       userId,
