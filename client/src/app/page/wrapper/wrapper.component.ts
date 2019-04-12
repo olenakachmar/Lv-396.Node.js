@@ -62,7 +62,9 @@ export class WrapperComponent implements OnInit {
             type: { name: item.type, value: this.getTaskType(item.type) },
             date: this.convertDate(item.date),
             author: item.author,
-            content: item.content
+            content: item.content,
+            resolveByAuthor: true,
+            resolveByDev: true,
           }));
       });
   }
@@ -74,9 +76,10 @@ export class WrapperComponent implements OnInit {
   getTaskType = (type: string): number => {
     return Type[type];
   }
-  /* Example: from server date looks like '1554287225073' (in millisecond); after convertDate it looks like '04/03/2019' */
+  /** Example: from server date looks like '1554287225073' (in millisecond); after convertDate it looks like '03/04/2019' */
 
   convertDate(date: number): string {
+    moment.locale('en-gb');
     return moment(date)
       .format('L');
   }
