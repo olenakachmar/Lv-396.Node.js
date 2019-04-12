@@ -8,14 +8,14 @@
   color: $primary-color;
   font-family: $font-stack;
 
-  .upload-image{
+  .upload-image {
     display: flex;
     padding-bottom: 20px;
-    .photo{
+    .photo {
       flex: 2 70%;
       max-width: 160px;
     }
-    .update-photo-button{
+    .update-photo-button {
       padding: 10px;
       align-self: center;
       flex: 2 30%;
@@ -37,7 +37,7 @@
       font-weight: bold;
       text-transform: uppercase;
       margin-bottom: 5px;
-      label{
+      label {
         margin-bottom: 0;
       }
     }
@@ -52,8 +52,30 @@
       border: $case-color solid 1px;
     }
 
-    ::placeholder{
+    ::placeholder {
       color: $primary-color;
+    }
+  }
+}
+
+//@media (max-width: 991px) {
+//  @media (min-width: 600px) {
+//    .fillInfo {
+//      -moz-column-count: 2;
+//      -moz-column-gap: 20px;
+//      -webkit-column-count: 2;
+//      -webkit-column-gap: 20px;
+//      column-count: 2;
+//      column-gap: 20px;
+//    }
+//  }
+//}
+@media (max-width: 991px) {
+  @media (min-width: 600px) {
+    .row {
+      display: grid;
+      grid-column-gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 }
