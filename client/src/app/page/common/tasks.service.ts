@@ -24,5 +24,19 @@ export class TasksService {
 
     return this.http.put<Task>(`${api}/issues/resolve`, body, httpOptions);
   }
+
+  editTask(id, name, excerpt, status, content, assignTo, reassigned): any {
+    const body = {
+      id,
+      name,
+      excerpt,
+      status,
+      content,
+      assignTo,
+      reassigned,
+    };
+
+    return this.http.put<Task>(`${api}/issues`, body, httpOptions);
+  }
 }
 
