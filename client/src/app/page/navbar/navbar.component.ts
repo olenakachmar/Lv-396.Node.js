@@ -49,8 +49,4 @@ export class NavbarComponent implements OnInit {
 
     return false;
   }
-
-  test(): void {
-    console.log('!!!!!!!!!!')
-  }
 }

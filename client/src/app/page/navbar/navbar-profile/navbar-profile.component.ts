@@ -62,6 +62,7 @@ export class NavbarProfileComponent implements OnInit {
       this.menuList[i].current = false;
       this.logout();
     }
+
     return false;
   }
 }

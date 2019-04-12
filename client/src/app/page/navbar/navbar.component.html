@@ -13,7 +13,7 @@
           </a>
         </div>
       </div>
-      <div class="burger-menu collapse" [ngClass]="{'active': active}" (clickOutside)="test()">
+      <div class="burger-menu" [ngClass]="{'active': active}">
         <ul class="burger-menu__list">
           <ng-container *ngFor="let link of menuList; let i = index">
             <li class="burger-menu__item" *ngIf="link.burgerMenu && (userType === link.hr || userType === link.dev)"
