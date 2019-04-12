@@ -12,7 +12,7 @@ export class CheckDevGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       const userLoggedIn = this.authService.getUser();
-      if (userLoggedIn && userLoggedIn === 'hr') {
+      if (userLoggedIn && userLoggedIn === 'hr' || userLoggedIn && userLoggedIn === 'development') {
         this.router.navigate(['/profile']);
         return false;
       }
