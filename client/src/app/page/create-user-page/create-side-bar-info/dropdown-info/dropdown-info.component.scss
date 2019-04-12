@@ -1,0 +1,38 @@
+@import '../../../../common/theme';
+
+.btn.dropdown-toggle.option-el {
+  border-radius: 0;
+  border-color: $case-color;
+  color: $primary-color;
+  background: $bg2-color;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  text-align: left;
+  height: 50px;
+}
+
+.btn-group {
+  display: block;
+}
+.btn-group button {
+  width:100%;
+}
+.dropdown-menu {
+  position: relative;
+  left: 0;
+  right: auto;
+  float: none;
+  margin: -1px;
+  top: 100%;
+  bottom: auto;
+  background-color: #fff;
+  color: $primary-color;
+  border: $case-color solid 1px;
+}
+.dropdown-item{
+  margin: 5px;
+  color: $primary-color;
+  font-family: $font-stack;
+}
+
+

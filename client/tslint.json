@@ -4,6 +4,7 @@
     "angular-tslint-rules"
   ],
   "rulesDirectory": [
+    "codelyzer",
     "./node_modules/codelyzer"
   ],
   "rules": {
@@ -14,6 +15,11 @@
     "deprecation": {
       "severity": "warn"
     },
+    "i18n": [
+      false,
+      "check-id",
+      "check-text"
+    ],
     "import-blacklist": [
       true,
       "rxjs/Rx"
@@ -24,10 +30,7 @@
       true,
       140
     ],
-    "member-access": [
-      true,
-      "no-public"
-    ],
+    "member-access": false,
     "member-ordering": [
       true,
       {

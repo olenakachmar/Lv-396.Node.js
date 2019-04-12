@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
-import { Department } from '../app_models/department';
+import { Observable } from 'rxjs/Observable';
+import { IDepartment } from '../app_models/department';
 import { HttpClient } from '@angular/common/http';
-import { httpOptions } from '../app_services/user.service';
+import { httpOptions } from './user.service';
 import { api } from '../../environments/environment';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class DepartmentService {
 
   constructor(private readonly http: HttpClient) { }
 
-  getAllDepartments(): Observable<Department> {
-    return this.http.get<Department>(`${api}/departments/`, httpOptions);
+  getAllDepartments(): Observable<IDepartment[]> {
+    return this.http.get<IDepartment[]>(`${api}/departments/`, httpOptions);
   }
 }
