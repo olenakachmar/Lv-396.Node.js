@@ -36,7 +36,7 @@
         <input type="text" disabled value="{{ task.date }}" class="btn btn-outline-primary" name="date">
       </div>
       <div class="text-grid">
-        <textarea type="text" class="form-control" aria-label="With textarea" value="{{task.content}}" name="content" formControlName="content" #content></textarea>
+        <textarea class="form-control" aria-label="With textarea" value="{{task.content}}" name="content" formControlName="content" #content></textarea>
       </div>
       <div *ngIf="modalType === 'RE-ASSIGNE'" class="fromName-grid">
         <div class="input-group mb-3">
