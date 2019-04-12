@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Injectable } from '@angular/core';
-import { Task, TaskImpl } from '../../../common/task';
+import { Task } from '../../../common/task';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../../app_services/user.service';
 import { User } from '../../../../app_models/user';
@@ -19,6 +19,5 @@ export class ItemComponent implements OnInit {
 
   selectUser(uid: number): void {
     this.router.navigate(['/profile/my-profile/', uid], {relativeTo: this.route});
-  }
   }
 }
