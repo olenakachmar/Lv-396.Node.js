@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Task } from './task';
 import { HttpClient } from '@angular/common/http';
-import { UserService, httpOptions } from '../../app_services/user.service';
+import { httpOptions } from '../../app_services/user.service';
 import { api } from '../../../environments/environment';
 
 @Injectable({
@@ -10,9 +10,7 @@ import { api } from '../../../environments/environment';
 })
 
 export class TasksService {
-  statusOptions: { Status: {}, Type: {} };
-
-  constructor(private readonly http: HttpClient, private readonly userService: UserService) {}
+  constructor(private readonly http: HttpClient) {}
 
   getTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(`${api}/issues/all`, httpOptions);
