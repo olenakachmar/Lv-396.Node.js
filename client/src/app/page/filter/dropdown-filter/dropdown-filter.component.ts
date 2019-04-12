@@ -10,7 +10,6 @@ import { DropDownService } from '../../common/drop-down.service';
 })
 export class DropdownFilterComponent implements OnInit {
   @Input() filterItem: Filter;
-  @Input() filterItemWithoutDefault: Filter;
   @Input() cssClassName: string;
   @Output() readonly filterVal = new EventEmitter();
   @ViewChild('dropDownWrapper') dropDownWrapperView: ElementRef;
