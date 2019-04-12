@@ -42,6 +42,7 @@ export class HomeComponent implements OnInit {
         (response: any) => {
           localStorage.setItem('token', response.token);
           localStorage.setItem('type', helper.decodeToken(response.token).type);
+          console.log(helper.decodeToken(response.token).type);
           this.router.navigate(['/profile']);
         },
         (error) => {
