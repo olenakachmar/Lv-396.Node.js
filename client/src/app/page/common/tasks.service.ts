@@ -24,8 +24,19 @@ export class TasksService {
     return throwError(err);
   }
 
-  update(task: any): any {
-    return this.http.put(`${api}/issues`, task, httpOptions);
+  // update(task: any): any {
+  //   return this.http.put(`${api}/issues`, task, httpOptions);
+  // }
+
+
+
+  updateResolvedBy(userId: string, taskId: number): any {
+    const body = {
+      userId,
+      id: taskId,
+    };
+
+    return this.http.put<Task>(`${api}/issues/resolve`, body, httpOptions);
   }
 }
 

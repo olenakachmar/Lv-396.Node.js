@@ -39,9 +39,9 @@ export class HomeComponent implements OnInit {
     this.authService
       .auth(login, password)
       .subscribe(
-        (response) => {
+        (response: any) => {
           localStorage.setItem('token', response.token);
-          // localStorage.setItem('type', helper.decodeToken(response.token).type);
+          localStorage.setItem('type', helper.decodeToken(response.token).type);
           this.router.navigate(['/profile']);
         },
         (error) => {
