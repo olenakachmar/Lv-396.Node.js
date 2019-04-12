@@ -34,7 +34,7 @@ export class ItemComponent implements OnInit {
 
   resolveClick(): void {
     this.tasksService.updateResolvedBy(this.user._id, this.task.id)
-      .subscribe(item => console.log(item));
+      .subscribe(item => item);
   }
 }
 
