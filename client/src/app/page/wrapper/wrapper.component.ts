@@ -76,17 +76,16 @@ export class WrapperComponent implements OnInit {
       });
   }
 
-  getStatusValue = (status: string): number => {
-    return Status[status];
-  }
+  getStatusValue = (status: string): number =>
+    Status[status];
 
-  getTaskType = (type: string): number => {
-    return Type[type];
-  }
+  getTaskType = (type: string): number =>
+    Type[type];
+
   /** Example: from server date looks like '1554287225073' (in millisecond); after convertDate it looks like '03/04/2019' */
-
   convertDate(date: number): string {
     moment.locale('en-gb');
+
     return moment(date)
       .format('L');
   }
@@ -103,7 +102,7 @@ export class WrapperComponent implements OnInit {
         } : item
       );
     }
-  }
+  };
 
   private readonly setOptions = (isCalendar: boolean, options: FilterOptions[], data: any) => {
     if (isCalendar) {
@@ -111,7 +110,7 @@ export class WrapperComponent implements OnInit {
     }
 
     return options;
-  }
+  };
 
   private readonly updateOptions = (options: any, dateValue: any): [] => {
     if (dateValue === -1) {
@@ -120,5 +119,5 @@ export class WrapperComponent implements OnInit {
 
     return options.map(opt =>
       opt.name === 'date' ? { name: opt.name, value: dateValue } : opt);
-  }
+  };
 }
