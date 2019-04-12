@@ -1,8 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Injectable } from '@angular/core';
 import { Task } from '../../../common/task';
+import { TasksService } from '../../../common/tasks.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../../app_services/user.service';
 import { User } from '../../../../app_models/user';
+
 
 @Component({
   selector: 'app-item',
@@ -10,13 +12,29 @@ import { User } from '../../../../app_models/user';
   styleUrls: ['./item.component.scss']
 })
 export class ItemComponent implements OnInit {
-  @Input() tasks: Task[];
-  user: User[];
-  constructor(private router: Router, private route: ActivatedRoute, private userService: UserService) {}
+  @Input() task: Task;
+  user = new User();
+  constructor(private readonly router: Router, private readonly route: ActivatedRoute,
+              private readonly userService: UserService, private readonly tasksService: TasksService) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    this.loadUser();
+  }
 
-  selectUser(uid: number) {
-    this.router.navigate(['/profile/my-profile/', uid], {relativeTo: this.route} );
+  loadUser(): boolean {
+    this.userService.getUser()
+      .subscribe(user => this.user = user);
+
+    return false;
+  }
+
+  selectUser(uid: number): void {
+    this.router.navigate(['/profile/my-profile/', uid], {relativeTo: this.route});
+  }
+
+  resolveClick(): void {
+    this.tasksService.updateResolvedBy(this.user._id, this.task.id)
+      .subscribe(item => item);
   }
 }
+

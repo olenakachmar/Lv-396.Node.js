@@ -12,7 +12,7 @@ export class LinkToProfileComponent implements OnInit {
 
   constructor(private readonly router: Router, private readonly route: ActivatedRoute) {
   }
-  selectDepartment(info): boolean {
+  selectOp(info): boolean {
     this.router.navigate(['/profile/contact-info/', info], {relativeTo: this.route});
     return false;
   }
