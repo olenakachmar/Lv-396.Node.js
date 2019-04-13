@@ -59,7 +59,6 @@ export class NavbarProfileComponent implements OnInit {
     if (this.menuList[i].logout) {
       this.logout();
     }
-
     return false;
   }
 }

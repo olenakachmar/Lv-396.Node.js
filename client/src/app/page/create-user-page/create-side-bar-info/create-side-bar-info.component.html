@@ -1,9 +1,9 @@
-<div class="create-user-bar-info">
-  <div class="upload-image">
-    <app-user-image class="photo"></app-user-image>
-    <button class="update-photo-button">Update Image</button>
-  </div>
-  <div class="fillInfo">
+<div class="create-user-bar-info row">
+  <div class="column">
+    <div class="upload-image">
+      <app-user-image class="photo"></app-user-image>
+      <button class="update-photo-button">Update Image</button>
+    </div>
     <div class="info-form">
       <div class="input-label"><label for="first-name">First Name</label></div>
       <input class="form-control" type="text" placeholder="Name" id='first-name' aria-label="Username">
@@ -19,6 +19,8 @@
                          (selected)="retrieveSelectedDepartment($event)">
       </app-dropdown-info>
     </div>
+  </div>
+  <div class="column">
     <div class="info-form">
       <div class="input-label"><label for="position">Position</label></div>
       <app-dropdown-info class="info-input-area" id="position" disabled [pairList]='positions'
@@ -39,7 +41,6 @@
     <div class="info-form">
       <div class="input-label"><label for="manager">Manager</label></div>
       <app-dropdown-info class="info-input-area" id="manager" [pairList]='managers'>
-
       </app-dropdown-info>
     </div>
   </div>
