@@ -33,7 +33,6 @@ export class NavbarComponent implements OnInit {
 
   currentPage(): boolean {
     this.menuList.map(item => item.current = item.id === 'upcoming-tasks');
-    console.log(this.menuList);
 
     return false;
   }

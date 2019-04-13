@@ -1,3 +1,12 @@
-<div class="d-flex justify-content-end">
+<div class="d-flex justify-content-end" *ngIf="!getDepartmentId()">
   <input class="form-control mr-sm-2" [(ngModel)]="filterText" (ngModelChange)="onGetFilterText()" type="search" placeholder="Search" aria-label="Search">
+</div>
+
+<div class="row" *ngIf="getDepartmentId()">
+  <div class="col-sm-12 col-md-6 d-flex justify-content-start">
+    <p>SEARCH RESULTS FOR<br> <span>{{ getDepartmentId() }}</span></p>
+  </div>
+  <div class="col-sm-12 col-md-6 d-flex justify-content-end">
+    <input class="form-control mr-sm-2" [(ngModel)]="filterText" (ngModelChange)="onGetFilterText()" type="search" placeholder="Search" aria-label="Search">
+  </div>
 </div>
