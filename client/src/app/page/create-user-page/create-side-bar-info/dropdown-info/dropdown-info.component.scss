@@ -34,5 +34,12 @@
   color: $primary-color;
   font-family: $font-stack;
 }
+@media (max-width: 991px) {
+  @media (min-width: 600px) {
+    .dropdown-menu {
+      position: absolute;
+    }
+  }
+}
 
 
