@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
   @HostListener('mouseleave') onMouseLeave(): void {
     this.activeFalse();
   }
-  @HostListener('window:scroll') onscroll(): void {
+  @HostListener('window:scroll') onScroll(): void {
     this.activeFalse();
   }
 
