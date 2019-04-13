@@ -20,33 +20,41 @@ export class NavbarComponent implements OnInit {
   userType: string;
 
   @HostListener('mouseleave') onMouseLeave(): void {
-    this.active = false;
+    this.activeFalse();
+  }
+  @HostListener('window:scroll') onScroll(): void {
+    this.activeFalse();
   }
 
   ngOnInit(): void {
     this.navItemsService.getNavList()
       .subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
-    this.active = false;
     this.avatar = 'assets/img/navbar-symbol-desk.png';
   }
 
-  currentPage(): boolean {
-    this.menuList.map(item => item.current = item.id === 'upcoming-tasks');
-    console.log(this.menuList);
+  currentByRout(currentRouter): boolean {
+    this.navItemsService.currentRouter(currentRouter);
+    this.activeFalse();
 
     return false;
   }
 
-  changeCurrent(i): boolean {
-    this.menuList.map((item, index) => item.current = index === i);
-    this.active = false;
+  currentByIndex(i): boolean {
+    this.navItemsService.currentIndex(i);
+    this.activeFalse();
 
     return false;
   }
 
   toggleIsActive(): boolean {
     this.active = !this.active;
+
+    return false;
+  }
+
+  activeFalse(): boolean {
+    this.active = false;
 
     return false;
   }

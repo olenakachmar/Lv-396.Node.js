@@ -18,6 +18,7 @@ export class NavbarProfileComponent implements OnInit {
   newTasksCount: number;
   menuList: NavItem[];
   userType: string;
+  active: boolean;
 
   constructor(
     private readonly authService: AuthService,
@@ -30,15 +31,15 @@ export class NavbarProfileComponent implements OnInit {
     this.navItemsService.getNavList()
       .subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
-    this.avatar = this.user.photoURL || 'assets/img/userimg.jpg';
     this.newTasksCount = 7;
   }
 
-  loadUser(): boolean {
+  loadUser(): void {
     this.userService.getUser()
-      .subscribe(user => this.user = user);
-
-    return false;
+      .subscribe(user => {
+        this.avatar = user.photoURL || 'assets/img/userimg.jpg';
+        this.user = user;
+      });
   }
 
   logout(): boolean {
@@ -48,17 +49,20 @@ export class NavbarProfileComponent implements OnInit {
     return false;
   }
 
-  currentPage(): boolean {
-    this.menuList.map(item => item.current = item.id === 'my-profile');
+  currentByRout(currentRouter): boolean {
+    this.navItemsService.currentRouter(currentRouter);
+    this.active = false;
 
     return false;
   }
 
-  changeCurrent(i): boolean {
-    this.menuList.map((item, index) => item.current = index === i);
+  currentByIndex(i): boolean {
+    this.navItemsService.currentIndex(i);
     if (this.menuList[i].logout) {
+      this.menuList[i].current = false;
       this.logout();
     }
+
     return false;
   }
 }
