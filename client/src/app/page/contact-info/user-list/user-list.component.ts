@@ -26,12 +26,11 @@ export class UserListComponent implements OnInit {
     this.router.navigate(['/profile/my-profile/', uid], {relativeTo: this.route});
   }
 
-  loadAllUsers(): void {
+  loadAllUsers(): any {
     if(this.getDepartmentId()) {
-      this.getAllEmployees();
+      return this.getAllEmployees();
     } 
-    if(!this.getDepartmentId())
-      this.getAllUsers(); 
+    return this.getAllUsers(); 
   }
 
   getDepartmentId(): string {
@@ -44,7 +43,7 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  getAllUsers(): any {
+  getAllUsers()  {
     this.userService.getAll().subscribe(users => this.users = users );
   }
 
