@@ -49,15 +49,15 @@ export class NavbarProfileComponent implements OnInit {
     return false;
   }
 
-  currentPage(currentRouter): boolean {
-    this.menuList.map(item => item.current = item.router === currentRouter);
+  currentByRout(currentRouter): boolean {
+    this.navItemsService.currentRouter(currentRouter);
     this.active = false;
 
     return false;
   }
 
-  changeCurrent(i): boolean {
-    this.menuList.map((item, index) => item.current = index === i);
+  currentByIndex(i): boolean {
+    this.navItemsService.currentIndex(i);
     if (this.menuList[i].logout) {
       this.menuList[i].current = false;
       this.logout();

@@ -20,7 +20,10 @@ export class NavbarComponent implements OnInit {
   userType: string;
 
   @HostListener('mouseleave') onMouseLeave(): void {
-    this.active = false;
+    this.activeFalse();
+  }
+  @HostListener('window:scroll') onscroll(): void {
+    this.activeFalse();
   }
 
   ngOnInit(): void {
@@ -30,15 +33,15 @@ export class NavbarComponent implements OnInit {
     this.avatar = 'assets/img/navbar-symbol-desk.png';
   }
 
-  currentPage(currentRouter): boolean {
-    this.menuList.map(item => item.current = item.router === currentRouter);
+  currentByRout(currentRouter): boolean {
+    this.navItemsService.currentRouter(currentRouter);
     this.active = false;
 
     return false;
   }
 
-  changeCurrent(i): boolean {
-    this.menuList.map((item, index) => item.current = index === i);
+  currentByIndex(i): boolean {
+    this.navItemsService.currentIndex(i);
     this.active = false;
 
     return false;
@@ -46,6 +49,12 @@ export class NavbarComponent implements OnInit {
 
   toggleIsActive(): boolean {
     this.active = !this.active;
+
+    return false;
+  }
+
+  activeFalse(): boolean {
+    this.active = false;
 
     return false;
   }
