@@ -35,14 +35,14 @@ export class NavbarComponent implements OnInit {
 
   currentByRout(currentRouter): boolean {
     this.navItemsService.currentRouter(currentRouter);
-    this.active = false;
+    this.activeFalse();
 
     return false;
   }
 
   currentByIndex(i): boolean {
     this.navItemsService.currentIndex(i);
-    this.active = false;
+    this.activeFalse();
 
     return false;
   }
