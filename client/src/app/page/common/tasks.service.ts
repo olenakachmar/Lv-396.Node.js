@@ -1,31 +1,43 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Task } from './task';
 import { HttpClient } from '@angular/common/http';
-import { UserService, httpOptions } from '../../app_services/user.service';
+import { httpOptions } from '../../app_services/user.service';
 import { api } from '../../../environments/environment';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class TasksService {
-  statusOptions: { Status: {}, Type: {} };
-
-  constructor(private readonly http: HttpClient, private readonly userService: UserService) {}
+  constructor(private readonly http: HttpClient) {}
 
   getTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(`${api}/issues/all`, httpOptions);
   }
 
-  handleError(err: Response | any): any {
-    return throwError(err);
+  public updateResolvedBy(userId: string, taskId: number): any {
+    const body = {
+      userId,
+      id: taskId,
+    };
+
+    return this.http.put<Task>(`${api}/issues/resolve`, body, httpOptions);
   }
 
-  update(task: any): any {
-    return this.http.put(`${api}/issues`, task, httpOptions);
+  public editTask(id: string, name: string, excerpt: string, status: any,
+                  content: string, assignTo: string, reassigned: string): any {
+    const body = {
+      id,
+      name,
+      excerpt,
+      status,
+      content,
+      assignTo,
+      reassigned,
+    };
+
+    return this.http.put<Task>(`${api}/issues`, body, httpOptions);
   }
 }
 
