@@ -12,11 +12,15 @@ export class UserFilterComponent implements OnInit {
   filterText: string;
   @Output() getFilterText = new EventEmitter;
   @Input() users: User[];
+  message: string;
   id: any;
 
-  constructor(private readonly route: ActivatedRoute) { }
+  constructor(private readonly route: ActivatedRoute) {
+    this.message = '';
+  }
 
   getDepartmentId(): string {
+    this.message = this.id;
     return this.id = this.route.snapshot.paramMap.get('id');
   }
 

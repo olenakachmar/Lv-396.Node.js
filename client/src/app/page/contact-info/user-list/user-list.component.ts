@@ -22,7 +22,7 @@ export class UserListComponent implements OnInit {
     this.loadAllUsers();
   }
 
-  selectUser(uid: any) {
+  selectUser(uid: number) {
     this.router.navigate(['/profile/my-profile/', uid], {relativeTo: this.route});
   }
 
