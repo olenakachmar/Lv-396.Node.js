@@ -16,46 +16,46 @@
     </button>
   </div>
   <div class="modal-body" >
-    <form [formGroup]="modalForm" (submit)="onSubmit($event, s.value, a.value)">
+    <form [formGroup]="modalForm">
     <div class="modal-grid">
       <div class="name-grid">
-        <input class="no-visible" type="text" value="{{tasks.id}}" name="id">
-        <input class="form-control" type="text" name="name" value="{{tasks.name}}" formControlName="name" #name>
+        <input class="no-visible" type="text" value="{{task.id}}" name="id">
+        <input class="form-control" type="text" name="name" value="{{task.name}}" formControlName="name" #name>
       </div>
       <div class="filter-grid">
-        <select class="form-control" #s >
-          <option selected>{{ tasks.status.name }}</option>
-        </select>
+        <app-dropdown-filter class="filter-item-container"
+                       [filterItem]="theFilter"
+                       (filterVal)="sendFilterVal(filterItem.id, $event)"></app-dropdown-filter>
       </div>
       <div class="btn-group assign-grid" dropdown>
         <select class="form-control" #a>
-          <option *ngFor="let user of users" value="{{user._id}}"> {{ user.firstName }} {{ user.lastName }} </option>
+          <option *ngFor="let user of users; trackBy: TrackElement" value="{{ user._id }}"> {{ user.firstName }} {{ user.lastName }} </option>
         </select>
       </div>
       <div class=" btn-group date-grid">
-        <input type="text" disabled value="{{ tasks.date }}" class="btn btn-outline-primary" name="date">
+        <input type="text" disabled value="{{ task.date }}" class="btn btn-outline-primary" name="date">
       </div>
       <div class="text-grid">
-        <textarea class="form-control" aria-label="With textarea" value="{{tasks.content}}" name="content" formControlName="content" #content></textarea>
+        <textarea class="form-control" aria-label="With textarea" value="{{task.content}}" name="content" formControlName="content" #content></textarea>
       </div>
       <div *ngIf="modalType === 'RE-ASSIGNE'" class="fromName-grid">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">FROM</span>
           </div>
-          <input type="text" disabled placeholder="{{tasks.author.firstName}} {{tasks.author.lastName}}" class="form-control" name="author">
+          <input type="text" disabled placeholder="{{task.author.firstName}} {{task.author.lastName}}" class="form-control" name="author">
         </div>
       </div>
       <div *ngIf="modalType === 'RE-ASSIGNE'" class="reassignFrom-grid">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">REASSIGN FROM</span>
+            <span class="input-group-text" id="basic-addon1">RE-ASSIGN FROM</span>
           </div>
           <input type="text" disabled class="form-control" placeholder="{{user.firstName}} {{user.lastName}}" aria-label="Username" aria-describedby="basic-addon1">
         </div>
       </div>
       <div class="addTask-grid">
-        <button type="submit"(click)="modalRef.hide()" class="btn btn-primary">ADD TASK</button>
+        <button type="submit" (click)="modalRef.hide()" class="btn btn-primary">ADD TASK</button>
       </div>
     </div>
   </form>

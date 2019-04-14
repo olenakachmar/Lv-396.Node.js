@@ -18,6 +18,8 @@ export class Task {
               public type: TaskType = new TaskType(),
               public date?: string,
               public author?: string,
-              public content?: string) {
+              public content?: string,
+              public resolvedByAuthor?: boolean,
+              public resolvedByPerformer?: boolean) {
   }
 }

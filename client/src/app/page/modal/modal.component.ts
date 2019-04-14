@@ -1,10 +1,13 @@
-import { Component, OnInit, TemplateRef, Input } from '@angular/core';
+import { Component, OnInit, TemplateRef, Input, EventEmitter, Output } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { TasksService } from '../../page/common/tasks.service';
 import { UserService } from '../../app_services/user.service';
 import { User } from '../../app_models/user';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Task } from '../common/task';
+import { FiltersService } from '../common/filters.service';
+import { FilterOptions } from '../common/filter-options';
+import { Filter } from '../common/filter';
 
 @Component({
   selector: 'app-modal',
@@ -13,51 +16,71 @@ import { Task } from '../common/task';
 })
 export class ModalComponent implements OnInit {
   modalForm: FormGroup;
-  @Input() tasks: any;
-
+  @Input() task: any;
   @Input() item: any;
   @Input() modalType: string;
-
   modalRef: BsModalRef;
   selectedStatus: {};
   users: User[];
   user: User;
   editTask: {};
-  constructor(private readonly modalService: BsModalService, private readonly tasksService: TasksService,
-              private readonly fb: FormBuilder, private readonly userService: UserService) {
+  filtersAll: Filter[];
+  theFilter: Filter;
+
+
+  constructor(private readonly modalService: BsModalService,
+              private readonly tasksService: TasksService,
+              private readonly fb: FormBuilder,
+              private readonly filtersService: FiltersService,
+              private readonly userService: UserService) {
     this.modalForm = fb.group({
       name: ['', Validators.required],
       content: ['', Validators.required],
+      assignTo: ['', Validators.required],
     });
   }
 
-  statuses = [
-    {name: 'High', value: 0},
-    {name: 'Normal', value: 1},
-    {name: 'Low', value: 2}
-  ];
-
-  ngOnInit() {
-    this.userService.getAll().subscribe(users => this.users = users);
-    this.userService.getUser().subscribe(user => this.user = user);
+  ngOnInit(): void {
+    this.userService.getAll()
+      .subscribe(users => this.users = users);
+    this.userService.getUser()
+      .subscribe(user => this.user = user);
   }
 
-  openModal(template: TemplateRef<any>) {
+  getFiltersNew(): any {
+    this.filtersService.getFilters()
+      .subscribe(filtersAll => this.theFilter = this.editFilter(filtersAll));
+  }
+
+  private readonly editFilter = (filtersAll: Filter[]): Filter => {
+    const filterElem = {...filtersAll.filter(item => item.id === 1)[0]};
+    filterElem.defaultValue = this.task.status.value;
+    filterElem.options = filterElem.options.filter(item => item.value > -1);
+
+    return filterElem;
+  };
+
+  openModal(template: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(template);
+    this.getFiltersNew();
   }
-  onSubmit(event: any, s: any, a: any) {
-    const newname = event.target.name.value;
-    const newcontent = event.target.content.value;
+
+  onSubmit(event: any, s: any, a: any): void {
+    const newname = event.target.name;
+    const newcontent = event.target.content;
+    const newAssignTo = event.target.assignTo;
     this.editTask = {
-      id: a,
+      id: this.task.id,
       name: newname,
       content: newcontent,
       status: s,
-      assignTo: `${this.user.firstName} ${this.user.lastName}`,
-      excerpt: this.tasks.excerpt,
-      date: this.tasks.date,
-      author: this.tasks.author
+      assignTo: newAssignTo,
+      excerpt: this.task.excerpt,
+      reassigned: this.task.author._id
     };
-    this.tasksService.update(this.editTask);
+  }
+
+  trackElement(index: number, element: any): any {
+    return element ? element.guid : 0;
   }
 }
