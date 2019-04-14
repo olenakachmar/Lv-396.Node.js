@@ -3,6 +3,7 @@ import { IDepartment } from '../../../app_models/department';
 import { DepartmentService } from '../../../app_services/department.service';
 import { OptionPair } from '../../../app_models/option-pair';
 import { UserService } from '../../../app_services/user.service';
+import { User } from '../../../app_models/user';
 
 @Component({
   selector: 'app-create-side-bar-info',
@@ -11,19 +12,16 @@ import { UserService } from '../../../app_services/user.service';
 })
 export class CreateSideBarInfoComponent implements OnInit {
 
+  newUser = new User();
+
   @Output() readonly getUserBarInfo = new EventEmitter();
 
   departmentsOptionPair: OptionPair[] = [];
   departments: IDepartment[] = [];
-  departmentId: any;
   positions: OptionPair[] = [];
-  positionId: string;
   teamLeads: OptionPair[] = [];
-  teamLeadId: any;
   roles: OptionPair[] = [];
-  role: string;
   managers: OptionPair[] = [];
-  managerId: any;
 
 
   constructor(readonly departmentService: DepartmentService, readonly userService: UserService) {
@@ -48,36 +46,25 @@ export class CreateSideBarInfoComponent implements OnInit {
   retrieveSelected(type: string, $event: any): void {
     switch (type) {
       case 'Department':
-        this.departmentId = $event;
+        this.newUser.department = $event;
         this.positions = this.departments
           .filter(elem => elem._id === $event)[0].position
           .map(e => new OptionPair(e, e));
         break;
       case 'TeamLead':
-        this.teamLeadId = $event;
+        this.newUser.teamlead = $event;
         break;
       case 'Position':
-        this.positionId = $event;
+        this.newUser.position = $event;
         break;
       case 'Role':
-        this.role = $event;
+        this.newUser.role = $event;
         break;
       case 'Manager':
-        this.managerId = $event;
+        this.newUser.manager = $event;
         break;
       default:
         break;
     }
-    this.passData();
-  }
-
-  passData(): any {
-    return {
-      positionID: this.positionId,
-      departmentID: this.departmentId,
-      managerID: this.managerId,
-      teamleadID: this.teamLeadId,
-      role: this.role
-    };
   }
 }
