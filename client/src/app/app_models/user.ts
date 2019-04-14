@@ -1,4 +1,4 @@
-import {IDepartment} from './department';
+import { IDepartment } from './department';
 
 export  class User {
   _id: any;
@@ -13,5 +13,5 @@ export  class User {
   contacts: object;
   photoURL: string;
   hrID: number;
-  date: object;
+  dates: any;
 }
