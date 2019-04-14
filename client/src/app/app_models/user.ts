@@ -14,4 +14,5 @@ export  class User {
   photoURL: string;
   hrID: number;
   dates: any;
+  role: string;
 }

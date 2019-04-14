@@ -1,9 +1,9 @@
 <div class="row ">
   <div class="col-lg-4 sidebar-wrapper">
-    <app-create-side-bar-info (getUserBarInfo)="retrieveSelectedObject($event)"></app-create-side-bar-info>
+    <app-create-side-bar-info #createUserComponent ></app-create-side-bar-info>
   </div>
   <main  class="col-lg-8 content-wrapper">
     <h4>Something will be here</h4>
-    <button>Save profile</button>
+    <button (click)="extractUser(createUserComponent.newUser)">Save profile</button>
   </main>
 </div>

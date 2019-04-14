@@ -6,7 +6,6 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./create-user-page.component.scss']
 })
 export class CreateUserPageComponent implements OnInit {
-  userObject: object;
 
   constructor() {
   }
@@ -14,8 +13,8 @@ export class CreateUserPageComponent implements OnInit {
   ngOnInit() {
   }
 
-  retrieveSelectedObject(event): void {
-    this.userObject = event;
+  extractUser(user){
+    //TODO
   }
 }
 
