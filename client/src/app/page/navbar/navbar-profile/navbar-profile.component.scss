@@ -50,6 +50,22 @@ a {
       font: normal 12px arial, sans-serif;
     }
   }
+  .dates {
+    display: flex;
+    align-items: center;
+    cursor: default;
+    &__icon {
+      height: auto;
+      width: 4vmin;
+      margin-right: 5px;
+      @include media-breakpoint-up(md) {
+        width: 3vmin;
+      }
+    }
+    &__count {
+      font: normal 12px arial, sans-serif;
+    }
+  }
   .user-bar {
     &__btn {
       display: flex;
@@ -87,10 +103,10 @@ a {
       right: 0 !important;
       left: auto !important;
       width: 180px;
-      border-color: $case-color;
+      border-color: $border-color;
       border-radius: 1px;
       @include media-breakpoint-up(md) {
-        width: 240px;
+        width: auto;
       }
     }
     &__elem {
@@ -108,6 +124,9 @@ a {
 
 .dropdown-menu li a {
   position: relative;
+}
+.dropdown-menu li:hover {
+  background: $bg-color !important;
 }
 .dropdown-menu li a:hover {
   background: $bg-color !important;

@@ -5,6 +5,8 @@ import { UserService } from '../../../app_services/user.service';
 import { User } from '../../../app_models/user';
 import { NavItemsService } from '../../common/nav-items.service';
 import { NavItem } from '../../common/nav-item';
+import { DatesItem } from '../../common/dates-item';
+import moment from 'moment';
 
 @Component({
   selector: 'app-navbar-profile',
@@ -17,13 +19,15 @@ export class NavbarProfileComponent implements OnInit {
   avatar: string;
   newTasksCount: number;
   menuList: NavItem[];
+  dateList: DatesItem[];
   userType: string;
+  datesCount: number;
 
-  constructor(
-    private readonly authService: AuthService,
-    private readonly router: Router,
-    private readonly navItemsService: NavItemsService,
-    private readonly userService: UserService) { }
+  constructor(private readonly authService: AuthService,
+              private readonly router: Router,
+              private readonly navItemsService: NavItemsService,
+              private readonly userService: UserService) {
+  }
 
   ngOnInit(): void {
     this.loadUser();
@@ -36,7 +40,12 @@ export class NavbarProfileComponent implements OnInit {
 
   loadUser(): boolean {
     this.userService.getUser()
-      .subscribe(user => this.user = user);
+      .subscribe(user => {
+        this.dateList = user.dates.map((item) => `${this.convertDate(item.date)}  ${item.topic}`);
+        this.datesCount = user.dates.length;
+        this.avatar = user.photoURL || 'assets/img/userimg.jpg';
+        this.user = user;
+      });
 
     return false;
   }
@@ -61,5 +70,10 @@ export class NavbarProfileComponent implements OnInit {
     }
 
     return false;
+  }
+
+  convertDate(date: number): string {
+    return moment(date)
+      .format('L');
   }
 }
