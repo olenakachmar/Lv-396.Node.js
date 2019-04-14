@@ -19,7 +19,7 @@ export class DropdownInfoComponent implements OnInit {
     this.selected.emit(pair._id);
     event.preventDefault();
     if (pair.name) {
-      return this.title = pair.name;
+      this.title = pair.name;
     }
   };
 

@@ -43,25 +43,25 @@ export class CreateSideBarInfoComponent implements OnInit {
       });
   }
 
-  retrieveSelected(type: string, $event: any): void {
+  retrieveSelected(type: string, id: any): void {
     switch (type) {
       case 'Department':
-        this.newUser.department = $event;
+        this.newUser.department = id;
         this.positions = this.departments
-          .filter(elem => elem._id === $event)[0].position
+          .filter(elem => elem._id === id)[0].position
           .map(e => new OptionPair(e, e));
         break;
       case 'TeamLead':
-        this.newUser.teamlead = $event;
+        this.newUser.teamlead = id;
         break;
       case 'Position':
-        this.newUser.position = $event;
+        this.newUser.position = id;
         break;
       case 'Role':
-        this.newUser.role = $event;
+        this.newUser.role = id;
         break;
       case 'Manager':
-        this.newUser.manager = $event;
+        this.newUser.manager = id;
         break;
       default:
         break;

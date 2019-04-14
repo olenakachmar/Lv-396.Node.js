@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-create-user-page',
@@ -13,8 +13,8 @@ export class CreateUserPageComponent implements OnInit {
   ngOnInit() {
   }
 
-  extractUser(user){
-    //TODO
+  extractUser(user) {
+    // TODO
   }
 }
 
