@@ -15,6 +15,11 @@
     "deprecation": {
       "severity": "warn"
     },
+    "i18n": [
+      false,
+      "check-id",
+      "check-text"
+    ],
     "import-blacklist": [
       true,
       "rxjs/Rx"

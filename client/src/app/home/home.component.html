@@ -8,7 +8,7 @@
           <input class="form-control" formControlName="login" name="login" #login>
         </div>
         <div class="alert alert-danger"
-          *ngIf="(frm.get('login').invalid && frm.get('login').touched) || showInputErrorslogin">
+          *ngIf="(frm.get('login').invalid && frm.get('login').touched || showInputErrorsPassword)">
           <div *ngIf="frm.get('login').hasError('required')">
             Please enter your loginZ
           </div>

@@ -22,23 +22,23 @@ export class NavbarProfileComponent implements OnInit {
   dateList: DatesItem[];
   userType: string;
   datesCount: number;
+  active: boolean;
 
-  constructor(private readonly authService: AuthService,
-              private readonly router: Router,
-              private readonly navItemsService: NavItemsService,
-              private readonly userService: UserService) {
-  }
+  constructor(
+    private readonly authService: AuthService,
+    private readonly router: Router,
+    private readonly navItemsService: NavItemsService,
+    private readonly userService: UserService) {}
 
   ngOnInit(): void {
     this.loadUser();
     this.navItemsService.getNavList()
       .subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
-    this.avatar = this.user.photoURL || 'assets/img/userimg.jpg';
     this.newTasksCount = 7;
   }
 
-  loadUser(): boolean {
+  loadUser(): void {
     this.userService.getUser()
       .subscribe(user => {
         this.dateList = user.dates.map((item) => `${this.convertDate(item.date)}  ${item.topic}`);
@@ -46,8 +46,6 @@ export class NavbarProfileComponent implements OnInit {
         this.avatar = user.photoURL || 'assets/img/userimg.jpg';
         this.user = user;
       });
-
-    return false;
   }
 
   logout(): boolean {
@@ -57,15 +55,17 @@ export class NavbarProfileComponent implements OnInit {
     return false;
   }
 
-  currentPage(): boolean {
-    this.menuList.map(item => item.current = item.id === 'my-profile');
+  currentByRout(currentRouter): boolean {
+    this.navItemsService.currentRouter(currentRouter);
+    this.active = false;
 
     return false;
   }
 
-  changeCurrent(i): boolean {
-    this.menuList.map((item, index) => item.current = index === i);
+  currentByIndex(i): boolean {
+    this.navItemsService.currentIndex(i);
     if (this.menuList[i].logout) {
+      this.menuList[i].current = false;
       this.logout();
     }
 
