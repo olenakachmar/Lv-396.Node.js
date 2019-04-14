@@ -14,11 +14,14 @@ import { User } from '../../../../app_models/user';
 export class ItemComponent implements OnInit {
   @Input() task: Task;
   user = new User();
+  users: User[];
   constructor(private readonly router: Router, private readonly route: ActivatedRoute,
               private readonly userService: UserService, private readonly tasksService: TasksService) {}
 
   ngOnInit(): void {
     this.loadUser();
+    this.userService.getAll()
+      .subscribe(users => this.users = users);
   }
 
   loadUser(): boolean {
@@ -28,13 +31,15 @@ export class ItemComponent implements OnInit {
     return false;
   }
 
+  
+
   selectUser(uid: number): void {
     this.router.navigate(['/profile/my-profile/', uid], {relativeTo: this.route});
   }
 
   resolveClick(): void {
     this.tasksService.updateResolvedBy(this.user._id, this.task.id)
-      .subscribe(item => item);
+      .subscribe(item => console.log(item));
   }
 }
 

@@ -46,26 +46,31 @@
   grid-row-start: 1;
   grid-row-end: 1;
 }
-
-.text-grid {
+.excerpt-grid {
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 3;
   grid-row-end: 3;
 }
-
-.fromName-grid{
+.text-grid {
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 4;
   grid-row-end: 4;
 }
 
-.reassignFrom-grid {
+.fromName-grid{
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 5;
   grid-row-end: 5;
+}
+
+.reassignFrom-grid {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 6;
+  grid-row-end: 6;
 }
 
 .addTask-grid {

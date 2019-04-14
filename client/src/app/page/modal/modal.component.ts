@@ -23,9 +23,15 @@ export class ModalComponent implements OnInit {
   selectedStatus: {};
   users: User[];
   user: User;
-  editTask: {};
+  editTask: any;
   filtersAll: Filter[];
   theFilter: Filter;
+  getFilter = new EventEmitter();
+  @Output() readonly filterVal = new EventEmitter();
+  obj: {
+    filterId: number,
+    optionId: any
+  };
 
 
   constructor(private readonly modalService: BsModalService,
@@ -34,9 +40,16 @@ export class ModalComponent implements OnInit {
               private readonly filtersService: FiltersService,
               private readonly userService: UserService) {
     this.modalForm = fb.group({
-      name: ['', Validators.required],
-      content: ['', Validators.required],
-      assignTo: ['', Validators.required],
+      id: new FormControl(),
+      name: new FormControl(),
+      content: new FormControl(),
+      excerpt: new FormControl(),
+      status: this.fb.group({
+        name: new FormControl(),
+        value: new FormControl(),
+      }),
+      assignTo: new FormControl(),
+      reassigned: new FormControl(),
     });
   }
 
@@ -46,6 +59,20 @@ export class ModalComponent implements OnInit {
     this.userService.getUser()
       .subscribe(user => this.user = user);
   }
+
+  sendFilterVal = (i: number, event: any) => {
+    this.obj = {
+      filterId: i,
+      optionId: event
+    };
+    this.getFilter.emit(this.obj);
+    console.log(this.obj);
+  };
+
+  selectIt = (i, event) => {
+    this.filterVal.emit(i);
+    event.preventDefault();
+  };
 
   getFiltersNew(): any {
     this.filtersService.getFilters()
@@ -65,19 +92,29 @@ export class ModalComponent implements OnInit {
     this.getFiltersNew();
   }
 
-  onSubmit(event: any, s: any, a: any): void {
-    const newname = event.target.name;
-    const newcontent = event.target.content;
-    const newAssignTo = event.target.assignTo;
+  onSubmit(event: any): any {
+    const newname = event.target.name.value;
+    const newcontent = event.target.content.value;
+    const newexcerpt = event.target.excerpt.value;
+    const newAssignTo = event.target.assignTo.value;
     this.editTask = {
       id: this.task.id,
       name: newname,
       content: newcontent,
-      status: s,
+      status: {
+        name: this.task.status.name,
+        value: this.task.status.value,
+      },
+      excerpt: newexcerpt,
       assignTo: newAssignTo,
-      excerpt: this.task.excerpt,
-      reassigned: this.task.author._id
+      reassigned: this.task.author,
     };
+    console.log(this.editTask);
+    console.log(this.task);
+    this.tasksService.editTask(this.editTask.id, this.editTask.name, this.editTask.newcontent,
+                              this.editTask.status.name, this.editTask.newAssignTo, this.editTask.newexcerpt,
+                              this.editTask.reassigned)
+      .subscribe(item => console.log(item));
   }
 
   trackElement(index: number, element: any): any {

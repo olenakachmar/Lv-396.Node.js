@@ -26,7 +26,7 @@ export class TasksService {
   }
 
   public editTask(id: string, name: string, excerpt: string, status: any,
-                  content: string, assignTo: string, reassigned: string): any {
+                  content: string, assignTo: any, reassigned: any): any {
     const body = {
       id,
       name,
