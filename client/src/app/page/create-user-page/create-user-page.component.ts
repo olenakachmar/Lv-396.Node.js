@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-create-user-page',
@@ -6,9 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-user-page.component.scss']
 })
 export class CreateUserPageComponent implements OnInit {
+  userObject: object;
 
-  constructor() { }
+  constructor() {
+  }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
+  retrieveSelectedObject(event): void {
+    this.userObject = event;
+  }
 }
+

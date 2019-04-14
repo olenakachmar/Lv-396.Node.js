@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { IDepartment } from '../../../app_models/department';
 import { DepartmentService } from '../../../app_services/department.service';
 import { OptionPair } from '../../../app_models/option-pair';
@@ -11,33 +11,22 @@ import { UserService } from '../../../app_services/user.service';
 })
 export class CreateSideBarInfoComponent implements OnInit {
 
+  @Output() readonly getUserBarInfo = new EventEmitter();
+
   departmentsOptionPair: OptionPair[] = [];
   departments: IDepartment[] = [];
   departmentId: any;
   positions: OptionPair[] = [];
+  positionId: string;
   teamLeads: OptionPair[] = [];
   teamLeadId: any;
   roles: OptionPair[] = [];
+  role: string;
   managers: OptionPair[] = [];
-  positionId: string;
+  managerId: any;
 
 
   constructor(readonly departmentService: DepartmentService, readonly userService: UserService) {
-  }
-
-  retrieveSelectedDepartment($event: any): void {
-    this.departmentId = $event;
-    this.positions = this.departments
-      .filter(elem => elem._id === $event)[0].position
-      .map(e => new OptionPair(e, e));
-  }
-
-  retrieveSelectedTeamleadId($event: any): void {
-    this.teamLeadId = $event;
-  }
-
-  retrieveSelectedPosition($event: any): void {
-    this.positionId = $event;
   }
 
   ngOnInit(): void {
@@ -51,9 +40,44 @@ export class CreateSideBarInfoComponent implements OnInit {
       .subscribe(data => {
         this.teamLeads = data
           .map(elem => new OptionPair(elem._id, `${elem.firstName} ${elem.lastName}`));
-        this.roles = data.map(elem => new OptionPair(elem._id, elem.firstName));
+        this.roles = ['Developer', 'Tester', 'HR'].map(elem => new OptionPair(elem, elem));
         this.managers = data.map(elem => new OptionPair(elem._id, elem.position));
       });
   }
 
+  retrieveSelected(type: string, $event: any): void {
+    switch (type) {
+      case 'Department':
+        this.departmentId = $event;
+        this.positions = this.departments
+          .filter(elem => elem._id === $event)[0].position
+          .map(e => new OptionPair(e, e));
+        break;
+      case 'TeamLead':
+        this.teamLeadId = $event;
+        break;
+      case 'Position':
+        this.positionId = $event;
+        break;
+      case 'Role':
+        this.role = $event;
+        break;
+      case 'Manager':
+        this.managerId = $event;
+        break;
+      default:
+        break;
+    }
+    this.passData();
+  }
+
+  passData(): any {
+    return {
+      positionID: this.positionId,
+      departmentID: this.departmentId,
+      managerID: this.managerId,
+      teamleadID: this.teamLeadId,
+      role: this.role
+    };
+  }
 }

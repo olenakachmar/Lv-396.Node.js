@@ -9,16 +9,18 @@ import { OptionPair } from '../../../../app_models/option-pair';
 export class DropdownInfoComponent implements OnInit {
   @Input() pairList: OptionPair[];
   @Output() readonly selected = new EventEmitter<any>();
+  title: string;
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.title = 'Choose';
   }
 
-  selectIt = (event: any) => {
+  selectIt = (pair: OptionPair, event: any) => {
+    this.selected.emit(pair._id);
     event.preventDefault();
+    if (pair.name) {
+      return this.title = pair.name;
+    }
   };
-
-  selectedElement(event: any): void {
-    this.selected.emit(event.target.value);
-  }
 
 }
