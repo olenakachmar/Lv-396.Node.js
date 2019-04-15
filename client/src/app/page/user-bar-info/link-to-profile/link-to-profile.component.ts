@@ -12,9 +12,11 @@ export class LinkToProfileComponent implements OnInit {
 
   constructor(private readonly router: Router, private readonly route: ActivatedRoute) {
   }
-  selectOp(info): boolean {
-    this.router.navigate(['/profile/contact-info/', info], {relativeTo: this.route});
-    return false;
+  selectDepartment(info, label): boolean {
+    if(label === 'My department') {
+      this.router.navigate(['/profile/contact-info/', info], {relativeTo: this.route});
+      return false;
+    }
   }
 
   ngOnInit() {

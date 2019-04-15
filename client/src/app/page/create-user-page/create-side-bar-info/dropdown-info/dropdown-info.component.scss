@@ -1,10 +1,6 @@
 @import '../../../../common/theme';
 
-.btn-group{
-  width: 100%;
-}
-
-.btn.dropdown-toggle.option-el{
+.btn.dropdown-toggle.option-el {
   border-radius: 0;
   border-color: $case-color;
   color: $primary-color;
@@ -15,21 +11,38 @@
   height: 50px;
 }
 
-.dropdown-menu.option-el li a.active:after{
-  position: absolute;
+.btn-group {
   display: block;
-  right: 20px;
-  top: 17px;
-  width: 16px;
-  height: 16px;
-  background-size: contain;
-  content: "";
+}
+.btn-group button {
+  width:100%;
+}
+.dropdown-menu {
+  position: relative;
+  left: 0;
+  right: auto;
+  float: none;
+  margin: -1px;
+  top: 100%;
+  bottom: auto;
+  background-color: #fff;
+  color: $primary-color;
+  border: $case-color solid 1px;
+  width: 101%;
+}
+.dropdown-item{
+  margin: 5px;
+  color: $primary-color;
+  font-family: $font-stack;
+  white-space: inherit;
+  line-height: normal;
+}
+@media (max-width: 991px) {
+  @media (min-width: 600px) {
+    .dropdown-menu {
+      position: absolute;
+    }
+  }
 }
 
-.dropdown-item{
-  position: relative;
-}
-#top{
-  top: -130px;
-}
 

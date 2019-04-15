@@ -16,7 +16,7 @@ export class FilterTasksByPipe implements PipeTransform {
   }
 
   private readonly isAllFiltersTurnedOff = (filters: Filter[]) =>
-    filters.every(filter => filter.defaultValue === -1)
+    filters.every(filter => filter.defaultValue === -1);
 
   private readonly isTaskMatchesFilters = (task: any, filters: Filter[]) =>
     filters.every(filter => {
@@ -29,6 +29,6 @@ export class FilterTasksByPipe implements PipeTransform {
       }
 
       return filter.defaultValue === task[meta].value;
-    })
+    });
 
 }
