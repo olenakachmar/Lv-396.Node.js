@@ -1,9 +1,47 @@
 <div class="row ">
   <div class="col-lg-4 sidebar-wrapper">
-    <app-create-side-bar-info #createUserComponent ></app-create-side-bar-info>
+    <app-create-side-bar-info #createUserComponent></app-create-side-bar-info>
   </div>
   <main class="col-lg-8 content-wrapper">
-    <h4>Something will be here</h4>
+    <div class="row main-user-info">
+      <div class="col main-user-info">
+        <h1>Name Surname</h1>
+        <p>position</p>
+      </div>
+      <button class="update-info-button">Update</button>
+    </div>
+
+    <div class="row additional-info">
+      <div class="col-md-6 user-info">
+        <div class="info-form">
+          <div class="input-label"><label for="first-name">Email</label></div>
+          <input class="form-control" type="text" placeholder="Email" id='email' aria-label="Email">
+        </div>
+
+        <div class="info-form">
+          <div class="input-label"><label for="first-name">Phone</label></div>
+          <input class="form-control" type="text" placeholder="Phone" id='phone' aria-label="Phone">
+        </div>
+
+        <div class="info-form">
+          <div class="input-label"><label for="first-name">Skype</label></div>
+          <input class="form-control" type="text" placeholder="Skype" id='skype' aria-label="Skype">
+        </div>
+
+        <div class="info-form">
+          <div class="input-label"><label for="first-name">Telegram</label></div>
+          <input class="form-control" type="text" placeholder="Telegram" id='telegram' aria-label="Telegram">
+        </div>
+      </div>
+
+      <div class="col-md-4 date-info">
+        <div class="info-form">
+          <div class="input-label"><label for="first-name">Phone</label></div>
+          <input class="form-control" type="text" placeholder="Phone" id='phone' aria-label="Phone">
+        </div>
+
+      </div>
+    </div>
     <button (click)="extractUser(createUserComponent.newUser)">Save profile</button>
   </main>
 </div>

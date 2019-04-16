@@ -1,7 +1,71 @@
-@import '../../common/theme';
+@import "../../common/theme";
 
 main {
   background-color: white;
+}
+
+.main-user-info {
+  max-width: 580px;
+  margin-top: 15px;
+  .main-user-info {
+    h1 {
+      font-size: 40px;
+    }
+
+    p {
+      font-size: 20px;
+    }
+  }
+
+  .update-info-button {
+    height: 48px;
+    width: 130px;
+    margin-left: 18px;
+    margin-top: 8px;
+    border: 1.5px solid $primary-color;
+    background-color: $case-color;
+    color: $primary-color;
+    text-transform: uppercase;
+    line-height: normal;
+    font-weight: bold;
+    font-size: 12px;
+  }
+}
+
+.additional-info {
+  .user-info {
+  }
+
+  .date-info {
+    background-color: #000;
+  }
+
+  .info-form {
+    padding: 10px 0 10px 0;
+    .input-label {
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      label {
+        margin-bottom: 0;
+      }
+    }
+
+    .form-control {
+      height: 50px;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 0;
+      background-color: #fff;
+      color: $primary-color;
+      border: $case-color solid 1px;
+    }
+
+    ::placeholder {
+      color: $primary-color;
+    }
+  }
 }
 
 .sidebar-wrapper {
