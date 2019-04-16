@@ -54,12 +54,10 @@ const UserSchema = new Schema({
   contacts: [{
     contact_name: {
       type: String,
-      required: true,
       unique: true,
     },
     contact_value: {
       type: String,
-      required: true,
     },
   },
   ],
@@ -90,6 +88,18 @@ const UserSchema = new Schema({
   reset_password_expires: {
     type: Date,
   },
+  watched_issues: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Issue',
+  },
+  ],
+  photoID: {
+    type: String,
+  },
+  roles: [{
+    type: String,
+  },
+  ],
 });
 
 function hashPassword(next) {
