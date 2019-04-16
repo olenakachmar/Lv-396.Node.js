@@ -21,6 +21,7 @@ export class AddTaskFormComponent implements OnInit {
   serverErrorMessage: {name: string, statusText: string, message: string};
   haveServerError: boolean;
   taskIsJustSend: boolean;
+  filterDefaultVal: number;
 
   addTaskForm = this.fb.group({
     taskName: [
@@ -68,6 +69,7 @@ export class AddTaskFormComponent implements OnInit {
     this.dropDownCssClassName = 'width-100';
     this.haveServerError = false;
     this.taskIsJustSend = false;
+    this.filterDefaultVal = 1;
     this.getTheFilter();
     this.userService.getUser()
       .subscribe(user => this.user = user);
@@ -78,7 +80,7 @@ export class AddTaskFormComponent implements OnInit {
   };
 
   getTheFilter(): void {
-    this.theFilter = this.filterReturnService.createFilterByName('status', 1);
+    this.theFilter = this.filterReturnService.createFilterByName('status', this.filterDefaultVal);
   }
 
   onSubmit(): void {
@@ -92,6 +94,8 @@ export class AddTaskFormComponent implements OnInit {
 
   private successHandling(): void {
     this.taskIsJustSend = true;
+    this.addTaskForm.reset();
+    this.theFilter.defaultValue = this.filterDefaultVal;
 
     setTimeout(() => {
       this.taskIsJustSend = false;
