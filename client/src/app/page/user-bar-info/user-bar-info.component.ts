@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from '../../app_models/user';
+import { User } from '../../common/models/user';
 
 @Component({
   selector: 'app-user-bar-info',
