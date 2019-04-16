@@ -6,8 +6,8 @@
   <ul class="user-bar__menu dropdown-menu" *dropdownMenu role="menu"
       aria-labelledby="button-disabled-item">
     <li class="user-bar__row user-bar__elem  dropdown-item"
-        *ngFor="let link of dateList; let i = index" role="menuitem" >
-      <b>{{ convertDate(link.date) }}</b> <br/> {{link.topic}}
+        *ngFor="let dates of dateList; let i = index" role="menuitem" >
+      <b>{{ convertDate(dates.date) }}</b> <br/> {{dates.topic}}
     </li>
   </ul>
 </div>

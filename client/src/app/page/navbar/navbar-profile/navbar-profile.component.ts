@@ -41,7 +41,7 @@ export class NavbarProfileComponent implements OnInit {
   loadUser(): void {
     this.userService.getUser()
       .subscribe(user => {
-        this.dateList = user.dates
+        this.dateList = user.dates;
         this.datesCount = user.dates.length;
         this.avatar = user.photoURL || 'assets/img/userimg.jpg';
         this.user = user;

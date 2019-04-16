@@ -1,25 +1,11 @@
 <div class="wrapper">
-  <div class="row list-users" *ngFor="let date of dates | filterUsersBy: filterText; let i = index"
-       (click)="selectUser(user._id)">
-    <div class="col-md-4 box font-weight-bold">
-      {{ user.firstName }} {{ user.lastName }}
+  <div class="row list-dates" *ngFor="let dates of dateList; let i = index">
+    <div class="col-md-3 box font-weight-bold">
+      {{dates.topic}}
     </div>
-    <div class="col-md-8 box-wrapper">
-      <div class="col-md-3 box">
-        {{ user.position }}
-      </div>
-      <div class="col-md-3 box">
-        {{ user.email }}
-      </div>
-      <div class="col-md-3 box">
-        {{ user.phone }}
-      </div>
-      <div class="col-md-3 box" *ngIf="user.contacts[0].contact_value">
-        {{ user.contacts[0].contact_value }}
-      </div>
-      <div class="col-md-3 box" *ngIf="!user.contacts[0].contact_value">
-        -
-      </div>
+    <div class="col-md-9 box">
+      {{ convertDate(dates.date) }}
     </div>
   </div>
 </div>
+x
