@@ -68,7 +68,6 @@ export class ModalComponent implements OnInit {
       optionId: event
     };
     this.getFilter.emit(this.obj);
-    console.log(this.obj);
   };
 
   getFiltersNew(): any {
@@ -107,7 +106,7 @@ export class ModalComponent implements OnInit {
       reassigned: this.task.author._id,
     };
     this.tasksService.editTask(this.editTask)
-      .subscribe((item: any) => console.log(item));
+      .subscribe((item: any) => item);
   }
 
   trackElement(index: number, element: any): any {

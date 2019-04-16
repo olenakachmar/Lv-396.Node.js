@@ -37,7 +37,6 @@ export class TasksService {
       assignTo: obj.assignTo,
       reassigned: obj.reassigned,
     };
-    console.log(body);
 
     return this.http.put<Task>(`${api}/issues`, body, httpOptions);
   }

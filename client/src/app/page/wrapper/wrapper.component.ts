@@ -65,10 +65,8 @@ export class WrapperComponent implements OnInit {
   getTasks(): void {
     this.tasksService.getTasks()
       .subscribe(tasks => {
-        this.tasks = tasks.map((item: any) => {
-          console.log(item);
-
-          return {
+        this.tasks = tasks.map((item: any) =>
+          ({
             id: item._id,
             name: item.name,
             excerpt: item.excerpt,
@@ -79,9 +77,8 @@ export class WrapperComponent implements OnInit {
             content: item.content,
             resolvedByAuthor: item.resolvedByAuthor,
             resolvedByPerformer: item.resolvedByPerformer,
-          };
-        }
-          );
+          }
+          ));
         this.ref.detectChanges();
       });
   }
