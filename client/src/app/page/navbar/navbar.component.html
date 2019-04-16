@@ -15,7 +15,7 @@
       </div>
       <div class="burger-menu" [ngClass]="{'active': active}">
         <ul class="burger-menu__list">
-          <ng-container *ngFor="let link of menuList; let i = index">
+          <ng-container *ngFor="let link of menuList; let i = index; trackBy: trackById;">
             <li class="burger-menu__item" *ngIf="link.burgerMenu && (userType === link.hr || userType === link.dev)"
               [ngClass]="{'current': link.current}">
               <a href [routerLink]="[ link.router ]" (click)="active = !active; currentByIndex(i)">{{ link.title }}</a>
