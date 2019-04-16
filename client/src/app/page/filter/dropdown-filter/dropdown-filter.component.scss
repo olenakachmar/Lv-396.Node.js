@@ -1,11 +1,14 @@
-@import '../../../common/theme';
+@import '../../../common/css/theme';
 
 .btn-group.width-100 {
   width: 100%;
 }
 
 .btn.dropdown-toggle.filter-el{
-  padding: 17px 56px 17px 20px;
+  display: flex;
+  height: 50px;
+  padding: 0 56px 0 20px;
+  align-items: center;
   border-radius: 0;
   border-color: $case-color;
   color: $primary-color;
@@ -13,6 +16,7 @@
   font-size: $base-font-size;
   line-height: $base-line-height;
   text-align: left;
+  cursor: pointer;
 }
 
 .btn-group.width-100 .btn.dropdown-toggle.filter-el {

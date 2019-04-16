@@ -3,15 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { throwError } from 'rxjs';
-import { api } from '../../environments/environment';
-
-
+import { api } from '../../../environments/environment';
 
 @Injectable()
 export class AuthService {
   constructor(private readonly http: HttpClient) { }
 
-  auth(login: string, password: string) {
+  auth(login: string, password: string): any {
     return this.http.post(`${api}auth/login`, {
       login,
       password
@@ -31,7 +29,7 @@ export class AuthService {
     return this.getUser() !== null;
   }
 
-  handleError(err: Response | any) {
+  handleError(err: Response | any): any {
     return throwError(err);
   }
 }
