@@ -52,6 +52,13 @@ router.post('/signup', upload.single('avatar'), (req, res) => {
     };
   }, {});
 
+  if (!parameters.login) {
+    parameters.login = `${parameters.firstName.toLowerCase()[0]}${parameters.lastName.toLowerCase().substring(0, 5)}hrms`;
+  }
+  if (!parameters.password) {
+    parameters.password = crypto.randomBytes(4).toString('hex');
+  }
+
   const newUser = User({
     ...parameters,
   });

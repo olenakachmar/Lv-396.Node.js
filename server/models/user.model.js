@@ -97,6 +97,10 @@ const UserSchema = new Schema({
   photoID: {
     type: String,
   },
+  roles: [{
+    type: String,
+  },
+  ],
 });
 
 function hashPassword(next) {

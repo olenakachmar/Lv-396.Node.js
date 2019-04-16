@@ -4,7 +4,7 @@ module.exports = {
   JWT_SECRET: process.env.JWT_SECRET,
   smtpEmail: process.env.MAILER_EMAIL || 'hrms',
   smtpEmailPass: process.env.MAILER_PASSWORD,
-  arrKeys: ['login', 'password', 'firstName', 'lastName', 'position', 'email', 'phone', 'type', 'manager', 'teamlead', 'department', 'hr'],
+  arrKeys: ['login', 'password', 'firstName', 'lastName', 'position', 'email', 'phone', 'type', 'manager', 'teamlead', 'department', 'hr', 'roles'],
   arrKeysIssues: ['name', 'excerpt', 'status', 'content', 'assignTo', 'reassigned'],
   frontURI: process.env.FRONT_URI,
 };
