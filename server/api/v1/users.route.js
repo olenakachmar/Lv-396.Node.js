@@ -214,13 +214,20 @@ router.put('/users/watched_issues', async (req, res) => {
     issueID,
   } = req.body;
   try {
-    const user = await User.findById(id);
+    const user = await User.findById(id).exec();
+    if (user.watched_issues.toString().split(',').includes(issueID)) {
+      res.status(400).json({
+        err: 'Array already includes this issue',
+      });
+      return 0;
+    }
     user.watched_issues = [...user.watched_issues, issueID];
-    user.save();
+    await user.save();
     res.json({
       success: 'updated',
     });
   } catch (err) {
+    console.error(err);
     res.status(500).json({
       err,
     });
