@@ -1,5 +1,5 @@
 <div class="create-user-bar-info row">
-  <div class="column">
+  <div class="column w-100">
     <div class="upload-image">
       <app-user-image class="photo"></app-user-image>
       <button class="update-photo-button">Update Image</button>
@@ -16,31 +16,33 @@
     <div class="info-form">
       <div class="input-label"><label for="department">Department</label></div>
       <app-dropdown-info class="info-input-area" id="department" [pairList]='departmentsOptionPair'
-                         (selected)="retrieveSelectedDepartment($event)">
+                         (selected)="retrieveSelected('Department', $event)">
       </app-dropdown-info>
     </div>
   </div>
-  <div class="column">
+  <div class="column w-100">
     <div class="info-form">
       <div class="input-label"><label for="position">Position</label></div>
       <app-dropdown-info class="info-input-area" id="position" disabled [pairList]='positions'
-                         (selected)="retrieveSelectedPosition($event)">
+                         (selected)="retrieveSelected('Position', $event)">
       </app-dropdown-info>
     </div>
     <div class="info-form">
       <div class="input-label"><label for="teamLead">Teamlead</label></div>
       <app-dropdown-info class="info-input-area" id="teamLead" [pairList]='teamLeads'
-                         (selected)="retrieveSelectedTeamleadId($event)">
+                         (selected)="retrieveSelected('TeamLead', $event)">
       </app-dropdown-info>
     </div>
     <div class="info-form">
       <div class="input-label"><label for="role">Role</label></div>
       <app-dropdown-info class="info-input-area" id="role" [pairList]='roles'
-      ></app-dropdown-info>
+                         (selected)="retrieveSelected('Role', $event)">
+      </app-dropdown-info>
     </div>
     <div class="info-form">
       <div class="input-label"><label for="manager">Manager</label></div>
-      <app-dropdown-info class="info-input-area" id="manager" [pairList]='managers'>
+      <app-dropdown-info class="info-input-area" id="manager" [pairList]='managers'
+                         (selected)="retrieveSelected('Manager', $event)">
       </app-dropdown-info>
     </div>
   </div>
