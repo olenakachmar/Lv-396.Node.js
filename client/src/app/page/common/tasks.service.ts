@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Task } from './task';
 import { HttpClient } from '@angular/common/http';
-import { httpOptions } from '../../app_services/user.service';
+import { httpOptions } from '../../common/services/user.service';
 import { api } from '../../../environments/environment';
 
 @Injectable({

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IDepartment } from '../../../app_models/department';
-import { DepartmentService } from '../../../app_services/department.service';
-import { OptionPair } from '../../../app_models/option-pair';
-import { UserService } from '../../../app_services/user.service';
+import { IDepartment } from '../../../common/models/department';
+import { DepartmentService } from '../../../common/services/department.service';
+import { OptionPair } from '../../../common/models/option-pair';
+import { UserService } from '../../../common/services/user.service';
 
 @Component({
   selector: 'app-create-side-bar-info',

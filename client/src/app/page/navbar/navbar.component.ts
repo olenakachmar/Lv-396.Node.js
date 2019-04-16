@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { NavItemsService } from '../common/nav-items.service';
-import { UserService } from '../../app_services/user.service';
+import { UserService } from '../../common/services/user.service';
 import { NavItem } from '../common/nav-item';
 
 @Component({

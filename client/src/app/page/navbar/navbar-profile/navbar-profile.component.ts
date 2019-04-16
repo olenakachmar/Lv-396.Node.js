@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../app_services/auth.service';
+import { AuthService } from '../../../common/services/auth.service';
 import { Router } from '@angular/router';
-import { UserService } from '../../../app_services/user.service';
-import { User } from '../../../app_models/user';
+import { UserService } from '../../../common/services/user.service';
+import { User } from '../../../common/models/user';
 import { NavItemsService } from '../../common/nav-items.service';
 import { NavItem } from '../../common/nav-item';
 

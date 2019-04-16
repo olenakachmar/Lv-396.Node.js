@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../app_services/user.service';
-import { User } from '../../app_models/user';
+import { UserService } from '../../common/services/user.service';
+import { User } from '../../common/models/user';
 import { FilterOptions } from '../common/filter-options';
 import { Filter } from '../common/filter';
 import { FiltersService } from '../common/filters.service';
@@ -24,6 +24,7 @@ export class WrapperComponent implements OnInit {
   modalTypeVal: string;
   filterGrids: string;
   users: User[];
+  userRole: string;
 
   constructor(
     private readonly userInfoService: UserService,
@@ -38,12 +39,16 @@ export class WrapperComponent implements OnInit {
     this.getTasks();
     this.loadUser();
     this.filterGrids = this.filters.length ? this.filterCssClassPrefix + this.filters.length.toString() : '';
+    this.userRole = this.checkUserRole();
   }
 
   loadUser(): any {
     this.userInfoService.getUser()
       .subscribe(user => { this.user = user; });
   }
+
+  private readonly checkUserRole = (): any =>
+    this.userInfoService.getUserType();
 
   getFilters(): void {
     this.filtersService.getFilters()

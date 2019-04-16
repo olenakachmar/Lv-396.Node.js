@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from '../../../app_models/user';
+import { User } from '../../../common/models/user';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DepartmentService } from '../../../app_services/department.service';
+import { DepartmentService } from '../../../common/services/department.service';
 
 @Component({
   selector: 'app-user-list',

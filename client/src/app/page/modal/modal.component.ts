@@ -1,8 +1,8 @@
 import { Component, OnInit, TemplateRef, Input } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { TasksService } from '../../page/common/tasks.service';
-import { UserService } from '../../app_services/user.service';
-import { User } from '../../app_models/user';
+import { UserService } from '../../common/services/user.service';
+import { User } from '../../common/models/user';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Task } from '../common/task';
 
