@@ -2,9 +2,11 @@ import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild }
 import { FilterOptions } from '../../common/filter-options';
 import { Filter } from '../../common/filter';
 import { DropDownService } from '../../common/drop-down.service';
+import { FilterReturnService } from '../../common/filter-return.service';
 
 @Component({
   selector: 'app-dropdown-filter',
+  providers: [ FilterReturnService ],
   templateUrl: './dropdown-filter.component.html',
   styleUrls: ['./dropdown-filter.component.scss']
 })
@@ -17,19 +19,31 @@ export class DropdownFilterComponent implements OnInit {
   title: string;
   dropDownPositionClassNames: any;
 
-  constructor(private readonly dropDownService: DropDownService) {}
+  get filter(): Filter {
+    return this.filterReturnService.filterReturn;
+  }
+
+  set filter(htr: Filter) {
+    this.filterReturnService.filterReturn = htr;
+  }
+
+  constructor(
+    private readonly dropDownService: DropDownService,
+    private readonly filterReturnService: FilterReturnService
+    ) {}
 
   ngOnInit(): void {
+    this.filter = this.filterItem;
     this.options = this.filterItem.options;
-    let titleObj: FilterOptions;
-    titleObj = this.filterItem.options.filter((item: FilterOptions) => this.filterItem.defaultValue === item.value)[0];
-    this.title = titleObj.name;
+    this.title = this.filterReturnService.getTitle(this.filterItem);
     this.getDropDownPositionClassNames();
   }
 
   selectIt = (i, event) => {
-    this.filterVal.emit(i);
     event.preventDefault();
+    this.filterVal.emit(i);
+    this.filterReturnService.saveFilterReturn(i)
+      .subscribe(data => this.title = data);
   };
 
   getDropDownPositionClassNames(): void {
@@ -37,10 +51,6 @@ export class DropdownFilterComponent implements OnInit {
       .subscribe(cssClassNames => {
         this.dropDownPositionClassNames = cssClassNames;
     });
-  }
-
-  trackElement(index: number, element: any): any {
-    return element ? element.guid : 0;
   }
 
 }
