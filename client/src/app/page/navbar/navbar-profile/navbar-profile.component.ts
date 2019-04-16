@@ -5,6 +5,8 @@ import { UserService } from '../../../app_services/user.service';
 import { User } from '../../../app_models/user';
 import { NavItemsService } from '../../common/nav-items.service';
 import { NavItem } from '../../common/nav-item';
+import { DatesItem } from '../../common/dates-item';
+import moment from 'moment';
 
 @Component({
   selector: 'app-navbar-profile',
@@ -17,28 +19,33 @@ export class NavbarProfileComponent implements OnInit {
   avatar: string;
   newTasksCount: number;
   menuList: NavItem[];
+  dateList: DatesItem[];
   userType: string;
+  datesCount: number;
+  active: boolean;
 
   constructor(
     private readonly authService: AuthService,
     private readonly router: Router,
     private readonly navItemsService: NavItemsService,
-    private readonly userService: UserService) { }
+    private readonly userService: UserService) {}
 
   ngOnInit(): void {
     this.loadUser();
     this.navItemsService.getNavList()
       .subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
-    this.avatar = this.user.photoURL || 'assets/img/userimg.jpg';
     this.newTasksCount = 7;
   }
 
-  loadUser(): boolean {
+  loadUser(): void {
     this.userService.getUser()
-      .subscribe(user => this.user = user);
-
-    return false;
+      .subscribe(user => {
+        this.dateList = user.dates.map((item) => `${this.convertDate(item.date)}  ${item.topic}`);
+        this.datesCount = user.dates.length;
+        this.avatar = user.photoURL || 'assets/img/userimg.jpg';
+        this.user = user;
+      });
   }
 
   logout(): boolean {
@@ -48,17 +55,25 @@ export class NavbarProfileComponent implements OnInit {
     return false;
   }
 
-  currentPage(): boolean {
-    this.menuList.map(item => item.current = item.id === 'my-profile');
+  currentByRout(currentRouter): boolean {
+    this.navItemsService.currentRouter(currentRouter);
+    this.active = false;
 
     return false;
   }
 
-  changeCurrent(i): boolean {
-    this.menuList.map((item, index) => item.current = index === i);
+  currentByIndex(i): boolean {
+    this.navItemsService.currentIndex(i);
     if (this.menuList[i].logout) {
+      this.menuList[i].current = false;
       this.logout();
     }
+
     return false;
+  }
+
+  convertDate(date: number): string {
+    return moment(date)
+      .format('L');
   }
 }
