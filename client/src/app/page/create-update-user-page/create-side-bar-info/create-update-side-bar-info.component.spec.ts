@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateSideBarInfoComponent } from './create-side-bar-info.component';
+import { CreateSideBarInfoComponent } from './create-update-side-bar-info.component';
 
 describe('CreateSideBarInfoComponent', () => {
   let component: CreateSideBarInfoComponent;

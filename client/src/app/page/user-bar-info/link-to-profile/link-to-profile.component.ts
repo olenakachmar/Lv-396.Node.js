@@ -9,17 +9,21 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class LinkToProfileComponent implements OnInit {
   @Input() label: string;
   @Input() info: string;
+  @Input() idLinks: string;
 
   constructor(private readonly router: Router, private readonly route: ActivatedRoute) {
   }
-  selectDepartment(info, label): boolean {
-    if(label === 'My department') {
+
+  selectDepartment(idLinks, info, label): any {
+    if (label === 'My department') {
       this.router.navigate(['/profile/contact-info/', info], {relativeTo: this.route});
-      return false;
+    } else if (label === 'My manager') {
+      this.router.navigate(['/profile/my-profile/', idLinks], {relativeTo: this.route});
+    } else if (label === 'My Team Lead') {
+      this.router.navigate(['/profile/my-profile/', idLinks], {relativeTo: this.route});
     }
   }
 
   ngOnInit() {
   }
-
 }

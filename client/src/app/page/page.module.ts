@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WrapperComponent } from './wrapper/wrapper.component';
@@ -25,10 +25,10 @@ import { ContactInfoComponent } from './contact-info/contact-info.component';
 import { UserListComponent } from './contact-info/user-list/user-list.component';
 import { UserFilterComponent } from './contact-info/user-filter/user-filter.component';
 import { FilterUsersByPipe } from './contact-info/filter-users-by.pipe';
-import { CreateUserPageComponent } from './create-user-page/create-user-page.component';
-import { CreateSideBarInfoComponent } from './create-user-page/create-side-bar-info/create-side-bar-info.component';
-import { DropdownInfoComponent } from './create-user-page/create-side-bar-info/dropdown-info/dropdown-info.component';
 import { DatepickerFilterComponent } from './filter/datepicker-filter/datepicker-filter.component';
+import { CreateUpdateSideBarInfoComponent } from './create-update-user-page/create-side-bar-info/create-update-side-bar-info.component';
+import { CreateUpdateUserPageComponent } from './create-update-user-page/create-update-user-page.component';
+import { DropdownInfoComponent } from './create-update-user-page/create-side-bar-info/dropdown-info/dropdown-info.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
@@ -37,7 +37,7 @@ export const routes: Routes = [
   { path: 'my-profile/:id', component: MyProfileComponent },
   { path: 'contact-info', component: ContactInfoComponent },
   { path: 'contact-info/:id', component: ContactInfoComponent },
-  { path: 'create-user', component: CreateUserPageComponent }
+  { path: 'create-user', component: CreateUpdateUserPageComponent }
 ];
 
 @NgModule({
@@ -58,8 +58,8 @@ export const routes: Routes = [
     UserListComponent,
     UserFilterComponent,
     FilterUsersByPipe,
-    CreateUserPageComponent,
-    CreateSideBarInfoComponent,
+    CreateUpdateUserPageComponent,
+    CreateUpdateSideBarInfoComponent,
     DatepickerFilterComponent,
     DropdownInfoComponent
   ],
