@@ -3,7 +3,8 @@
   <span class="notifications__count">({{ newTasksCount }})</span>
 </div>
 <div class="user-bar__item user-bar__name">
-  <a href [routerLink]="[ 'my-profile' ]" (click)="currentByRout('my-profile')"> {{ user.firstName }} {{ user.lastName }}
+  <a href [routerLink]="[ 'my-profile' ]" (click)="currentByRout('my-profile')"> {{ user.firstName }}
+    {{ user.lastName }}
   </a>
 </div>
 <div class="user-bar__item btn-group" dropdown>
@@ -12,7 +13,7 @@
   </div>
   <ul class="user-bar__menu dropdown-menu" id="dropdown-disabled-item" *dropdownMenu role="menu"
     aria-labelledby="button-disabled-item">
-    <ng-container *ngFor="let link of menuList; let i = index">
+    <ng-container *ngFor="let link of menuList; let i = index; trackBy: trackById;">
       <li class="user-bar__row" role="menuitem"
         *ngIf="link.rightMenu && (userType === link.dev || userType === link.hr)" [ngClass]="{'current': link.current}"
         (click)="currentByIndex(i)">

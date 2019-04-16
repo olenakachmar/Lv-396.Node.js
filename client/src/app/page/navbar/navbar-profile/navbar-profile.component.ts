@@ -49,14 +49,14 @@ export class NavbarProfileComponent implements OnInit {
     return false;
   }
 
-  currentByRout(currentRouter): boolean {
+  currentByRout(currentRouter: string): boolean {
     this.navItemsService.currentRouter(currentRouter);
     this.active = false;
 
     return false;
   }
 
-  currentByIndex(i): boolean {
+  currentByIndex(i: number): boolean {
     this.navItemsService.currentIndex(i);
     if (this.menuList[i].logout) {
       this.menuList[i].current = false;
@@ -64,5 +64,9 @@ export class NavbarProfileComponent implements OnInit {
     }
 
     return false;
+  }
+
+  trackById(link: any): string {
+    return link.id;
   }
 }
