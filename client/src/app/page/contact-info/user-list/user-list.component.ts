@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../../../app_models/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DepartmentService } from '../../../app_services/department.service';
+import { UserService } from '../../../app_services/user.service';
 
 @Component({
   selector: 'app-user-list',
@@ -12,26 +13,38 @@ export class UserListComponent implements OnInit {
   @Input() users: User[];
   @Input() filterText: string;
   departments: any;
-  user: User;
   id: any;
 
-  constructor(private readonly router: Router, private readonly route: ActivatedRoute, private readonly departmentService: DepartmentService) {}
+  constructor(private readonly router: Router, private readonly route: ActivatedRoute,
+   private readonly departmentService: DepartmentService, private readonly userService: UserService) {}
 
   ngOnInit() {
-    this.checkIdParam();
-    this.loadDepartments();
+    this.loadAllUsers();
   }
 
-  selectUser(uid: number): void {
+  selectUser(uid: number) {
     this.router.navigate(['/profile/my-profile/', uid], {relativeTo: this.route});
   }
 
-  checkIdParam(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+  loadAllUsers(): any {
+    if(this.getDepartmentId()) {
+      return this.getAllEmployees();
+    }
+    return this.getAllUsers(); 
   }
 
-  loadDepartments() {
-    this.departmentService.getAllDepartments().subscribe(department => this.departments = department);
+  getDepartmentId(): string {
+    return this.id = this.route.snapshot.paramMap.get('id');
+  }
+
+  getAllEmployees(): any {
+    this.departmentService.getAllDepartments().subscribe((department: any) => {
+      department.filter((item: any) => item.name === this.id).map((item: any) => this.users = item.employees);
+    });
+  }
+
+  getAllUsers()  {
+    this.userService.getAll().subscribe(users => this.users = users );
   }
 
 }
