@@ -1,0 +1,16 @@
+img {
+  border-radius: 50%;
+  width: 75%;
+  height: auto;
+  @media (max-width: 500px) {
+    float: left;
+  }
+  @media (min-width: 501px) {
+    padding-left: 10px;
+  }
+  @media (min-width: 992px) {
+    width: 80%;
+  }
+}
+
+

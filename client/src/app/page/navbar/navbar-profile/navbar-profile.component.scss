@@ -1,0 +1,139 @@
+@import "./node_modules/bootstrap/scss/mixins";
+@import "./node_modules/bootstrap/scss/functions";
+@import "./node_modules/bootstrap/scss/variables";
+
+@import "../../../common/theme";
+
+p {
+  padding: 0;
+  margin: 0;
+}
+a {
+  border: none;
+  text-decoration: none;
+}
+
+:host {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  @include media-breakpoint-up(md) {
+    min-width: 20vmin;
+  }
+  .user-bar__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-left: 30px;
+  }
+  & :first-child {
+    justify-content: flex-start;
+  }
+  & :last-child {
+    justify-content: flex-end;
+  }
+  .notifications {
+    display: flex;
+    align-items: center;
+    cursor: default;
+    &__icon {
+      height: auto;
+      width: 4vmin;
+      margin-right: 5px;
+      @include media-breakpoint-up(md) {
+        width: 3vmin;
+      }
+    }
+    &__count {
+      font: normal 12px arial, sans-serif;
+    }
+  }
+  .dates {
+    display: flex;
+    align-items: center;
+    cursor: default;
+    &__icon {
+      height: auto;
+      width: 4vmin;
+      margin-right: 5px;
+      @include media-breakpoint-up(md) {
+        width: 3vmin;
+      }
+    }
+    &__count {
+      font: normal 12px arial, sans-serif;
+    }
+  }
+  .user-bar {
+    &__btn {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end !important;
+      align-items: center;
+      width: 100%;
+      cursor: pointer;
+    }
+    &__name {
+      display: none;
+      @include media-breakpoint-up(md) {
+        display: flex;
+        justify-content: center;
+        font: $base-font-size $font-stack;
+        color: $bg2-color;
+      }
+      a {
+        text-decoration: none;
+        color: $bg2-color;
+      }
+    }
+    &__avatar {
+      height: 25px;
+      width: 25px;
+      border-radius: 50%;
+      @include media-breakpoint-up(md) {
+        height: 30px;
+        width: 30px;
+      }
+    }
+    &__menu {
+      margin: 0 !important;
+      padding: 0;
+      right: 0 !important;
+      left: auto !important;
+      width: 180px;
+      border-color: $border-color;
+      border-radius: 1px;
+      @include media-breakpoint-up(md) {
+        width: auto;
+      }
+    }
+    &__elem {
+      font: normal 12px $font-stack;
+      color: $primary-color;
+      padding: 17px;
+      text-transform: capitalize;
+      cursor: pointer;
+      @include media-breakpoint-up(md) {
+        font: $base-font-size $font-stack;
+      }
+    }
+  }
+}
+
+.dropdown-menu li a {
+  position: relative;
+}
+
+.dropdown-menu li a:hover {
+  background: $bg-color !important;
+}
+.dropdown-menu li.current a::after {
+  position: absolute;
+  content: url("../../../../assets/img/symbol_ok.svg");
+  left: 140px;
+  @include media-breakpoint-up(md) {
+    left: 200px;
+  }
+}

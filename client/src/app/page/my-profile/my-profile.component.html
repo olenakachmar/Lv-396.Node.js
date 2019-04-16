@@ -1,0 +1,91 @@
+<section class="container-fluid page-wrapper">
+  <div class="row">
+    <div class="col-lg-4 sidebar-wrapper">
+      <app-user-bar-info class="user-bar-info" [userinfo]="user"></app-user-bar-info>
+    </div>
+    <main class="col-lg-8 content-wrapper">
+      <div class="row first-row" *ngIf="user">
+
+        <div class="col main-user-info">
+          <h1>{{ getFullName() }}</h1>
+          <p>{{ user.position }}</p>
+        </div>
+      </div>
+      <div class="row second-row">
+        <div class="col-lg-4 col-md-4 contact-info">
+          <div class="contact_up">
+            <div class="email">
+              <div>
+                <span class="label">email</span>
+              </div>
+              <span class="info">example@gmail.com</span>
+            </div>
+
+            <div class="phone">
+              <div>
+                <span class="label">phone</span><br>
+              </div>
+              <span class="info">+380 123 45 67 880</span>
+            </div>
+          </div>
+
+          <div class="contact_down">
+            <div class="skype">
+              <div>
+                <span class="label">skype</span><br>
+              </div>
+              <span class="info">skype</span>
+            </div>
+
+            <div class="telegram">
+              <div>
+                <span class="label">telegram</span><br>
+              </div>
+              <span class="info">@telegram</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5 col-md-5 date-info">
+          <div class="date_up">
+            <div class="upcoming-review">
+              <div>
+                <span class="label">upcoming review date</span><br>
+              </div>
+              <span class="info">12 / 08 / 2019</span>
+            </div>
+
+            <div class="last-review">
+              <div>
+                <span class="label">last review date</span><br>
+              </div>
+              <span class="info">12 / 08 / 2019</span>
+            </div>
+          </div>
+          <div class="date_down">
+            <div class="data-coming">
+              <div>
+                <span class="label">data coming</span><br>
+              </div>
+              <span class="info">12 / 08 / 2019</span>
+            </div>
+
+            <div class="last-login">
+              <div>
+                <span class="label">last login date</span><br>
+              </div>
+              <span class="info">12 / 08 / 2019</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row third-row">
+        <div class="col">
+          <div class="button_wrapper" [routerLink]="[ '/profile/edit-my-profile' ]">
+            <a class="edit_button">Edit Profile</a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</section>

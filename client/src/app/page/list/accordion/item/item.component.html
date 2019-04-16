@@ -1,0 +1,36 @@
+<accordion>
+  <accordion-group #group>
+    <div accordion-heading class="heading-grid">
+      <span>{{ task.id }}</span>
+      <div class="heading-text">
+        <h5>{{ task.name }}</h5>
+      </div>
+      <div class="heading-excerpt">
+        <p>{{ task.excerpt }}</p>
+      </div>
+      <div class="heading-filter">
+        <p>{{ task.status.name }}</p>
+      </div>
+      <div class="heading-date">
+        <p>{{ task.date }}</p>
+      </div>
+      <div class="heading-icon">
+      </div>
+    </div>
+    <div class="body-text">
+      <p>{{ task.content }}</p>
+    </div>
+    <div class="body-grid">
+      <div class="body-from">
+        <span>From: </span>
+        <span class="bold" (click)="selectUser(user._id)">{{ task.author.firstName }} {{ task.author.lastName }}</span>
+      </div>
+      <div class="body-resolve">
+        <button type="submit" (click)="resolveClick()" class="btn btn-outline-primary mark-resolve">
+          MARK AS RESOLVED
+        </button>
+      </div>
+      <app-modal [modalType]="'RE-ASSIGNE'" [task]="task"></app-modal>
+    </div>
+  </accordion-group>
+</accordion>

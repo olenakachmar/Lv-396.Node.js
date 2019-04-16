@@ -1,0 +1,34 @@
+@import '../../../common/theme';
+
+input {
+  width: 459px;
+  height: 50px;
+  border: 1px solid $case-color;
+  background-image: url("../../../../assets/img/search.svg");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-origin: content-box;
+  border-radius: 0;
+
+    &::placeholder {
+      color: $primary-color;
+      font-size: $base-font-size;
+    }
+}
+
+.row {
+  padding: 0;
+}
+
+p {
+  font-size: 11px;
+  line-height: $base2-font-size;
+  margin-bottom: 0;
+  span {
+    font-size: $base3-font-size;
+  }
+}
+
+.mr-sm-2, .mx-sm-2 {
+  margin-right: -0.5rem !important;
+}

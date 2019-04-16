@@ -1,0 +1,20 @@
+<div class="user-bar-info" *ngIf="userinfo">
+  <div class="photo">
+    <app-user-image></app-user-image>
+  </div>
+  <input type="checkbox" id="bt"/>
+  <label class="check-button" for="bt">Show more</label>
+  <div class="toggle-show">
+    <div class="main-user-info">
+      <div>{{ userinfo.firstName }} {{ userinfo.lastName }}</div>
+      <div>{{ userinfo.position }}</div>
+    </div>
+    <app-link-to-profile class="additional-info" [info]="userinfo.manager.firstName + ' ' + userinfo.manager.lastName"
+                         [label]="'My manager'"></app-link-to-profile>
+    <app-link-to-profile class="additional-info" [info]="userinfo.department.name"
+                         [label]="'My department'"></app-link-to-profile>
+    <app-link-to-profile class="additional-info" [info]="userinfo.myTeamlead"
+                         [label]="'My Team Lead'"></app-link-to-profile>
+  </div>
+</div>
+
