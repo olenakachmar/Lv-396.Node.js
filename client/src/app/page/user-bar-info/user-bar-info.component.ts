@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from '../../app_models/user';
-import { UserService } from '../../app_services/user.service';
+import { UserService } from '../../common/services/user.service';
+import { User } from '../../common/models/user';
 
 @Component({
   selector: 'app-user-bar-info',

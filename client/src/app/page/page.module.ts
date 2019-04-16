@@ -29,6 +29,7 @@ import { DatepickerFilterComponent } from './filter/datepicker-filter/datepicker
 import { CreateUpdateSideBarInfoComponent } from './create-update-user-page/create-side-bar-info/create-update-side-bar-info.component';
 import { CreateUpdateUserPageComponent } from './create-update-user-page/create-update-user-page.component';
 import { DropdownInfoComponent } from './create-update-user-page/create-side-bar-info/dropdown-info/dropdown-info.component';
+import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
@@ -61,7 +62,8 @@ export const routes: Routes = [
     CreateUpdateUserPageComponent,
     CreateUpdateSideBarInfoComponent,
     DatepickerFilterComponent,
-    DropdownInfoComponent
+    DropdownInfoComponent,
+    AddTaskFormComponent
   ],
   imports: [
     CommonModule,
