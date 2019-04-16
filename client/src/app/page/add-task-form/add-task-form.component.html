@@ -1,0 +1,28 @@
+<div class="row">
+  <h2 class="entry-title">Create issue</h2>
+</div>
+<div class="row form-wrapper">
+  <form class="container-fluid">
+    <div class="row form-row">
+      <div class="col">
+        <label for="task-name">Theme name</label>
+        <input type="text" name="task-name" id="task-name" required placeholder="Theme name" value="" />
+      </div>
+      <div class="col">
+        <label>Status</label>
+        <app-dropdown-filter class="filter-item-container"
+                             [cssClassName]="dropDownCssClassName" [filterItem]="theFilter"
+                             (filterVal)="sendFilterVal(theFilter.id, $event)"></app-dropdown-filter>
+      </div>
+    </div>
+    <div class="row form-row">
+      <input type="text" name="task-summary" id="task-summary" required placeholder="Summary message" value="" />
+    </div>
+    <div class="row form-row">
+      <textarea name="task-description" id="task-description" class="textarea-field" placeholder="Task description"></textarea>
+    </div>
+    <div class="row form-row">
+      <input type="submit" value="Send Issue"/>
+    </div>
+  </form>
+</div>
