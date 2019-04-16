@@ -17,13 +17,12 @@ export class LinkToProfileComponent implements OnInit {
   selectDepartment(idLinks, info, label): any {
     if (label === 'My department') {
       this.router.navigate(['/profile/contact-info/', info], {relativeTo: this.route});
-    } else if (label === 'My manager') {
-      this.router.navigate(['/profile/my-profile/', idLinks], {relativeTo: this.route});
-    } else if (label === 'My Team Lead') {
+    }
+    if (label === 'My manager') {
       this.router.navigate(['/profile/my-profile/', idLinks], {relativeTo: this.route});
     }
-  }
-
-  ngOnInit() {
+    if (label === 'My Team Lead') {
+      this.router.navigate(['/profile/my-profile/', idLinks], {relativeTo: this.route});
+    }
   }
 }

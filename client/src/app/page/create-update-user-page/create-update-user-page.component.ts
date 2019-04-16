@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../app_services/user.service';
-import { User } from '../../app_models/user';
+import { UserService } from '../../common/services/user.service';
+import { User } from '../../common/models/user';
 
 @Component({
   selector: 'app-create-update-user-page',
@@ -13,13 +13,10 @@ export class CreateUpdateUserPageComponent implements OnInit {
   constructor(readonly userService: UserService) {
   }
 
-  ngOnInit() {
-  }
   extractUser(user): any {
     this.newUser = user;
     this.userService.addUser(this.extractUser(this.newUser))
       .subscribe((data: User) => {
-        console.log(data);
       });
   }
 }
