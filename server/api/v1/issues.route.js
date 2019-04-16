@@ -27,32 +27,8 @@ router.route('/issues')
         res.json(issues);
       });
   })
-  .post(async (req, res) => {
-    const newIssue = Issues({
-      name: req.body.name,
-      excerpt: req.body.excerpt,
-      status: req.body.status,
-      type: req.body.type,
-      date: new Date().getTime(),
-      author: req.body.author,
-      content: req.body.content,
-      assignTo: req.body.assignTo,
-    });
-    await newIssue.save((err) => {
-      if (err) {
-        res.json({
-          error: err,
-        });
-        res.end();
-      }
-      res.json({
-        added: 'Successfully',
-      });
-    });
-  })
-  .put((req, res) => {
-    const { id } = req.body;
-    const user = arrKeys.reduce((obj, el) => {
+  .post((req, res) => {
+    const parameters = arrKeys.reduce((obj, el) => {
       if (req.body[el]) {
         return {
           ...obj,
@@ -63,7 +39,65 @@ router.route('/issues')
         ...obj,
       };
     }, {});
-    Issues.findByIdAndUpdate(id, user, { new: true })
+    const newIssue = Issues({
+      ...parameters,
+      status: {
+        name: req.body.statusName,
+        value: req.body.statusValue,
+      },
+      type: {
+        name: req.body.typeName,
+        value: req.body.typeValue,
+      },
+    });
+    newIssue.save()
+      .then(() => {
+        res.status(201).json({
+          added: 'Successfully',
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          err,
+        });
+      });
+  })
+  .put((req, res) => {
+    const { id } = req.body;
+    const parameters = arrKeys.reduce((obj, el) => {
+      if (req.body[el]) {
+        if (el === 'statusName' || el === 'statusValue') {
+          if (req.body.statusName && req.body.statusValue) {
+            return {
+              ...obj,
+              status: {
+                name: req.body.statusName,
+                value: req.body.statusValue,
+              },
+            };
+          }
+        }
+        if (el === 'typeName' || el === 'typeValue') {
+          if (req.body.typeName && req.body.typeValue) {
+            return {
+              ...obj,
+              type: {
+                name: req.body.typeName,
+                value: req.body.typeValue,
+              },
+            };
+          }
+        }
+        return {
+          ...obj,
+          [el]: req.body[el],
+        };
+      }
+      return {
+        ...obj,
+      };
+    }, {});
+    Issues.findByIdAndUpdate(id, parameters, { new: true })
       .exec((err, issue) => {
         if (err) {
           res.status(500).json({
@@ -78,7 +112,7 @@ router.route('/issues')
             err: 'You should enter assignTo and reassigned options',
           });
         }
-        res.json({
+        res.status(201).json({
           updated: 'Successfully',
         });
       });
@@ -96,7 +130,7 @@ router.route('/issues')
             err: 'Issue not found',
           });
         }
-        res.json({
+        res.status(201).json({
           deleted: 'Successfully',
         });
       });
@@ -112,7 +146,7 @@ router.get('/issues/all', (req, res) => {
           err,
         });
       }
-      res.json(issues);
+      res.status(201).json(issues);
     });
 });
 router.put('/issues/resolve', async (req, res) => {
@@ -140,7 +174,7 @@ router.put('/issues/resolve', async (req, res) => {
           err: 'You should enter userId',
         });
       }
-      res.json({
+      res.status(201).json({
         updated: 'Successfully',
       });
     });

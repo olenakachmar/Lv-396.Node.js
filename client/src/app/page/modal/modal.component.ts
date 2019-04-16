@@ -4,10 +4,9 @@ import { TasksService } from '../../page/common/tasks.service';
 import { UserService } from '../../app_services/user.service';
 import { User } from '../../app_models/user';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Task } from '../common/task';
 import { FiltersService } from '../common/filters.service';
-import { FilterOptions } from '../common/filter-options';
 import { Filter } from '../common/filter';
+
 
 @Component({
   selector: 'app-modal',
@@ -19,6 +18,7 @@ export class ModalComponent implements OnInit {
   @Input() task: any;
   @Input() item: any;
   @Input() modalType: string;
+  @Output() readonly filterVal = new EventEmitter();
   modalRef: BsModalRef;
   selectedStatus: {};
   users: User[];
@@ -27,12 +27,10 @@ export class ModalComponent implements OnInit {
   filtersAll: Filter[];
   theFilter: Filter;
   getFilter = new EventEmitter();
-  @Output() readonly filterVal = new EventEmitter();
   obj: {
     filterId: number,
     optionId: any
   };
-
 
   constructor(private readonly modalService: BsModalService,
               private readonly tasksService: TasksService,
@@ -69,11 +67,6 @@ export class ModalComponent implements OnInit {
     console.log(this.obj);
   };
 
-  selectIt = (i, event) => {
-    this.filterVal.emit(i);
-    event.preventDefault();
-  };
-
   getFiltersNew(): any {
     this.filtersService.getFilters()
       .subscribe(filtersAll => this.theFilter = this.editFilter(filtersAll));
@@ -87,12 +80,12 @@ export class ModalComponent implements OnInit {
     return filterElem;
   };
 
-  openModal(template: TemplateRef<any>): void {
+  public openModal(template: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(template);
     this.getFiltersNew();
   }
 
-  onSubmit(event: any): any {
+  public onSubmit(event: any): void {
     const newname = event.target.name.value;
     const newcontent = event.target.content.value;
     const newexcerpt = event.target.excerpt.value;
@@ -107,14 +100,10 @@ export class ModalComponent implements OnInit {
       },
       excerpt: newexcerpt,
       assignTo: newAssignTo,
-      reassigned: this.task.author,
+      reassigned: this.task.author._id,
     };
-    console.log(this.editTask);
-    console.log(this.task);
-    this.tasksService.editTask(this.editTask.id, this.editTask.name, this.editTask.newcontent,
-                              this.editTask.status.name, this.editTask.newAssignTo, this.editTask.newexcerpt,
-                              this.editTask.reassigned)
-      .subscribe(item => console.log(item));
+    this.tasksService.editTask(this.editTask)
+      .subscribe((item: any) => console.log(item));
   }
 
   trackElement(index: number, element: any): any {

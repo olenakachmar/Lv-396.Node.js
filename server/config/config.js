@@ -5,6 +5,6 @@ module.exports = {
   smtpEmail: process.env.MAILER_EMAIL,
   smtpEmailPass: process.env.MAILER_PASSWORD,
   arrKeys: ['login', 'password', 'firstName', 'lastName', 'position', 'email', 'phone', 'type', 'manager', 'teamlead', 'department', 'photoURL', 'hr'],
-  arrKeysIssues: ['name', 'excerpt', 'status', 'content', 'assignTo', 'reassigned'],
+  arrKeysIssues: ['name', 'excerpt', 'author', 'content', 'assignTo', 'reassigned', 'statusName', 'statusValue', 'typeName', 'typeValue'],
   frontURI: process.env.FRONT_URI,
 };

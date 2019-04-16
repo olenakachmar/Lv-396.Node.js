@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../../app_services/user.service';
 import { User } from '../../../../app_models/user';
 
-
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
@@ -31,15 +30,13 @@ export class ItemComponent implements OnInit {
     return false;
   }
 
-  
-
   selectUser(uid: number): void {
     this.router.navigate(['/profile/my-profile/', uid], {relativeTo: this.route});
   }
 
   resolveClick(): void {
     this.tasksService.updateResolvedBy(this.user._id, this.task.id)
-      .subscribe(item => console.log(item));
+      .subscribe((item: any) => item);
   }
 }
 

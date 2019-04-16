@@ -19,6 +19,8 @@ export class Task {
               public date?: string,
               public author?: string,
               public content?: string,
+              public assignTo?: string,
+              public reassigned?: string,
               public resolvedByAuthor?: boolean,
               public resolvedByPerformer?: boolean) {
   }
