@@ -1,4 +1,5 @@
 @import '../../common/css/theme';
+@import '../../common/css/theme.form';
 
 .text-reassign {
   font-size: 11px;
@@ -59,7 +60,7 @@
   grid-row-end: 4;
 }
 
-.fromName-grid{
+.fromName-grid {
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 5;
@@ -81,23 +82,6 @@
 
 .no-visible{
   display: none;
-}
-.name-grid input,
-.filter-grid select,
-.assign-grid button,
-.date-grid input,
-.text-grid textarea {
-  height: 50px;
-  border: $case-color 1px solid;
-  border-radius: 0;
-  background-color: $bg2-color;
-  width: 100%;
-  font-size: $base-font-size;
-  text-align: left;
-}
-
-.filter-grid select option{
-  margin: 30px;
 }
 
 .input-group-prepend,
@@ -121,51 +105,8 @@
   border:none;
 }
 
-.name-grid input::placeholder,
-.date-grid input::placeholder {
-  color: $primary-color;
-}
-
-.fromName-grid input::placeholder,
-.reassignFrom-grid input::placeholder {
-  color: $case-color;
-  font-size: $base-font-size;
-}
-
 .text-grid textarea {
   height: 120px;
-}
-
-.addTask-grid button {
-  font-size: 12px;
-  height: 50px;
-  border-radius: 0;
-  padding-left: 28px;
-  padding-right: 28px;
-}
-
-.dropdown-item{
-  color: $primary-color;
-  font-size: $base-font-size;
-}
-
-.btn-outline-primary:hover {
-  color: $primary-color;
-}
-
-.dropdown-toggle::after {
-  position: absolute;
-  display: block;
-  right: 20px;
-  top: 17px;
-  width: 16px;
-  height: 16px;
-  border: 0;
-  background: url('../../../assets/img/arrow_down.svg') center center no-repeat;
-}
-
-.dropdown-toggle[aria-expanded='true']::after{
-  background: url('../../../assets/img/arrow_up.svg') center center no-repeat;
 }
 
 ::ng-deep .modal-dialog {
@@ -185,10 +126,14 @@
 
 .close span {
   position: absolute;
-  top: 5px;
-  left: 11px;
+  top: 13px;
+  left: 10px;
   color: $border-color;
   font-size: 32px;
+}
+
+.re-assign {
+  float: right;
 }
 
 @media(max-width:610px) {
@@ -198,19 +143,4 @@
     right: 25px;
     background-color: transparent;
   }
-}
-
-.re-assign {
-  float: right;
-}
-
-.re-assign button {
-  border-radius: 0;
-  padding: 15px;
-}
-
-.re-assign button:hover {
-  background-color: $primary-color;
-  border: $primary-color 1px solid;
-  color: $bg2-color;
 }
