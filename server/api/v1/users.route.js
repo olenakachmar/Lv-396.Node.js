@@ -122,11 +122,14 @@ router.route('/users')
         res.status(404).json({
           err: 'User not found',
         });
-      } else {
-        Object.assign(doc, user);
-        doc.save();
-        res.json(doc);
+        return 0;
       }
+      if (user.photoID) {
+        cloudinary.v2.api.delete_resources(user.photoID);
+      }
+      Object.assign(doc, user);
+      doc.save();
+      res.json(doc);
     });
   });
 
