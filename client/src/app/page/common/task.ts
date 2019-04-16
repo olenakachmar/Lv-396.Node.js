@@ -19,7 +19,7 @@ export class Task {
               public date?: string,
               public author?: string,
               public content?: string,
-              public resolveByAuthor?: boolean,
-              public resolveByDev?: boolean) {
+              public resolvedByAuthor?: boolean,
+              public resolvedByPerformer?: boolean) {
   }
 }

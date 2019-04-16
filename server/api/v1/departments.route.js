@@ -51,6 +51,7 @@ router.route('/departments')
         });
       });
   });
+
 router.get('/departments/:id', (req, res) => {
   const { id } = req.params;
   Departments.findById(id)
