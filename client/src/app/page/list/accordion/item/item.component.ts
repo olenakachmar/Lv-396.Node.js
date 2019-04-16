@@ -38,5 +38,4 @@ export class ItemComponent implements OnInit {
     this.tasksService.updateResolvedBy(this.user._id, this.task.id)
       .subscribe((item: any) => item);
   }
-
 }
