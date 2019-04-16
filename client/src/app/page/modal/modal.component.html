@@ -25,7 +25,7 @@
       <div class="filter-grid">
         <app-dropdown-filter class="filter-item-container"
                        [filterItem]="theFilter"
-                       (filterVal)="sendFilterVal(theFilter.id, $event)"></app-dropdown-filter>
+                       (filterVal)="getFilterVal(theFilter.id, $event)"></app-dropdown-filter>
       </div>
       <div class="btn-group assign-grid">
         <select class="form-control" name="assignTo" formControlName="assignTo">

@@ -11,4 +11,5 @@ export class FiltersService {
   getFilters(): Observable<Filter[]> {
     return of(FILTERS);
   }
+
 }

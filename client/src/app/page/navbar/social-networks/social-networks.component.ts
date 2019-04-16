@@ -15,4 +15,8 @@ export class SocialNetworksComponent implements OnInit {
     this.networksService.getLinksList()
     .subscribe(links => this.links = links);
   }
+
+  trackById(link: any): string {
+    return link.id;
+  }
 }

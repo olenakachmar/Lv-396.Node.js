@@ -2,8 +2,8 @@ import { Component, OnInit, Input, Injectable } from '@angular/core';
 import { Task } from '../../../common/task';
 import { TasksService } from '../../../common/tasks.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from '../../../../app_services/user.service';
-import { User } from '../../../../app_models/user';
+import { UserService } from '../../../../common/services/user.service';
+import { User } from '../../../../common/models/user';
 
 @Component({
   selector: 'app-item',
@@ -38,5 +38,5 @@ export class ItemComponent implements OnInit {
     this.tasksService.updateResolvedBy(this.user._id, this.task.id)
       .subscribe((item: any) => item);
   }
-}
 
+}

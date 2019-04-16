@@ -1,17 +1,19 @@
 import { Component, OnInit, TemplateRef, Input, EventEmitter, Output } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { TasksService } from '../../page/common/tasks.service';
-import { UserService } from '../../app_services/user.service';
-import { User } from '../../app_models/user';
+import { UserService } from '../../common/services/user.service';
+import { User } from '../../common/models/user';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { FiltersService } from '../common/filters.service';
 import { Filter } from '../common/filter';
+import { FilterReturnService } from '../common/filter-return.service';
 
 
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss']
+  styleUrls: ['./modal.component.scss'],
+  providers: [ FilterReturnService ],
 })
 export class ModalComponent implements OnInit {
   modalForm: FormGroup;
@@ -36,7 +38,8 @@ export class ModalComponent implements OnInit {
               private readonly tasksService: TasksService,
               private readonly fb: FormBuilder,
               private readonly filtersService: FiltersService,
-              private readonly userService: UserService) {
+              private readonly userService: UserService,
+              private readonly filterReturnService: FilterReturnService) {
     this.modalForm = fb.group({
       id: new FormControl(),
       name: new FormControl(),
@@ -56,6 +59,7 @@ export class ModalComponent implements OnInit {
       .subscribe(users => this.users = users);
     this.userService.getUser()
       .subscribe(user => this.user = user);
+    this.getTheFilter();
   }
 
   sendFilterVal = (i: number, event: any) => {
@@ -109,4 +113,13 @@ export class ModalComponent implements OnInit {
   trackElement(index: number, element: any): any {
     return element ? element.guid : 0;
   }
+
+  getFilterVal = (i: number, data: number) => {
+    this.theFilter.defaultValue = data;
+  };
+
+  getTheFilter(): void {
+    this.theFilter = this.filterReturnService.createFilterByName('status', 1);
+  }
+
 }

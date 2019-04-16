@@ -1,4 +1,4 @@
-@import '../../../common/theme';
+@import '../../../common/css/theme';
 
 .create-user-bar-info {
   background-color: white;
@@ -64,6 +64,12 @@
       display: grid;
       grid-column-gap: 20px;
       grid-template-columns: repeat(2, 1fr);
+    }
+    .column {
+      width: 100%;
+    }
+    .column:last-of-type {
+      margin-top: 37px;
     }
   }
 }
