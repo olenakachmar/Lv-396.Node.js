@@ -54,7 +54,7 @@ router.route('/users')
 
   .put(passport.authenticate('jwt', {
     session: false,
-  }), (req, res) => {
+  }), upload.single('avatar'), (req, res) => {
     const {
       id,
     } = req.body;
@@ -69,6 +69,53 @@ router.route('/users')
         ...obj,
       };
     }, {});
+
+    let {
+      contactName,
+      contactValue,
+    } = req.body;
+
+    if (contactName && contactValue) {
+      contactValue = Array.isArray(contactValue) ? contactValue : Array(contactValue);
+      contactName = Array.isArray(contactName) ? contactName : Array(contactName);
+
+      const contacts = contactName.reduce((obj, el, idx) => {
+        if (contactValue[idx]) {
+          return [...obj, {
+            contact_name: el,
+            contact_value: contactValue[idx],
+          }];
+        }
+        return [...obj];
+      }, []);
+
+      user.contacts = [...contacts];
+    }
+
+    let {
+      dateTopic,
+      date,
+    } = req.body;
+    if (dateTopic && date) {
+      dateTopic = Array.isArray(dateTopic) ? dateTopic : Array(dateTopic);
+      date = Array.isArray(date) ? date : Array(date);
+      const dates = dateTopic.reduce((obj, el, idx) => {
+        if (date[idx]) {
+          return [...obj, {
+            topic: el,
+            date: new Date(date[idx]),
+          }];
+        }
+        return [...obj];
+      }, []);
+
+      user.dates = [...dates];
+    }
+
+    if (req.file) {
+      user.photoURL = req.file.url;
+      user.photoID = req.file.public_id;
+    }
 
     User.findById(id, (err, doc) => {
       if (!doc) {
