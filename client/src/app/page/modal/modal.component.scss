@@ -6,7 +6,7 @@
 }
 
 ::ng-deep .modal-content {
-  background-color: $bg2-color;
+  background-color: $bg-color;
   border-radius: 0;
   color: $primary-color;
   font-family: $font-stack;
@@ -83,7 +83,7 @@
 .date-grid input,
 .text-grid textarea {
   height: 50px;
-  border: $border-color 1px solid;
+  border: $case-color 1px solid;
   border-radius: 0;
   background-color: $bg2-color;
   width: 100%;
@@ -201,4 +201,10 @@
 .re-assign button {
   border-radius: 0;
   padding: 15px;
+}
+
+.re-assign button:hover {
+  background-color: $primary-color;
+  border: $primary-color 1px solid;
+  color: $bg2-color;
 }

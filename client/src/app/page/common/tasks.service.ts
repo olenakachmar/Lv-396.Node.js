@@ -16,13 +16,28 @@ export class TasksService {
     return this.http.get<Task[]>(`${api}/issues/all`, httpOptions);
   }
 
-  updateResolvedBy(userId: string, taskId: number): any {
+  public updateResolvedBy(userId: string, taskId: number): any {
     const body = {
       userId,
       id: taskId,
     };
 
     return this.http.put<Task>(`${api}/issues/resolve`, body, httpOptions);
+  }
+
+  public editTask(id: string, name: string, excerpt: string, status: any,
+                  content: string, assignTo: string, reassigned: string): any {
+    const body = {
+      id,
+      name,
+      excerpt,
+      status,
+      content,
+      assignTo,
+      reassigned,
+    };
+
+    return this.http.put<Task>(`${api}/issues`, body, httpOptions);
   }
 }
 
