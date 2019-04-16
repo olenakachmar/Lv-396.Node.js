@@ -27,8 +27,14 @@ export class ForgotPasswordComponent implements OnInit {
   ngOnInit() {
   }
 
-  send(email: string) {
-    this.recoverPassword.forgotPassword(email).subscribe(
+  send(form: any) {
+    this.frm.valueChanges.subscribe((value: string) => {
+      if(value.length !== 0) {
+        this.hasFailed = false;
+      }
+    });
+
+    this.recoverPassword.forgotPassword(form.email).subscribe(
       (response) => {
         this.getResponse = true;
         this.message = response;

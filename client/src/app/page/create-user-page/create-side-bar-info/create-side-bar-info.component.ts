@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { IDepartment } from '../../../common/models/department';
 import { DepartmentService } from '../../../common/services/department.service';
 import { OptionPair } from '../../../common/models/option-pair';
 import { UserService } from '../../../common/services/user.service';
+import { User } from '../../../common/models/user';
 
 @Component({
   selector: 'app-create-side-bar-info',
@@ -11,33 +12,19 @@ import { UserService } from '../../../common/services/user.service';
 })
 export class CreateSideBarInfoComponent implements OnInit {
 
+  newUser = new User();
+
+  @Output() readonly getUserBarInfo = new EventEmitter();
+
   departmentsOptionPair: OptionPair[] = [];
   departments: IDepartment[] = [];
-  departmentId: any;
   positions: OptionPair[] = [];
   teamLeads: OptionPair[] = [];
-  teamLeadId: any;
   roles: OptionPair[] = [];
   managers: OptionPair[] = [];
-  positionId: string;
 
 
   constructor(readonly departmentService: DepartmentService, readonly userService: UserService) {
-  }
-
-  retrieveSelectedDepartment($event: any): void {
-    this.departmentId = $event;
-    this.positions = this.departments
-      .filter(elem => elem._id === $event)[0].position
-      .map(e => new OptionPair(e, e));
-  }
-
-  retrieveSelectedTeamleadId($event: any): void {
-    this.teamLeadId = $event;
-  }
-
-  retrieveSelectedPosition($event: any): void {
-    this.positionId = $event;
   }
 
   ngOnInit(): void {
@@ -51,9 +38,33 @@ export class CreateSideBarInfoComponent implements OnInit {
       .subscribe(data => {
         this.teamLeads = data
           .map(elem => new OptionPair(elem._id, `${elem.firstName} ${elem.lastName}`));
-        this.roles = data.map(elem => new OptionPair(elem._id, elem.firstName));
+        this.roles = ['Developer', 'Tester', 'HR'].map(elem => new OptionPair(elem, elem));
         this.managers = data.map(elem => new OptionPair(elem._id, elem.position));
       });
   }
 
+  retrieveSelected(type: string, id: any): void {
+    switch (type) {
+      case 'Department':
+        this.newUser.department = id;
+        this.positions = this.departments
+          .filter(elem => elem._id === id)[0].position
+          .map(e => new OptionPair(e, e));
+        break;
+      case 'TeamLead':
+        this.newUser.teamlead = id;
+        break;
+      case 'Position':
+        this.newUser.position = id;
+        break;
+      case 'Role':
+        this.newUser.role = id;
+        break;
+      case 'Manager':
+        this.newUser.manager = id;
+        break;
+      default:
+        break;
+    }
+  }
 }

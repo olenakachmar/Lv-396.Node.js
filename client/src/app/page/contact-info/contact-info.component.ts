@@ -14,15 +14,10 @@ export class ContactInfoComponent implements OnInit {
   constructor(private readonly userService: UserService) { }
 
   ngOnInit() {
-    this.loadAllUsers();
   }
 
   takeFilterValue(text: string) {
     this.filterText = text;
-  }
-
-  loadAllUsers() {
-    this.userService.getAll().subscribe(users => { this.users = users; });
   }
 
 }

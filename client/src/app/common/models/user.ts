@@ -13,5 +13,6 @@ export  class User {
   contacts: object;
   photoURL: string;
   hrID: number;
-  date: object;
+  dates: any;
+  role: string;
 }

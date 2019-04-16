@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Injectable } from '@angular/core';
 import { Task } from '../../../common/task';
+import { TasksService } from '../../../common/tasks.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../../common/services/user.service';
 import { User } from '../../../../common/models/user';

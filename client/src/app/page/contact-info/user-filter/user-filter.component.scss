@@ -16,6 +16,19 @@ input {
     }
 }
 
+.row {
+  padding: 0;
+}
+
+p {
+  font-size: 11px;
+  line-height: $base2-font-size;
+  margin-bottom: 0;
+  span {
+    font-size: $base3-font-size;
+  }
+}
+
 .mr-sm-2, .mx-sm-2 {
   margin-right: -0.5rem !important;
 }

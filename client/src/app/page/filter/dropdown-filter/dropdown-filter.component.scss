@@ -109,6 +109,10 @@
   content: "";
 }
 
+.btn-group {
+  width: 100%;
+}
+
 @media(max-width: 670px) {
   .btn-group.width-100 {
     display: block;
