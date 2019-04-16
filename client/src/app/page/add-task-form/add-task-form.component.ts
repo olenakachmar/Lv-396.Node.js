@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Filter } from '../common/filter';
+import { FilterOptions } from '../common/filter-options';
 import { FilterReturnService } from '../common/filter-return.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { UserService } from '../../common/services/user.service';
+import { User } from '../../common/models/user';
+import { TasksService } from '../../page/common/tasks.service';
+import { TaskCreateRequestBody } from '../../page/common/task';
 
 @Component({
   selector: 'app-add-task-form',
@@ -12,6 +17,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class AddTaskFormComponent implements OnInit {
   theFilter: Filter;
   dropDownCssClassName: string;
+  user: User;
+  serverErrorMessage: {name: string, statusText: string, message: string};
+  haveServerError: boolean;
+  taskIsJustSend: boolean;
 
   addTaskForm = this.fb.group({
     taskName: [
@@ -50,12 +59,18 @@ export class AddTaskFormComponent implements OnInit {
 
   constructor(
     private readonly filterReturnService: FilterReturnService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private readonly userService: UserService,
+    private readonly tasksService: TasksService,
   ) { }
 
   ngOnInit(): any {
     this.dropDownCssClassName = 'width-100';
+    this.haveServerError = false;
+    this.taskIsJustSend = false;
     this.getTheFilter();
+    this.userService.getUser()
+      .subscribe(user => this.user = user);
   }
 
   getFilterVal = (i: number, data: number) => {
@@ -67,10 +82,51 @@ export class AddTaskFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const result: [any, any] = [
-      this.addTaskForm.value,
-      this.theFilter.defaultValue
-    ];
+    const requestBody: TaskCreateRequestBody = this.getRequestBody(this.addTaskForm.value);
+
+    this.tasksService.createTask(requestBody)
+      .subscribe(() => this.successHandling(),
+        error => this.errorHandling(error)
+      );
   }
+
+  private successHandling(): void {
+    this.taskIsJustSend = true;
+
+    setTimeout(() => {
+      this.taskIsJustSend = false;
+    }, 5000);
+  }
+
+  private errorHandling(error: any): void {
+    this.haveServerError = true;
+    this.serverErrorMessage = {
+      name: error.status,
+      statusText: error.statusText,
+      message: error.message
+    };
+    setTimeout(() => {
+      this.haveServerError = false;
+    }, 5000);
+  }
+
+  private readonly getRequestBody = (formVal: any): TaskCreateRequestBody => ({
+      name: formVal.taskName,
+      excerpt: formVal.taskSummary,
+      statusName: this.getStatusName(),
+      statusValue: this.theFilter.defaultValue,
+      typeName: 'issue',
+      typeValue: 1,
+      author: this.user._id,
+      content: formVal.taskDescription,
+      assignTo: this.user.manager._id
+    });
+
+  private readonly getStatusName = (): string => {
+    const val = this.theFilter.defaultValue;
+    const options: FilterOptions[] = this.theFilter.options.filter((opt: FilterOptions) => opt.value === val);
+
+    return options[0].name;
+  };
 
 }

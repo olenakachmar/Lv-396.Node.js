@@ -1,8 +1,19 @@
-<div class="row">
-  <h2 class="entry-title">Create issue</h2>
-</div>
 <div class="row form-wrapper">
-  <form class="container-fluid" [formGroup]="addTaskForm" (ngSubmit)="onSubmit()">
+  <div class="container-fluid">
+    <div class="row">
+      <h2 class="entry-title">Create issue</h2>
+    </div>
+  </div>
+  <div class="container-fluid" *ngIf="haveServerError === true">
+    <div class="row">
+      <div class="alert alert-danger">
+        <h5>Sorry, we have some problems</h5>
+        <p>Error {{ serverErrorMessage.name }}: {{ serverErrorMessage.statusText }}</p>
+        <span>{{ serverErrorMessage.message }}</span>
+      </div>
+    </div>
+  </div>
+  <form class="container-fluid" [formGroup]="addTaskForm" (ngSubmit)="onSubmit()" *ngIf="taskIsJustSend === false">
     <div class="row form-row">
       <div class="col">
         <label for="taskName">Theme name</label>
@@ -49,7 +60,12 @@
       </div>
     </div>
     <div class="row form-row">
-      <input type="submit" value="Send Issue" [disabled]="!addTaskForm.valid"/>
+      <input type="submit" value="Send Issue" class="ml-auto" [disabled]="!addTaskForm.valid"/>
     </div>
   </form>
+  <div class="container-fluid" *ngIf="taskIsJustSend === true">
+    <div class="row">
+      <h1>Success!</h1>
+    </div>
+  </div>
 </div>
