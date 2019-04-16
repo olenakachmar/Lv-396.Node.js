@@ -227,7 +227,6 @@ router.put('/users/watched_issues', async (req, res) => {
       success: 'updated',
     });
   } catch (err) {
-    console.error(err);
     res.status(500).json({
       err,
     });

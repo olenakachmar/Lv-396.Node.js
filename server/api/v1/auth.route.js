@@ -104,8 +104,10 @@ router.post('/signup', upload.single('avatar'), (req, res) => {
     newUser.dates = [...dates];
   }
 
-  newUser.photoURL = req.file.url;
-  newUser.photoID = req.file.public_id;
+  if (req.file) {
+    newUser.photoURL = req.file.url;
+    newUser.photoID = req.file.public_id;
+  }
 
   const mailData = {
     to: newUser.email,
@@ -153,9 +155,9 @@ router.post('/forgot_password', async (req, res) => {
       reset_password_token: token,
       reset_password_expires: Date.now() + 86400000,
     }, {
-      upsert: true,
-      new: true,
-    }).exec();
+        upsert: true,
+        new: true,
+      }).exec();
     const data = {
       to: user.email,
       from: smtpEmail,
