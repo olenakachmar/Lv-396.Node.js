@@ -11,6 +11,7 @@ import { api } from '../../../environments/environment';
 
 export class TasksService {
   constructor(private readonly http: HttpClient) {}
+  tasks: Task[];
 
   getTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(`${api}/issues/all`, httpOptions);
@@ -25,17 +26,18 @@ export class TasksService {
     return this.http.put<Task>(`${api}/issues/resolve`, body, httpOptions);
   }
 
-  public editTask(id: string, name: string, excerpt: string, status: any,
-                  content: string, assignTo: string, reassigned: string): any {
+  public editTask(obj: any): any {
     const body = {
-      id,
-      name,
-      excerpt,
-      status,
-      content,
-      assignTo,
-      reassigned,
+      id: obj.id,
+      name: obj.name,
+      excerpt: obj.excerpt,
+      statusName: obj.status.name,
+      statusValue: obj.status.value,
+      content: obj.content,
+      assignTo: obj.assignTo,
+      reassigned: obj.reassigned,
     };
+    console.log(body);
 
     return this.http.put<Task>(`${api}/issues`, body, httpOptions);
   }

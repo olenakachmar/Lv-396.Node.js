@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, ChangeDetectorRef } from '@angular/core';
 import { UserService } from '../../common/services/user.service';
 import { User } from '../../common/models/user';
 import { FilterOptions } from '../common/filter-options';
@@ -7,7 +7,7 @@ import { FiltersService } from '../common/filters.service';
 import { Task } from '../common/task';
 import moment from 'moment';
 import { TasksService } from '../common/tasks.service';
-import { Status, Type } from '../common/statusOptions.enum';
+import { Status, Type } from '../common/status-options.enum';
 
 @Component({
   selector: 'app-wrapper',
@@ -30,7 +30,8 @@ export class WrapperComponent implements OnInit {
   constructor(
     private readonly userInfoService: UserService,
     private readonly filtersService: FiltersService,
-    private readonly tasksService: TasksService
+    private readonly tasksService: TasksService,
+    private readonly ref: ChangeDetectorRef,
   ) { }
 
   ngOnInit(): void {
@@ -64,20 +65,24 @@ export class WrapperComponent implements OnInit {
   getTasks(): void {
     this.tasksService.getTasks()
       .subscribe(tasks => {
-        this.tasks = tasks.map((item: any) =>
-          ({
+        this.tasks = tasks.map((item: any) => {
+          console.log(item);
+
+          return {
             id: item._id,
             name: item.name,
             excerpt: item.excerpt,
-            status: { name: item.status, value: this.getStatusValue(item.status) },
-            type: { name: item.type, value: this.getTaskType(item.type) },
+            status: { name: item.status.name, value: item.status.value},
+            type: { name: item.type.name, value: item.type.value },
             date: this.convertDate(item.date),
             author: item.author,
             content: item.content,
             resolvedByAuthor: item.resolvedByAuthor,
             resolvedByPerformer: item.resolvedByPerformer,
-          }
-          ));
+          };
+        }
+          );
+        this.ref.detectChanges();
       });
   }
 
@@ -88,7 +93,7 @@ export class WrapperComponent implements OnInit {
     Type[type];
 
   /** Example: from server date looks like '1554287225073' (in millisecond); after convertDate it looks like '03/04/2019' */
-  convertDate(date: number): string {
+  convertDate(date: any): string {
     moment.locale('en-gb');
 
     return moment(date)
