@@ -71,6 +71,17 @@ input[type='submit']:focus {
   color: $primary-color;
 }
 
+button[type='submit']:disabled,
+input[type='submit']:disabled,
+button[type='submit']:disabled:hover,
+button[type='submit']:disabled:focus,
+input[type='submit']:disabled:hover,
+input[type='submit']:disabled:focus{
+  border-color: $case-color;
+  background: $bg2-color;
+  color: $border-color;
+}
+
 label {
   margin-bottom: 5px;
   font-size: $small-font-size;
