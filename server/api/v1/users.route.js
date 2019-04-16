@@ -1,7 +1,9 @@
 const express = require('express');
 const passport = require('../../config/passport');
 const User = require('../../models/user.model');
+const upload = require('../../config/multer');
 const config = require('../../config/config');
+const cloudinary = require('../../config/cloudinary');
 
 const { arrKeys } = config;
 
@@ -155,5 +157,42 @@ const updateContacts = (req, res) => {
 };
 
 router.put('/users/contacts', passport.authenticate('jwt', { session: false }), updateContacts);
+
+router.put('/users/watched_issues', async (req, res) => {
+  const {
+    id,
+    issueID,
+  } = req.body;
+  try {
+    const user = await User.findById(id);
+    user.watched_issues = [...user.watched_issues, issueID];
+    user.save();
+    res.json({
+      success: 'updated',
+    });
+  } catch (err) {
+    res.status(500).json({
+      err,
+    });
+  }
+});
+
+router.post('/users/change_avatar', upload.single('avatar'), async (req, res) => {
+  const {
+    id,
+  } = req.body;
+  try {
+    const user = await User.findById(id);
+    await cloudinary.v2.api.delete_resources(user.photoID);
+    user.photoURL = req.file.url;
+    user.photoID = req.file.public_id;
+    await user.save();
+    res.json(req.file);
+  } catch (err) {
+    res.status(500).json({
+      err,
+    });
+  }
+});
 
 module.exports = router;

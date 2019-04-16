@@ -2,6 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const smtpTransport = require('../../config/smtpTransport');
+const upload = require('../../config/multer');
 const User = require('../../models/user.model');
 const {
   JWT_SECRET,
@@ -38,7 +39,7 @@ router.post('/login', (req, res) => {
   });
 });
 
-router.post('/signup', (req, res) => {
+router.post('/signup', upload.single('avatar'), (req, res) => {
   const parameters = arrKeys.reduce((obj, el) => {
     if (req.body[el]) {
       return {
@@ -74,11 +75,8 @@ router.post('/signup', (req, res) => {
     }, []);
 
     newUser.contacts = [...contacts];
-  } else {
-    res.status(400).json({
-      err: 'Contact value or contact name not specified',
-    });
   }
+
   let {
     dateTopic,
     date,
@@ -86,25 +84,35 @@ router.post('/signup', (req, res) => {
   if (dateTopic && date) {
     dateTopic = Array.isArray(dateTopic) ? dateTopic : Array(dateTopic);
     date = Array.isArray(date) ? date : Array(date);
-
     const dates = dateTopic.reduce((obj, el, idx) => {
       if (date[idx]) {
         return [...obj, {
           topic: el,
-          date: Date(date[idx]),
+          date: new Date(date[idx]),
         }];
       }
       return [...obj];
     }, []);
 
     newUser.dates = [...dates];
-  } else {
-    res.status(400).json({
-      err: 'Date topic or date not specified',
-    });
   }
 
-  newUser.save()
+  newUser.photoURL = req.file.url;
+  newUser.photoID = req.file.public_id;
+
+  const mailData = {
+    to: newUser.email,
+    from: smtpEmail,
+    template: 'create-user-email',
+    subject: 'Registration in HRMS',
+    context: {
+      name: newUser.firstName,
+      login: newUser.login,
+      password: newUser.password,
+    },
+  };
+
+  Promise.all([newUser.save(), smtpTransport.sendMail(mailData)])
     .then(() => {
       res.status(201).json({
         newUser,
@@ -205,6 +213,33 @@ router.post('/recover_password', async (req, res) => {
     res.status(500).json({ err });
   }
   return 0;
+});
+
+router.post('/validate_recovery', async (req, res) => {
+  const {
+    token,
+  } = req.body;
+  try {
+    const user = await User.findOne({
+      reset_password_token: token,
+      reset_password_expires: {
+        $gt: Date.now(),
+      },
+    }).exec();
+
+    if (!user) {
+      res.status(404).json({
+        err: 'Reset password link is invalid or expired',
+      });
+      return 0;
+    }
+
+    res.json({
+      validate: 'Success',
+    });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
 });
 
 module.exports = router;
