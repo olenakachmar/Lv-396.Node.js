@@ -154,11 +154,17 @@ router.put('/issues/resolve', async (req, res) => {
   const { userId } = req.body;
   const issues = await Issues.findById(id);
   let resolve;
-  if (userId === issues.author.toString()) {
+  if (userId === issues.author.toString() && userId === issues.assignTo.toString()) {
+    resolve = {
+      resolvedByAuthor: true,
+      resolvedByPerformer: true,
+    };
+  } else if (userId === issues.author.toString()) {
     resolve = { resolvedByAuthor: true };
   } else if (userId === issues.assignTo.toString()) {
     resolve = { resolvedByPerformer: true };
   }
+
   Issues.findByIdAndUpdate(id, resolve, { new: true })
     .exec((err, issue) => {
       if (err) {
