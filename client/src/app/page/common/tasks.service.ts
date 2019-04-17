@@ -43,5 +43,9 @@ export class TasksService {
   public createTask(requestBody: TaskCreateRequestBody): Observable<any> {
     return this.http.post<Task>(`${api}issues`, requestBody, httpOptions);
   }
+
+  public deleteTask(taskId: string): Observable<{}> {
+    return this.http.delete(`${api}issues/${taskId}`, httpOptions);
+  }
 }
 

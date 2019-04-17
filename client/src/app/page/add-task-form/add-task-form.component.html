@@ -13,6 +13,11 @@
       </div>
     </div>
   </div>
+  <div class="container-fluid" *ngIf="taskIsJustSend === true">
+    <div class="row">
+      <span>Your issue is already send. <a href="#" on-click="onDelete($event)">Undo?</a></span>
+    </div>
+  </div>
   <form class="container-fluid" [formGroup]="addTaskForm" (ngSubmit)="onSubmit()" *ngIf="taskIsJustSend === false">
     <div class="row form-row">
       <div class="col">
@@ -63,9 +68,4 @@
       <input type="submit" value="Send Issue" class="ml-auto" [disabled]="!addTaskForm.valid"/>
     </div>
   </form>
-  <div class="container-fluid" *ngIf="taskIsJustSend === true">
-    <div class="row">
-      <h1>Success!</h1>
-    </div>
-  </div>
 </div>
