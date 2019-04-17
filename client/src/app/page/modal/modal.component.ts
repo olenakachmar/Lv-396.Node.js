@@ -118,7 +118,7 @@ export class ModalComponent implements OnInit {
       id: this.task.id,
       name: newname,
       content: newcontent,
-      statusName: this.theFilter.options.filter((opt: FilterOptions) => opt.value === this.theFilter.defaultValue)[0].name,
+      statusName: this.getStatusName,
       statusValue: this.theFilter.defaultValue,
       excerpt: newexcerpt,
       assignTo: this.usersIds[this.userDropDown.defaultValue],
@@ -128,6 +128,13 @@ export class ModalComponent implements OnInit {
       .subscribe((item: any) => item);
   }
 
+  private readonly getStatusName = (): string => {
+    const val = this.theFilter.defaultValue;
+    const options: FilterOptions[] = this.theFilter.options.filter((opt: FilterOptions) => opt.value === val);
+
+    return options[0].name;
+  };
+  
   trackElement(index: number, element: any): any {
     return element ? element.guid : 0;
   }
