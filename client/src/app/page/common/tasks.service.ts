@@ -17,7 +17,7 @@ export class TasksService {
     return this.http.get<Task[]>(`${api}/issues/all`, httpOptions);
   }
 
-  public updateResolvedBy(userId: string, taskId: number): any {
+  public updateResolvedBy(userId: string, taskId: string): Observable<any> {
     const body = {
       userId,
       id: taskId,
@@ -26,19 +26,8 @@ export class TasksService {
     return this.http.put<Task>(`${api}/issues/resolve`, body, httpOptions);
   }
 
-  public editTask(obj: TaskEditRequestBody): Observable<any> {
-    const body = {
-      id: obj.id,
-      name: obj.name,
-      excerpt: obj.excerpt,
-      statusName: obj.status.name,
-      statusValue: obj.status.value,
-      content: obj.content,
-      assignTo: obj.assignTo,
-      reassigned: obj.reassigned,
-    };
-
-    return this.http.put<TaskEditRequestBody>(`${api}/issues`, body, httpOptions);
+  public editTask(requestBody: TaskEditRequestBody): Observable<any> {
+    return this.http.put<TaskEditRequestBody>(`${api}/issues`, requestBody, httpOptions);
   }
 
   public createTask(requestBody: TaskCreateRequestBody): Observable<any> {
