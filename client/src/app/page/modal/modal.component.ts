@@ -60,7 +60,7 @@ export class ModalComponent implements OnInit {
     this.getTheFilter();
   }
 
-  private createUserDropDown(users): void {
+  private createUserDropDown(users: User[]): void {
     this.usersIds = users.map(item => (item._id));
     this.userDropDown = {
       id: 1,
@@ -71,7 +71,7 @@ export class ModalComponent implements OnInit {
     };
   }
 
-  private createUserDropdownOptions = (users: any): FilterOptions[] => {
+  private createUserDropdownOptions = (users: User[]): FilterOptions[] => {
     let options: FilterOptions[] = users.map(
       (item: User, index: number) =>
       ({
