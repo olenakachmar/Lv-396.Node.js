@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Task } from './task';
+import { Task, TaskCreateRequestBody } from './task';
 import { HttpClient } from '@angular/common/http';
 import { httpOptions } from '../../common/services/user.service';
 import { api } from '../../../environments/environment';
@@ -38,6 +38,10 @@ export class TasksService {
     };
 
     return this.http.put<Task>(`${api}/issues`, body, httpOptions);
+  }
+
+  public createTask(requestBody: TaskCreateRequestBody): Observable<any> {
+    return this.http.post<Task>(`${api}issues`, requestBody, httpOptions);
   }
 }
 
