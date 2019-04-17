@@ -41,7 +41,7 @@ export class NavbarProfileComponent implements OnInit {
   loadUser(): void {
     this.userService.getUser()
       .subscribe(user => {
-        this.dateList = user.dates.map((item) => `${this.convertDate(item.date)}  ${item.topic}`);
+        this.dateList = user.dates;
         this.datesCount = user.dates.length;
         this.avatar = user.photoURL || 'assets/img/userimg.jpg';
         this.user = user;
@@ -55,14 +55,14 @@ export class NavbarProfileComponent implements OnInit {
     return false;
   }
 
-  currentByRout(currentRouter): boolean {
+  currentByRout(currentRouter: string): boolean {
     this.navItemsService.currentRouter(currentRouter);
     this.active = false;
 
     return false;
   }
 
-  currentByIndex(i): boolean {
+  currentByIndex(i: number): boolean {
     this.navItemsService.currentIndex(i);
     if (this.menuList[i].logout) {
       this.menuList[i].current = false;
@@ -72,8 +72,7 @@ export class NavbarProfileComponent implements OnInit {
     return false;
   }
 
-  convertDate(date: number): string {
-    return moment(date)
-      .format('L');
+  trackById(link: any): string {
+    return link.id;
   }
 }
