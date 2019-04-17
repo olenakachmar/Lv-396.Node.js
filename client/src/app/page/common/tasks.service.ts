@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Task, TaskCreateRequestBody } from './task';
+import { Task, TaskCreateRequestBody, TaskEditRequestBody } from './task';
 import { HttpClient } from '@angular/common/http';
 import { httpOptions } from '../../common/services/user.service';
 import { api } from '../../../environments/environment';
@@ -22,11 +22,12 @@ export class TasksService {
       userId,
       id: taskId,
     };
+    console.log(body);
 
     return this.http.put<Task>(`${api}/issues/resolve`, body, httpOptions);
   }
 
-  public editTask(obj: any): any {
+  public editTask(obj: TaskEditRequestBody): Observable<any> {
     const body = {
       id: obj.id,
       name: obj.name,
@@ -38,7 +39,7 @@ export class TasksService {
       reassigned: obj.reassigned,
     };
 
-    return this.http.put<Task>(`${api}/issues`, body, httpOptions);
+    return this.http.put<TaskEditRequestBody>(`${api}/issues`, body, httpOptions);
   }
 
   public createTask(requestBody: TaskCreateRequestBody): Observable<any> {

@@ -13,7 +13,7 @@
         <p>{{ task.status.name }}</p>
       </div>
       <div class="heading-date">
-        <p>{{ convertDate(task.date) }}</p>
+        <p>{{ task.date | date:"dd/MM/yyyy" }}</p>
       </div>
       <div class="heading-icon">
       </div>

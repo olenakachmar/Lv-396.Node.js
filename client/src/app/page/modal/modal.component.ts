@@ -110,11 +110,4 @@ export class ModalComponent implements OnInit {
   getTheFilter(): void {
     this.theFilter = this.filterReturnService.createFilterByName('status', 1);
   }
-
-  convertDate(date: number): string {
-    moment.locale('en-gb');
-
-    return moment(date)
-      .format('L');
-    }
 }

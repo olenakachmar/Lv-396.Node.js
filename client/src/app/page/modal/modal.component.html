@@ -34,7 +34,7 @@
         </select>
       </div>
       <div class=" btn-group date-grid">
-        <input type="text" disabled value="{{ task.date }}" class="form-control" name="date" value="{{ convertDate(task.date) }}">
+        <input type="text" disabled value="{{ task.date }}" class="form-control" name="date" value="{{ task.date | date:'dd/MM/yyyy' }}">
       </div>
       <div class="excerpt-grid">
         <input type="text" class="form-control" value="{{ task.excerpt }}" name="excerpt" formControlName="excerpt" placeholder="Summary message">
