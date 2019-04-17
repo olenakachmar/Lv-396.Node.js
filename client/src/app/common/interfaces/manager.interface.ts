@@ -1,4 +1,5 @@
 export interface IManager {
+  _id: string;
   contacts: object;
   dates: object;
   department: string;
@@ -8,6 +9,9 @@ export interface IManager {
   manager: string;
   phone: string;
   position: string;
+  roles: object;
+  teamlead: string;
+  watched_issues: object;
   reset_password_expires: string;
   reset_password_token: string;
 }

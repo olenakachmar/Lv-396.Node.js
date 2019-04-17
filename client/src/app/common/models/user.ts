@@ -1,4 +1,5 @@
 import { IDepartment } from './department';
+import { IUser } from '../interfaces/user.interface';
 import { IManager } from '../interfaces/manager.interface';
 
 export  class User {
@@ -7,7 +8,7 @@ export  class User {
   lastName: string;
   position: string;
   manager?: IManager;
-  teamlead: User;
+  teamlead: IUser;
   department?: IDepartment;
   email: string;
   phone: string;

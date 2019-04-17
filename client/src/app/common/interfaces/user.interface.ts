@@ -1,12 +1,11 @@
 import { IManager } from './manager.interface';
-import { ITeamlead } from './teamlead.interface';
 
 export interface IUser {
   firstName: string;
   lastName: string;
   position: string;
   manager?: IManager;
-  teamlead: ITeamlead;
+  teamlead: IUser;
   department: object;
   email: string;
   phone: string;
