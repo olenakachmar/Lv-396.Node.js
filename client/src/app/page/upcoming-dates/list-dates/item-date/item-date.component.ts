@@ -4,7 +4,7 @@ import { User } from '../../../../common/models/user';
 import { DatesItem } from '../../../common/dates-item';
 
 @Component({
-  selector: 'app-item',
+  selector: 'app-date-item',
   templateUrl: './item-date.component.html',
   styleUrls: ['./item-date.component.scss']
 })
