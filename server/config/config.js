@@ -7,4 +7,5 @@ module.exports = {
   arrKeys: ['login', 'password', 'firstName', 'lastName', 'position', 'email', 'phone', 'type', 'manager', 'teamlead', 'department', 'hr', 'roles'],
   arrKeysIssues: ['name', 'excerpt', 'author', 'content', 'assignTo', 'reassigned', 'statusName', 'statusValue', 'typeName', 'typeValue'],
   frontURI: process.env.FRONT_URI,
+  userQueryOptions: ['type', 'roles'],
 };
