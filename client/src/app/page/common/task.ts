@@ -23,3 +23,16 @@ export class Task {
               public resolvedByPerformer?: boolean) {
   }
 }
+
+export class TaskCreateRequestBody {
+  constructor(public name?: string,
+              public excerpt?: string,
+              public statusName?: string,
+              public statusValue?: number,
+              public typeName?: string,
+              public typeValue?: number,
+              public author?: string,
+              public content?: string,
+              public assignTo?: string) {
+  }
+}
