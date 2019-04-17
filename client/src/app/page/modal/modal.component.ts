@@ -8,8 +8,6 @@ import { FiltersService } from '../common/filters.service';
 import { Filter } from '../common/filter';
 import { FilterReturnService } from '../common/filter-return.service';
 import { FilterOptions } from '../common/filter-options';
-import moment from 'moment';
-
 
 @Component({
   selector: 'app-modal',
@@ -31,6 +29,8 @@ export class ModalComponent implements OnInit {
   filtersAll: Filter[];
   theFilter: Filter;
   getFilter = new EventEmitter();
+  usersIds: [];
+  userDropDown: Filter;
 
   constructor(private readonly modalService: BsModalService,
               private readonly tasksService: TasksService,
@@ -54,11 +54,45 @@ export class ModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getAll()
-      .subscribe(users => this.users = users);
+      .subscribe(users => this.createUserDropDown(users));
     this.userService.getUser()
       .subscribe(user => this.user = user);
     this.getTheFilter();
   }
+
+  private createUserDropDown(users): void {
+    console.log('users');
+    console.log(users);
+    this.usersIds = users.map(item => (item._id));
+    console.log('usersIds');
+    console.log(this.usersIds);
+    this.userDropDown = {
+      id: 1,
+      name: 'assignTo',
+      isCalendar: false,
+      defaultValue: -1,
+      options: this.createUserDropdownOptions(users),
+    };
+    console.log('this.userDropDown');
+    console.log(this.userDropDown);
+  }
+
+  private createUserDropdownOptions = (users: any): FilterOptions[] => {
+    let options: FilterOptions[] = users.map(
+      (item: User, index: number) =>
+      ({
+        name: `${item.firstName} ${item.lastName}`,
+        value: index,
+      })
+     );
+    options = [{name: 'Choose Users', value: -1}, ...options];
+
+    return options;
+  };
+
+  getFilterValUserDropDown = (i: number) => {
+    this.userDropDown.defaultValue = i;
+  };
 
   getFilterVal = (i: number) => {
     this.theFilter.defaultValue = i;
@@ -86,7 +120,6 @@ export class ModalComponent implements OnInit {
     const newname = event.target.name.value;
     const newcontent = event.target.content.value;
     const newexcerpt = event.target.excerpt.value;
-    const newAssignTo = event.target.assignTo.value;
     this.editTask = {
       id: this.task.id,
       name: newname,
@@ -94,7 +127,7 @@ export class ModalComponent implements OnInit {
       statusName: this.theFilter.options.filter((opt: FilterOptions) => opt.value === this.theFilter.defaultValue)[0].name,
       statusValue: this.theFilter.defaultValue,
       excerpt: newexcerpt,
-      assignTo: newAssignTo,
+      assignTo: this.usersIds[this.userDropDown.defaultValue],
       reassigned: this.task.author._id,
     };
     this.tasksService.editTask(this.editTask)
