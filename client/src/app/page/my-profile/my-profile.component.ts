@@ -29,6 +29,6 @@ export class MyProfileComponent implements OnInit {
   }
 
   private readonly loadUser = (id: string) => {
-    this.UserInfoService.getUser(this.id).subscribe(user => { console.log(user); this.user = user; });
+    this.UserInfoService.getUser(this.id).subscribe(user => { this.user = user; });
   };
 }
