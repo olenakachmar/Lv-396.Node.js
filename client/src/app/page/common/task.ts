@@ -36,3 +36,15 @@ export class TaskCreateRequestBody {
               public assignTo?: string) {
   }
 }
+
+export class TaskEditRequestBody {
+  constructor(public id?: number,
+              public name?: string,
+              public excerpt?: string,
+              public status: TaskStatus = new TaskStatus(),
+              public author?: string,
+              public content?: string,
+              public assignTo?: string,
+              public reassigned?: string) {
+  }
+}

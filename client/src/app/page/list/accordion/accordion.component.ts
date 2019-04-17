@@ -12,6 +12,6 @@ export class AccordionComponent implements OnInit {
   ngOnInit(): void {}
 
   trackElement(index: number, element: any): any {
-    return element ? element.guid : 0;
+    return element ? element.id : 0;
   }
 }
