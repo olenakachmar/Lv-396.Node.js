@@ -134,10 +134,13 @@ export class AddTaskFormComponent implements OnInit {
     return options[0].name;
   };
 
-  onDelete(event: any): void {
+  onDelete(event: MouseEvent): void {
     event.preventDefault();
     this.tasksService.deleteTask(this.newTaskId)
-      .subscribe((success) => console.log(success),
+      .subscribe((success) => {
+          console.log(success);
+          this.taskIsJustSend = false;
+        },
         error => this.errorHandling(error)
       );
   }
