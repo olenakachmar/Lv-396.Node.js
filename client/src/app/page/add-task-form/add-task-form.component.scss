@@ -30,3 +30,18 @@
 ::ng-deep .form-wrapper .filter-item-container .btn-group .dropdown-menu.filter-el {
   border-color: $border-color;
 }
+
+.form-wrapper a,
+.form-wrapper a:hover,
+.form-wrapper a:active {
+  color: $primary-color;
+}
+
+.form-wrapper a {
+  text-decoration: underline;
+}
+
+.form-wrapper a:hover,
+.form-wrapper a:active {
+  text-decoration: none;
+}
