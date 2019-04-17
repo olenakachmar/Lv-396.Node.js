@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../app_services/auth.service';
+import { Component } from '@angular/core';
+import { AuthService } from '../common/services/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 
@@ -11,7 +11,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
   frm: FormGroup;
   hasFailed: boolean;
@@ -30,9 +30,12 @@ export class HomeComponent implements OnInit {
     const helper = new JwtHelperService();
     if (this.frm.invalid && this.frm.get('login').value === '') {
       this.showInputErrorslogin = true;
+
       return;
-    } else if (this.frm.invalid && this.frm.get('password').value === '') {
+    }
+    if (this.frm.invalid && this.frm.get('password').value === '') {
       this.showInputErrorsPassword = true;
+
       return;
     }
 
@@ -45,9 +48,9 @@ export class HomeComponent implements OnInit {
     this.authService
       .auth(form.login, form.password)
       .subscribe(
-        (response: any) => {
-          localStorage.setItem('token', response.token);
-          localStorage.setItem('type', helper.decodeToken(response.token).type);
+        (response) => {
+          localStorage.setItem('token', response['token']);
+          localStorage.setItem('type', helper.decodeToken(response['token']).type);
           this.router.navigate(['/profile']);
         },
         (error) => {
@@ -56,9 +59,6 @@ export class HomeComponent implements OnInit {
       );
 
     return false;
-  }
-
-  ngOnInit() {
   }
 
 }
