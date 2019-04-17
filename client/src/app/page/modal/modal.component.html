@@ -25,16 +25,16 @@
       <div class="filter-grid">
         <app-dropdown-filter class="filter-item-container"
                        [filterItem]="theFilter"
-                       (filterVal)="getFilterVal(theFilter.id, $event)"></app-dropdown-filter>
+                       (filterVal)="getFilterVal($event)"></app-dropdown-filter>
       </div>
       <div class="btn-group assign-grid">
-        <select class="form-control" name="assignTo" formControlName="assignTo">
+        <select class="form-control" name="assignTo" formControlName="assignTo" >
           <option selected hidden>Choose here</option>
           <option *ngFor="let user of users; trackBy: TrackElement" [value]="user._id" > {{ user.firstName }} {{ user.lastName }} </option>
         </select>
       </div>
       <div class=" btn-group date-grid">
-        <input type="text" disabled value="{{ task.date }}" class="form-control" name="date" placeholder="{{newDate}}">
+        <input type="text" disabled value="{{ task.date }}" class="form-control" name="date" value="{{ convertDate(task.date) }}">
       </div>
       <div class="excerpt-grid">
         <input type="text" class="form-control" value="{{ task.excerpt }}" name="excerpt" formControlName="excerpt" placeholder="Summary message">

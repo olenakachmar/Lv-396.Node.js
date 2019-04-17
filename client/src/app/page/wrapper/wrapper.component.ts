@@ -5,9 +5,7 @@ import { FilterOptions } from '../common/filter-options';
 import { Filter } from '../common/filter';
 import { FiltersService } from '../common/filters.service';
 import { Task } from '../common/task';
-import moment from 'moment';
 import { TasksService } from '../common/tasks.service';
-import { Status, Type } from '../common/status-options.enum';
 
 @Component({
   selector: 'app-wrapper',
@@ -70,31 +68,18 @@ export class WrapperComponent implements OnInit {
             id: item._id,
             name: item.name,
             excerpt: item.excerpt,
-            status: { name: item.status.name, value: item.status.value},
+            status: { name: item.status.name, value: item.status.value },
             type: { name: item.type.name, value: item.type.value },
-            date: this.convertDate(item.date),
+            date: item.date,
             author: item.author,
             content: item.content,
             resolvedByAuthor: item.resolvedByAuthor,
             resolvedByPerformer: item.resolvedByPerformer,
-          }
-          ));
+          })
+        )
+        .sort((a, b) => (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0));
         this.ref.detectChanges();
       });
-  }
-
-  getStatusValue = (status: string): number =>
-    Status[status];
-
-  getTaskType = (type: string): number =>
-    Type[type];
-
-  /** Example: from server date looks like '1554287225073' (in millisecond); after convertDate it looks like '03/04/2019' */
-  convertDate(date: any): string {
-    moment.locale('en-gb');
-
-    return moment(date)
-      .format('L');
   }
 
   selectFilterOption = (data: any) => {

@@ -7,6 +7,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { FiltersService } from '../common/filters.service';
 import { Filter } from '../common/filter';
 import { FilterReturnService } from '../common/filter-return.service';
+import { FilterOptions } from '../common/filter-options';
+import moment from 'moment';
 
 
 @Component({
@@ -29,10 +31,6 @@ export class ModalComponent implements OnInit {
   filtersAll: Filter[];
   theFilter: Filter;
   getFilter = new EventEmitter();
-  obj: {
-    filterId: number,
-    optionId: any
-  };
 
   constructor(private readonly modalService: BsModalService,
               private readonly tasksService: TasksService,
@@ -62,12 +60,8 @@ export class ModalComponent implements OnInit {
     this.getTheFilter();
   }
 
-  sendFilterVal = (i: number, event: any) => {
-    this.obj = {
-      filterId: i,
-      optionId: event
-    };
-    this.getFilter.emit(this.obj);
+  getFilterVal = (i: number) => {
+    this.theFilter.defaultValue = i;
   };
 
   getFiltersNew(): any {
@@ -98,8 +92,8 @@ export class ModalComponent implements OnInit {
       name: newname,
       content: newcontent,
       status: {
-        name: this.task.status.name,
-        value: this.task.status.value,
+        name: this.theFilter.options.filter((opt: FilterOptions) => opt.value === this.theFilter.defaultValue)[0].name,
+        value: this.theFilter.defaultValue,
       },
       excerpt: newexcerpt,
       assignTo: newAssignTo,
@@ -113,12 +107,14 @@ export class ModalComponent implements OnInit {
     return element ? element.guid : 0;
   }
 
-  getFilterVal = (i: number, data: number) => {
-    this.theFilter.defaultValue = data;
-  };
-
   getTheFilter(): void {
     this.theFilter = this.filterReturnService.createFilterByName('status', 1);
   }
 
+  convertDate(date: number): string {
+    moment.locale('en-gb');
+
+    return moment(date)
+      .format('L');
+    }
 }
