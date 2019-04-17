@@ -1,12 +1,13 @@
 import { IDepartment } from './department';
+import { IManager } from '../interfaces/manager.interface';
 
 export  class User {
   _id: any;
   firstName: string;
   lastName: string;
   position: string;
-  manager?: any;
-  teamlead: any;
+  manager?: IManager;
+  teamlead: User;
   department?: IDepartment;
   email: string;
   phone: string;
