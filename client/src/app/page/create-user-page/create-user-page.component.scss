@@ -1,73 +1,92 @@
-<<<<<<< HEAD
-@import "../../common/theme";
-=======
 @import '../../common/css/theme';
->>>>>>> 3198360b208ab21d44f4ddaa85f786865d34e330
-
-main {
-  background-color: white;
-}
+@import '../../common/css/theme.form';
 
 .main-user-info {
   max-width: 580px;
   margin-top: 15px;
-  .main-user-info {
-    h1 {
-      font-size: 40px;
-    }
 
-    p {
-      font-size: 20px;
-    }
+  p {
+    font-size: 20px;
   }
 
-  .update-info-button {
+  .update-button {
     height: 48px;
-    width: 130px;
+    width: 150px;
     margin-left: 18px;
-    margin-top: 8px;
-    border: 1.5px solid $primary-color;
-    background-color: $case-color;
-    color: $primary-color;
+    margin-top: 14px;
+    text-align: center;
     text-transform: uppercase;
-    line-height: normal;
     font-weight: bold;
-    font-size: 12px;
   }
 }
 
 .additional-info {
+  margin-top: 50px;
+
+  @media (max-width: 991px) {
+    margin-top: 0;
+  }
+
+  .add__icon {
+    margin-right: 10px;
+  }
+
   .user-info {
+    padding-top: 25px;
+
+    .fields-button {
+      width: 100%;
+      margin-top: 24px;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
   }
 
   .date-info {
-    background-color: #000;
+    margin-left: 40px;
+    padding: 25px;
+    height: 100%;
+    background-color: white;
+
+    @media (max-width: 991px) {
+      margin-left: 0;
+      margin-top: 40px;
+    }
+
+    .date-button {
+      width: 100%;
+      margin-top: 28px;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
   }
 
   .info-form {
     padding: 10px 0 10px 0;
-    .input-label {
-      font-size: 12px;
-      font-weight: bold;
-      text-transform: uppercase;
-      margin-bottom: 5px;
-      label {
-        margin-bottom: 0;
-      }
-    }
 
     .form-control {
       height: 50px;
       width: 100%;
-      font-size: 16px;
-      border-radius: 0;
-      background-color: #fff;
-      color: $primary-color;
-      border: $case-color solid 1px;
-    }
 
-    ::placeholder {
-      color: $primary-color;
+    }
+  }
+}
+
+.save-profile {
+
+  .save-button {
+    width: 100%;
+    background-color: $primary-color;
+    color: $bg-color;
+    margin-top: 103px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+
+    @media (max-width: 991px) {
+      margin-top: 20px;
     }
   }
 }
@@ -76,4 +95,5 @@ main {
   @media (max-width: 991px) {
     margin-bottom: 40px;
   }
+
 }

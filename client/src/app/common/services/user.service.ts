@@ -19,33 +19,33 @@ export class UserService {
 
   constructor(private readonly http: HttpClient) { }
 
-  helper = new JwtHelperService();
+  private helper = new JwtHelperService();
 
-  getAll(): Observable<User[]> {
+  private getAll(): Observable<User[]> {
     httpOptions.headers = this.getHeader();
 
     return this.http.get<User[]>(`${api}users`, httpOptions);
   }
 
-  getAllTeamLeads(): Observable<User[]> {
+  private getAllTeamLeads(): Observable<User[]> {
     return this.http.get<User[]>(`${api}users?position=TEAM_LEAD`, httpOptions);
   }
 
-  getUser(id?: string): Observable<User> {
+  private getUser(id?: string): Observable<User> {
     httpOptions.headers = this.getHeader();
     const userId = this.getUserId();
 
     return this.http.get<User>(`${api}users/${id || userId}`, httpOptions);
   }
 
-  getUserId(): any {
+  private getUserId(): any {
     httpOptions.headers = this.getHeader();
     const helper = new JwtHelperService();
 
     return helper.decodeToken(localStorage.token).id;
   }
 
-  getUserType(): any {
+  private getUserType(): any {
     return this.helper.decodeToken(localStorage.token).type;
   }
 
