@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './link-to-profile.component.html',
   styleUrls: ['./link-to-profile.component.scss']
 })
-export class LinkToProfileComponent implements OnInit {
+export class LinkToProfileComponent{
   @Input() label: string;
   @Input() info: string;
   @Input() idLinks: string;
