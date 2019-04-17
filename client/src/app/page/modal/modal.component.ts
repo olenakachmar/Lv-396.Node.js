@@ -91,10 +91,8 @@ export class ModalComponent implements OnInit {
       id: this.task.id,
       name: newname,
       content: newcontent,
-      status: {
-        name: this.theFilter.options.filter((opt: FilterOptions) => opt.value === this.theFilter.defaultValue)[0].name,
-        value: this.theFilter.defaultValue,
-      },
+      statusName: this.theFilter.options.filter((opt: FilterOptions) => opt.value === this.theFilter.defaultValue)[0].name,
+      statusValue: this.theFilter.defaultValue,
       excerpt: newexcerpt,
       assignTo: newAssignTo,
       reassigned: this.task.author._id,
