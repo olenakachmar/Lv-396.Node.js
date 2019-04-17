@@ -45,6 +45,7 @@ export class NavbarProfileComponent implements OnInit {
         this.datesCount = user.dates.length;
         this.avatar = user.photoURL || 'assets/img/userimg.jpg';
         this.user = user;
+        console.log(this.user + "!!!!!!")
       });
   }
 
