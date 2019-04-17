@@ -61,11 +61,7 @@ export class ModalComponent implements OnInit {
   }
 
   private createUserDropDown(users): void {
-    console.log('users');
-    console.log(users);
     this.usersIds = users.map(item => (item._id));
-    console.log('usersIds');
-    console.log(this.usersIds);
     this.userDropDown = {
       id: 1,
       name: 'assignTo',
@@ -73,8 +69,6 @@ export class ModalComponent implements OnInit {
       defaultValue: -1,
       options: this.createUserDropdownOptions(users),
     };
-    console.log('this.userDropDown');
-    console.log(this.userDropDown);
   }
 
   private createUserDropdownOptions = (users: any): FilterOptions[] => {
