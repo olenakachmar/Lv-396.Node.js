@@ -42,6 +42,7 @@ export const routes: Routes = [
   { path: 'contact-info', component: ContactInfoComponent },
   { path: 'contact-info/:id', component: ContactInfoComponent },
   { path: 'create-user', component: CreateUserPageComponent },
+  { path: 'edit-user', component: CreateUserPageComponent },
   { path: 'upcoming-dates', component: UpcomingDatesComponent }
 ];
 
