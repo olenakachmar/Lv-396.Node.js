@@ -1,0 +1,11 @@
+<div class="wrapper">
+  <div class="row list-dates" *ngFor="let dates of dateList">
+    <div class="col-md-3 box font-weight-bold">
+      {{dates.topic}}
+    </div>
+    <div class="col-md-9 box">
+      {{ convertDate(dates.date) }}
+    </div>
+  </div>
+</div>
+
