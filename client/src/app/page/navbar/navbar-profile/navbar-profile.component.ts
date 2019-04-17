@@ -28,7 +28,7 @@ export class NavbarProfileComponent implements OnInit {
     private readonly authService: AuthService,
     private readonly router: Router,
     private readonly navItemsService: NavItemsService,
-    private readonly userService: UserService) {}
+    private readonly userService: UserService) { }
 
   ngOnInit(): void {
     this.loadUser();
@@ -45,7 +45,6 @@ export class NavbarProfileComponent implements OnInit {
         this.datesCount = user.dates.length;
         this.avatar = user.photoURL || 'assets/img/userimg.jpg';
         this.user = user;
-        console.log(this.user + "!!!!!!")
       });
   }
 
@@ -64,6 +63,7 @@ export class NavbarProfileComponent implements OnInit {
   }
 
   currentByIndex(i: number): boolean {
+    console.log(this.user)
     this.navItemsService.currentIndex(i);
     if (this.menuList[i].logout) {
       this.menuList[i].current = false;
