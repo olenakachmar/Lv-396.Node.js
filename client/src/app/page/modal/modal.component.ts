@@ -27,7 +27,7 @@ export class ModalComponent implements OnInit {
   user: User;
   editTask: any;
   filtersAll: Filter[];
-  theFilter: Filter;
+  filter: Filter;
   getFilter = new EventEmitter();
   usersIds: [];
   userDropDown: Filter;
@@ -57,15 +57,11 @@ export class ModalComponent implements OnInit {
       .subscribe(users => this.createUserDropDown(users));
     this.userService.getUser()
       .subscribe(user => this.user = user);
-    this.getTheFilter();
+    this.getFilterStatus();
   }
 
   private createUserDropDown(users): void {
-    console.log('users');
-    console.log(users);
     this.usersIds = users.map(item => (item._id));
-    console.log('usersIds');
-    console.log(this.usersIds);
     this.userDropDown = {
       id: 1,
       name: 'assignTo',
@@ -73,11 +69,9 @@ export class ModalComponent implements OnInit {
       defaultValue: -1,
       options: this.createUserDropdownOptions(users),
     };
-    console.log('this.userDropDown');
-    console.log(this.userDropDown);
   }
 
-  private createUserDropdownOptions = (users: any): FilterOptions[] => {
+  private createUserDropdownOptions = (users: User[]): FilterOptions[] => {
     let options: FilterOptions[] = users.map(
       (item: User, index: number) =>
       ({
@@ -95,12 +89,12 @@ export class ModalComponent implements OnInit {
   };
 
   getFilterVal = (i: number) => {
-    this.theFilter.defaultValue = i;
+    this.filter.defaultValue = i;
   };
 
   getFiltersNew(): any {
     this.filtersService.getFilters()
-      .subscribe(filtersAll => this.theFilter = this.editFilter(filtersAll));
+      .subscribe(filtersAll => this.filter = this.editFilter(filtersAll));
   }
 
   private readonly editFilter = (filtersAll: Filter[]): Filter => {
@@ -124,8 +118,8 @@ export class ModalComponent implements OnInit {
       id: this.task.id,
       name: newname,
       content: newcontent,
-      statusName: this.theFilter.options.filter((opt: FilterOptions) => opt.value === this.theFilter.defaultValue)[0].name,
-      statusValue: this.theFilter.defaultValue,
+      statusName: this.getStatusName(),
+      statusValue: this.filter.defaultValue,
       excerpt: newexcerpt,
       assignTo: this.usersIds[this.userDropDown.defaultValue],
       reassigned: this.task.author._id,
@@ -134,11 +128,18 @@ export class ModalComponent implements OnInit {
       .subscribe((item: any) => item);
   }
 
+  private readonly getStatusName = (): string => {
+    const val = this.filter.defaultValue;
+    const options: FilterOptions[] = this.filter.options.filter((opt: FilterOptions) => opt.value === val);
+
+    return options[0].name;
+  };
+
   trackElement(index: number, element: any): any {
     return element ? element.guid : 0;
   }
 
-  getTheFilter(): void {
-    this.theFilter = this.filterReturnService.createFilterByName('status', 1);
+  getFilterStatus(): void {
+    this.filter = this.filterReturnService.createFilterByName('status', 1);
   }
 }

@@ -24,12 +24,12 @@
       </div>
       <div class="filter-grid">
         <app-dropdown-filter class="filter-item-container"
-                       [filterItem]="theFilter"
+                       [filterItem]="filter"
                        (filterVal)="getFilterVal($event)"></app-dropdown-filter>
       </div>
       <div class="btn-group assign-grid">
         <app-dropdown-filter class="filter-item-container"
-                       [filterItem]="userDropDown" [cssClassName]="'width-100'"
+                       [filterItem]="userDropDown"
                        (filterVal)="getFilterValUserDropDown($event)"></app-dropdown-filter>
       </div>
       <div class=" btn-group date-grid">
