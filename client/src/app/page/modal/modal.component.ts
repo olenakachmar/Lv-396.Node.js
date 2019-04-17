@@ -31,7 +31,7 @@ export class ModalComponent implements OnInit {
   getFilter = new EventEmitter();
   obj: {
     filterId: number,
-    optionId: any
+    optionId: Event
   };
 
   constructor(private readonly modalService: BsModalService,
@@ -62,7 +62,7 @@ export class ModalComponent implements OnInit {
     this.getTheFilter();
   }
 
-  sendFilterVal = (i: number, event: any) => {
+  sendFilterVal = (i: number, event: Event) => {
     this.obj = {
       filterId: i,
       optionId: event
