@@ -22,7 +22,6 @@ export class TasksService {
       userId,
       id: taskId,
     };
-    console.log(body);
 
     return this.http.put<Task>(`${api}/issues/resolve`, body, httpOptions);
   }
