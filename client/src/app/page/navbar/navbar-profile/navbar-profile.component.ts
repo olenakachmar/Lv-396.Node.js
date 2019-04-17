@@ -75,9 +75,4 @@ export class NavbarProfileComponent implements OnInit {
   trackById(link: any): string {
     return link.id;
   }
-
-  convertDate(date: number): string {
-    return moment(date)
-      .format('L');
-  }
 }

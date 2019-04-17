@@ -7,7 +7,7 @@
       aria-labelledby="button-disabled-item">
     <li class="user-bar__row user-bar__elem  dropdown-item"
         *ngFor="let dates of dateList" role="menuitem" >
-      <b>{{ convertDate(dates.date) }}</b> <br/> {{dates.topic}}
+      <b>{{ dates.date | date:"MM/dd/yy" }}</b> <br/> {{dates.topic}}
     </li>
   </ul>
 </div>
