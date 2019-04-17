@@ -90,7 +90,7 @@ export class WrapperComponent implements OnInit {
     Type[type];
 
   /** Example: from server date looks like '1554287225073' (in millisecond); after convertDate it looks like '03/04/2019' */
-  convertDate(date: any): string {
+  convertDate(date: number): string {
     moment.locale('en-gb');
 
     return moment(date)
