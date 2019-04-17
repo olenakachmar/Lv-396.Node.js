@@ -142,7 +142,7 @@ export class AddTaskFormComponent implements OnInit {
       );
   }
 
-  private readonly deleteIsSuccess(): void {
+  private deleteIsSuccess(): void {
     this.taskIsJustSend = false;
   }
 }

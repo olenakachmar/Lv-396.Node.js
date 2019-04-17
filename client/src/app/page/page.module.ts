@@ -31,6 +31,7 @@ import { DropdownInfoComponent } from './create-user-page/create-side-bar-info/d
 import { DatepickerFilterComponent } from './filter/datepicker-filter/datepicker-filter.component';
 import { UpcomingDatesComponent } from './upcoming-dates/upcoming-dates.component';
 import { ListDatesComponent } from './upcoming-dates/list-dates/list-dates.component';
+import { ItemDateComponent } from './upcoming-dates/list-dates/item-date/item-date.component';
 import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
 
 export const routes: Routes = [
@@ -67,7 +68,8 @@ export const routes: Routes = [
     DatepickerFilterComponent,
     DropdownInfoComponent,
     UpcomingDatesComponent,
-    ListDatesComponent
+    ListDatesComponent,
+    ItemDateComponent,
     AddTaskFormComponent
   ],
   imports: [

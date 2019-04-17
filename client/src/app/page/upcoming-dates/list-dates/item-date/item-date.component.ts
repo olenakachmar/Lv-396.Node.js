@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../../app_services/user.service';
-import { User } from '../../../app_models/user';
-import { DatesItem } from '../../common/dates-item';
+import { UserService } from '../../../../common/services/user.service';
+import { User } from '../../../../common/models/user';
+import { DatesItem } from '../../../common/dates-item';
 
 @Component({
   selector: 'app-item',
-  templateUrl: './item.component.html',
-  styleUrls: ['./item.component.scss']
+  templateUrl: './item-date.component.html',
+  styleUrls: ['./item-date.component.scss']
 })
-export class ItemComponent implements OnInit {
+export class ItemDateComponent implements OnInit {
   user = new User();
   dateList: DatesItem[];
 
@@ -23,9 +23,5 @@ export class ItemComponent implements OnInit {
       .subscribe(user => {
         this.dateList = user.dates;
       });
-  }
-  convertDate(date: number): string {
-    return moment(date)
-      .format('L');
   }
 }
