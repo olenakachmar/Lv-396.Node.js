@@ -6,7 +6,7 @@ export  class User {
   lastName: string;
   position: string;
   manager?: any;
-  teamlead: object;
+  teamlead: any;
   department?: IDepartment;
   email: string;
   phone: string;

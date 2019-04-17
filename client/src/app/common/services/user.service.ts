@@ -19,37 +19,37 @@ export class UserService {
 
   constructor(private readonly http: HttpClient) { }
 
-  private helper = new JwtHelperService();
+  helper = new JwtHelperService();
 
-  private getAll(): Observable<User[]> {
+  getAll(): Observable<User[]> {
     httpOptions.headers = this.getHeader();
 
     return this.http.get<User[]>(`${api}users`, httpOptions);
   }
 
-  private getAllTeamLeads(): Observable<User[]> {
+  getAllTeamLeads(): Observable<User[]> {
     return this.http.get<User[]>(`${api}users?position=TEAM_LEAD`, httpOptions);
   }
 
-  private getUser(id?: string): Observable<User> {
+  getUser(id?: string): Observable<User> {
     httpOptions.headers = this.getHeader();
     const userId = this.getUserId();
 
     return this.http.get<User>(`${api}users/${id || userId}`, httpOptions);
   }
 
-  private getUserId(): any {
+  getUserId(): any {
     httpOptions.headers = this.getHeader();
     const helper = new JwtHelperService();
 
     return helper.decodeToken(localStorage.token).id;
   }
 
-  private getUserType(): any {
+  getUserType(): any {
     return this.helper.decodeToken(localStorage.token).type;
   }
 
-  private readonly getHeader = () =>
+  readonly getHeader = () =>
     httpOptions.headers.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
 
 }
