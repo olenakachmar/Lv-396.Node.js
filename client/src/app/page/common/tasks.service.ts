@@ -49,4 +49,3 @@ export class TasksService {
     return this.http.delete(`${api}issues/${taskId}`, httpOptions);
   }
 }
-

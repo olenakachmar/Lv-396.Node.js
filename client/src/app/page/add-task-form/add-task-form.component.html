@@ -3,6 +3,9 @@
     <div class="row">
       <h2 class="entry-title">Create issue</h2>
     </div>
+    <div class="row" *ngIf="isSuccessfullyDeleted === true">
+      <p>(your message was successfully deleted)</p>
+    </div>
   </div>
   <div class="container-fluid" *ngIf="haveServerError === true">
     <div class="row">
@@ -15,24 +18,24 @@
   </div>
   <div class="container-fluid" *ngIf="taskIsJustSend === true">
     <div class="row">
-      <span>Your issue is already send. <a href="#" on-click="onDelete($event)">Undo?</a></span>
+      <span class="pos-absolute">Your issue is already send. <a href="#" on-click="onDelete($event)">Undo?</a></span>
     </div>
   </div>
-  <form class="container-fluid" [formGroup]="addTaskForm" (ngSubmit)="onSubmit()" *ngIf="taskIsJustSend === false">
+  <form class="container-fluid hide-{{ taskIsJustSend }}" [formGroup]="addTaskForm" (ngSubmit)="onSubmit()">
     <div class="row form-row">
       <div class="col">
         <label for="taskName">Theme name</label>
         <input type="text" name="taskName" formControlName="taskName" id="taskName" required minlength="5" maxlength="20" placeholder="Theme name" value=""/>
-        <div *ngIf="taskName.invalid && (taskName.dirty || taskName.touched)" class="alert alert-danger">
-          <span *ngIf="taskName.errors.required">
+        <div *ngIf="taskName.invalid && (taskName.dirty || taskName.touched)" class="info-message">
+          <div *ngIf="taskName.errors.required" class="alert alert-danger visible-temporarily">
             Task name is required.
-          </span>
-          <span *ngIf="taskName.errors.minlength">
+          </div>
+          <div *ngIf="taskName.errors.minlength" class="alert alert-danger visible-temporarily">
             Task name must be at least 5 characters long.
-          </span>
-          <span *ngIf="taskName.errors.maxlength">
+          </div>
+          <div *ngIf="taskName.errors.maxlength" class="alert alert-danger visible-temporarily">
             Task name must be less 20 characters long.
-          </span>
+          </div>
         </div>
       </div>
       <div class="col">
@@ -44,22 +47,22 @@
     </div>
     <div class="row form-row">
       <input type="text" name="taskSummary" formControlName="taskSummary" id="taskSummary" required minlength="9" maxlength="40" placeholder="Summary message" value="" />
-      <div *ngIf="taskSummary.invalid && (taskSummary.dirty || taskSummary.touched)" class="alert alert-danger">
-        <span *ngIf="taskSummary.errors.required">
+      <div *ngIf="taskSummary.invalid && (taskSummary.dirty || taskSummary.touched)" class="info-message">
+        <div *ngIf="taskSummary.errors.required" class="alert alert-danger visible-temporarily">
           Task name is required.
-        </span>
-        <span *ngIf="taskSummary.errors.minlength">
+        </div>
+        <div *ngIf="taskSummary.errors.minlength" class="alert alert-danger visible-temporarily">
           Task name must be at least 9 characters long.
-        </span>
-        <span *ngIf="taskSummary.errors.maxlength">
+        </div>
+        <div *ngIf="taskSummary.errors.maxlength" class="alert alert-danger visible-temporarily">
           Task name must be less 40 characters long.
-        </span>
+        </div>
       </div>
     </div>
     <div class="row form-row">
       <textarea name="taskDescription" formControlName="taskDescription" maxlength="400" id="taskDescription" class="textarea-field" placeholder="Task description"></textarea>
-      <div *ngIf="taskDescription.invalid && (taskDescription.dirty || taskDescription.touched)" class="alert alert-danger">
-        <span *ngIf="taskDescription.errors.maxlength">
+      <div *ngIf="taskDescription.invalid && (taskDescription.dirty || taskDescription.touched)" class="info-message">
+        <span *ngIf="taskDescription.errors.maxlength" class="alert alert-danger visible-temporarily">
           Task name must be less 400 characters long.
         </span>
       </div>

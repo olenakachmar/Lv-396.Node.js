@@ -5,8 +5,8 @@ import { FilterReturnService } from '../common/filter-return.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../common/services/user.service';
 import { User } from '../../common/models/user';
-import { TasksService } from '../../page/common/tasks.service';
-import { TaskCreateRequestBody } from '../../page/common/task';
+import { TasksService } from '../common/tasks.service';
+import { TaskCreateRequestBody } from '../common/task';
 
 @Component({
   selector: 'app-add-task-form',
@@ -18,10 +18,16 @@ export class AddTaskFormComponent implements OnInit {
   theFilter: Filter;
   dropDownCssClassName: string;
   user: User;
-  serverErrorMessage: { name: string, statusText: string, message: string };
+  serverErrorMessage: {
+    name: string,
+    statusText: string,
+    message: string
+  };
   haveServerError: boolean;
   taskIsJustSend: boolean;
+  isSuccessfullyDeleted: boolean;
   filterDefaultVal: number;
+  duration: number;
   newTaskId: string;
   addTaskForm = this.fb.group({
     taskName: [
@@ -69,6 +75,8 @@ export class AddTaskFormComponent implements OnInit {
     this.dropDownCssClassName = 'width-100';
     this.haveServerError = false;
     this.taskIsJustSend = false;
+    this.isSuccessfullyDeleted = false;
+    this.duration = 10000;
     this.filterDefaultVal = 1;
     this.getTheFilter();
     this.userService.getUser()
@@ -85,9 +93,8 @@ export class AddTaskFormComponent implements OnInit {
 
   onSubmit(): void {
     const requestBody: TaskCreateRequestBody = this.getRequestBody(this.addTaskForm.value);
-
     this.tasksService.createTask(requestBody)
-      .subscribe((taskId: string) => this.successHandling(taskId),
+      .subscribe((result: {id: string}) => this.successHandling(result.id),
         error => this.errorHandling(error)
       );
   }
@@ -100,7 +107,7 @@ export class AddTaskFormComponent implements OnInit {
 
     setTimeout(() => {
       this.taskIsJustSend = false;
-    }, 5000);
+    }, this.duration);
   }
 
   private errorHandling(error: any): void {
@@ -112,7 +119,7 @@ export class AddTaskFormComponent implements OnInit {
     };
     setTimeout(() => {
       this.haveServerError = false;
-    }, 5000);
+    }, this.duration);
   }
 
   private readonly getRequestBody = (formVal: any): TaskCreateRequestBody => ({
@@ -137,12 +144,17 @@ export class AddTaskFormComponent implements OnInit {
   onDelete(event: MouseEvent): void {
     event.preventDefault();
     this.tasksService.deleteTask(this.newTaskId)
-      .subscribe(() => this.deleteIsSuccess(),
+      .subscribe(
+        () => this.deleteIsSuccess(),
         error => this.errorHandling(error)
       );
   }
 
   private deleteIsSuccess(): void {
     this.taskIsJustSend = false;
+    this.isSuccessfullyDeleted = true;
+    setTimeout(() => {
+      this.isSuccessfullyDeleted = false;
+    }, this.duration);
   }
 }
