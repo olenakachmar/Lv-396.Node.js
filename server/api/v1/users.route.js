@@ -5,7 +5,10 @@ const upload = require('../../config/multer');
 const config = require('../../config/config');
 const cloudinary = require('../../config/cloudinary');
 
-const { arrKeys } = config;
+const {
+  arrKeys,
+  userQueryOptions,
+} = config;
 
 const router = express.Router();
 
@@ -13,7 +16,19 @@ router.route('/users')
   .get(passport.authenticate('jwt', {
     session: false,
   }), (req, res) => {
-    User.find()
+    const params = userQueryOptions.reduce((obj, el) => {
+      if (req.query[el]) {
+        return {
+          ...obj,
+          [el]: req.query[el],
+        };
+      }
+      return {
+        ...obj,
+      };
+    }, {});
+
+    User.find(params)
       .populate('manager')
       .populate('teamlead')
       .populate('deparment', 'name')

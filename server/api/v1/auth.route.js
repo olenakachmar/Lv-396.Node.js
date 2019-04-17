@@ -155,9 +155,9 @@ router.post('/forgot_password', async (req, res) => {
       reset_password_token: token,
       reset_password_expires: Date.now() + 86400000,
     }, {
-        upsert: true,
-        new: true,
-      }).exec();
+      upsert: true,
+      new: true,
+    }).exec();
     const data = {
       to: user.email,
       from: smtpEmail,
