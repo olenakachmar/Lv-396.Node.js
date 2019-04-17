@@ -1,9 +1,12 @@
+import { IManager } from './manager.interface';
+import { ITeamlead } from './teamlead.interface';
+
 export interface IUser {
   firstName: string;
   lastName: string;
   position: string;
-  manager: object;
-  teamlead: object;
+  manager?: IManager;
+  teamlead: ITeamlead;
   department: object;
   email: string;
   phone: string;
