@@ -12,6 +12,14 @@ export class UserBarInfoComponent implements OnInit {
   constructor() {
   }
 
+  private  getManagerName(): string {
+    return `${this.userinfo.manager.firstName} ${this.userinfo.manager.lastName}`;
+  }
+
+  private  getTeamleadName(): string {
+    return `${this.userinfo.teamlead.firstName} ${this.userinfo.teamlead.lastName}`;
+  }
+
   ngOnInit() {
   }
 }
