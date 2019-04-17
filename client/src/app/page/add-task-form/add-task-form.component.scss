@@ -1,0 +1,32 @@
+@import '../../common/css/theme.form';
+
+.entry-title {
+  margin-bottom: 20px;
+  font-size: $big-font-size;
+  line-height: 1em;
+  text-transform: uppercase;
+}
+
+.form-wrapper {
+
+}
+
+.form-wrapper .form-row {
+  margin-bottom: 10px;
+}
+
+.form-wrapper .form-row:first-child {
+  display: grid;
+  grid-template-columns: 1fr 160px;
+  grid-column-gap: 10px;
+}
+
+.form-wrapper .form-row:first-child > * {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+::ng-deep .form-wrapper .filter-item-container .btn-group .btn.dropdown-toggle.filter-el,
+::ng-deep .form-wrapper .filter-item-container .btn-group .dropdown-menu.filter-el {
+  border-color: $border-color;
+}
