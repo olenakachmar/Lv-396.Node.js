@@ -41,7 +41,7 @@ export class NavbarProfileComponent implements OnInit {
   loadUser(): void {
     this.userService.getUser()
       .subscribe(user => {
-        this.dateList = user.dates.map((item) => `${this.convertDate(item.date)}  ${item.topic}`);
+        this.dateList = user.dates;
         this.datesCount = user.dates.length;
         this.avatar = user.photoURL || 'assets/img/userimg.jpg';
         this.user = user;
@@ -74,10 +74,5 @@ export class NavbarProfileComponent implements OnInit {
 
   trackById(link: any): string {
     return link.id;
-  }
-
-  convertDate(date: number): string {
-    return moment(date)
-      .format('L');
   }
 }
