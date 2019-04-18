@@ -18,11 +18,11 @@ export class AddTaskFormComponent implements OnInit {
   theFilter: Filter;
   dropDownCssClassName: string;
   user: User;
-  serverErrorMessage: {name: string, statusText: string, message: string};
+  serverErrorMessage: { name: string, statusText: string, message: string };
   haveServerError: boolean;
   taskIsJustSend: boolean;
   filterDefaultVal: number;
-
+  newTaskId: string;
   addTaskForm = this.fb.group({
     taskName: [
       '',
@@ -63,7 +63,7 @@ export class AddTaskFormComponent implements OnInit {
     private fb: FormBuilder,
     private readonly userService: UserService,
     private readonly tasksService: TasksService,
-  ) { }
+  ) {}
 
   ngOnInit(): any {
     this.dropDownCssClassName = 'width-100';
@@ -87,15 +87,16 @@ export class AddTaskFormComponent implements OnInit {
     const requestBody: TaskCreateRequestBody = this.getRequestBody(this.addTaskForm.value);
 
     this.tasksService.createTask(requestBody)
-      .subscribe(() => this.successHandling(),
+      .subscribe((taskId: string) => this.successHandling(taskId),
         error => this.errorHandling(error)
       );
   }
 
-  private successHandling(): void {
+  private successHandling(taskId: string): void {
     this.taskIsJustSend = true;
     this.addTaskForm.reset();
     this.theFilter.defaultValue = this.filterDefaultVal;
+    this.newTaskId = taskId;
 
     setTimeout(() => {
       this.taskIsJustSend = false;
@@ -115,16 +116,16 @@ export class AddTaskFormComponent implements OnInit {
   }
 
   private readonly getRequestBody = (formVal: any): TaskCreateRequestBody => ({
-      name: formVal.taskName,
-      excerpt: formVal.taskSummary,
-      statusName: this.getStatusName(),
-      statusValue: this.theFilter.defaultValue,
-      typeName: 'issue',
-      typeValue: 1,
-      author: this.user._id,
-      content: formVal.taskDescription,
-      assignTo: this.user.manager._id
-    });
+    name: formVal.taskName,
+    excerpt: formVal.taskSummary,
+    statusName: this.getStatusName(),
+    statusValue: this.theFilter.defaultValue,
+    typeName: 'issue',
+    typeValue: 1,
+    author: this.user._id,
+    content: formVal.taskDescription,
+    assignTo: this.user.manager._id
+  });
 
   private readonly getStatusName = (): string => {
     const val = this.theFilter.defaultValue;
@@ -133,4 +134,15 @@ export class AddTaskFormComponent implements OnInit {
     return options[0].name;
   };
 
+  onDelete(event: MouseEvent): void {
+    event.preventDefault();
+    this.tasksService.deleteTask(this.newTaskId)
+      .subscribe(() => this.deleteIsSuccess(),
+        error => this.errorHandling(error)
+      );
+  }
+
+  private deleteIsSuccess(): void {
+    this.taskIsJustSend = false;
+  }
 }
