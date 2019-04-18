@@ -33,12 +33,18 @@ export class CreateUpdateSideBarInfoComponent implements OnInit {
         this.departments = data;
       });
 
-    this.userService.getAll()
+    // this.userService.getAll()
+    //   .subscribe(data => {
+    //     this.teamLeads = data
+    //       .map(elem => new OptionPair(elem._id, `${elem.firstName} ${elem.lastName}`));
+    //     this.hr = ['Developer', 'Tester', 'HR'].map(elem => new OptionPair(elem, elem));
+    //     this.managers = data.map(elem => new OptionPair(elem._id, elem.position));
+    //   });
+
+    this.userService.getAllTeamLeads()
       .subscribe(data => {
-        this.teamLeads = data
-          .map(elem => new OptionPair(elem._id, `${elem.firstName} ${elem.lastName}`));
-        this.hr = ['Developer', 'Tester', 'HR'].map(elem => new OptionPair(elem, elem));
-        this.managers = data.map(elem => new OptionPair(elem._id, elem.position));
+        this.teamLeads = data.map(elem => new OptionPair(elem._id, elem.name));
+        console.log(data);
       });
   }
 
@@ -70,7 +76,7 @@ export class CreateUpdateSideBarInfoComponent implements OnInit {
         this.newUser.position = id;
         break;
       case 'Role':
-        this.newUser.role = id;
+        this.newUser.roles = id;
         break;
       case 'Manager':
         this.newUser.manager = id;

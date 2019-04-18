@@ -19,8 +19,8 @@ export  class User {
   phone: string;
   contacts: Contact[];
   photoURL: string;
-  hrID: number;
+  hr: object;
   dates: any;
-  role: string;
+  roles: [];
   type: string;
 }
