@@ -2,7 +2,7 @@ import { Task } from './task';
 
 export const TASKS: Task[] = [
   {
-    id: 0,
+    id: '0',
     name: 'Upcoming task name',
     excerpt: 'This content is straight in the template.',
     status: { name: 'LOW', value: 2 },
@@ -16,7 +16,7 @@ export const TASKS: Task[] = [
     resolvedByPerformer: false,
   },
   {
-    id: 1,
+    id: '1',
     name: 'Upcoming task name2',
     excerpt: 'This content is straight in the template2.',
     status: { name: 'HIGHT', value: 0 },
@@ -30,7 +30,7 @@ export const TASKS: Task[] = [
     resolvedByPerformer: false,
   },
   {
-    id: 2,
+    id: '2',
     name: 'Upcoming task name3',
     excerpt: 'This content is straight in the template3.',
     status: { name: 'LOW', value: 2 },
@@ -44,7 +44,7 @@ export const TASKS: Task[] = [
     resolvedByPerformer: false,
   },
   {
-    id: 3,
+    id: '3',
     name: 'Upcoming task name4',
     excerpt: 'This content is straight in the template4.',
     status: { name: 'NORMAL', value: 1 },
@@ -58,7 +58,7 @@ export const TASKS: Task[] = [
     resolvedByPerformer: false,
   },
   {
-    id: 4,
+    id: '4',
     name: 'Upcoming task name5',
     excerpt: 'This content is straight in the template5.',
     status: { name: 'LOW', value: 2 },

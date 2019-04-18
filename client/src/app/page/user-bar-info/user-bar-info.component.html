@@ -9,11 +9,11 @@
       <div>{{ userinfo.firstName }} {{ userinfo.lastName }}</div>
       <div>{{ userinfo.position }}</div>
     </div>
-    <app-link-to-profile class="additional-info" [info]="userinfo.manager.firstName + ' ' + userinfo.manager.lastName"
+    <app-link-to-profile class="additional-info" [info]="getManagerName()"
                          [label]="'My manager'"></app-link-to-profile>
     <app-link-to-profile class="additional-info" [info]="userinfo.department.name"
                          [label]="'My department'"></app-link-to-profile>
-    <app-link-to-profile class="additional-info" [info]="userinfo.myTeamlead"
+    <app-link-to-profile class="additional-info" [info]="getTeamleadName()"
                          [label]="'My Team Lead'"></app-link-to-profile>
   </div>
 </div>
