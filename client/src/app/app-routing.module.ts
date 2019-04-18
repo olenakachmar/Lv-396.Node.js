@@ -6,10 +6,10 @@ import { PageComponent } from './page/page.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
-import { LoggedInGuard } from './app_guards/logged-in.guard';
-import { LoggedOutGuard } from './app_guards/logged-out.guard';
+import { LoggedInGuard } from './common/guards/logged-in.guard';
+import { LoggedOutGuard } from './common/guards/logged-out.guard';
 
-import { CheckDevGuard } from './app_guards/check-dev.guard';
+import { CheckDevGuard } from './common/guards/check-dev.guard';
 import { ForgotPasswordComponent } from './home/common/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './home/common/reset-password/reset-password.component';
 

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WrapperComponent } from './wrapper/wrapper.component';
@@ -29,6 +29,10 @@ import { CreateUserPageComponent } from './create-user-page/create-user-page.com
 import { CreateSideBarInfoComponent } from './create-user-page/create-side-bar-info/create-side-bar-info.component';
 import { DropdownInfoComponent } from './create-user-page/create-side-bar-info/dropdown-info/dropdown-info.component';
 import { DatepickerFilterComponent } from './filter/datepicker-filter/datepicker-filter.component';
+import { UpcomingDatesComponent } from './upcoming-dates/upcoming-dates.component';
+import { ListDatesComponent } from './upcoming-dates/list-dates/list-dates.component';
+import { ItemDateComponent } from './upcoming-dates/list-dates/item-date/item-date.component';
+import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
@@ -37,7 +41,9 @@ export const routes: Routes = [
   { path: 'my-profile/:id', component: MyProfileComponent },
   { path: 'contact-info', component: ContactInfoComponent },
   { path: 'contact-info/:id', component: ContactInfoComponent },
-  { path: 'create-user', component: CreateUserPageComponent }
+  { path: 'create-user', component: CreateUserPageComponent },
+  { path: 'edit-user', component: CreateUserPageComponent },
+  { path: 'upcoming-dates', component: UpcomingDatesComponent }
 ];
 
 @NgModule({
@@ -61,7 +67,11 @@ export const routes: Routes = [
     CreateUserPageComponent,
     CreateSideBarInfoComponent,
     DatepickerFilterComponent,
-    DropdownInfoComponent
+    DropdownInfoComponent,
+    UpcomingDatesComponent,
+    ListDatesComponent,
+    ItemDateComponent,
+    AddTaskFormComponent
   ],
   imports: [
     CommonModule,

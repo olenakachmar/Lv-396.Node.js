@@ -11,7 +11,7 @@ export class TaskType {
 }
 
 export class Task {
-  constructor(public id?: number,
+  constructor(public id?: string,
               public name?: string,
               public excerpt?: string,
               public status: TaskStatus = new TaskStatus(),
@@ -21,5 +21,30 @@ export class Task {
               public content?: string,
               public resolvedByAuthor?: boolean,
               public resolvedByPerformer?: boolean) {
+  }
+}
+
+export class TaskCreateRequestBody {
+  constructor(public name?: string,
+              public excerpt?: string,
+              public statusName?: string,
+              public statusValue?: number,
+              public typeName?: string,
+              public typeValue?: number,
+              public author?: string,
+              public content?: string,
+              public assignTo?: string) {
+  }
+}
+
+export class TaskEditRequestBody {
+  constructor(public id?: string,
+              public name?: string,
+              public excerpt?: string,
+              public status: TaskStatus = new TaskStatus(),
+              public author?: string,
+              public content?: string,
+              public assignTo?: string,
+              public reassigned?: string) {
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from '../../app_services/user.service';
-import { User } from '../../app_models/user';
+import { UserService } from '../../common/services/user.service';
+import { User } from '../../common/models/user';
 
 @Component({
   selector: 'app-my-profile',
@@ -19,17 +19,16 @@ export class MyProfileComponent implements OnInit {
     this.checkIdParam();
   }
 
-  checkIdParam(): void {
+  private readonly checkIdParam = () => {
     this.id = this.route.snapshot.paramMap.get('id');
     this.loadUser(this.id);
-  }
+  };
 
-  getFullName(): string {
+  private getFullName(): string {
     return `${this.user.firstName} ${this.user.lastName}`;
   }
 
-  loadUser(id: string) {
+  private readonly loadUser = (id: string) => {
     this.UserInfoService.getUser(this.id).subscribe(user => { this.user = user; });
-  }
-
+  };
 }

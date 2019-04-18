@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { NavItemsService } from '../common/nav-items.service';
-import { UserService } from '../../app_services/user.service';
+import { UserService } from '../../common/services/user.service';
 import { NavItem } from '../common/nav-item';
 
 @Component({
@@ -20,10 +20,10 @@ export class NavbarComponent implements OnInit {
   userType: string;
 
   @HostListener('mouseleave') onMouseLeave(): void {
-    this.activeFalse();
+    this.active = false;
   }
   @HostListener('window:scroll') onScroll(): void {
-    this.activeFalse();
+    this.active = false;
   }
 
   ngOnInit(): void {
@@ -33,16 +33,16 @@ export class NavbarComponent implements OnInit {
     this.avatar = 'assets/img/navbar-symbol-desk.png';
   }
 
-  currentByRout(currentRouter): boolean {
+  currentByRout(currentRouter: string): boolean {
     this.navItemsService.currentRouter(currentRouter);
-    this.activeFalse();
+    this.active = false;
 
     return false;
   }
 
-  currentByIndex(i): boolean {
+  currentByIndex(i: number): boolean {
     this.navItemsService.currentIndex(i);
-    this.activeFalse();
+    this.active = false;
 
     return false;
   }
@@ -53,9 +53,7 @@ export class NavbarComponent implements OnInit {
     return false;
   }
 
-  activeFalse(): boolean {
-    this.active = false;
-
-    return false;
+  trackById(link: any): string {
+    return link.id;
   }
 }

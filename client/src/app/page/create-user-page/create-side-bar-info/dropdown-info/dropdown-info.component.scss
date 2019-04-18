@@ -1,4 +1,4 @@
-@import '../../../../common/theme';
+@import '../../../../common/css/theme';
 
 .btn.dropdown-toggle.option-el {
   border-radius: 0;
@@ -28,11 +28,21 @@
   background-color: #fff;
   color: $primary-color;
   border: $case-color solid 1px;
+  width: 101%;
 }
 .dropdown-item{
   margin: 5px;
   color: $primary-color;
   font-family: $font-stack;
+  white-space: inherit;
+  line-height: normal;
+}
+@media (max-width: 991px) {
+  @media (min-width: 600px) {
+    .dropdown-menu {
+      position: absolute;
+    }
+  }
 }
 
 
