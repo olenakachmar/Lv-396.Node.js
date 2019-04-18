@@ -36,6 +36,12 @@ export class UserService {
     return this.http.get<User>(`${api}users/${id || userId}`, httpOptions);
   }
 
+  getImage(avatar: any): Observable<Object> {
+    httpOptions.headers = httpOptions.headers.set('Content-Type', 'multipart/form-data');
+    const id = this.getUserId();
+    return this.http.post(`${api}users/change_avatar`, { id, avatar });
+  }
+
   getUserId(): any {
     httpOptions.headers = this.getHeader();
     const helper = new JwtHelperService();

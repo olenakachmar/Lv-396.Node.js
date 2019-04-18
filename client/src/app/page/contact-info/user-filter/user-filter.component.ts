@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { User } from '../../../app_models/user';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,7 +10,6 @@ export class UserFilterComponent implements OnInit {
 
   filterText: string;
   @Output() getFilterText = new EventEmitter;
-  @Input() users: User[];
   message: string;
   id: any;
 

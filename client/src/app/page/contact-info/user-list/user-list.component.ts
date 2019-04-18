@@ -14,9 +14,16 @@ export class UserListComponent implements OnInit {
   @Input() filterText: string;
   departments: any;
   id: any;
+  bool: boolean;
+  message: string;
 
-  constructor(private readonly router: Router, private readonly route: ActivatedRoute,
-   private readonly departmentService: DepartmentService, private readonly userService: UserService) {}
+  constructor(private readonly router: Router,
+              private readonly route: ActivatedRoute,
+              private readonly departmentService: DepartmentService, 
+              private readonly userService: UserService) {
+      this.bool = false;
+      this.message = 'Show more';
+    }
 
   ngOnInit() {
     this.loadAllUsers();
@@ -27,7 +34,7 @@ export class UserListComponent implements OnInit {
   }
 
   loadAllUsers(): any {
-    if(this.getDepartmentId()) {
+    if(this.getDepartmentId() && this.bool === false) {
       return this.getAllEmployees();
     }
     return this.getAllUsers(); 
@@ -45,6 +52,18 @@ export class UserListComponent implements OnInit {
 
   getAllUsers()  {
     this.userService.getAll().subscribe(users => this.users = users );
+  }
+
+  showOrHide(): any {
+    if(this.bool === true) {
+      this.message = 'Show more';
+    } else {
+      this.message = 'Hide all';
+    }
+
+    this.bool = !this.bool;
+
+    return this.loadAllUsers();
   }
 
 }
