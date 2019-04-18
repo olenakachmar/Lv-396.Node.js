@@ -33,18 +33,9 @@ export class CreateUpdateSideBarInfoComponent implements OnInit {
         this.departments = data;
       });
 
-    // this.userService.getAll()
-    //   .subscribe(data => {
-    //     this.teamLeads = data
-    //       .map(elem => new OptionPair(elem._id, `${elem.firstName} ${elem.lastName}`));
-    //     this.hr = ['Developer', 'Tester', 'HR'].map(elem => new OptionPair(elem, elem));
-    //     this.managers = data.map(elem => new OptionPair(elem._id, elem.position));
-    //   });
-
     this.userService.getAllTeamLeads()
       .subscribe(data => {
         this.teamLeads = data.map(elem => new OptionPair(elem._id, elem.name));
-        console.log(data);
       });
   }
 
