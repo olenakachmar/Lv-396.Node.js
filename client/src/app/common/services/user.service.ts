@@ -49,7 +49,8 @@ export class UserService {
   addUser(user: User): Observable<any> {
     return this.http.post<User>(`${api}auth/signup`, user, httpOptions);
   }
-  private readonly getHeader = () =>
+
+  readonly getHeader = () =>
     httpOptions.headers.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
 
 }

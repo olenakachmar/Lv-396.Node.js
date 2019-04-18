@@ -10,14 +10,15 @@
       <div>{{ userinfo.position }}</div>
     </div>
     <app-link-to-profile class="additional-info" [idLinks]="userinfo.manager._id"
-                         [info]="userinfo.manager.firstName + ' ' + userinfo.manager.lastName"
+                         [info]="getManagerName()"
                          [label]="'My manager'">
     </app-link-to-profile>
     <app-link-to-profile class="additional-info" [info]="userinfo.department.name"
                          [label]="'My department'">
     </app-link-to-profile>
-    <app-link-to-profile *ngIf="userType !== 'hr'" class="additional-info" [idLinks]="userinfo.manager.teamlead"
-                         [info]="userinfo.myTeamlead"
+    <app-link-to-profile *ngIf="userType !== 'hr'" class="additional-info"
+                         [idLinks]="userinfo.manager.teamlead"
+                         [info]="getTeamleadName()"
                          [label]="'My Team Lead'">
     </app-link-to-profile>
   </div>

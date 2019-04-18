@@ -29,6 +29,9 @@ import { DatepickerFilterComponent } from './filter/datepicker-filter/datepicker
 import { CreateUpdateSideBarInfoComponent } from './create-update-user-page/create-side-bar-info/create-update-side-bar-info.component';
 import { CreateUpdateUserPageComponent } from './create-update-user-page/create-update-user-page.component';
 import { DropdownInfoComponent } from './create-update-user-page/create-side-bar-info/dropdown-info/dropdown-info.component';
+import { UpcomingDatesComponent } from './upcoming-dates/upcoming-dates.component';
+import { ListDatesComponent } from './upcoming-dates/list-dates/list-dates.component';
+import { ItemDateComponent } from './upcoming-dates/list-dates/item-date/item-date.component';
 import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
 
 export const routes: Routes = [
@@ -39,6 +42,9 @@ export const routes: Routes = [
   { path: 'contact-info', component: ContactInfoComponent },
   { path: 'contact-info/:id', component: ContactInfoComponent },
   { path: 'create-user', component: CreateUpdateUserPageComponent }
+  { path: 'create-user', component: CreateUpdateUserPageComponent },
+  { path: 'edit-user', component: CreateUpdateUserPageComponent },
+  { path: 'upcoming-dates', component: UpcomingDatesComponent }
 ];
 
 @NgModule({
@@ -63,6 +69,9 @@ export const routes: Routes = [
     CreateUpdateSideBarInfoComponent,
     DatepickerFilterComponent,
     DropdownInfoComponent,
+    UpcomingDatesComponent,
+    ListDatesComponent,
+    ItemDateComponent,
     AddTaskFormComponent
   ],
   imports: [
