@@ -81,7 +81,8 @@ const UserSchema = new Schema({
       type: Date,
       required: true,
     },
-  }],
+  },
+  ],
   reset_password_token: {
     type: String,
   },
