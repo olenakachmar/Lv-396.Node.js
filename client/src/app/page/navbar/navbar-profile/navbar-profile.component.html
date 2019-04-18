@@ -6,8 +6,8 @@
   <ul class="user-bar__menu dropdown-menu" *dropdownMenu role="menu"
       aria-labelledby="button-disabled-item">
     <li class="user-bar__row user-bar__elem  dropdown-item"
-        *ngFor="let link of dateList; let i = index; trackBy: trackById;" role="menuitem" >
-      {{ dateList[ i ] }}
+        *ngFor="let dates of dateList" role="menuitem" >
+      <b>{{ dates.date | date:"MM/dd/yy" }}</b> <br/> {{dates.topic}}
     </li>
   </ul>
 </div>

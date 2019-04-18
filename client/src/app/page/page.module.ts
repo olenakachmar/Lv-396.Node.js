@@ -29,6 +29,8 @@ import { CreateUserPageComponent } from './create-user-page/create-user-page.com
 import { CreateSideBarInfoComponent } from './create-user-page/create-side-bar-info/create-side-bar-info.component';
 import { DropdownInfoComponent } from './create-user-page/create-side-bar-info/dropdown-info/dropdown-info.component';
 import { DatepickerFilterComponent } from './filter/datepicker-filter/datepicker-filter.component';
+import { UpcomingDatesComponent } from './upcoming-dates/upcoming-dates.component';
+import { ListDatesComponent } from './upcoming-dates/list-dates/list-dates.component';
 import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
 
 export const routes: Routes = [
@@ -38,7 +40,8 @@ export const routes: Routes = [
   { path: 'my-profile/:id', component: MyProfileComponent },
   { path: 'contact-info', component: ContactInfoComponent },
   { path: 'contact-info/:id', component: ContactInfoComponent },
-  { path: 'create-user', component: CreateUserPageComponent }
+  { path: 'create-user', component: CreateUserPageComponent },
+  { path: 'upcoming-dates', component: UpcomingDatesComponent }
 ];
 
 @NgModule({
@@ -63,6 +66,8 @@ export const routes: Routes = [
     CreateSideBarInfoComponent,
     DatepickerFilterComponent,
     DropdownInfoComponent,
+    UpcomingDatesComponent,
+    ListDatesComponent,
     AddTaskFormComponent
   ],
   imports: [

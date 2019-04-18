@@ -15,4 +15,5 @@ export  class User {
   hrID: number;
   dates: any;
   role: string;
+  watched_issues?: string[];
 }
