@@ -8,6 +8,7 @@ import { User } from '../../../common/models/user';
 import { Task } from '../../common/task';
 import { NavItem } from '../../common/nav-item';
 import { DatesItem } from '../../common/dates-item';
+import { switchMap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar-profile',
@@ -18,14 +19,14 @@ import { DatesItem } from '../../common/dates-item';
 export class NavbarProfileComponent implements OnInit {
   user = new User();
   avatar: string;
-  newTasksCount: number;
+  userType: string;
+  userTasks: Task[];
+  newTasks: Task[];
   menuList: NavItem[];
   dateList: DatesItem[];
-  userType: string;
+  newTasksCount: number;
   datesCount: number;
   active: boolean;
-  userTasks: any[];
-  // openedTasks: string[];
 
   constructor(
     private readonly authService: AuthService,
@@ -35,44 +36,37 @@ export class NavbarProfileComponent implements OnInit {
     private readonly taskService: TasksService) { }
 
   ngOnInit(): void {
-    this.loadUserInfo();
+    this.getUser();
     this.navItemsService.getNavList()
       .subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
   }
 
-  loadUserInfo(): void {
+
+  getUser(): void {
     this.userService.getUser()
-      .subscribe(user => {
-        this.user = user;
-        this.avatar = user.photoURL || 'assets/img/userimg.jpg';
-        this.dateList = user.dates;
-        this.datesCount = user.dates.length;
-        // this.openedTasks = user.watched_issues;
-        // this.loadUserTasks(user._id);
-        this.taskService.getUserTasks(user._id)
-          .subscribe(tasks => {
-            this.userTasks = tasks;
-            if (user.watched_issues.length > 0) {
-              this.newTasksCount = this.getNewTasks(tasks, user.watched_issues).length;
-            }
-          });
+      .pipe(
+        map(user => this.takeUserInfo(user)),
+        switchMap(user => this.taskService.getUserTasks(user._id))
+      )
+      .subscribe(tasks => {
+        if (this.user.watched_issues.length > 0) {
+          this.newTasks = this.takeNewTasks(tasks, this.user.watched_issues);
+          this.newTasksCount = this.newTasks.length;
+        }
       });
   }
 
-  loadUserTasks(id): Task[] {
-    this.taskService.getUserTasks(id)
-      .subscribe(tasks => this.userTasks = tasks);
+  takeUserInfo(user: User): User {
+    this.user = user;
+    this.avatar = user.photoURL || 'assets/img/userimg.jpg';
+    this.dateList = user.dates;
+    this.datesCount = user.dates.length;
 
-    return this.userTasks;
+    return user;
   }
 
-  // getNewTasks(): Task[] {
-  //   if (this.openedTasks) {
-  //     return this.userTasks.filter(task => !(this.openedTasks.includes(task._id)));
-  //   }
-  // }
-  getNewTasks(all: any[], watched: string[]): Task[] {
+  takeNewTasks(all: any, watched: string[]): Task[] {
     if (this.userType === 'hr') {
       return all.filter(task => task.author !== this.user._id);
     }
@@ -109,4 +103,6 @@ export class NavbarProfileComponent implements OnInit {
   trackById(link: NavItem): string {
     return link.id;
   }
+
 }
+

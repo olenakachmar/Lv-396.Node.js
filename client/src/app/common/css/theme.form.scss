@@ -52,6 +52,11 @@ input[type='button']:focus {
   background-color: $primary-color;
   border-color: $primary-color;
   color: $bg-color;
+  .add__icon {
+    margin-right: 10px;
+    color: white;
+  }
+
 }
 
 button[type='submit'],
@@ -80,6 +85,12 @@ input[type='submit']:disabled:focus{
   border-color: $case-color;
   background: $bg2-color;
   color: $border-color;
+}
+
+.light-button {
+  background-color: $case-color;
+  border-color: $primary-color;
+  color: $primary-color;
 }
 
 label {

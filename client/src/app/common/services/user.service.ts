@@ -49,7 +49,7 @@ export class UserService {
     return this.helper.decodeToken(localStorage.token).type;
   }
 
-  private readonly getHeader = () =>
+  readonly getHeader = () =>
     httpOptions.headers.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
 
 }
