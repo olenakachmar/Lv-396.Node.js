@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateSideBarInfoComponent } from './create-side-bar-info.component';
+import { CreateUserPageComponent } from './create-update-user-page.component';
 
-describe('CreateSideBarInfoComponent', () => {
-  let component: CreateSideBarInfoComponent;
-  let fixture: ComponentFixture<CreateSideBarInfoComponent>;
+describe('CreateUserPageComponent', () => {
+  let component: CreateUserPageComponent;
+  let fixture: ComponentFixture<CreateUserPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateSideBarInfoComponent ]
+      declarations: [ CreateUserPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateSideBarInfoComponent);
+    fixture = TestBed.createComponent(CreateUserPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
