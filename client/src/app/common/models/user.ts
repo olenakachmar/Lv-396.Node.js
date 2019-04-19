@@ -1,18 +1,29 @@
 import { IDepartment } from './department';
+import { IUser } from '../interfaces/user.interface';
+import { IManager } from '../interfaces/manager.interface';
+
+export class Contact {
+  constructor(
+    contact_name?: string,
+    contact_value?: string
+  ){}
+}
 
 export  class User {
   _id: any;
   firstName: string;
   lastName: string;
   position: string;
-  manager?: any;
-  teamlead: object;
+  manager?: IManager;
+  teamlead: IUser;
   department?: IDepartment;
   email: string;
   phone: string;
-  contacts: object;
+  contacts: Contact[];
   photoURL: string;
-  hrID: number;
+  hr: object;
   dates: any;
-  role: string;
+  watched_issues?: string[];
+  roles: [];
+  type: string;
 }

@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../../common/services/user.service';
 import { User } from '../../../../common/models/user';
 
-
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
@@ -13,12 +12,33 @@ import { User } from '../../../../common/models/user';
 })
 export class ItemComponent implements OnInit {
   @Input() task: Task;
-  user: User[];
-  constructor(private readonly router: Router, private readonly route: ActivatedRoute, private readonly userService: UserService) {}
+  user = new User();
+  users: User[];
+  constructor(private readonly router: Router,
+              private readonly route: ActivatedRoute,
+              private readonly userService: UserService,
+              private readonly tasksService: TasksService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadUser();
+    this.userService.getAll()
+      .subscribe(users => this.users = users);
+  }
+
+  loadUser(): boolean {
+    this.userService.getUser()
+      .subscribe(user => this.user = user);
+
+    return false;
+  }
 
   selectUser(uid: number): void {
     this.router.navigate(['/profile/my-profile/', uid], {relativeTo: this.route});
   }
+
+  resolveClick(): void {
+    this.tasksService.updateResolvedBy(this.user._id, this.task.id)
+      .subscribe((item: any) => item);
+  }
+
 }

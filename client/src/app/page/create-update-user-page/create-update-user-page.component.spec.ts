@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateUserPageComponent } from './create-user-page.component';
+import { CreateUserPageComponent } from './create-update-user-page.component';
 
 describe('CreateUserPageComponent', () => {
   let component: CreateUserPageComponent;
