@@ -23,8 +23,8 @@ export class DropdownFilterComponent implements OnInit {
     return this.filterReturnService.filterReturn;
   }
 
-  set filter(htr: Filter) {
-    this.filterReturnService.filterReturn = htr;
+  set filter(filter: Filter) {
+    this.filterReturnService.filterReturn = filter;
   }
 
   constructor(

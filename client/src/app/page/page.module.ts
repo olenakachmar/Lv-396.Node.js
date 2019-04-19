@@ -34,6 +34,9 @@ import { ListDatesComponent } from './upcoming-dates/list-dates/list-dates.compo
 import { ItemDateComponent } from './upcoming-dates/list-dates/item-date/item-date.component';
 import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
 
+import { appConfigProviders } from './common/config';
+import { FilterReturnService } from './common/filter-return.service';
+
 export const routes: Routes = [
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
   { path: '', component: WrapperComponent },
@@ -85,6 +88,10 @@ export const routes: Routes = [
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
     ModalModule.forRoot()
+  ],
+  providers: [
+    appConfigProviders,
+    FilterReturnService
   ],
   bootstrap: [WrapperComponent]
 })
