@@ -6,11 +6,11 @@ import { UserService } from '../../../common/services/user.service';
 import { User } from '../../../common/models/user';
 
 @Component({
-  selector: 'app-create-side-bar-info',
-  templateUrl: './create-side-bar-info.component.html',
-  styleUrls: ['./create-side-bar-info.component.scss']
+  selector: 'app-create-update-side-bar-info',
+  templateUrl: './create-update-side-bar-info.component.html',
+  styleUrls: ['./create-update-side-bar-info.component.scss']
 })
-export class CreateSideBarInfoComponent implements OnInit {
+export class CreateUpdateSideBarInfoComponent implements OnInit {
 
   newUser = new User();
 
@@ -20,9 +20,8 @@ export class CreateSideBarInfoComponent implements OnInit {
   departments: IDepartment[] = [];
   positions: OptionPair[] = [];
   teamLeads: OptionPair[] = [];
-  roles: OptionPair[] = [];
+  hr: OptionPair[] = [];
   managers: OptionPair[] = [];
-
 
   constructor(readonly departmentService: DepartmentService, readonly userService: UserService) {
   }
@@ -34,13 +33,23 @@ export class CreateSideBarInfoComponent implements OnInit {
         this.departments = data;
       });
 
-    this.userService.getAll()
+    this.userService.getAllTeamLeads()
       .subscribe(data => {
-        this.teamLeads = data
-          .map(elem => new OptionPair(elem._id, `${elem.firstName} ${elem.lastName}`));
-        this.roles = ['Developer', 'Tester', 'HR'].map(elem => new OptionPair(elem, elem));
-        this.managers = data.map(elem => new OptionPair(elem._id, elem.position));
+        this.teamLeads = data.map(elem => new OptionPair(elem._id, elem.name));
       });
+  }
+
+  onKeyInput(type: string, id: string): void {
+    switch (type) {
+      case 'firstName':
+        this.newUser.firstName = id;
+        break;
+      case 'lastName':
+        this.newUser.lastName = id;
+        break;
+      default:
+        break;
+    }
   }
 
   retrieveSelected(type: string, id: any): void {
@@ -58,7 +67,7 @@ export class CreateSideBarInfoComponent implements OnInit {
         this.newUser.position = id;
         break;
       case 'Role':
-        this.newUser.role = id;
+        this.newUser.roles = id;
         break;
       case 'Manager':
         this.newUser.manager = id;
