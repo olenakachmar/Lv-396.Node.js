@@ -35,6 +35,9 @@ import { ItemDateComponent } from './upcoming-dates/list-dates/item-date/item-da
 import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
 import { NavbarProfileComponent } from './navbar/navbar-profile/navbar-profile.component';
 
+import { appConfigProviders } from './common/config';
+import { FilterReturnService } from './common/filter-return.service';
+
 export const routes: Routes = [
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
   { path: '', component: WrapperComponent },
@@ -88,6 +91,10 @@ export const routes: Routes = [
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
     ModalModule.forRoot()
+  ],
+  providers: [
+    appConfigProviders,
+    FilterReturnService
   ],
   bootstrap: [WrapperComponent]
 })
