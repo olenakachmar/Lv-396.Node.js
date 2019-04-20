@@ -8,21 +8,21 @@
       <div class="input-label">
         <label for="first-name">First Name</label>
       </div>
-      <input #lastName (keyup)="onKeyInput('firstName', lastName.value)" class="form-control"
+      <input [(ngModel)]="newUser.firstName" class="form-control"
              type="text" placeholder="Name" id='first-name' aria-label="Username">
     </div>
     <div class="info-form">
       <div class="input-label">
         <label for="last-name">Last Name</label>
       </div>
-      <input #firstName (keyup)="onKeyInput('lastName', firstName.value)" class="form-control"
+      <input [(ngModel)]="newUser.lastName" class="form-control"
              type="text" placeholder="Surname" id='last-name' aria-label="UserSurname"
              aria-describedby="addon-wrapping">
     </div>
     <div class="info-form">
       <div class="input-label"><label for="department">Department</label></div>
       <app-dropdown-info class="info-input-area" id="department" [pairList]='departmentsOptionPair'
-                         (selected)="retrieveSelected('Department', $event)">
+                         (selected)="selectDepartment($event)">
       </app-dropdown-info>
     </div>
   </div>
@@ -30,19 +30,19 @@
     <div class="info-form">
       <div class="input-label"><label for="position">Position</label></div>
       <app-dropdown-info class="info-input-area" id="position" disabled [pairList]='positions'
-                         (selected)="retrieveSelected('Position', $event)">
+                         (selected)="newUser.position = $event" [selectedId]="newUser.position">
       </app-dropdown-info>
     </div>
     <div class="info-form">
       <div class="input-label"><label for="teamLead">Teamlead</label></div>
       <app-dropdown-info class="info-input-area" id="teamLead" [pairList]='teamLeads'
-                         (selected)="retrieveSelected('TeamLead', $event)">
+                         (selected)="newUser.teamlead = $event" [selectedId]="newUser.teamlead">
       </app-dropdown-info>
     </div>
     <div class="info-form">
       <div class="input-label"><label for="hr">HR</label></div>
-      <app-dropdown-info class="info-input-area" id="hr" [pairList]='hr'
-                         (selected)="retrieveSelected('Role', $event)">
+      <app-dropdown-info class="info-input-area" id="hr" [pairList]='hrs'
+                         (selected)="retrieveSelected('HR', $event)">
       </app-dropdown-info>
     </div>
     <div class="info-form">

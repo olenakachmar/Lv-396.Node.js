@@ -8,7 +8,7 @@ import { Contact, User } from '../../common/models/user';
   templateUrl: './create-update-user-page.component.html',
   styleUrls: ['./create-update-user-page.component.scss']
 })
-export class CreateUpdateUserPageComponent{
+export class CreateUpdateUserPageComponent {
   newUser: User;
 
   constructor(readonly userService: UserService) {

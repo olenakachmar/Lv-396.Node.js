@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../common/services/user.service';
 import { User } from '../../common/models/user';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-my-profile',
@@ -9,14 +10,31 @@ import { User } from '../../common/models/user';
   styleUrls: ['./my-profile.component.scss']
 })
 export class MyProfileComponent implements OnInit {
+  modalRef: BsModalRef;
+  message: string;
 
-  constructor(private readonly UserInfoService: UserService, private readonly route: ActivatedRoute) { }
+  constructor(private readonly UserInfoService: UserService, private readonly route: ActivatedRoute,
+              private modalService: BsModalService) { }
 
   user: User;
   id: any;
 
   ngOnInit() {
     this.checkIdParam();
+  }
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+
+  confirm(): void {
+    this.UserInfoService.deleteUser(this.user._id)
+      .subscribe( () => console.log(`Employee with Id = ${this.user._id} deleted`)),
+      (err) => console.log(err);
+    this.modalRef.hide();
+  }
+
+  decline(): void {
+    this.modalRef.hide();
   }
 
   private readonly checkIdParam = () => {

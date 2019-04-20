@@ -1,6 +1,6 @@
 <div class="btn-group" dropdown placement="bottom right">
   <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle option-el"
-          aria-controls="dropdown-basic"> {{ title }}
+          aria-controls="dropdown-basic"> {{  title || 'Choose' }}
     <span class="caret"></span>
   </button>
   <ul id="dropdown-basic top" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
