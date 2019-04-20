@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../app_services/auth.service';
+import { Component } from '@angular/core';
+import { AuthService } from '../common/services/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -11,7 +11,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
   frm: FormGroup;
   hasFailed: boolean;
@@ -30,14 +30,17 @@ export class HomeComponent implements OnInit {
     const helper = new JwtHelperService();
     if (this.frm.invalid && this.frm.get('login').value === '') {
       this.showInputErrorslogin = true;
-      return;
-    } else if (this.frm.invalid && this.frm.get('password').value === '') {
+
+      return undefined;
+    }
+    if (this.frm.invalid && this.frm.get('password').value === '') {
       this.showInputErrorsPassword = true;
-      return;
+
+      return undefined;
     }
 
     this.frm.valueChanges.subscribe((value: string) => {
-      if(value.length !== 0) {
+      if (value.length !== 0) {
         this.hasFailed = false;
       }
     });
@@ -51,14 +54,12 @@ export class HomeComponent implements OnInit {
           this.router.navigate(['/profile']);
         },
         (error) => {
+          console.log(error);
           this.hasFailed = true;
         }
       );
 
     return false;
-  }
-
-  ngOnInit() {
   }
 
 }

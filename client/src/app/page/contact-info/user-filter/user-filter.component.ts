@@ -19,13 +19,14 @@ export class UserFilterComponent implements OnInit {
 
   getDepartmentId(): string {
     this.message = this.id;
+
     return this.id = this.route.snapshot.paramMap.get('id');
   }
 
   ngOnInit() {
   }
 
-  onGetFilterText() {
+  onGetFilterText(): void {
     this.getFilterText.emit(this.filterText);
   }
 

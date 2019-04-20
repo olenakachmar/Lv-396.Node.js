@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from '../../../app_models/user';
+import { User } from '../../../common/models/user';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DepartmentService } from '../../../app_services/department.service';
-import { UserService } from '../../../app_services/user.service';
+import { DepartmentService } from '../../../common/services/department.service';
+import { UserService } from '../../../common/services/user.service';
 
 @Component({
   selector: 'app-user-list',
@@ -19,25 +19,26 @@ export class UserListComponent implements OnInit {
 
   constructor(private readonly router: Router,
               private readonly route: ActivatedRoute,
-              private readonly departmentService: DepartmentService, 
+              private readonly departmentService: DepartmentService,
               private readonly userService: UserService) {
       this.bool = false;
       this.message = 'Show more';
     }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadAllUsers();
   }
 
-  selectUser(uid: number) {
+  selectUser(uid: number): void {
     this.router.navigate(['/profile/my-profile/', uid], {relativeTo: this.route});
   }
 
   loadAllUsers(): any {
-    if(this.getDepartmentId() && this.bool === false) {
+    if (this.getDepartmentId() && !this.bool) {
       return this.getAllEmployees();
     }
-    return this.getAllUsers(); 
+
+    return this.getAllUsers();
   }
 
   getDepartmentId(): string {
@@ -45,22 +46,20 @@ export class UserListComponent implements OnInit {
   }
 
   getAllEmployees(): any {
-    this.departmentService.getAllDepartments().subscribe((department: any) => {
-      department.filter((item: any) => item.name === this.id).map((item: any) => this.users = item.employees);
+    this.departmentService.getAllDepartments()
+      .subscribe((department: any) => {
+        department.filter((item: any) => item.name === this.id)
+          .map((item: any) => this.users = item.employees);
     });
   }
 
-  getAllUsers()  {
-    this.userService.getAll().subscribe(users => this.users = users );
+  getAllUsers(): any  {
+    this.userService.getAll()
+      .subscribe(users => this.users = users);
   }
 
   showOrHide(): any {
-    if(this.bool === true) {
-      this.message = 'Show more';
-    } else {
-      this.message = 'Hide all';
-    }
-
+    this.message = this.bool ? 'Show more' : 'Hide all';
     this.bool = !this.bool;
 
     return this.loadAllUsers();

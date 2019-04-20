@@ -14,12 +14,24 @@ const issueSchema = new Schema(
       required: true,
     },
     status: {
-      type: String,
-      required: true,
+      name: {
+        type: String,
+        required: true,
+      },
+      value: {
+        type: Number,
+        required: true,
+      },
     },
     type: {
-      type: String,
-      required: true,
+      name: {
+        type: String,
+        required: true,
+      },
+      value: {
+        type: Number,
+        required: true,
+      },
     },
     date: { type: Number },
     author: {
@@ -48,6 +60,15 @@ const issueSchema = new Schema(
     },
   },
 );
+
+issueSchema.set('toObject', {
+  transform(doc, ret) {
+    const object = ret;
+    delete object.__v;
+    return object;
+  },
+});
+
 
 issueSchema.set('toJSON', {
   transform(doc, ret) {

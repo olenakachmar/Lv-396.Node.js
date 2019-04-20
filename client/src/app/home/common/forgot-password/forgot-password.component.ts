@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RecoverPasswordService } from '../../../app_services/recover-password.service';
+import { RecoverPasswordService } from '../../../common/services/recover-password.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -16,7 +16,9 @@ export class ForgotPasswordComponent implements OnInit {
   message: any;
   error: string;
 
-  constructor(private readonly router: Router, private readonly fb: FormBuilder, private recoverPassword: RecoverPasswordService) {
+  constructor(private readonly router: Router,
+              private readonly fb: FormBuilder,
+              private readonly recoverPassword: RecoverPasswordService) {
     this.frm = fb.group({
       email: ['', Validators.required],
     });
@@ -27,23 +29,24 @@ export class ForgotPasswordComponent implements OnInit {
   ngOnInit() {
   }
 
-  send(form: any) {
+  send(form: any): void {
     this.frm.valueChanges.subscribe((value: string) => {
       if(value.length !== 0) {
         this.hasFailed = false;
       }
     });
 
-    this.recoverPassword.forgotPassword(form.email).subscribe(
-      (response) => {
-        this.getResponse = true;
-        this.message = response;
-      },
-      (error) => {
-        this.error = error.error.err;
-        this.hasFailed = true;
-      }
-    )
+    this.recoverPassword.forgotPassword(form.email)
+      .subscribe(
+        (response) => {
+          this.getResponse = true;
+          this.message = response;
+        },
+        (error) => {
+          this.error = error.error.err;
+          this.hasFailed = true;
+        }
+      );
   }
 
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../../../app_services/user.service';
+import { UserService } from '../../../common/services/user.service';
 
 @Component({
   selector: 'app-user-image',
@@ -9,10 +9,11 @@ import { UserService } from '../../../app_services/user.service';
 })
 export class UserImageComponent implements OnInit {
   form: FormGroup;
-
-  constructor(private fb: FormBuilder, private userService: UserService) {
+  @ViewChild('fileInput') inputEl: ElementRef;
+  
+  constructor(private fb: FormBuilder, private userService: UserService, private cd: ChangeDetectorRef) {
     this.form = fb.group({
-      avatar: ['', Validators.required]
+      avatar: null
     });
   }
 
@@ -20,8 +21,9 @@ export class UserImageComponent implements OnInit {
   }
 
   upload(form: any) {
-    console.log(form.avatar);
-    this.userService.getImage(form.avatar).subscribe(users => console.log(users) );
+    let inputEl: HTMLInputElement = this.inputEl.nativeElement;
+    this.userService.getImage(inputEl.files[0])
+      .subscribe(user => console.log(user))
   }
 
 }

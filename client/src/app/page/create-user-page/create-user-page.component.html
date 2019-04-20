@@ -1,8 +1,73 @@
 <div class="row ">
   <div class="col-lg-4 sidebar-wrapper">
-    <app-create-side-bar-info></app-create-side-bar-info>
+    <app-create-side-bar-info #createUserComponent></app-create-side-bar-info>
   </div>
   <main class="col-lg-8 content-wrapper">
-    <h4>Something will be here</h4>
+    <div class="row main-user-info">
+      <div class="col main-user-info">
+        <h1>Name Surname</h1>
+        <p>position</p>
+      </div>
+      <button class="light-button update-button">Update</button>
+    </div>
+
+    <div class="row additional-info">
+      <div class="col-md-6 user-info">
+        <div class="info-form">
+          <div class="input-label"><label for="first-name">Email</label></div>
+          <input class="form-control" type="text" placeholder="Email" id='email' aria-label="Email">
+        </div>
+
+        <div class="info-form">
+          <div class="input-label"><label for="first-name">Phone</label></div>
+          <input class="form-control" type="text" placeholder="Phone" id='phone' aria-label="Phone">
+        </div>
+
+        <div class="info-form">
+          <div class="input-label"><label for="first-name">Skype</label></div>
+          <input class="form-control" type="text" placeholder="Skype" id='skype' aria-label="Skype">
+        </div>
+
+        <div class="info-form">
+          <div class="input-label"><label for="first-name">Telegram</label></div>
+          <input class="form-control" type="text" placeholder="Telegram" id='telegram' aria-label="Telegram">
+        </div>
+
+        <button class="light-button fields-button">
+          <img _ngcontent-c4="" alt="add" class="add__icon" src="assets/img/add.svg">
+          Add fields
+        </button>
+      </div>
+
+      <div class="col-md-5 date-info">
+        <div class="info-form">
+          <div class="input-label"><label for="date">Upcoming review date</label></div>
+          <app-dropdown-info class="info-input-area" id="role" [pairList]='roles'
+            (selected)="retrieveSelected('Role', $event)">
+          </app-dropdown-info>
+        </div>
+
+        <div class="info-form">
+          <div class="input-label"><label for="role">Data comning</label></div>
+          <app-dropdown-info class="info-input-area" id="role" [pairList]='roles'
+            (selected)="retrieveSelected('Role', $event)">
+          </app-dropdown-info>
+        </div>
+
+        <button class="light-button date-button">
+          <img _ngcontent-c4="" alt="add" class="add__icon" src="assets/img/add.svg">
+          
+          Add date
+        </button>
+      </div>
+    </div>
+
+    <div class="row save-profile">
+      <div class="col">
+        <button class="save-button" (click)="extractUser(createUserComponent.newUser)">
+          Save profile
+        </button>
+      </div>
+    </div>
   </main>
 </div>

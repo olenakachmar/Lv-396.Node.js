@@ -1,4 +1,8 @@
-@import '../../../../common/theme';
+@import '../../../../common/css/theme';
+
+::ng-deep .accordion-wrapper:not(:last-child) .card {
+  border-bottom: 0;
+}
 
 .heading-grid {
   display: grid;
@@ -6,23 +10,18 @@
   grid-template-rows: 1fr 1fr;
 }
 
-.heading-text {
-  margin-top: auto;
-  margin-bottom: auto;
+.heading-text h5{
+  margin-top: 8px;
 }
+
 .heading-grid span {
   display: none;
 }
+
 .heading-filter, .heading-date {
-  margin-top: auto;
-  margin-bottom: auto;
   text-align: center;
 }
 
-.heading-text p {
-  margin-top: 14px;
-  margin-bottom: 14px;
-}
 .heading-excerpt {
   grid-column-start: 1;
   grid-column-end: 3;
@@ -50,6 +49,7 @@
 .body-grid {
   display: grid;
   grid-template-columns: auto auto 27%;
+  grid-gap: 5px;
 }
 
 .body-from {
@@ -72,6 +72,9 @@
 p {
   margin-top: 15px;
 }
+.heading-excerpt p {
+  margin: 0;
+}
 
 .mark-resolve {
   float: right;
@@ -79,6 +82,7 @@ p {
   border-radius: 0;
   font-weight: bold;
   padding: 15px;
+  border-color: $case-color;
 }
 
 .mark-resolve:hover {
@@ -88,7 +92,7 @@ p {
 }
 
 .body-text p{
-  margin-top: -15px;
+  margin-top: -25px;
 }
 @media(max-width:530px) {
   .heading-grid {
@@ -107,6 +111,7 @@ p {
     float: left;
     margin-top: 15px;
   }
+
   .body-from {
     grid-column-start: 1;
     grid-column-end: 3;
@@ -142,6 +147,7 @@ p {
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
+    margin: 15px 0 15px 0;
   }
   .heading-filter {
     grid-column-start: 1;
@@ -187,4 +193,10 @@ p {
   background: url(../../../../../assets/img/arrow_up.svg) center no-repeat;
 }
 
+.waiting {
+  color: green;
+}
 
+.pointer {
+  cursor: pointer;
+}

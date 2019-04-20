@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UserService } from './user.service';
+import { FilterReturnService } from './filter-return.service';
 
-describe('UserService', () => {
+describe('FilterReturnService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: UserService = TestBed.get(UserService);
+    const service: FilterReturnService = TestBed.get(FilterReturnService);
     expect(service).toBeTruthy();
   });
 });
