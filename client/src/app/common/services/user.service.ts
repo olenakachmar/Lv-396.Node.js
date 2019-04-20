@@ -23,30 +23,31 @@ export class UserService {
 
   getAll(): Observable<User[]> {
     httpOptions.headers = this.getHeader();
-
     return this.http.get<User[]>(`${api}users`, httpOptions);
   }
 
-  getAllTeamLeads(): Observable<User[]> {
-    return this.http.get<User[]>(`${api}users?position=TEAM_LEAD`, httpOptions);
+  getAllTeamLeads(): Observable<any> {
+    return this.http.get<any>(`${api}users?roles=teamlead`, httpOptions);
   }
 
   getUser(id?: string): Observable<User> {
     httpOptions.headers = this.getHeader();
     const userId = this.getUserId();
-
     return this.http.get<User>(`${api}users/${id || userId}`, httpOptions);
   }
 
   getUserId(): any {
     httpOptions.headers = this.getHeader();
     const helper = new JwtHelperService();
-
     return helper.decodeToken(localStorage.token).id;
   }
 
   getUserType(): any {
     return this.helper.decodeToken(localStorage.token).type;
+  }
+
+  addUser(user: User): Observable<any> {
+    return this.http.post<User>(`${api}auth/signup`, user, httpOptions);
   }
 
   readonly getHeader = () =>
