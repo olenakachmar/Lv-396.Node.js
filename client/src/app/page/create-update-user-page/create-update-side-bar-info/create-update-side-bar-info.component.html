@@ -5,12 +5,18 @@
       <button class="update-photo-button">Update Image</button>
     </div>
     <div class="info-form">
-      <div class="input-label"><label for="first-name">First Name</label></div>
-      <input class="form-control" type="text" placeholder="Name" id='first-name' aria-label="Username">
+      <div class="input-label">
+        <label for="first-name">First Name</label>
+      </div>
+      <input #lastName (keyup)="onKeyInput('firstName', lastName.value)" class="form-control"
+             type="text" placeholder="Name" id='first-name' aria-label="Username">
     </div>
     <div class="info-form">
-      <div class="input-label"><label for="last-name">First Name</label></div>
-      <input class="form-control" type="text" placeholder="Surname" id='last-name' aria-label="UserSurname"
+      <div class="input-label">
+        <label for="last-name">Last Name</label>
+      </div>
+      <input #firstName (keyup)="onKeyInput('lastName', firstName.value)" class="form-control"
+             type="text" placeholder="Surname" id='last-name' aria-label="UserSurname"
              aria-describedby="addon-wrapping">
     </div>
     <div class="info-form">
@@ -34,8 +40,8 @@
       </app-dropdown-info>
     </div>
     <div class="info-form">
-      <div class="input-label"><label for="role">Role</label></div>
-      <app-dropdown-info class="info-input-area" id="role" [pairList]='roles'
+      <div class="input-label"><label for="hr">HR</label></div>
+      <app-dropdown-info class="info-input-area" id="hr" [pairList]='hr'
                          (selected)="retrieveSelected('Role', $event)">
       </app-dropdown-info>
     </div>
