@@ -23,7 +23,7 @@ export class CreateUpdateUserPageComponent {
     this.newUser.email = 'marley@gmail.com';
     this.userService.addUser(this.newUser)
       .subscribe((data: any) => {
-      window.location.href = `/profile/my-profile/${data.newUser._id}`;
+        window.location.href = `/profile/my-profile/${data.newUser._id}`;
       });
   }
 }
