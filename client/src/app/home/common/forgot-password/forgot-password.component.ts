@@ -26,7 +26,7 @@ export class ForgotPasswordComponent implements OnInit {
     this.getResponse = false;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
   send(form: any): void {
@@ -44,6 +44,7 @@ export class ForgotPasswordComponent implements OnInit {
         },
         (error) => {
           this.error = error.error.err;
+          console.log(error);
           this.hasFailed = true;
         }
       );

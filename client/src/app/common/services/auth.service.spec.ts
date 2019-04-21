@@ -14,7 +14,7 @@ describe('AuthService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, HttpClientTestingModule, FormsModule, RouterTestingModule, ReactiveFormsModule],
       providers: [AuthService]
-    })
+    });
     httpTestingController = TestBed.get(HttpTestingController);
     service = TestBed.get(AuthService);
   });

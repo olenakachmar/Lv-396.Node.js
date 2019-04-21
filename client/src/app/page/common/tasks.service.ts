@@ -10,11 +10,15 @@ import { api } from '../../../environments/environment';
 })
 
 export class TasksService {
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient) { }
   tasks: Task[];
 
   getTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(`${api}/issues/all`, httpOptions);
+  }
+
+  public getUserTasks(id: string): Observable<Task[]> {
+    return  this.http.get<Task[]>(`${api}/issues/${id}`, httpOptions);
   }
 
   public updateResolvedBy(userId: string, taskId: string): Observable<any> {
@@ -37,5 +41,5 @@ export class TasksService {
   public deleteTask(taskId: string): Observable<{}> {
     return this.http.delete(`${api}issues/${taskId}`, httpOptions);
   }
-}
 
+}

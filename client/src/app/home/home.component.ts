@@ -15,6 +15,7 @@ export class HomeComponent {
 
   frm: FormGroup;
   hasFailed: boolean;
+  submitted: boolean;
   showInputErrorslogin = false;
   showInputErrorsPassword = false;
 
@@ -27,6 +28,7 @@ export class HomeComponent {
   }
 
   auth(form: any): boolean {
+    this.submitted = true;
     const helper = new JwtHelperService();
     if (this.frm.invalid && this.frm.get('login').value === '') {
       this.showInputErrorslogin = true;
@@ -54,7 +56,6 @@ export class HomeComponent {
           this.router.navigate(['/profile']);
         },
         (error) => {
-          console.log(error);
           this.hasFailed = true;
         }
       );
