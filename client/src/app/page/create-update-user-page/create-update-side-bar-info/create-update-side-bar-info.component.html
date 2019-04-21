@@ -8,14 +8,14 @@
       <div class="input-label">
         <label for="first-name">First Name</label>
       </div>
-      <input #lastName (keyup)="onKeyInput('firstName', lastName.value)" class="form-control"
+      <input [(ngModel)]="newUser.firstName" class="form-control"
              type="text" placeholder="Name" id='first-name' aria-label="Username">
     </div>
     <div class="info-form">
       <div class="input-label">
         <label for="last-name">Last Name</label>
       </div>
-      <input #firstName (keyup)="onKeyInput('lastName', firstName.value)" class="form-control"
+      <input [(ngModel)]="newUser.lastName" class="form-control"
              type="text" placeholder="Surname" id='last-name' aria-label="UserSurname"
              aria-describedby="addon-wrapping">
     </div>
@@ -41,7 +41,7 @@
     </div>
     <div class="info-form">
       <div class="input-label"><label for="hr">HR</label></div>
-      <app-dropdown-info class="info-input-area" id="hr" [pairList]='hr'
+      <app-dropdown-info class="info-input-area" id="hr" [pairList]='hrs'
                          (selected)="retrieveSelected('Role', $event)">
       </app-dropdown-info>
     </div>
