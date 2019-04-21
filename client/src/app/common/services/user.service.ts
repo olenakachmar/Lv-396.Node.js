@@ -23,12 +23,11 @@ export class UserService {
 
   getAll(): Observable<User[]> {
     httpOptions.headers = this.getHeader();
-
     return this.http.get<User[]>(`${api}users`, httpOptions);
   }
 
-  getAllTeamLeads(): Observable<User[]> {
-    return this.http.get<User[]>(`${api}users?position=TEAM_LEAD`, httpOptions);
+  getAllTeamLeads(): Observable<any> {
+    return this.http.get<any>(`${api}users?roles=teamlead`, httpOptions);
   }
   getUsersOfHr(): Observable<User[]> {
     httpOptions.headers = this.getHeader();
@@ -40,14 +39,12 @@ export class UserService {
   getUser(id?: string): Observable<User> {
     httpOptions.headers = this.getHeader();
     const userId = this.getUserId();
-
     return this.http.get<User>(`${api}users/${id || userId}`, httpOptions);
   }
 
   getUserId(): any {
     httpOptions.headers = this.getHeader();
     const helper = new JwtHelperService();
-
     return helper.decodeToken(localStorage.token).id;
   }
 

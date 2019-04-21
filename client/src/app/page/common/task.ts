@@ -11,7 +11,7 @@ export class TaskType {
 }
 
 export class Task {
-  constructor(public id?: number,
+  constructor(public id?: string,
               public name?: string,
               public excerpt?: string,
               public status: TaskStatus = new TaskStatus(),
@@ -38,7 +38,7 @@ export class TaskCreateRequestBody {
 }
 
 export class TaskEditRequestBody {
-  constructor(public id?: number,
+  constructor(public id?: string,
               public name?: string,
               public excerpt?: string,
               public status: TaskStatus = new TaskStatus(),

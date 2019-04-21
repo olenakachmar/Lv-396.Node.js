@@ -3,6 +3,13 @@ import { IUser } from '../interfaces/user.interface';
 import { IManager } from '../interfaces/manager.interface';
 import { DatesItem } from '../../page/common/dates-item';
 
+export class Contact {
+  constructor(
+    contact_name?: string,
+    contact_value?: string
+  ){}
+}
+
 export  class User {
   _id: any;
   firstName: string;
@@ -13,9 +20,11 @@ export  class User {
   department?: IDepartment;
   email: string;
   phone: string;
-  contacts: object;
+  contacts: Contact[];
   photoURL: string;
-  hrID: number;
+  hr: object;
   dates: DatesItem[];
-  role: string;
+  watched_issues?: string[];
+  roles: [];
+  type: string;
 }

@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../common/services/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../common/services/auth.service';
 import { UserService } from '../../../common/services/user.service';
-import { User } from '../../../common/models/user';
 import { NavItemsService } from '../../common/nav-items.service';
+import { TasksService } from '../../common/tasks.service';
+import { User } from '../../../common/models/user';
+import { Task } from '../../common/task';
 import { NavItem } from '../../common/nav-item';
 import { DatesItem } from '../../common/dates-item';
 import moment from 'moment';
+import { switchMap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar-profile',
@@ -17,22 +20,26 @@ import moment from 'moment';
 export class NavbarProfileComponent implements OnInit {
   user = new User();
   avatar: string;
-  newTasksCount: number;
+  userType: string;
+  userTasks: Task[];
+  newTasks: Task[];
   menuList: NavItem[];
   dateList: DatesItem[];
-  userType: string;
+  newTasksCount: number;
   datesCount: number;
   active: boolean;
   todayDate: string;
 
-  constructor(
-    private readonly authService: AuthService,
-    private readonly router: Router,
-    private readonly navItemsService: NavItemsService,
-    private readonly userService: UserService) {}
+  constructor(private readonly authService: AuthService,
+              private readonly router: Router,
+              private readonly navItemsService: NavItemsService,
+              private readonly userService: UserService,
+              private readonly taskService: TasksService) {
+  }
 
   ngOnInit(): void {
-    this.loadUser();
+    this.loadDates();
+    this.getUser();
     this.navItemsService.getNavList()
       .subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
@@ -40,18 +47,13 @@ export class NavbarProfileComponent implements OnInit {
     this.todayDate = String(new Date());
   }
 
-  loadUser(): void {
-    this.userService.getUser()
-      .subscribe(user => {
-        this.avatar = user.photoURL || 'assets/img/userimg.jpg';
-        this.user = user;
-      });
+  loadDates(): void {
     this.userService.getUsersOfHr()
       .subscribe(user => {
         this.dateList = [];
         user.map((item) => {
           item.dates.map((items) => {
-            this.dateList = [...this.dateList, items ];
+            this.dateList = [...this.dateList, items];
           });
         });
         this.dateList = this.dateList.filter(date =>
@@ -60,16 +62,43 @@ export class NavbarProfileComponent implements OnInit {
       });
   }
 
+  getUser(): void {
+    this.userService.getUser()
+      .pipe(
+        map(user => this.takeUserInfo(user)),
+        switchMap(user => this.taskService.getUserTasks(user._id))
+      )
+      .subscribe(tasks => {
+        if (this.user.watched_issues.length > 0) {
+          this.newTasks = this.takeNewTasks(tasks, this.user.watched_issues);
+          this.newTasksCount = this.newTasks.length;
+        }
+      });
+  }
+
+  takeUserInfo(user: User): User {
+    this.user = user;
+    this.avatar = user.photoURL || 'assets/img/userimg.jpg';
+    this.dateList = user.dates;
+    this.datesCount = user.dates.length;
+
+    return user;
+  }
+
+  takeNewTasks(all: any, watched: string[]): Task[] {
+    if (this.userType === 'hr') {
+      return all.filter(task => task.author !== this.user._id);
+    }
+    if (this.userType === 'developer') {
+      return all.filter(task => task.resolvedByPerformer);
+    }
+
+    return all.filter(task => !(watched.includes(task._id)));
+  }
+
   logout(): boolean {
     this.authService.logout();
     this.router.navigate(['/home']);
-
-    return false;
-  }
-
-  currentByRout(currentRouter: string): boolean {
-    this.navItemsService.currentRouter(currentRouter);
-    this.active = false;
 
     return false;
   }
@@ -83,11 +112,18 @@ export class NavbarProfileComponent implements OnInit {
 
     return false;
   }
+
   convertDate(date: string): string {
     return moment(date)
       .format('L');
   }
-  trackById(link: any): string {
+
+  currentByRout(currentRouter: string): boolean {
+    this.navItemsService.currentRouter(currentRouter);
+
+    return this.active = false;
+  }
+  trackById(link: NavItem): string {
     return link.id;
   }
 }

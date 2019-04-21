@@ -25,7 +25,7 @@
     <img class="user-bar__avatar" src="{{ avatar }}" alt="avatar" *ngIf="avatar">
   </div>
   <ul class="user-bar__menu dropdown-menu" *dropdownMenu role="menu" aria-labelledby="button-disabled-item">
-    <ng-container *ngFor="let link of menuList; let i = index; trackBy: trackById;">
+    <ng-container *ngFor="let link of menuList; let i = index; trackBy: trackById">
       <li class="user-bar__row" role="menuitem"
         *ngIf="link.rightMenu && (userType === link.dev || userType === link.hr)"
         [ngClass]="{'current': link.current}" (click)="currentByIndex(i)">
@@ -34,5 +34,3 @@
     </ng-container>
   </ul>
 </div>
-
-

@@ -1,15 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Filter } from './filter';
 import { FilterOptions } from './filter-options';
-import { FILTERS } from './mock-filters';
+import { FILTERS } from './config';
 import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class FilterReturnService {
+  constructor(
+    @Inject(FILTERS) public filters: Filter[]
+  ) { }
+
   private currentFilterReturn: Filter;
 
-  set filterReturn(htr: Filter) {
-    this.currentFilterReturn  = {...htr};
+  set filterReturn(filter: Filter) {
+    this.currentFilterReturn  = {...filter};
   }
 
   get filterReturn(): Filter {
@@ -25,7 +29,7 @@ export class FilterReturnService {
   };
 
   createFilterByName = (filterName: string, defaultValue: number = -1): Filter => {
-    let filterEl = FILTERS.filter((item: Filter) => item.name === filterName);
+    let filterEl = this.filters.filter((item: Filter) => item.name === filterName);
     filterEl = [...filterEl];
     const theFilter: Filter = {...filterEl[0]};
     theFilter.defaultValue = defaultValue;
