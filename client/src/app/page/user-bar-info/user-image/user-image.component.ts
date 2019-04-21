@@ -20,10 +20,4 @@ export class UserImageComponent implements OnInit {
   ngOnInit() {
   }
 
-  upload(form: any) {
-    let inputEl: HTMLInputElement = this.inputEl.nativeElement;
-    this.userService.getImage(inputEl.files[0])
-      .subscribe(user => console.log(user))
-  }
-
 }
