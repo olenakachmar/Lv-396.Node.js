@@ -1,6 +1,7 @@
 import { IDepartment } from './department';
 import { IUser } from '../interfaces/user.interface';
 import { IManager } from '../interfaces/manager.interface';
+import { DatesItem } from '../../page/common/dates-item';
 
 export  class User {
   _id: any;
@@ -15,6 +16,6 @@ export  class User {
   contacts: object;
   photoURL: string;
   hrID: number;
-  dates: any;
+  dates: DatesItem[];
   role: string;
 }

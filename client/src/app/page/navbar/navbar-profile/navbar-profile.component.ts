@@ -23,6 +23,7 @@ export class NavbarProfileComponent implements OnInit {
   userType: string;
   datesCount: number;
   active: boolean;
+  todayDate: string;
 
   constructor(
     private readonly authService: AuthService,
@@ -36,15 +37,26 @@ export class NavbarProfileComponent implements OnInit {
       .subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
     this.newTasksCount = 7;
+    this.todayDate = String(new Date());
   }
 
   loadUser(): void {
     this.userService.getUser()
       .subscribe(user => {
-        this.dateList = user.dates;
-        this.datesCount = user.dates.length;
         this.avatar = user.photoURL || 'assets/img/userimg.jpg';
         this.user = user;
+      });
+    this.userService.getUsersOfHr()
+      .subscribe(user => {
+        this.dateList = [];
+        user.map((item) => {
+          item.dates.map((items) => {
+            this.dateList = [...this.dateList, items ];
+          });
+        });
+        this.dateList = this.dateList.filter(date =>
+          this.convertDate(date.date) === this.convertDate(this.todayDate));
+        this.datesCount = this.dateList.length;
       });
   }
 
@@ -71,7 +83,10 @@ export class NavbarProfileComponent implements OnInit {
 
     return false;
   }
-
+  convertDate(date: string): string {
+    return moment(date)
+      .format('L');
+  }
   trackById(link: any): string {
     return link.id;
   }

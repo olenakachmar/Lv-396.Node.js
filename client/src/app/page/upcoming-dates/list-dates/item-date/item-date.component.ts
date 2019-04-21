@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../../../common/services/user.service';
-import { User } from '../../../../common/models/user';
+import { Component, OnInit, Input } from '@angular/core';
 import { DatesItem } from '../../../common/dates-item';
+import moment from 'moment';
 
 @Component({
   selector: 'app-date-item',
@@ -9,19 +8,14 @@ import { DatesItem } from '../../../common/dates-item';
   styleUrls: ['./item-date.component.scss']
 })
 export class ItemDateComponent implements OnInit {
-  user = new User();
-  dateList: DatesItem[];
-
-  constructor(
-    private readonly userService: UserService) {}
+  @Input() date: DatesItem;
+  todayDate: string;
 
   ngOnInit(): void {
-    this.loadUser();
+    this.todayDate = String(new Date());
   }
-  loadUser(): void {
-    this.userService.getUser()
-      .subscribe(user => {
-        this.dateList = user.dates;
-      });
+  convertDate(date: number): string {
+    return moment(date)
+      .format('L');
   }
 }

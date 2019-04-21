@@ -30,6 +30,12 @@ export class UserService {
   getAllTeamLeads(): Observable<User[]> {
     return this.http.get<User[]>(`${api}users?position=TEAM_LEAD`, httpOptions);
   }
+  getUsersOfHr(): Observable<User[]> {
+    httpOptions.headers = this.getHeader();
+    const userId = this.getUserId();
+
+    return this.http.get<User[]>(`${api}users?hr=${userId}`, httpOptions);
+  }
 
   getUser(id?: string): Observable<User> {
     httpOptions.headers = this.getHeader();
@@ -47,6 +53,10 @@ export class UserService {
 
   getUserType(): any {
     return this.helper.decodeToken(localStorage.token).type;
+  }
+
+  addUser(user: User): Observable<any> {
+    return this.http.post<User>(`${api}auth/signup`, user, httpOptions);
   }
 
   readonly getHeader = () =>

@@ -88,4 +88,4 @@ export const routes: Routes = [
   ],
   bootstrap: [WrapperComponent]
 })
-export class PageModule { }
+export class PageModule {}
