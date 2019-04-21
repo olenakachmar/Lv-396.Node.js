@@ -32,8 +32,8 @@ export class MyProfileComponent implements OnInit, OnDestroy {
   confirm(): void {
     this.userInfoService.deleteUser(this.user._id)
       .takeUntil(this.destroy$)
-      .subscribe(() => console.log(`Employee with Id = ${this.user._id} deleted`));
-    window.location.href = `/profile/contact-info`;
+      .subscribe(() =>
+    window.location.href = `/profile/contact-info`);
     this.modalRef.hide();
   }
 
