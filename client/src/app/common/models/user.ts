@@ -23,6 +23,7 @@ export  class User {
   photoURL: string;
   hr: object;
   dates: any;
+  watched_issues?: string[];
   roles: [];
   type: string;
 }

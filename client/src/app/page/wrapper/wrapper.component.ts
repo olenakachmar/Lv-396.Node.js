@@ -14,7 +14,7 @@ import { TasksService } from '../common/tasks.service';
 })
 
 export class WrapperComponent implements OnInit {
-  emptyTask: Task = new Task();
+  emptyTask: Task;
   user: User;
   task: Task;
   filters: Filter[];
@@ -77,7 +77,7 @@ export class WrapperComponent implements OnInit {
             resolvedByPerformer: item.resolvedByPerformer,
           })
         )
-        .sort((a, b) => (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0));
+          .sort((a, b) => (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0));
         this.ref.detectChanges();
       });
   }

@@ -33,6 +33,10 @@ import { UpcomingDatesComponent } from './upcoming-dates/upcoming-dates.componen
 import { ListDatesComponent } from './upcoming-dates/list-dates/list-dates.component';
 import { ItemDateComponent } from './upcoming-dates/list-dates/item-date/item-date.component';
 import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
+import { NavbarProfileComponent } from './navbar/navbar-profile/navbar-profile.component';
+
+import { appConfigProviders } from './common/config';
+import { FilterReturnService } from './common/filter-return.service';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
@@ -72,7 +76,8 @@ export const routes: Routes = [
     UpcomingDatesComponent,
     ListDatesComponent,
     ItemDateComponent,
-    AddTaskFormComponent
+    AddTaskFormComponent,
+    // NavbarProfileComponent
   ],
   imports: [
     CommonModule,
@@ -86,6 +91,10 @@ export const routes: Routes = [
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
     ModalModule.forRoot()
+  ],
+  providers: [
+    appConfigProviders,
+    FilterReturnService
   ],
   bootstrap: [WrapperComponent]
 })
