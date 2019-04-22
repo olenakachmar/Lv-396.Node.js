@@ -13,10 +13,10 @@ export class ContactInfoComponent implements OnInit {
 
   constructor(private readonly userService: UserService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  takeFilterValue(text: string) {
+  takeFilterValue(text: string): void {
     this.filterText = text;
   }
 

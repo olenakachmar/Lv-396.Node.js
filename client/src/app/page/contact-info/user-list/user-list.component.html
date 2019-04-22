@@ -1,6 +1,6 @@
 <div class="wrapper">
-  <div class="row list-users" *ngFor="let user of users | filterUsersBy: filterText; let i = index"
-       (click)="selectUser(user._id)">
+  <div class="row list-users" *ngFor="let user of users | filterUsersBy: filterText"
+    (click)="selectUser(user._id)">
     <div class="col-md-4 box font-weight-bold">
       {{ user.firstName }} {{ user.lastName }}
     </div>
@@ -21,5 +21,8 @@
         -
       </div>
     </div>
+  </div>
+  <div class="d-flex justify-content-center mt-2" *ngIf="getDepartmentId()">
+    <button class="btn btn-primary" (click)="showOrHide()">{{ message }}</button>
   </div>
 </div>

@@ -83,7 +83,6 @@ export const routes: Routes = [
     CommonModule,
     RouterModule,
     BrowserModule,
-    FormsModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

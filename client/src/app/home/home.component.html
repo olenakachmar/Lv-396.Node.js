@@ -2,7 +2,7 @@
   <div class="card">
     <p class="card-title">LOGIN TO <span class="font-weight-bold">HRMS</span></p>
     <div class="card-body">
-      <form class="container" *ngIf="!authService.getUser()" [formGroup]="frm" (ngSubmit)="auth(frm.value)">
+      <form class="container" [formGroup]="frm" (ngSubmit)="auth(frm.value)">
         <div class="form-group">
           <label for="login">LOGIN:</label>
           <input class="form-control" formControlName="login" name="login">

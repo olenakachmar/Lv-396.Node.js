@@ -1,1 +1,5 @@
 <img src="assets/img/userimg.jpg" alt="avatar"/>
+<form [formGroup]="form" (ngSubmit)="upload()" enctype="multipart/form-data">
+  <input type="file" formControlName="avatar" name="avatar" #fileInput >
+  <button type="submit">Send</button>
+</form>
