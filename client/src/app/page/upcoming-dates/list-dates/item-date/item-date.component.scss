@@ -1,0 +1,90 @@
+@import "./node_modules/bootstrap/scss/mixins";
+@import "./node_modules/bootstrap/scss/functions";
+@import "./node_modules/bootstrap/scss/variables";
+@import "../../../../common/css/theme";
+
+.list-dates {
+  padding-left: 0;
+  padding-right: 0;
+  border: 1px solid $case-color;
+  font-size: $base2-font-size;
+  background-color: $bg-color;
+
+  .box {
+    position: relative;
+    padding: 20px 10px;
+    cursor: pointer;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    line-height: 1.2em;
+  }
+  .dates-topic {
+    font-size: 20px;
+  }
+  .dates-date {
+    font-size: 14px;
+  }
+}
+
+.dates {
+  display: flex;
+  align-items: center;
+  cursor: default;
+  &__icon {
+    height: 33.5px;
+    width:  33.5px;
+    margin-right: 5px;
+    @include media-breakpoint-up(md) {
+      width:  33.5px;
+    }
+  }
+}
+.box-wrapper > * {
+  float: left;
+}
+
+.box-wrapper:after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
+@media (max-width: 970px) {
+  .box {
+    text-align: left;
+  }
+}
+
+.box-wrapper {
+  @media (max-width: 970px) {
+    padding: 20px 10px;
+
+    .box {
+      float: none;
+      padding: 5px 0;
+      max-width: 100%;
+      width: 100%;
+      flex: 1;
+    }
+  }
+}
+
+@media (max-width: 680px) {
+  .box-wrapper {
+    max-width: 100%;
+    width: 100%;
+    flex: 1;
+
+    .box {
+      text-align: center;
+    }
+  }
+}
+
+.wrapper .row:nth-child(even) {
+  background: $bg-color;
+}
+.wrapper .row:nth-child(odd) {
+  background: #fff;
+}
+

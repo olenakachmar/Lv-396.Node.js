@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../../../common/services/user.service';
-import { User } from '../../../../common/models/user';
+import { Component, OnInit, Input } from '@angular/core';
 import { DatesItem } from '../../../common/dates-item';
+import { DateService } from '../../../common/date.service';
 
 @Component({
   selector: 'app-date-item',
@@ -9,19 +8,14 @@ import { DatesItem } from '../../../common/dates-item';
   styleUrls: ['./item-date.component.scss']
 })
 export class ItemDateComponent implements OnInit {
-  user = new User();
-  dateList: DatesItem[];
-
+  @Input() date: DatesItem;
+  todayDate: Date;
   constructor(
-    private readonly userService: UserService) {}
+    private readonly dateService: DateService) {}
 
   ngOnInit(): void {
-    this.loadUser();
+    this.todayDate = new Date();
   }
-  loadUser(): void {
-    this.userService.getUser()
-      .subscribe(user => {
-        this.dateList = user.dates;
-      });
-  }
+  public convertDate = (date: Date): boolean =>
+    this.dateService.convertDate(this.todayDate) === this.dateService.convertDate(date);
 }
