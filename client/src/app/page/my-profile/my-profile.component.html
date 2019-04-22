@@ -31,9 +31,9 @@
 
           <div class="contact_down" *ngFor="let contact of user.contacts">
             <div>
-              <span class="label">{{ contact.contact_name}}</span><br>
+              <span class="label">{{ contact.contact_name }}</span><br>
             </div>
-            <span class="info">{{ contact.contact_value}}</span>
+            <span class="info">{{ contact.contact_value }}</span>
           </div>
         </div>
 
@@ -71,9 +71,19 @@
         </div>
       </div>
       <div class="row third-row">
-        <div class="col">
-          <div class="button_wrapper" [routerLink]="[ '/profile/edit-user' ]">
+        <div class="row w-100">
+          <div class="button_wrapper w-50" [routerLink]="[ '/profile/edit-user' ]">
             <a class="edit_button">Edit Profile</a>
+          </div>
+          <div class="w-50">
+            <button type="button" id="delete-button" (click)="openModal(template)">delete profile</button>
+            <ng-template #template>
+              <div class="modal-body text-center">
+                <p>Do you want to delete {{ getFullName() }}?</p>
+                <button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
+                <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+              </div>
+            </ng-template>
           </div>
         </div>
       </div>

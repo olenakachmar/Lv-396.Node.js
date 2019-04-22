@@ -3,11 +3,9 @@
     <img src="assets/img/navbar-dates-desk.svg" alt="all dates" class="dates__icon">
     <span class="dates__count">({{ datesCount }})</span>
   </div>
-  <ul class="user-bar__menu dropdown-menu" *dropdownMenu role="menu"
-      aria-labelledby="button-disabled-item">
-    <li class="user-bar__row user-bar__elem  dropdown-item"
-        *ngFor="let dates of dateList" role="menuitem" >
-      <b>{{ dates.date | date:"MM/dd/yy" }}</b> <br/> {{dates.topic}}
+  <ul class="user-bar__menu dropdown-menu" *dropdownMenu role="menu" aria-labelledby="button-disabled-item">
+    <li class="user-bar__row user-bar__elem  dropdown-item" *ngFor="let dates of dateList" role="menuitem">
+      <b>{{ dates.date | date:"MM/dd/yy" }}</b> <br /> {{ dates.topic }}
     </li>
   </ul>
 </div>
@@ -24,16 +22,13 @@
   <div class="user-bar__btn" dropdownToggle>
     <img class="user-bar__avatar" src="{{ avatar }}" alt="avatar" *ngIf="avatar">
   </div>
-  <ul class="user-bar__menu dropdown-menu" *dropdownMenu role="menu"
-    aria-labelledby="button-disabled-item">
+  <ul class="user-bar__menu dropdown-menu" *dropdownMenu role="menu" aria-labelledby="button-disabled-item">
     <ng-container *ngFor="let link of menuList; let i = index; trackBy: trackById;">
       <li class="user-bar__row" role="menuitem"
-        *ngIf="link.rightMenu && (userType === link.dev || userType === link.hr)" [ngClass]="{'current': link.current}"
-        (click)="currentByIndex(i)">
+        *ngIf="link.rightMenu && (userType === link.dev || userType === link.hr)" 
+        [ngClass]="{'current': link.current}" (click)="currentByIndex(i)">
         <a href [routerLink]="[ link.router ]" class="user-bar__elem dropdown-item">{{ link.title }}</a>
       </li>
     </ng-container>
   </ul>
 </div>
-
-
