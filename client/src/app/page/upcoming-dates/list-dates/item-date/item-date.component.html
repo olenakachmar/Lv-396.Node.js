@@ -1,8 +1,8 @@
 <div class="wrapper">
   <div class="row list-dates">
     <div class="col-md-6 box font-weight-bold dates-topic">
-      {{date.firstName}} {{date.lastName}}'s {{ date.topic }}
-      <span *ngIf="convertDate(todayDate)===convertDate(date.date)">TODAY</span>
+      {{ date.firstName }} {{ date.lastName }}'s {{ date.topic }}
+      <span *ngIf="(convertDate(date.date))">TODAY</span>
     </div>
     <div class="col-md-3 box">
       <img src="../../../../../assets/img/upcoming-dates.svg" alt="all dates" class="dates__icon">

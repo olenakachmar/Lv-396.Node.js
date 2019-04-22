@@ -3,12 +3,13 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../common/services/auth.service';
 import { UserService } from '../../../common/services/user.service';
 import { NavItemsService } from '../../common/nav-items.service';
+import { DateService } from '../../common/date.service';
 import { TasksService } from '../../common/tasks.service';
 import { User } from '../../../common/models/user';
 import { Task } from '../../common/task';
 import { NavItem } from '../../common/nav-item';
 import { DatesItem } from '../../common/dates-item';
-import moment from 'moment';
+
 import { switchMap, map } from 'rxjs/operators';
 
 @Component({
@@ -28,13 +29,14 @@ export class NavbarProfileComponent implements OnInit {
   newTasksCount: number;
   datesCount: number;
   active: boolean;
-  todayDate: string;
+  todayDate: Date;
 
   constructor(private readonly authService: AuthService,
               private readonly router: Router,
               private readonly navItemsService: NavItemsService,
               private readonly userService: UserService,
-              private readonly taskService: TasksService) {
+              private readonly taskService: TasksService,
+              private readonly dateService: DateService) {
   }
 
   ngOnInit(): void {
@@ -44,7 +46,7 @@ export class NavbarProfileComponent implements OnInit {
       .subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
     this.newTasksCount = 7;
-    this.todayDate = String(new Date());
+    this.todayDate = new Date();
   }
 
   loadDates(): void {
@@ -57,10 +59,11 @@ export class NavbarProfileComponent implements OnInit {
           });
         });
         this.dateList = this.dateList.filter(date =>
-          this.convertDate(date.date) === this.convertDate(this.todayDate));
+          this.dateService.convertDate(date.date) === this.dateService.convertDate(this.todayDate)
+        );
         this.datesCount = this.dateList.length;
       });
-  }
+}
 
   getUser(): void {
     this.userService.getUser()
@@ -79,8 +82,6 @@ export class NavbarProfileComponent implements OnInit {
   takeUserInfo(user: User): User {
     this.user = user;
     this.avatar = user.photoURL || 'assets/img/userimg.jpg';
-    this.dateList = user.dates;
-    this.datesCount = user.dates.length;
 
     return user;
   }
@@ -111,11 +112,6 @@ export class NavbarProfileComponent implements OnInit {
     }
 
     return false;
-  }
-
-  convertDate(date: string): string {
-    return moment(date)
-      .format('L');
   }
 
   currentByRout(currentRouter: string): boolean {

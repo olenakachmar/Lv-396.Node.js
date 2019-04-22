@@ -14,7 +14,7 @@ import { FiltersService } from '../common/filters.service';
 })
 export class UpcomingDatesComponent implements OnInit {
   user = new User();
-  filters: Filter[];
+  filter: Filter[];
   dateList: DatesItem[];
   filterCssClassPrefix: string;
   modalTypeVal: string;
@@ -29,7 +29,6 @@ export class UpcomingDatesComponent implements OnInit {
     this.modalTypeVal = 'CREATE';
     this.loadUser();
     this.getFilters();
-    this.filterGrids = this.filters.length ? this.filterCssClassPrefix + this.filters.length.toString() : '';
   }
   loadUser(): void {
     this.userService.getUser()
@@ -52,12 +51,20 @@ export class UpcomingDatesComponent implements OnInit {
   }
   getFilters(): void {
     this.filtersService.getFilters()
-      .subscribe(filters => this.filters = filters);
+      .subscribe(
+        filters => this.filter = filters.filter((item: Filter) => item.name === 'date'),
+        () => {},
+        () => {
+          this.filterGrids = this.filter.length ? this.filterCssClassPrefix + this.filter.length.toString() : '';
+        }
+      );
   }
   selectFilterOption = (data: any) => {
-    if (this.filters.length) {
-      this.filters = this.filters.map(
-        (item, index) => index === data.filterId ? {
+    console.log(data);
+    if (this.filter.length) {
+      console.log('here');
+      this.filter = this.filter.map(
+        (item: Filter) => item.id === data.filterId ? {
           id: item.id,
           name: item.name,
           isCalendar: item.isCalendar,
@@ -65,6 +72,8 @@ export class UpcomingDatesComponent implements OnInit {
           options: this.setOptions(item.isCalendar, item.options, data.optionId)
         } : item
       );
+      console.log('filter');
+      console.log(this.filter);
     }
   };
   private readonly setOptions = (isCalendar: boolean, options: FilterOptions[], data: any) => {

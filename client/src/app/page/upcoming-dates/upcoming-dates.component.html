@@ -4,9 +4,9 @@
   </div>
   <main class="col-lg-8 content-wrapper">
     <app-filter class="container-fluid filter-wrapper {{filterGrids}}" [cssClass]="filterGrids"
-                [filters]="filters" (getFilter)="selectFilterOption($event)"></app-filter>
+                [filters]="filter" (getFilter)="selectFilterOption($event)"></app-filter>
     <div class="container-fluid list-wrapper">
-      <app-list-dates [dates]="dateList"></app-list-dates>
+      <app-list-dates [dates]="dateList | filterTasksBy: filter"></app-list-dates>
     </div>
   </main>
 </div>

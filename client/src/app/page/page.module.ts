@@ -77,7 +77,7 @@ export const routes: Routes = [
     ListDatesComponent,
     ItemDateComponent,
     AddTaskFormComponent,
-    // NavbarProfileComponent
+/*    NavbarProfileComponent*/
   ],
   imports: [
     CommonModule,

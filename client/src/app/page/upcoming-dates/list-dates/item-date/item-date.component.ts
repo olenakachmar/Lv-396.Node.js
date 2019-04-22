@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DatesItem } from '../../../common/dates-item';
-import moment from 'moment';
+import { DateService } from '../../../common/date.service';
 
 @Component({
   selector: 'app-date-item',
@@ -9,13 +9,13 @@ import moment from 'moment';
 })
 export class ItemDateComponent implements OnInit {
   @Input() date: DatesItem;
-  todayDate: string;
+  todayDate: Date;
+  constructor(
+    private readonly dateService: DateService) {}
 
   ngOnInit(): void {
-    this.todayDate = String(new Date());
+    this.todayDate = new Date();
   }
-  convertDate(date: number): string {
-    return moment(date)
-      .format('L');
-  }
+  public convertDate = (date: Date): boolean =>
+    this.dateService.convertDate(this.todayDate) === this.dateService.convertDate(date);
 }
