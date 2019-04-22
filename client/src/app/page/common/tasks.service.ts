@@ -13,10 +13,6 @@ export class TasksService {
   constructor(private readonly http: HttpClient) { }
   tasks: Task[];
 
-  getTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(`${api}/issues/all`, httpOptions);
-  }
-
   public getUserTasks(id: string): Observable<Task[]> {
     return  this.http.get<Task[]>(`${api}/issues/${id}`, httpOptions);
   }

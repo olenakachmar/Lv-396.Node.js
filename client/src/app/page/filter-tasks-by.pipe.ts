@@ -14,6 +14,9 @@ export class FilterTasksByPipe implements PipeTransform {
     if (!filters || this.isAllFiltersTurnedOff(filters)) {
       return tasks;
     }
+    if (!filters || this.isAllFiltersTurnedOff(filters)) {
+      return tasks.filter(task => !(task.resolvedByAuthor && task.resolvedByPerformer));
+    }
 
     return tasks.filter(task => this.isTaskMatchesFilters(task, filters));
   }
@@ -23,7 +26,12 @@ export class FilterTasksByPipe implements PipeTransform {
 
   private readonly isTaskMatchesFilters = (task: Task, filters: Filter[]): boolean =>
     filters.every(filter => {
+      const meta = filter.name;
       if (filter.defaultValue === -1) {
+        if (meta === 'type') {
+          return !(task.resolvedByAuthor && task.resolvedByPerformer);
+        }
+
         return true;
       }
       const meta: string = filter.name;
@@ -34,6 +42,10 @@ export class FilterTasksByPipe implements PipeTransform {
 
         return this.dateService.convertStringToDate(filter.defaultValue)
           .getTime() === date.getTime();
+      }
+
+      if (meta === 'type' && filter.defaultValue === 2) {
+        return task.resolvedByAuthor && task.resolvedByPerformer;
       }
 
       return filter.defaultValue === task[meta].value;
