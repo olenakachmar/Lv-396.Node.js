@@ -18,12 +18,10 @@ export class TasksService {
   }
 
   public updateResolvedBy(userId: string, taskId: string): Observable<any> {
-
     const body = {
       userId,
       id: taskId,
     };
-    console.log(body);
 
     return this.http.put<Task>(`${api}/issues/resolve`, body, httpOptions);
   }

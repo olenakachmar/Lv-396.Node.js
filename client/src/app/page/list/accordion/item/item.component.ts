@@ -52,10 +52,8 @@ export class ItemComponent implements OnInit {
   }
 
   resolveClick(): void {
-    this.tasksService.updateResolvedBy(this.user.firstName, this.task.id)
-      .subscribe((item: any) => console.log(item),
-        error => console.log(error));
-    console.log(this.task);
+    this.tasksService.updateResolvedBy(this.user._id, this.task.id)
+      .subscribe((item: any) => item);
     this.cssClass = 'hiddenMark';
     this.cssClassVisible = 'visible';
     this.markResolve = true;

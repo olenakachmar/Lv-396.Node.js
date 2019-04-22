@@ -57,13 +57,12 @@ export class WrapperComponent implements OnInit {
 
   updateResolve(): void {
     this.tasksService.updateResolvedBy(this.user._id, this.task.id)
-      .subscribe(tasks => this.tasks = tasks);
+      .subscribe(tasks => { this.tasks = tasks; });
   }
 
   getTasks(): void {
     this.tasksService.getUserTasks(this.userInfoService.getUserId())
       .subscribe(tasks => {
-        console.log(tasks);
         this.tasks = tasks.map((item: any) =>
           ({
             id: item._id,

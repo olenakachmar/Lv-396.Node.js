@@ -55,7 +55,7 @@ export class ModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getAll()
+    this.userService.getAllHr()
       .subscribe(users => this.createUserDropDown(users));
     this.userService.getUser()
       .subscribe(user => this.user = user);
