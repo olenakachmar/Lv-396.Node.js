@@ -8,7 +8,7 @@
     <div accordion-heading class="heading-grid">
       <span>{{ task.id }}</span>
       <div class="heading-text">
-        <h5>{{ task.name }} {{ task.resolvedByAuthor }} {{ task.resolvedByPerformer }}</h5>
+        <h5>{{ task.name }}</h5>
         <p *ngIf="task.resolvedByAuthor === true || task.resolvedByPerformer === true" class="waiting {{cssClassVisible}}">Waiting for second mark</p>
       </div>
       <div class="heading-excerpt">
