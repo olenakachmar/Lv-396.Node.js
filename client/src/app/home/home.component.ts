@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../common/services/auth.service';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -15,6 +15,7 @@ export class HomeComponent {
 
   frm: FormGroup;
   hasFailed: boolean;
+  submitted: boolean;
   showInputErrorslogin = false;
   showInputErrorsPassword = false;
 
@@ -27,20 +28,21 @@ export class HomeComponent {
   }
 
   auth(form: any): boolean {
+    this.submitted = true;
     const helper = new JwtHelperService();
     if (this.frm.invalid && this.frm.get('login').value === '') {
       this.showInputErrorslogin = true;
 
-      return;
+      return undefined;
     }
     if (this.frm.invalid && this.frm.get('password').value === '') {
       this.showInputErrorsPassword = true;
 
-      return;
+      return undefined;
     }
 
     this.frm.valueChanges.subscribe((value: string) => {
-      if(value.length !== 0) {
+      if (value.length !== 0) {
         this.hasFailed = false;
       }
     });
@@ -48,9 +50,9 @@ export class HomeComponent {
     this.authService
       .auth(form.login, form.password)
       .subscribe(
-        (response) => {
-          localStorage.setItem('token', response['token']);
-          localStorage.setItem('type', helper.decodeToken(response['token']).type);
+        (response: any) => {
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('type', helper.decodeToken(response.token).type);
           this.router.navigate(['/profile']);
         },
         (error) => {

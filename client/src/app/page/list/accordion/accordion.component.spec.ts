@@ -13,7 +13,7 @@ describe('AccordionComponent', () => {
   let fixture: ComponentFixture<AccordionComponent>;
   const items: Task[] = [
     {
-      id: 0,
+      id: '0',
       name: 'Upcoming task name',
       excerpt: 'This content is straight in the template.',
       status: { name: 'LOW', value: 2 },
@@ -25,7 +25,7 @@ describe('AccordionComponent', () => {
         'ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis',
     },
     {
-      id: 1,
+      id: '1',
       name: 'Upcoming task name2',
       excerpt: 'This content is straight in the template2.',
       status: { name: 'HIGHT', value: 0 },
@@ -37,7 +37,7 @@ describe('AccordionComponent', () => {
         'ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis',
     },
     {
-      id: 2,
+      id: '2',
       name: 'Upcoming task name3',
       excerpt: 'This content is straight in the template3.',
       status: { name: 'LOW', value: 2 },
@@ -49,7 +49,7 @@ describe('AccordionComponent', () => {
         'exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis',
     },
     {
-      id: 3,
+      id: '3',
       name: 'Upcoming task name4',
       excerpt: 'This content is straight in the template4.',
       status: { name: 'NORMAL', value: 1 },
@@ -61,7 +61,7 @@ describe('AccordionComponent', () => {
         'exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis',
     },
     {
-      id: 4,
+      id: '4',
       name: 'Upcoming task name5',
       excerpt: 'This content is straight in the template5.',
       status: { name: 'LOW', value: 2 },
@@ -91,7 +91,7 @@ describe('AccordionComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AccordionComponent);
     component = fixture.componentInstance;
-    component.items = items;
+    component.tasks = items;
     fixture.detectChanges();
   });
 

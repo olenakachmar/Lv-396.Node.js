@@ -1,3 +1,12 @@
-<p>
-  upcoming-dates works!
-</p>
+<div class="row">
+  <div class="col-lg-4 sidebar-wrapper">
+    <app-user-bar-info class="user-bar-info" [userinfo]="user"></app-user-bar-info>
+  </div>
+  <main class="col-lg-8 content-wrapper">
+    <app-filter class="container-fluid filter-wrapper {{filterGrids}}" [cssClass]="filterGrids"
+                [filters]="filter" (getFilter)="selectFilterOption($event)"></app-filter>
+    <div class="container-fluid list-wrapper">
+      <app-list-dates [dates]="dateList | filterTasksBy: filter"></app-list-dates>
+    </div>
+  </main>
+</div>

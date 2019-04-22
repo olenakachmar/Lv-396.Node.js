@@ -1,10 +1,11 @@
 const express = require('express');
 const Departments = require('../../models/department.model');
+const passport = require('../../config/passport');
 
 const router = express.Router();
 
 router.route('/departments')
-  .get((req, res) => {
+  .get(passport.authenticate('jwt', { session: false }), (req, res) => {
     Departments.find()
       .populate('employees', ['firstName', 'lastName', 'position', 'email', 'phone', 'contacts'])
       .exec((err, departments) => {
@@ -16,7 +17,7 @@ router.route('/departments')
         res.json(departments);
       });
   })
-  .post(async (req, res) => {
+  .post(passport.authenticate('jwt', { session: false }), async (req, res) => {
     const newDepartment = Departments({
       name: req.body.name,
       position: req.body.position,
@@ -33,7 +34,7 @@ router.route('/departments')
       });
     });
   })
-  .delete((req, res) => {
+  .delete(passport.authenticate('jwt', { session: false }), (req, res) => {
     const { id } = req.body;
     Departments.findByIdAndDelete(id)
       .exec((err, department) => {
@@ -52,7 +53,7 @@ router.route('/departments')
       });
   });
 
-router.get('/departments/:id', (req, res) => {
+router.get('/departments/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
   const { id } = req.params;
   Departments.findById(id)
     .populate('employees', ['firstName', 'lastName'])
@@ -69,7 +70,7 @@ router.get('/departments/:id', (req, res) => {
       res.json(department);
     });
 });
-router.post('/departments/users', async (req, res) => {
+router.post('/departments/users', passport.authenticate('jwt', { session: false }), async (req, res) => {
   const { id } = req.body;
   let added = false;
   const department = await Departments.findById(id);
