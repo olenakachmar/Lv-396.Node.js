@@ -48,6 +48,10 @@ export class FilterTasksByPipe implements PipeTransform {
         return task.resolvedByAuthor && task.resolvedByPerformer;
       }
 
+      if (meta === 'type' && filter.defaultValue === 2) {
+        return task.resolvedByAuthor && task.resolvedByPerformer;
+      }
+
       return filter.defaultValue === task[meta].value;
     });
 
