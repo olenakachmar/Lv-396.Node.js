@@ -133,12 +133,14 @@ router.get('/issues/all', passport.authenticate('jwt', { session: false }), (req
       res.status(200).json(issues);
     });
 });
-router.get('/issues/:userId', (req, res) => {
+router.get('/issues/:userId', passport.authenticate('jwt', { session: false }), (req, res) => {
   const { userId } = req.params;
   const author = userId;
   const assignTo = userId;
   Issues.find({ $or: [{ author }, { assignTo }] })
-    .populate('employees', ['firstName', 'lastName'])
+    .populate('assignTo', ['firstName', 'lastName'])
+    .populate('author', ['firstName', 'lastName'])
+    .populate('reassigned', ['firstName', 'lastName'])
     .exec((err, issue) => {
       if (err) {
         res.status(500).json({
