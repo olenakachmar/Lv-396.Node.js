@@ -13,16 +13,16 @@ export class TasksService {
   constructor(private readonly http: HttpClient) {}
   tasks: Task[];
 
-  getTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(`${api}/issues/all`, httpOptions);
+  getTasks(userId): Observable<Task[]> {
+    return this.http.get<Task[]>(`${api}/issues/${userId}`, httpOptions);
   }
 
-  public updateResolvedBy(userId: string, taskId: string): Observable<any> {
+  public updateResolvedBy(userId: string, taskId: string): any {
     const body = {
       userId,
       id: taskId,
     };
-
+    console.log(body);
     return this.http.put<Task>(`${api}/issues/resolve`, body, httpOptions);
   }
 

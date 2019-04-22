@@ -42,7 +42,7 @@ export class WrapperComponent implements OnInit {
     this.userRole = this.checkUserRole();
   }
 
-  loadUser(): any {
+  loadUser(): void {
     this.userInfoService.getUser()
       .subscribe(user => { this.user = user; });
   }
@@ -61,7 +61,7 @@ export class WrapperComponent implements OnInit {
   }
 
   getTasks(): void {
-    this.tasksService.getTasks()
+    this.tasksService.getTasks(this.userInfoService.getUserId())
       .subscribe(tasks => {
         this.tasks = tasks.map((item: any) =>
           ({
@@ -73,11 +73,14 @@ export class WrapperComponent implements OnInit {
             date: item.date,
             author: item.author,
             content: item.content,
+            assignTo: item.assignTo,
+            reassigned: item.reassigned,
             resolvedByAuthor: item.resolvedByAuthor,
             resolvedByPerformer: item.resolvedByPerformer,
           })
         )
         .sort((a, b) => (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0));
+        console.log(this.tasks);
         this.ref.detectChanges();
       });
   }

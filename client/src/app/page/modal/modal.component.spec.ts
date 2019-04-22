@@ -8,7 +8,7 @@ describe('ModalComponent', () => {
   let fixture: ComponentFixture<ModalComponent>;
   let item: any;
   item = {
-    id: 0,
+    id: '0',
     name: 'Upcoming task name',
     excerpt: 'This content is straight in the template.',
     status: { name: 'LOW', value: 2 },
