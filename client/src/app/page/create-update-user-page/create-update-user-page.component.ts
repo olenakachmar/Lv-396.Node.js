@@ -29,17 +29,19 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
     this.newUser.phone = '33336448845';
     this.newUser.email = 'marley@gmail.com';
 
-    const required = [this.newUser.firstName, this.newUser.lastName, this.newUser.department,
-                      this.newUser.position, this.newUser.teamlead, this.newUser.hr, this.newUser.manager];
+    const requiredForCreationUserFields = [this.newUser.firstName, this.newUser.lastName, this.newUser.department,
+                                       this.newUser.position, this.newUser.teamlead, this.newUser.hr, this.newUser.manager];
 
-    required.map(elem => {if (elem === undefined) {
-    } else {
-      this.userService.addUser(this.newUser)
-        .takeUntil(this.destroy$)
-        .subscribe((data: any) => {
-          window.location.href = `/profile/my-profile/${data.newUser._id}`;
-        });
-    }});
+    requiredForCreationUserFields.map(elem => {
+      if (elem === undefined) {
+      } else {
+        this.userService.addUser(this.newUser)
+          .takeUntil(this.destroy$)
+          .subscribe((data: any) => {
+            window.location.href = `/profile/my-profile/${data.newUser._id}`;
+          });
+      }
+    });
   }
 
   ngOnDestroy(): void {
