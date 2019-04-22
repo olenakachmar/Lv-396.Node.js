@@ -9,6 +9,9 @@ export class FilterTasksByPipe implements PipeTransform {
 
   transform(tasks: Task[], filters?: Filter[]): Task[] {
     console.log(tasks);
+    if (!tasks) {
+      return tasks;
+    }
     if (!filters || this.isAllFiltersTurnedOff(filters)) {
       return tasks.filter(task => !(task.resolvedByAuthor && task.resolvedByPerformer));
     }

@@ -132,11 +132,7 @@ export class ModalComponent implements OnInit {
       assignTo: this.usersIds[this.userDropDown.defaultValue],
       reassigned: this.task.author._id,
     };
-    if (this.userDropDown.defaultValue === -1) {
-      this.errorHandling();
-
-      return;
-    }
+    this.updateTask = false;
     this.tasksService.editTask(this.editTask)
       .subscribe((item: any) => this.successHandling());
   }

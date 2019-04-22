@@ -20,11 +20,6 @@
       <span>Your issue was update.</span>
     </div>
   </div>
-  <div class="container-fluid" *ngIf="!updateTask">
-    <div class="row alert alert-danger">
-      <span>Choose assign to!</span>
-    </div>
-  </div>
   <div class="modal-body" >
     <form [formGroup]="modalForm" (ngSubmit)="onSubmit($event)">
     <div class="modal-grid">

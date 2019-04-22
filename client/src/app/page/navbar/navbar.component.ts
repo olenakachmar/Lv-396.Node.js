@@ -35,16 +35,14 @@ export class NavbarComponent implements OnInit {
 
   currentByRout(currentRouter: string): boolean {
     this.navItemsService.currentRouter(currentRouter);
-    this.active = false;
 
-    return false;
+    return this.active = false;
   }
 
   currentByIndex(i: number): boolean {
     this.navItemsService.currentIndex(i);
-    this.active = false;
 
-    return false;
+    return this.active = false;
   }
 
   toggleIsActive(): boolean {
@@ -53,7 +51,7 @@ export class NavbarComponent implements OnInit {
     return false;
   }
 
-  trackById(link: any): string {
+  trackById(link: NavItem): string {
     return link.id;
   }
 }

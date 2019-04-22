@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { UserService } from '../../common/services/user.service';
 import { User } from '../../common/models/user';
 
 @Component({
@@ -8,8 +9,13 @@ import { User } from '../../common/models/user';
 })
 export class UserBarInfoComponent implements OnInit {
   @Input() userinfo: User;
+  userType: string;
 
-  constructor() {
+  constructor(readonly userService: UserService) {
+  }
+
+  ngOnInit(): void {
+    this.userType = this.userService.getUserType();
   }
 
   private  getManagerName(): string {
@@ -18,8 +24,5 @@ export class UserBarInfoComponent implements OnInit {
 
   private  getTeamleadName(): string {
     return `${this.userinfo.teamlead.firstName} ${this.userinfo.teamlead.lastName}`;
-  }
-
-  ngOnInit() {
   }
 }

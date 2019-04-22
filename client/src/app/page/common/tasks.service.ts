@@ -10,19 +10,21 @@ import { api } from '../../../environments/environment';
 })
 
 export class TasksService {
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient) { }
   tasks: Task[];
 
-  getTasks(userId): Observable<Task[]> {
-    return this.http.get<Task[]>(`${api}/issues/${userId}`, httpOptions);
+  public getUserTasks(id: string): Observable<Task[]> {
+    return  this.http.get<Task[]>(`${api}/issues/${id}`, httpOptions);
   }
 
-  public updateResolvedBy(userId: string, taskId: string): any {
+  public updateResolvedBy(userId: string, taskId: string): Observable<any> {
+
     const body = {
       userId,
       id: taskId,
     };
     console.log(body);
+
     return this.http.put<Task>(`${api}/issues/resolve`, body, httpOptions);
   }
 
@@ -37,5 +39,5 @@ export class TasksService {
   public deleteTask(taskId: string): Observable<{}> {
     return this.http.delete(`${api}issues/${taskId}`, httpOptions);
   }
-}
 
+}

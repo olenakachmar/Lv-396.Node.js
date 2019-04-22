@@ -14,7 +14,7 @@ import { TasksService } from '../common/tasks.service';
 })
 
 export class WrapperComponent implements OnInit {
-  emptyTask: Task = new Task();
+  emptyTask: Task;
   user: User;
   task: Task;
   filters: Filter[];
@@ -61,8 +61,9 @@ export class WrapperComponent implements OnInit {
   }
 
   getTasks(): void {
-    this.tasksService.getTasks(this.userInfoService.getUserId())
+    this.tasksService.getUserTasks(this.userInfoService.getUserId())
       .subscribe(tasks => {
+        console.log(tasks);
         this.tasks = tasks.map((item: any) =>
           ({
             id: item._id,
@@ -79,8 +80,7 @@ export class WrapperComponent implements OnInit {
             resolvedByPerformer: item.resolvedByPerformer,
           })
         )
-        .sort((a, b) => (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0));
-        console.log(this.tasks);
+          .sort((a, b) => (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0));
         this.ref.detectChanges();
       });
   }
