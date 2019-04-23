@@ -8,7 +8,6 @@ import { FiltersService } from '../common/filters.service';
 import { Filter } from '../common/filter';
 import { FilterReturnService } from '../common/filter-return.service';
 import { FilterOptions } from '../common/filter-options';
-import { errorHandler } from '@angular/platform-browser/src/browser';
 
 @Component({
   selector: 'app-modal',
@@ -41,16 +40,24 @@ export class ModalComponent implements OnInit {
               private readonly userService: UserService,
               private readonly filterReturnService: FilterReturnService) {
     this.modalForm = fb.group({
-      id: ['', Validators.required],
-      name: ['', Validators.required],
-      content: ['', Validators.required],
-      excerpt: ['', Validators.required],
+      id: new FormControl(),
+      name: new FormControl('', [
+        Validators.minLength(5),
+        Validators.maxLength(20),
+      ]),
+      content: new FormControl('', [
+        Validators.maxLength(400),
+      ]),
+      excerpt: new FormControl('', [
+        Validators.minLength(9),
+        Validators.maxLength(40),
+      ]),
       status: this.fb.group({
-        name: ['', Validators.required],
-        value: ['', Validators.required],
+        name: new FormControl(),
+        value: new FormControl(),
       }),
-      assignTo: ['', Validators.required],
-      reassigned: ['', Validators.required],
+      assignTo: new FormControl(),
+      reassigned: new FormControl(),
     });
   }
 
@@ -60,6 +67,26 @@ export class ModalComponent implements OnInit {
     this.userService.getUser()
       .subscribe(user => this.user = user);
     this.getFilterStatus();
+  }
+
+  get name(): any {
+    return this.modalForm.get('name');
+  }
+
+  get excerpt(): any {
+    return this.modalForm.get('excerpt');
+  }
+
+  get content(): any {
+    return this.modalForm.get('content');
+  }
+
+  isFieldCorrectLength = (field: string): boolean =>
+    this.modalForm.get(field)
+      .hasError('minlength');
+
+  public chooseAssignTo(): boolean {
+    return this.userDropDown.defaultValue === -1;
   }
 
   private createUserDropDown(users): void {

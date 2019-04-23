@@ -11,7 +11,7 @@ export class FilterTasksByPipe implements PipeTransform {
     private readonly dateService: DateService) {}
 
   transform(tasks: Task[], filters?: Filter[]): Task[] {
-    if (!filters || this.isAllFiltersTurnedOff(filters)) {
+    if (!tasks) {
       return tasks;
     }
     if (!filters || this.isAllFiltersTurnedOff(filters)) {
@@ -34,7 +34,6 @@ export class FilterTasksByPipe implements PipeTransform {
 
         return true;
       }
-      const meta: string = filter.name;
       if (meta === 'date') {
         const date = (this.dateService.isDateString(task[meta])) ?
           this.dateService.convertStringToDate(task[meta]) :
@@ -42,10 +41,6 @@ export class FilterTasksByPipe implements PipeTransform {
 
         return this.dateService.convertStringToDate(filter.defaultValue)
           .getTime() === date.getTime();
-      }
-
-      if (meta === 'type' && filter.defaultValue === 2) {
-        return task.resolvedByAuthor && task.resolvedByPerformer;
       }
 
       if (meta === 'type' && filter.defaultValue === 2) {
