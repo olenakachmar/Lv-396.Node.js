@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { UserService } from '../../common/services/user.service';
 import { User } from '../../common/models/user';
 import { DatesItem } from '../common/dates-item';
 import { FilterOptions } from '../common/filter-options';
 import { Filter } from '../common/filter';
 import { FiltersService } from '../common/filters.service';
+import { FILTER_CSS_CLASS_PREFIX } from '../common/config';
 
 
 @Component({
@@ -16,39 +17,41 @@ export class UpcomingDatesComponent implements OnInit {
   user = new User();
   filter: Filter[];
   dateList: DatesItem[];
-  filterCssClassPrefix: string;
   modalTypeVal: string;
   filterGrids: string;
 
   constructor(
     private readonly userService: UserService,
-    private readonly filtersService: FiltersService) {}
+    private readonly filtersService: FiltersService,
+    @Inject(FILTER_CSS_CLASS_PREFIX) public filterCssClassPrefix: string
+  ) {}
 
   ngOnInit(): void {
-    this.filterCssClassPrefix = 'filter-col-';
     this.modalTypeVal = 'CREATE';
     this.loadUser();
     this.getFilters();
   }
+
   loadUser(): void {
     this.userService.getUser()
       .subscribe(user => { this.user = user; });
     this.userService.getUsersOfHr()
-      .subscribe(user => {
+      .subscribe(users => {
         this.dateList = [];
-        user.map((item) => {
-          item.dates.map((items) => {
-            const dates = {
-              firstName: item.firstName,
-              lastName: item.lastName,
-              topic: items.topic,
-              date: items.date
+        users.map((user) => {
+          user.dates.map((date) => {
+            const dateObj = {
+              firstName: user.firstName,
+              lastName: user.lastName,
+              topic: date.topic,
+              date: date.date
             };
-            this.dateList = [...this.dateList, dates ];
+            this.dateList = [...this.dateList, dateObj ];
           });
         });
       });
   }
+
   getFilters(): void {
     this.filtersService.getFilters()
       .subscribe(
@@ -59,10 +62,9 @@ export class UpcomingDatesComponent implements OnInit {
         }
       );
   }
+
   selectFilterOption = (data: any) => {
-    console.log(data);
     if (this.filter.length) {
-      console.log('here');
       this.filter = this.filter.map(
         (item: Filter) => item.id === data.filterId ? {
           id: item.id,
@@ -72,10 +74,9 @@ export class UpcomingDatesComponent implements OnInit {
           options: this.setOptions(item.isCalendar, item.options, data.optionId)
         } : item
       );
-      console.log('filter');
-      console.log(this.filter);
     }
   };
+
   private readonly setOptions = (isCalendar: boolean, options: FilterOptions[], data: any) => {
     if (isCalendar) {
       return this.updateOptions(options, data);
