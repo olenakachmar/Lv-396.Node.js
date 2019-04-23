@@ -22,5 +22,4 @@ export class FilterTasksByPipe implements PipeTransform {
 
     return tasks.filter(task => this.filterByPipeService.isTaskMatchesFilters(task, filters));
   }
-
 }

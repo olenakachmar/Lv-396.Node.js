@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModalComponent } from './modal.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { DropdownFilterComponent } from '../filter/dropdown-filter/dropdown-filter.component';
 
 describe('ModalComponent', () => {
   let component: ModalComponent;
@@ -21,8 +23,15 @@ describe('ModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ ModalModule.forRoot() ],
-      declarations: [ ModalComponent ]
+      imports: [
+        ModalModule.forRoot(),
+        ReactiveFormsModule,
+        FormsModule,
+       ],
+      declarations: [
+        ModalComponent,
+        DropdownFilterComponent,
+      ]
     })
     .compileComponents();
   }));
@@ -35,6 +44,7 @@ describe('ModalComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component)
+      .toBeTruthy();
   });
 });
