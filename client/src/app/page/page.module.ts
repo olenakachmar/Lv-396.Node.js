@@ -77,7 +77,7 @@ export const routes: Routes = [
     ListDatesComponent,
     ItemDateComponent,
     AddTaskFormComponent,
-    // NavbarProfileComponent
+/*    NavbarProfileComponent*/
   ],
   imports: [
     CommonModule,
@@ -97,4 +97,4 @@ export const routes: Routes = [
   ],
   bootstrap: [WrapperComponent]
 })
-export class PageModule { }
+export class PageModule {}

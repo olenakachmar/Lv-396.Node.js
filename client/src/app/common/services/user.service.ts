@@ -31,6 +31,20 @@ export class UserService {
   getAllTeamLeads(): Observable<any> {
     return this.http.get<any>(`${api}users?roles=teamlead`, httpOptions);
   }
+  getUsersOfHr(): Observable<User[]> {
+    httpOptions.headers = this.getHeader();
+    const userId = this.getUserId();
+
+    return this.http.get<User[]>(`${api}users?hr=${userId}`, httpOptions);
+  }
+
+  getAllHr(): Observable<any> {
+    return this.http.get<any>(`${api}users?roles=HR`, httpOptions);
+  }
+
+  getAllManagers(): Observable<any> {
+    return this.http.get<any>(`${api}users?roles=Manager`, httpOptions);
+  }
 
   getAllHr(): Observable<any> {
     return this.http.get<any>(`${api}users?roles=HR`, httpOptions);
