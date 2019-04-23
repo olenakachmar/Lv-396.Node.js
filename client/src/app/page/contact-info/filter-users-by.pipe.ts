@@ -9,6 +9,7 @@ export class FilterUsersByPipe implements PipeTransform {
     if (!filterText) {
       return users;
     }
+
     return users.filter(user => user.firstName.toLowerCase().startsWith(filterText.toLowerCase())
       || user.lastName.toLowerCase().startsWith(filterText.toLowerCase()));
   }

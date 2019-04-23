@@ -1,5 +1,6 @@
 <div class="btn-group" dropdown placement="bottom right">
   <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle option-el"
+          [ngClass]=" !required ? []: title === 'Choose' ? ['border-red'] : ['border-green']"
           aria-controls="dropdown-basic"> {{ title }}
     <span class="caret"></span>
   </button>

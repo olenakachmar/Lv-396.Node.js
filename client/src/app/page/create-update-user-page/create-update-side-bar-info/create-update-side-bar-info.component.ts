@@ -64,28 +64,10 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  retrieveSelected(type: string, id: any): void {
-    switch (type) {
-      case 'Department':
-        this.newUser.department = id;
-        this.positions = this.departments
-          .filter(elem => elem._id === id)[0].position
-          .map(e => new OptionPair(e, e));
-        break;
-      case 'TeamLead':
-        this.newUser.teamlead = id;
-        break;
-      case 'Position':
-        this.newUser.position = id;
-        break;
-      case 'Role':
-        this.newUser.roles = id;
-        break;
-      case 'Manager':
-        this.newUser.manager = id;
-        break;
-      default:
-        break;
-    }
+  selectDepartment(id: any): void {
+    this.newUser.department = id;
+    this.positions = this.departments
+      .filter(elem => elem._id === id)[0].position
+      .map(e => new OptionPair(e, e));
   }
 }

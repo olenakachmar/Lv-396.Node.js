@@ -14,7 +14,7 @@ const filters: Filter[] = [
     options: [
       { name: 'Show all tasks', value: -1 },
       { name: 'Show delegates tasks only', value: 0 },
-      { name: 'Show assigned to me tasks only', value: 1 },
+      { name: 'Show issues only', value: 1 },
       { name: 'Show resolved tasks only', value: 2 }
     ],
   },
