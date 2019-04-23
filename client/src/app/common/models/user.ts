@@ -25,6 +25,6 @@ export  class User {
   hr: object;
   dates: DatesItem[];
   watched_issues?: string[];
-  roles: [];
+  roles: string[];
   type: string;
 }
