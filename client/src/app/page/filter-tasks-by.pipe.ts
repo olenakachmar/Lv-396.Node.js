@@ -16,7 +16,7 @@ export class FilterTasksByPipe implements PipeTransform {
       return tasks;
     }
 
-    if (this.filterByPipeServsice.isAllFiltersTurnedOff(filters)) {
+    if (this.filterByPipeService.isAllFiltersTurnedOff(filters)) {
       return tasks.filter(task => !(task.resolvedByAuthor && task.resolvedByPerformer));
     }
 
