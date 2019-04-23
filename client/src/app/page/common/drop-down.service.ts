@@ -58,9 +58,6 @@ export class DropDownService {
   private readonly offsetAboveEl = (el) => {
     const rect = el.getBoundingClientRect();
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    console.log('offsetAboveEl');
-    console.log(rect.top);
-    console.log(rect.top + scrollTop - el.offsetHeight);
 
     return rect.top + scrollTop - el.offsetHeight;
   };
