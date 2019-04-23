@@ -36,6 +36,7 @@ import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
 
 import { appConfigProviders } from './common/config';
 import { FilterReturnService } from './common/filter-return.service';
+import { FilterDatesByPipe } from './filter-dates-by.pipe';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
@@ -61,6 +62,7 @@ export const routes: Routes = [
     DropdownFilterComponent,
     AccordionComponent,
     FilterTasksByPipe,
+    FilterDatesByPipe,
     ItemComponent,
     ModalComponent,
     MyProfileComponent,

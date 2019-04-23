@@ -5,18 +5,16 @@ import { Injectable } from '@angular/core';
 })
 
 export class DateService {
-  public isDateString = (str: string): boolean => {
+  public isDateString = (dateStr: string): boolean => {
+    const str = `${dateStr}`;
     const time = str.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
     if (time === null) {
       return false;
     }
     const day = +time[1];
     const month = +time[2];
-    if (month > 0 && month <= 12 && day > 0 && day <= 31) {
-      return true;
-    }
 
-    return false;
+    return month > 0 && month <= 12 && day > 0 && day <= 31;
   };
 
   public readonly convertStringToDate = (dateStr: string) => {

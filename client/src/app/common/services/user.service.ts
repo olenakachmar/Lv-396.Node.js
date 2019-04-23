@@ -31,6 +31,7 @@ export class UserService {
   getAllTeamLeads(): Observable<any> {
     return this.http.get<any>(`${api}users?roles=teamlead`, httpOptions);
   }
+
   getUsersOfHr(): Observable<User[]> {
     httpOptions.headers = this.getHeader();
     const userId = this.getUserId();
@@ -38,21 +39,13 @@ export class UserService {
     return this.http.get<User[]>(`${api}users?hr=${userId}`, httpOptions);
   }
 
-  // getAllHr(): Observable<any> {
-  //   return this.http.get<any>(`${api}users?roles=HR`, httpOptions);
-  // }
-
-  getAllManagers(): Observable<any> {
-    return this.http.get<any>(`${api}users?roles=Manager`, httpOptions);
-  }
-
   getAllHr(): Observable<any> {
     return this.http.get<any>(`${api}users?roles=HR`, httpOptions);
   }
 
-  // getAllManagers(): Observable<any> {
-  //   return this.http.get<any>(`${api}users?roles=Manager`, httpOptions);
-  // }
+  getAllManagers(): Observable<any> {
+    return this.http.get<any>(`${api}users?roles=Manager`, httpOptions);
+  }
 
   getUser(id?: string): Observable<User> {
     httpOptions.headers = this.getHeader();
@@ -92,6 +85,5 @@ export class UserService {
 
   readonly getHeader = () =>
     httpOptions.headers.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-
 
 }
