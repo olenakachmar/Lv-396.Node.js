@@ -6,7 +6,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ItemComponent } from './item.component';
 import { ModalComponent } from '../../../modal/modal.component';
 import { AccordionComponent } from '../accordion.component';
-
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Task } from '../../../common/task';
 
 describe('ItemComponent', () => {
@@ -14,13 +14,13 @@ describe('ItemComponent', () => {
   let fixture: ComponentFixture<ItemComponent>;
   let item: Task;
   item = {
-    id: 0,
+    id: '0',
     name: 'Upcoming task name',
     excerpt: 'This content is straight in the template.',
     status: { name: 'LOW', value: 2 },
     type: { name: 'issue', value: 1 },
     date: '22/03/2019',
-    author: 'Alex Somename',
+    author: {id: '0', firstName: 'Alex', lastName: 'Somename'},
     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ' +
       'tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ' +
       'ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis',
@@ -30,7 +30,9 @@ describe('ItemComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         AccordionModule.forRoot(),
-        ModalModule.forRoot()
+        ModalModule.forRoot(),
+        ReactiveFormsModule,
+        FormsModule
         ],
       declarations: [
         ModalComponent,

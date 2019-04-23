@@ -33,10 +33,10 @@ import { UpcomingDatesComponent } from './upcoming-dates/upcoming-dates.componen
 import { ListDatesComponent } from './upcoming-dates/list-dates/list-dates.component';
 import { ItemDateComponent } from './upcoming-dates/list-dates/item-date/item-date.component';
 import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
-import { NavbarProfileComponent } from './navbar/navbar-profile/navbar-profile.component';
 
 import { appConfigProviders } from './common/config';
 import { FilterReturnService } from './common/filter-return.service';
+import { FilterDatesByPipe } from './filter-dates-by.pipe';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
@@ -62,6 +62,7 @@ export const routes: Routes = [
     DropdownFilterComponent,
     AccordionComponent,
     FilterTasksByPipe,
+    FilterDatesByPipe,
     ItemComponent,
     ModalComponent,
     MyProfileComponent,
@@ -77,13 +78,11 @@ export const routes: Routes = [
     ListDatesComponent,
     ItemDateComponent,
     AddTaskFormComponent,
-    // NavbarProfileComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     BrowserModule,
-    FormsModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -98,4 +97,4 @@ export const routes: Routes = [
   ],
   bootstrap: [WrapperComponent]
 })
-export class PageModule { }
+export class PageModule {}

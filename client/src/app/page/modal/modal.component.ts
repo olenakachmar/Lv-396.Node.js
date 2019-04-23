@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef, Input, EventEmitter, Output } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { TasksService } from '../../page/common/tasks.service';
+import { TasksService } from '../common/tasks.service';
 import { UserService } from '../../common/services/user.service';
 import { User } from '../../common/models/user';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
@@ -8,6 +8,8 @@ import { FiltersService } from '../common/filters.service';
 import { Filter } from '../common/filter';
 import { FilterReturnService } from '../common/filter-return.service';
 import { FilterOptions } from '../common/filter-options';
+import { Task } from '../common/task';
+import { errorHandler } from '@angular/platform-browser/src/browser';
 
 @Component({
   selector: 'app-modal',
@@ -17,20 +19,18 @@ import { FilterOptions } from '../common/filter-options';
 })
 export class ModalComponent implements OnInit {
   modalForm: FormGroup;
-  @Input() task: any;
+  @Input() task: Task;
   @Input() item: any;
   @Input() modalType: string;
   @Output() readonly filterVal = new EventEmitter();
   modalRef: BsModalRef;
-  selectedStatus: {};
   users: User[];
   user: User;
   editTask: any;
-  filtersAll: Filter[];
   filter: Filter;
-  getFilter = new EventEmitter();
   usersIds: [];
   userDropDown: Filter;
+  updateTask: boolean;
 
   constructor(private readonly modalService: BsModalService,
               private readonly tasksService: TasksService,
@@ -40,9 +40,17 @@ export class ModalComponent implements OnInit {
               private readonly filterReturnService: FilterReturnService) {
     this.modalForm = fb.group({
       id: new FormControl(),
-      name: new FormControl(),
-      content: new FormControl(),
-      excerpt: new FormControl(),
+      name: new FormControl('', [
+        Validators.minLength(5),
+        Validators.maxLength(20),
+      ]),
+      content: new FormControl('', [
+        Validators.maxLength(400),
+      ]),
+      excerpt: new FormControl('', [
+        Validators.minLength(9),
+        Validators.maxLength(40),
+      ]),
       status: this.fb.group({
         name: new FormControl(),
         value: new FormControl(),
@@ -53,11 +61,31 @@ export class ModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getAll()
+    this.userService.getAllHr()
       .subscribe(users => this.createUserDropDown(users));
     this.userService.getUser()
       .subscribe(user => this.user = user);
     this.getFilterStatus();
+  }
+
+  get name(): any {
+    return this.modalForm.get('name');
+  }
+
+  get excerpt(): any {
+    return this.modalForm.get('excerpt');
+  }
+
+  get content(): any {
+    return this.modalForm.get('content');
+  }
+
+  isFieldCorrectLength = (field: string): boolean =>
+    this.modalForm.get(field)
+      .hasError('minlength');
+
+  public chooseAssignTo(): boolean {
+    return this.userDropDown.defaultValue === -1;
   }
 
   private createUserDropDown(users): void {
@@ -110,22 +138,37 @@ export class ModalComponent implements OnInit {
     this.getFiltersNew();
   }
 
+  public hideAfter(): void {
+    setTimeout(() => {
+      this.modalRef.hide();
+    }, 3000);
+  }
+
   public onSubmit(event: any): void {
-    const newname = event.target.name.value;
-    const newcontent = event.target.content.value;
-    const newexcerpt = event.target.excerpt.value;
+    const newName = event.target.name.value;
+    const newContent = event.target.content.value;
+    const newExcerpt = event.target.excerpt.value;
     this.editTask = {
       id: this.task.id,
-      name: newname,
-      content: newcontent,
+      name: newName,
+      content: newContent,
       statusName: this.getStatusName(),
       statusValue: this.filter.defaultValue,
-      excerpt: newexcerpt,
+      excerpt: newExcerpt,
       assignTo: this.usersIds[this.userDropDown.defaultValue],
-      reassigned: this.task.author._id,
+      reassigned: this.task.author.id,
     };
+    this.updateTask = false;
     this.tasksService.editTask(this.editTask)
-      .subscribe((item: any) => item);
+      .subscribe((item: any) => this.successHandling());
+  }
+
+  private successHandling(): void {
+    this.updateTask = true;
+  }
+
+  private errorHandling(): void {
+    this.updateTask = false;
   }
 
   private readonly getStatusName = (): string => {
@@ -134,10 +177,6 @@ export class ModalComponent implements OnInit {
 
     return options[0].name;
   };
-
-  trackElement(index: number, element: any): any {
-    return element ? element.guid : 0;
-  }
 
   getFilterStatus(): void {
     this.filter = this.filterReturnService.createFilterByName('status', 1);

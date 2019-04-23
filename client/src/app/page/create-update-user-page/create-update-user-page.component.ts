@@ -27,7 +27,6 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
     this.ifChosenDevelopmentDepartment = chosenDevelopmentDepartment;
 
     this.newUser.contacts = [new Contact('a', 'b')];
-    this.newUser.dates = ['16/04/2019'];
     this.newUser.type = 'developer';
     this.newUser.phone = '3583996448845';
     this.newUser.email = 'm44llrley@gmail.com';
