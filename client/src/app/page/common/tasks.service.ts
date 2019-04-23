@@ -4,7 +4,6 @@ import { Task, TaskCreateRequestBody, TaskEditRequestBody } from './task';
 import { HttpClient } from '@angular/common/http';
 import { httpOptions } from '../../common/services/user.service';
 import { api } from '../../../environments/environment';
-
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';   
 
 @Injectable({
