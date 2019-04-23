@@ -1,6 +1,7 @@
 import { IDepartment } from './department';
 import { IUser } from '../interfaces/user.interface';
 import { IManager } from '../interfaces/manager.interface';
+import { DatesItem } from '../../page/common/dates-item';
 
 export class Contact {
   constructor(
@@ -22,7 +23,8 @@ export  class User {
   contacts: Contact[];
   photoURL: string;
   hr: object;
-  dates: any;
+  dates: DatesItem[];
+  watched_issues?: string[];
   roles: [];
   type: string;
 }
