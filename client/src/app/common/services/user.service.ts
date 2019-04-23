@@ -17,7 +17,8 @@ export const httpOptions = {
 })
 export class UserService {
 
-  constructor(private readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient) {
+  }
 
   helper = new JwtHelperService();
 
@@ -27,8 +28,30 @@ export class UserService {
     return this.http.get<User[]>(`${api}users`, httpOptions);
   }
 
-  getAllTeamLeads(): Observable<User[]> {
-    return this.http.get<User[]>(`${api}users?position=TEAM_LEAD`, httpOptions);
+  getAllTeamLeads(): Observable<any> {
+    return this.http.get<any>(`${api}users?roles=teamlead`, httpOptions);
+  }
+  getUsersOfHr(): Observable<User[]> {
+    httpOptions.headers = this.getHeader();
+    const userId = this.getUserId();
+
+    return this.http.get<User[]>(`${api}users?hr=${userId}`, httpOptions);
+  }
+
+  getAllHr(): Observable<any> {
+    return this.http.get<any>(`${api}users?roles=HR`, httpOptions);
+  }
+
+  getAllManagers(): Observable<any> {
+    return this.http.get<any>(`${api}users?roles=Manager`, httpOptions);
+  }
+
+  getAllHr(): Observable<any> {
+    return this.http.get<any>(`${api}users?roles=HR`, httpOptions);
+  }
+
+  getAllManagers(): Observable<any> {
+    return this.http.get<any>(`${api}users?roles=Manager`, httpOptions);
   }
 
   getUser(id?: string): Observable<User> {
@@ -49,7 +72,24 @@ export class UserService {
     return this.helper.decodeToken(localStorage.token).type;
   }
 
+  addUser(user: User): Observable<any> {
+    return this.http.post<User>(`${api}auth/signup`, user, httpOptions);
+  }
+
+  deleteUser(id: string): Observable<any> {
+    const deleteOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      }),
+      body: {id}
+    };
+
+    return this.http.delete(`${api}users/`, deleteOptions);
+  }
+
   readonly getHeader = () =>
     httpOptions.headers.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+
 
 }

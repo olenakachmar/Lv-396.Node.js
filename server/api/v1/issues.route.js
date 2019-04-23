@@ -2,13 +2,14 @@ const express = require('express');
 const url = require('url');
 const Issues = require('../../models/issue.model');
 const config = require('../../config/config');
+const passport = require('../../config/passport');
 
 const router = express.Router();
 
 const arrKeys = config.arrKeysIssues;
 
 router.route('/issues')
-  .get((req, res) => {
+  .get(passport.authenticate('jwt', { session: false }), (req, res) => {
     const { query } = url.parse(req.url, true);
     const { status, type, date } = query;
     Issues.find({ $or: [{ 'status.name': status }, { 'type.name': type }, { date }] })
@@ -27,7 +28,7 @@ router.route('/issues')
         res.json(issues);
       });
   })
-  .post((req, res) => {
+  .post(passport.authenticate('jwt', { session: false }), (req, res) => {
     const parameters = arrKeys.reduce((obj, el) => {
       if (req.body[el]) {
         return {
@@ -63,7 +64,7 @@ router.route('/issues')
         });
       });
   })
-  .put((req, res) => {
+  .put(passport.authenticate('jwt', { session: false }), (req, res) => {
     const { id } = req.body;
     const parameters = arrKeys.reduce((obj, el) => {
       if (req.body[el]) {
@@ -118,7 +119,7 @@ router.route('/issues')
         });
       });
   });
-router.get('/issues/all', (req, res) => {
+router.get('/issues/all', passport.authenticate('jwt', { session: false }), (req, res) => {
   Issues.find()
     .populate('assignTo', ['firstName', 'lastName'])
     .populate('author', ['firstName', 'lastName'])
@@ -132,12 +133,14 @@ router.get('/issues/all', (req, res) => {
       res.status(200).json(issues);
     });
 });
-router.get('/issues/:userId', (req, res) => {
+router.get('/issues/:userId', passport.authenticate('jwt', { session: false }), (req, res) => {
   const { userId } = req.params;
   const author = userId;
   const assignTo = userId;
   Issues.find({ $or: [{ author }, { assignTo }] })
-    .populate('employees', ['firstName', 'lastName'])
+    .populate('assignTo', ['firstName', 'lastName'])
+    .populate('author', ['firstName', 'lastName'])
+    .populate('reassigned', ['firstName', 'lastName'])
     .exec((err, issue) => {
       if (err) {
         res.status(500).json({
@@ -148,7 +151,7 @@ router.get('/issues/:userId', (req, res) => {
     });
 });
 
-router.put('/issues/resolve', async (req, res) => {
+router.put('/issues/resolve', passport.authenticate('jwt', { session: false }), async (req, res) => {
   const { id } = req.body;
   const { userId } = req.body;
   const issues = await Issues.findById(id);
@@ -184,7 +187,7 @@ router.put('/issues/resolve', async (req, res) => {
       });
     });
 });
-router.delete('/issues/:id', (req, res) => {
+router.delete('/issues/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
   const { id } = req.params;
   Issues.findByIdAndDelete(id)
     .exec((err, issue) => {
