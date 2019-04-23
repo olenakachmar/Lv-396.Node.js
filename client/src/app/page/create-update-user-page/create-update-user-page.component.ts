@@ -12,41 +12,62 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   newUser: User;
-  userType: string;
+  ifChosenDevelopmentDepartment: boolean;
+  notValidUser: boolean;
 
   constructor(readonly userService: UserService) {
   }
 
-  ngOnInit(): void {
-    this.userType = this.userService.getUserType();
+  ngOnInit() {
+    this.notValidUser = false;
   }
 
-  extractUser(user): any {
+  extractUser(user, chosenDevelopmentDepartment): any {
     this.newUser = user;
+    this.ifChosenDevelopmentDepartment = chosenDevelopmentDepartment;
+
     this.newUser.contacts = [new Contact('a', 'b')];
     this.newUser.dates = ['16/04/2019'];
     this.newUser.type = 'developer';
-    this.newUser.phone = '33336448845';
-    this.newUser.email = 'marley@gmail.com';
+    this.newUser.phone = '3583996448845';
+    this.newUser.email = 'm44llrley@gmail.com';
+    this.newUser.roles = ['HR', 'Manager'];
 
-    const requiredForCreationUserFields = [this.newUser.firstName, this.newUser.lastName, this.newUser.department,
-                                       this.newUser.position, this.newUser.teamlead, this.newUser.hr, this.newUser.manager];
+    if (this.validateUser()) {
+      this.userService.addUser(this.newUser)
+        .takeUntil(this.destroy$)
+        .subscribe((data: any) => {
+          window.location.href = `/profile/my-profile/${data.newUser._id}`;
+        });
+    } else {
+      this.notValidUser = true;
+    }
+  }
 
+  validateUser(): boolean {
+    let requiredForCreationUserFields = [this.newUser.firstName, this.newUser.lastName, this.newUser.department,
+                                         this.newUser.position, this.newUser.hr, this.newUser.manager];
+
+    if (this.ifChosenDevelopmentDepartment) {
+      requiredForCreationUserFields = [...requiredForCreationUserFields, this.newUser.teamlead];
+    }
+
+    let requiredField = true;
     requiredForCreationUserFields.map(elem => {
-      if (elem === undefined) {
-      } else {
-        this.userService.addUser(this.newUser)
-          .takeUntil(this.destroy$)
-          .subscribe((data: any) => {
-            window.location.href = `/profile/my-profile/${data.newUser._id}`;
-          });
+      if (!elem || elem === '') {
+        requiredField = false;
       }
     });
+
+    return requiredField;
+
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
 }
+
 
