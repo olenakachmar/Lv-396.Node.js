@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ModalModule } from 'ngx-bootstrap/modal';
-
 import { ModalComponent } from './modal.component';
 
 describe('ModalComponent', () => {
@@ -8,7 +7,7 @@ describe('ModalComponent', () => {
   let fixture: ComponentFixture<ModalComponent>;
   let item: any;
   item = {
-    id: 0,
+    id: '0',
     name: 'Upcoming task name',
     excerpt: 'This content is straight in the template.',
     status: { name: 'LOW', value: 2 },
