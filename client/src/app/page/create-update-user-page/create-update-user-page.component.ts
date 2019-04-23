@@ -53,7 +53,7 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
 
     let requiredField = true;
     requiredForCreationUserFields.map(elem => {
-      if (!elem || elem === '') {
+      if (!elem) {
         requiredField = false;
       }
     });
