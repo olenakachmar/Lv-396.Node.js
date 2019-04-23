@@ -27,8 +27,6 @@ export class DropDownService {
       cssClassName = (isSmaller) ? ' full-top' : ' popup-to-left half-top';
       if (isSmaller) {
         const isSpaceAboveEnough = this.isSpaceAboveElSmallerElHeight(dropDownEl, wrapperEl, false);
-        console.log('isSpaceAboveEnough');
-        console.log(isSpaceAboveEnough);
         cssClassName = (isSpaceAboveEnough) ? ' full-top' : ' popup-pos-relative';
       }
     }
@@ -60,9 +58,6 @@ export class DropDownService {
   private readonly offsetAboveEl = (el) => {
     const rect = el.getBoundingClientRect();
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    console.log('offsetAboveEl');
-    console.log(rect.top);
-    console.log(rect.top + scrollTop - el.offsetHeight);
 
     return rect.top + scrollTop - el.offsetHeight;
   };

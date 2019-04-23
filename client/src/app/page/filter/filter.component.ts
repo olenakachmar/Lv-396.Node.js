@@ -23,7 +23,6 @@ export class FilterComponent implements OnInit {
   private readonly getCssClassNames = () => {
     this.cssClassNames = this.cssClass.length ? 'width-100' : '';
     this.cssClassNames += this.filters.length === 1 ? ' popup-to-right' : '';
-    console.log(this.cssClassNames);
   };
 
   sendFilterVal = (i: number, event: any) => {

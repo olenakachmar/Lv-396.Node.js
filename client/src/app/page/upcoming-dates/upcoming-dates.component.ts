@@ -59,7 +59,6 @@ export class UpcomingDatesComponent implements OnInit {
         () => {},
         () => {
           this.filterGrids = this.filter.length ? this.filterCssClassPrefix + this.filter.length.toString() : '';
-          console.log(this.filterGrids);
         }
       );
   }

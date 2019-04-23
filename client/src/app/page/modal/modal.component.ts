@@ -120,7 +120,6 @@ export class ModalComponent implements OnInit {
     const newName = event.target.name.value;
     const newContent = event.target.content.value;
     const newExcerpt = event.target.excerpt.value;
-    console.log(this.task.author);
     this.editTask = {
       id: this.task.id,
       name: newName,
