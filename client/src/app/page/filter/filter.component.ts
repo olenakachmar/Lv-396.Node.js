@@ -14,11 +14,17 @@ export class FilterComponent implements OnInit {
     filterId: number,
     optionId: any
   };
-  makeFullWidth: string;
+  cssClassNames: string;
 
   ngOnInit(): void {
-    this.makeFullWidth = this.cssClass.length ? 'width-100' : '';
+    this.getCssClassNames();
   }
+
+  private readonly getCssClassNames = () => {
+    this.cssClassNames = this.cssClass.length ? 'width-100' : '';
+    this.cssClassNames += this.filters.length === 1 ? ' popup-to-right' : '';
+    console.log(this.cssClassNames);
+  };
 
   sendFilterVal = (i: number, event: any) => {
     this.obj = {

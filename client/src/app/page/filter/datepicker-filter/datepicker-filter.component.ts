@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ElementRef, ViewChild } from '@angular/core';
 import { FilterOptions } from '../../common/filter-options';
 import { Filter } from '../../common/filter';
+import { DateService } from '../../common/date.service';
 import { DropDownService } from '../../common/drop-down.service';
 
 @Component({
@@ -22,7 +23,8 @@ export class DatepickerFilterComponent implements OnInit {
   choiseReadyFlag: number;
   cancelLinkText: string;
 
-  constructor(private readonly dropDownService: DropDownService) { }
+  constructor(private readonly dropDownService: DropDownService,
+              private readonly dateService: DateService) { }
 
   ngOnInit(): void {
     this.cancelLinkText = 'View all dates';
@@ -72,7 +74,7 @@ export class DatepickerFilterComponent implements OnInit {
 
   selectDate = (event) => {
     this.choiseReadyFlag ++;
-    this.filterResult = this.convertDateToString(event);
+    this.filterResult = this.dateService.convertDate(event);
     if (this.isCalendarReady()) {
       this.title = this.filterResult;
     }
@@ -80,38 +82,6 @@ export class DatepickerFilterComponent implements OnInit {
 
   private readonly isCalendarReady = (): boolean =>
     (this.choiseReadyFlag - 1) > 0;
-
-  private readonly convertDateToString = (date: Date): string => {
-    const dd = this.getDayStr(date);
-    const mm = this.getMonthStr(date);
-    const yyyy = date.getFullYear()
-      .toString();
-    const separator = '/';
-
-    return dd + separator + mm + separator + yyyy;
-  };
-
-  private readonly getDayStr = (date: Date): string => {
-    const day = date.getDate();
-    if (day < 10) {
-      const str = '0';
-
-      return str + day.toString();
-    }
-
-    return day.toString();
-  };
-
-  private readonly getMonthStr = (date: Date): string => {
-    const month = date.getMonth() + 1;
-    if (month < 10) {
-      const str = '0';
-
-      return str + month.toString();
-    }
-
-    return month.toString();
-  };
 
   getDropDownPositionClassNames(): void {
     this.dropDownService.checkDropDownElPosition(this.dropDownWrapperView)

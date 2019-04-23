@@ -1,34 +1,26 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Filter } from './common/filter';
 import { Task } from './common/task';
+import { FilterByPipeService } from './common/filter-by-pipe.service';
 
 @Pipe({
   name: 'filterTasksBy'
 })
 export class FilterTasksByPipe implements PipeTransform {
+  constructor(
+    private readonly filterByPipeService: FilterByPipeService
+  ) {}
 
   transform(tasks: Task[], filters?: Filter[]): Task[] {
-    if (!filters || this.isAllFiltersTurnedOff(filters)) {
+    if (!filters || !tasks) {
       return tasks;
     }
 
-    return tasks.filter(task => this.isTaskMatchesFilters(task, filters));
+    if (this.filterByPipeService.isAllFiltersTurnedOff(filters)) {
+      return tasks.filter(task => !(task.resolvedByAuthor && task.resolvedByPerformer));
+    }
+
+    return tasks.filter(task => this.filterByPipeService.isTaskMatchesFilters(task, filters));
   }
-
-  private readonly isAllFiltersTurnedOff = (filters: Filter[]) =>
-    filters.every(filter => filter.defaultValue === -1);
-
-  private readonly isTaskMatchesFilters = (task: any, filters: Filter[]) =>
-    filters.every(filter => {
-      if (filter.defaultValue === -1) {
-        return true;
-      }
-      const meta = filter.name;
-      if (meta === 'date') {
-        return filter.defaultValue === task[meta];
-      }
-
-      return filter.defaultValue === task[meta].value;
-    });
 
 }

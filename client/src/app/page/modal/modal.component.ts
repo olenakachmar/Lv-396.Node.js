@@ -9,6 +9,7 @@ import { Filter } from '../common/filter';
 import { FilterReturnService } from '../common/filter-return.service';
 import { FilterOptions } from '../common/filter-options';
 import { Task } from '../common/task';
+import { errorHandler } from '@angular/platform-browser/src/browser';
 
 @Component({
   selector: 'app-modal',
@@ -29,6 +30,7 @@ export class ModalComponent implements OnInit {
   filter: Filter;
   usersIds: [];
   userDropDown: Filter;
+  updateTask: boolean;
 
   constructor(private readonly modalService: BsModalService,
               private readonly tasksService: TasksService,
@@ -37,21 +39,21 @@ export class ModalComponent implements OnInit {
               private readonly userService: UserService,
               private readonly filterReturnService: FilterReturnService) {
     this.modalForm = fb.group({
-      id: new FormControl(),
-      name: new FormControl(),
-      content: new FormControl(),
-      excerpt: new FormControl(),
+      id: ['', Validators.required],
+      name: ['', Validators.required],
+      content: ['', Validators.required],
+      excerpt: ['', Validators.required],
       status: this.fb.group({
-        name: new FormControl(),
-        value: new FormControl(),
+        name: ['', Validators.required],
+        value: ['', Validators.required],
       }),
-      assignTo: new FormControl(),
-      reassigned: new FormControl(),
+      assignTo: ['', Validators.required],
+      reassigned: ['', Validators.required],
     });
   }
 
   ngOnInit(): void {
-    this.userService.getAll()
+    this.userService.getAllHr()
       .subscribe(users => this.createUserDropDown(users));
     this.userService.getUser()
       .subscribe(user => this.user = user);
@@ -108,6 +110,12 @@ export class ModalComponent implements OnInit {
     this.getFiltersNew();
   }
 
+  public hideAfter(): void {
+    setTimeout(() => {
+      this.modalRef.hide();
+    }, 3000);
+  }
+
   public onSubmit(event: any): void {
     const newName = event.target.name.value;
     const newContent = event.target.content.value;
@@ -121,10 +129,19 @@ export class ModalComponent implements OnInit {
       statusValue: this.filter.defaultValue,
       excerpt: newExcerpt,
       assignTo: this.usersIds[this.userDropDown.defaultValue],
-      reassigned: this.task.author._id,
+      reassigned: this.task.author.id,
     };
+    this.updateTask = false;
     this.tasksService.editTask(this.editTask)
-      .subscribe((item: any) => item);
+      .subscribe((item: any) => this.successHandling());
+  }
+
+  private successHandling(): void {
+    this.updateTask = true;
+  }
+
+  private errorHandling(): void {
+    this.updateTask = false;
   }
 
   private readonly getStatusName = (): string => {

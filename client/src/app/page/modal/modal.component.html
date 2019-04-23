@@ -15,12 +15,22 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
+  <div class="container-fluid" *ngIf="updateTask">
+    <div class="row alert alert-success">
+      <span>Your issue was update.</span>
+    </div>
+  </div>
   <div class="modal-body" >
     <form [formGroup]="modalForm" (ngSubmit)="onSubmit($event)">
     <div class="modal-grid">
       <div class="name-grid">
         <input class="no-visible" type="text" value="{{task.id}}" name="id">
-        <input class="form-control" type="text" name="name" value="{{task.name}}" formControlName="name" placeholder="Task name">
+        <input class="form-control" id="name" type="text" name="name" value="{{task.name}}" required formControlName="name">
+        <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="alert alert-danger">
+          <span *ngIf="name.errors.required">
+              Task name is required.
+          </span>
+        </div>
       </div>
       <div class="filter-grid">
         <app-dropdown-filter class="filter-item-container"
@@ -33,7 +43,7 @@
                        (filterVal)="getFilterValUserDropDown($event)"></app-dropdown-filter>
       </div>
       <div class=" btn-group date-grid">
-        <input type="text" disabled value="{{ task.date }}" class="form-control" name="date" value="{{ task.date | date:'dd/MM/yyyy' }}">
+        <input type="text" disabled value="{{ task.date }}" class="form-control" name="date" value="{{ task.date | date:'dd/MM/yyyy' }}" placeholder="{{ task.date | date:'dd/MM/yyyy' }}">
       </div>
       <div class="excerpt-grid">
         <input type="text" class="form-control" value="{{ task.excerpt }}" name="excerpt" formControlName="excerpt" placeholder="Summary message">
@@ -59,7 +69,7 @@
         </div>
       </div>
       <div class="addTask-grid">
-        <button type="submit" (click)="modalRef.hide()" class="btn btn-primary">ADD TASK</button>
+        <button type="submit" (click)="hideAfter()" class="btn btn-primary">ADD TASK</button>
       </div>
     </div>
   </form>
