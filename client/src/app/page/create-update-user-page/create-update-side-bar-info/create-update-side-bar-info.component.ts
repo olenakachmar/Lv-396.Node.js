@@ -24,7 +24,6 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
   errorMsg;
   ifChosenDevelopmentDepartment = false;
 
-
   constructor(readonly departmentService: DepartmentService,
               readonly userService: UserService) {
   }
