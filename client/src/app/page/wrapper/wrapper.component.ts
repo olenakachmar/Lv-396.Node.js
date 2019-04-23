@@ -38,11 +38,12 @@ export class WrapperComponent implements OnInit {
     this.getFilters();
     this.getTasks();
     this.loadUser();
+    this.openTaskById();
     this.filterGrids = this.filters.length ? this.filterCssClassPrefix + this.filters.length.toString() : '';
     this.userRole = this.checkUserRole();
   }
 
-  loadUser(): any {
+  loadUser(): void {
     this.userInfoService.getUser()
       .subscribe(user => { this.user = user; });
   }
@@ -57,11 +58,11 @@ export class WrapperComponent implements OnInit {
 
   updateResolve(): void {
     this.tasksService.updateResolvedBy(this.user._id, this.task.id)
-      .subscribe(tasks => this.tasks = tasks);
+      .subscribe(tasks => { this.tasks = tasks; });
   }
 
   getTasks(): void {
-    this.tasksService.getTasks()
+    this.tasksService.getUserTasks(this.userInfoService.getUserId())
       .subscribe(tasks => {
         this.tasks = tasks.map((item: any) =>
           ({
@@ -73,8 +74,11 @@ export class WrapperComponent implements OnInit {
             date: item.date,
             author: item.author,
             content: item.content,
+            assignTo: item.assignTo,
+            reassigned: item.reassigned,
             resolvedByAuthor: item.resolvedByAuthor,
             resolvedByPerformer: item.resolvedByPerformer,
+            isOpen: false
           })
         )
           .sort((a, b) => (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0));
@@ -95,6 +99,14 @@ export class WrapperComponent implements OnInit {
       );
     }
   };
+
+  openTaskById(): void {
+    this.tasksService.isOpenTask.subscribe((isOpenID: string) => {
+      if (this.tasks && isOpenID) {
+        this.tasks.map(task => task.isOpen = task.id === isOpenID);
+      }
+    });
+  }
 
   private readonly setOptions = (isCalendar: boolean, options: FilterOptions[], data: any) => {
     if (isCalendar) {

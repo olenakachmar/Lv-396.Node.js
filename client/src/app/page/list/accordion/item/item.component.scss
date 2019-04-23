@@ -1,7 +1,18 @@
 @import '../../../../common/css/theme';
-
 ::ng-deep .accordion-wrapper:not(:last-child) .card {
   border-bottom: 0;
+}
+
+.hiddenMark {
+  visibility: hidden;
+}
+
+.visible {
+  display: block;
+}
+
+.message-position {
+  margin-top: 16px;
 }
 
 .heading-grid {
@@ -194,7 +205,8 @@ p {
 }
 
 .waiting {
-  color: green;
+  color: $primary-color;
+  font-style: italic;;
 }
 
 .pointer {

@@ -5,7 +5,7 @@
   <main class="col-lg-8 content-wrapper">
     <app-add-task-form *ngIf="userRole === 'developer'" class="container-fluid"></app-add-task-form>
     <app-filter class="container-fluid filter-wrapper {{filterGrids}}" [cssClass]="filterGrids"
-      [filters]="filters" (getFilter)="selectFilterOption($event)"></app-filter>
+                [filters]="filters" (getFilter)="selectFilterOption($event)"></app-filter>
     <div class="container-fluid list-wrapper">
       <app-list [tasks]="tasks | filterTasksBy: filters"></app-list>
     </div>

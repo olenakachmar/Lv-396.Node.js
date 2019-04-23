@@ -1,7 +1,10 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-// import { HttpClientModule } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { fakeAsync, async, ComponentFixture, getTestBed, TestBed, inject, tick } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+
+import { HttpClientModule } from '@angular/common/http';
+import { switchMap, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
 import 'rxjs/add/observable/of';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NavbarProfileComponent } from './navbar-profile.component';
@@ -13,7 +16,6 @@ describe('NavbarProfileComponent', () => {
   let fixture: ComponentFixture<NavbarProfileComponent>;
   let navItemsService: NavItemsService;
   let userService: UserService;
-  let spy: jasmine.Spy;
   const mockMenuList = [
     {
       id: 'upcoming-tasks',
@@ -89,11 +91,11 @@ describe('NavbarProfileComponent', () => {
   ];
 
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        // HttpClientModule,
+        HttpClientModule,
         HttpClientTestingModule
       ],
       declarations: [
@@ -105,7 +107,7 @@ describe('NavbarProfileComponent', () => {
       ]
     })
       .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NavbarProfileComponent);
@@ -121,16 +123,6 @@ describe('NavbarProfileComponent', () => {
     expect(component)
       .toBeTruthy();
   });
-
-  // it(`should call metchod getUserType from userService`, inject([UserService, HttpTestingController], (service: UserService, backend:)) => {
-  //   spy = spyOn(UserService.prototype, 'getUser');
-  //   component.loadUser();
-  //   spy.and.callThrough();
-  //   expect(spy)
-  //     .toHaveBeenCalled();
-  // });
-
-
 
   it(`should be inject service, shouldn't get navites list if note async`, () => {
     jasmine.createSpy('getNavList').and

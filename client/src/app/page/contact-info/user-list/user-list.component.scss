@@ -85,3 +85,14 @@
 .wrapper .row:nth-child(odd) {
   background: #fff;
 }
+
+button {
+  width: 50%;
+  position: relative;
+  background: $case-color;
+  color: $primary-color;
+  font-size: 15px;
+  padding: 12px;
+  border-radius: 0;
+  cursor: pointer;
+}

@@ -9,6 +9,7 @@ import { OptionPair } from '../../../../common/models/option-pair';
 export class DropdownInfoComponent implements OnInit {
   @Input() pairList: OptionPair[];
   @Output() readonly selected = new EventEmitter<any>();
+  @Input() required: boolean;
   title: string;
 
   ngOnInit(): void {

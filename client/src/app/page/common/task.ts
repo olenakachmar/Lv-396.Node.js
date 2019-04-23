@@ -10,6 +10,13 @@ export class TaskType {
   }
 }
 
+export class TaskAuthor {
+  constructor(public id?: string,
+              public firstName?: string,
+              public lastName?: string) {
+  }
+}
+
 export class Task {
   constructor(public id?: string,
               public name?: string,
@@ -17,10 +24,15 @@ export class Task {
               public status: TaskStatus = new TaskStatus(),
               public type: TaskType = new TaskType(),
               public date?: string,
-              public author?: string,
+              public author: TaskAuthor = new TaskAuthor(),
               public content?: string,
+              public assignTo?: string,
+              public reassigned?: string,
               public resolvedByAuthor?: boolean,
-              public resolvedByPerformer?: boolean) {
+              public resolvedByPerformer?: boolean,
+
+              
+              public isOpen?: boolean) {
   }
 }
 
