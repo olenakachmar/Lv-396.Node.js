@@ -1,11 +1,11 @@
 <div *ngIf="modalType === 'RE-ASSIGNE'" class="re-assign">
-  <button type="button" class="btn btn-outline-primary text-reassign" (click)="openModal(template, $event)">
+  <button type="button" class="btn btn-outline-primary text-reassign" (click)="openModal(template)">
     RE-ASSIGN
   </button>
 </div>
 <div *ngIf="modalType === 'CREATE'">
-  <button type="button" class="btn btn-circle" (click)="openModal(template, $event)">
-    <img src="assets/img/plus-to-add-button.svg" alt="plus on add button">
+  <button type="button" class="btn btn-circle" (click)="openModal(template)">
+    <img src="assets/img/plus-to-add-button.svg" alt="create task"/>
   </button>
 </div>
 <ng-template #template>
@@ -58,7 +58,7 @@
       <div *ngIf="modalType === 'RE-ASSIGNE'" class="fromName-grid">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">FROM</span>
+            <span class="input-group-text">FROM</span>
           </div>
           <input type="text" disabled placeholder="{{task.author.firstName}} {{task.author.lastName}}" class="form-control" name="author">
         </div>
@@ -66,7 +66,7 @@
       <div *ngIf="modalType === 'RE-ASSIGNE'" class="reassignFrom-grid">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">RE-ASSIGN FROM</span>
+            <span class="input-group-text">RE-ASSIGN FROM</span>
           </div>
           <input type="hidden" class="form-control" placeholder="{{user.firstName}} {{user.lastName}}" formControlName="reassigned" >
           <input type="text" disabled class="form-control" placeholder="{{user.firstName}} {{user.lastName}}">
