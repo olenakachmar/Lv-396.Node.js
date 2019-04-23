@@ -27,8 +27,6 @@ export class DropDownService {
       cssClassName = (isSmaller) ? ' full-top' : ' popup-to-left half-top';
       if (isSmaller) {
         const isSpaceAboveEnough = this.isSpaceAboveElSmallerElHeight(dropDownEl, wrapperEl, false);
-        console.log('isSpaceAboveEnough');
-        console.log(isSpaceAboveEnough);
         cssClassName = (isSpaceAboveEnough) ? ' full-top' : ' popup-pos-relative';
       }
     }
