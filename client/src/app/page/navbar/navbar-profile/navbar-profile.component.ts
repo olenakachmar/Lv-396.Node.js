@@ -9,18 +9,19 @@ import { Task } from '../../common/task';
 import { NavItem } from '../../common/nav-item';
 import { DatesItem } from '../../common/dates-item';
 import { switchMap, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-navbar-profile',
   templateUrl: './navbar-profile.component.html',
-  styleUrls: ['./navbar-profile.component.scss']
+  styleUrls: ['./navbar-profile.component.scss'],
+  providers: [AuthService]
 })
 
 export class NavbarProfileComponent implements OnInit {
   user = new User();
   avatar: string;
   userType: string;
-  userTasks: Task[];
   newTasks: Task[];
   menuList: NavItem[];
   dateList: DatesItem[];
@@ -36,14 +37,14 @@ export class NavbarProfileComponent implements OnInit {
     private readonly taskService: TasksService) { }
 
   ngOnInit(): void {
-    this.getUser();
+    this.loadUser();
     this.navItemsService.getNavList()
       .subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
   }
 
 
-  getUser(): void {
+  loadUser(): void {
     this.userService.getUser()
       .pipe(
         map(user => this.takeUserInfo(user)),

@@ -33,7 +33,6 @@ import { UpcomingDatesComponent } from './upcoming-dates/upcoming-dates.componen
 import { ListDatesComponent } from './upcoming-dates/list-dates/list-dates.component';
 import { ItemDateComponent } from './upcoming-dates/list-dates/item-date/item-date.component';
 import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
-import { NavbarProfileComponent } from './navbar/navbar-profile/navbar-profile.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
@@ -74,7 +73,6 @@ export const routes: Routes = [
     ListDatesComponent,
     ItemDateComponent,
     AddTaskFormComponent,
-    // NavbarProfileComponent
   ],
   imports: [
     CommonModule,

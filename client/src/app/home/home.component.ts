@@ -40,7 +40,7 @@ export class HomeComponent {
     }
 
     this.frm.valueChanges.subscribe((value: string) => {
-      if(value.length !== 0) {
+      if (value.length !== 0) {
         this.hasFailed = false;
       }
     });
@@ -48,9 +48,9 @@ export class HomeComponent {
     this.authService
       .auth(form.login, form.password)
       .subscribe(
-        (response) => {
-          localStorage.setItem('token', response['token']);
-          localStorage.setItem('type', helper.decodeToken(response['token']).type);
+        (response: any) => {
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('type', helper.decodeToken(response.token).type);
           this.router.navigate(['/profile']);
         },
         (error) => {

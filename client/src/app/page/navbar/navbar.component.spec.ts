@@ -1,71 +1,137 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import 'rxjs/add/observable/of';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
 import { NavbarComponent } from './navbar.component';
 import { NavbarProfileComponent } from './navbar-profile/navbar-profile.component';
+import { SocialNetworksComponent } from './social-networks/social-networks.component';
+import { NavItemsService } from '../common/nav-items.service';
+import { Observable } from 'rxjs';
+
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
-  const menuBurger = [
+  let navService: NavItemsService;
+  let spy: jasmine.Spy;
+  const mockMenuList = [
     {
-      id: 1,
-      href: '#1',
+      id: 'upcoming-tasks',
       title: 'upcoming tasks',
-      isCurrent: true,
+      current: true,
+      router: '/profile',
+      rightMenu: false,
+      burgerMenu: true,
+      hr: 'hr',
+      dev: 'developer'
     },
     {
-      id: 2,
-      href: '#2',
+      id: 'issues',
+      title: 'issues',
+      current: false,
+      router: '',
+      rightMenu: false,
+      burgerMenu: true,
+      hr: '',
+      dev: 'developer'
+    },
+    {
+      id: 'contact-info',
       title: 'contact info',
-      isCurrent: false,
+      current: false,
+      router: 'contact-info',
+      rightMenu: false,
+      burgerMenu: true,
+      hr: 'hr',
+      dev: 'developer'
     },
     {
-      id: 3,
-      href: '#3',
+      id: 'log-out',
+      title: 'log out',
+      current: false,
+      router: '',
+      rightMenu: true,
+      burgerMenu: false,
+      hr: 'hr',
+      dev: 'developer',
+      logout: true
+    },
+    {
+      id: 'my-profile',
       title: 'my profile',
-      isCurrent: false,
+      current: false,
+      router: 'my-profile',
+      rightMenu: true,
+      burgerMenu: true,
+      hr: 'hr',
+      dev: 'developer'
     },
     {
-      id: 4,
-      href: '#4',
+      id: 'edit-profile',
+      title: 'edit profile',
+      current: false,
+      router: '',
+      rightMenu: true,
+      burgerMenu: false,
+      hr: 'hr',
+      dev: ''
+    },
+    {
+      id: 'create-user',
       title: 'create user',
-      isCurrent: false,
-    }
-  ];
-  const menuRight = [
-    {
-      id: 1,
-      href: '#1',
-      title: 'Log Out',
-      isCurrent: false,
-    },
-    {
-      id: 2,
-      href: '#2',
-      title: 'Edit Profile',
-      isCurrent: false,
+      current: false,
+      router: 'create-user',
+      rightMenu: false,
+      burgerMenu: true,
+      hr: 'hr',
+      dev: ''
     }
   ];
 
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule,
+        HttpClientModule
+      ],
       declarations: [
         NavbarProfileComponent,
-        NavbarComponent
-      ]
+        NavbarComponent,
+        SocialNetworksComponent
+      ],
+      providers: [NavItemsService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NavbarComponent);
     component = fixture.componentInstance;
-    component.menuBurger = menuBurger;
-    component.menuRight = menuRight;
+    navService = fixture.debugElement.injector.get(NavItemsService);
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component)
+      .toBeTruthy();
+  });
+
+  it(`should set menuList`, () => {
+    spy = spyOn(NavItemsService.prototype, 'getNavList').and
+      .returnValue(Observable.of(mockMenuList));
+    expect(component.menuList)
+      .toEqual(mockMenuList);
+  });
+
+  it('should change property active to false on window scroll', () => {
+    window.dispatchEvent(new Event('scroll'));
+    expect(component.active)
+      .toBe(false);
+  });
+
+  it(`should return item id`, () => {
+    expect(component.trackById(mockMenuList[0]))
+      .toEqual('upcoming-tasks');
   });
 });

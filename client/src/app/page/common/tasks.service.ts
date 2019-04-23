@@ -18,7 +18,7 @@ export class TasksService {
   }
 
   public getUserTasks(id: string): Observable<Task[]> {
-    return  this.http.get<Task[]>(`${api}/issues/${id}`, httpOptions);
+    return this.http.get<Task[]>(`${api}issues/${id}`, httpOptions);
   }
 
   public updateResolvedBy(userId: string, taskId: string): Observable<any> {
