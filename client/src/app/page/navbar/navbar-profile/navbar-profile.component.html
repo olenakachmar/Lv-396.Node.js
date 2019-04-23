@@ -1,7 +1,7 @@
-<div class="user-bar__item btn-group dates" dropdown *ngIf="datesCount">
+<div class="user-bar__item btn-group dates" dropdown>
   <div class="user-bar__btn" dropdownToggle>
     <img src="assets/img/navbar-dates-desk.svg" alt="all dates" class="dates__icon">
-    <span class="dates__count">({{ datesCount }})</span>
+    <span class="dates__count"  *ngIf="datesCount">({{ datesCount }})</span>
   </div>
   <ul class="user-bar__menu dropdown-menu" *dropdownMenu role="menu"
       aria-labelledby="button-disabled-item">
