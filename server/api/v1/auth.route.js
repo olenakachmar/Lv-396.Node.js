@@ -173,6 +173,7 @@ router.post('/forgot_password', async (req, res) => {
       msg: 'Email sent',
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json({ err });
   }
 });

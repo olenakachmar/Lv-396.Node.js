@@ -127,7 +127,7 @@ export class ModalComponent implements OnInit {
 
   private readonly editFilter = (filtersAll: Filter[]): Filter => {
     const filterElem = {...filtersAll.filter(item => item.id === 1)[0]};
-    filterElem.defaultValue = this.task.status.value;
+    filterElem.defaultValue = (this.task === undefined) ? 1 : this.task.status.value;
     filterElem.options = filterElem.options.filter(item => item.value > -1);
 
     return filterElem;

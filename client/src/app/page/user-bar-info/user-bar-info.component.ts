@@ -15,6 +15,7 @@ export class UserBarInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userinfo = new User();
     this.userType = this.userService.getUserType();
   }
 
