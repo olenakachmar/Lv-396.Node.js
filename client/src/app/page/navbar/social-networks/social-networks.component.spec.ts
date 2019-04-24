@@ -42,13 +42,15 @@ describe('SocialNetworksComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component)
+      .toBeTruthy();
   });
 
   it(`should be inject service, shouldn't get links list if note async`, () => {
     jasmine.createSpy('getLinksList').and
       .returnValue(Observable.of(mockLinksList));
-    expect(component.links).toEqual(mockLinksList);
+    expect(component.links)
+      .toEqual(mockLinksList);
     fixture.detectChanges();
   });
 
