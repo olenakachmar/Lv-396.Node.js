@@ -1,6 +1,6 @@
-<div class="row ">
+<main class="row ">
   <div class="col-lg-4 sidebar-wrapper">
-    <app-create-update-side-bar-info #createUserComponent ></app-create-update-side-bar-info>
+    <app-create-update-side-bar-info #createUserComponent></app-create-update-side-bar-info>
   </div>
   <main class="col-lg-8 content-wrapper">
     <div class="row main-user-info">
@@ -43,14 +43,14 @@
         <div class="info-form">
           <div class="input-label"><label for="date">Upcoming review date</label></div>
           <app-dropdown-info class="info-input-area" id="role" [pairList]='roles'
-            (selected)="retrieveSelected('Role', $event)">
+                             (selected)="retrieveSelected('Role', $event)">
           </app-dropdown-info>
         </div>
 
         <div class="info-form">
           <div class="input-label"><label for="role">Data comning</label></div>
           <app-dropdown-info class="info-input-area" id="role" [pairList]='roles'
-            (selected)="retrieveSelected('Role', $event)">
+                             (selected)="retrieveSelected('Role', $event)">
           </app-dropdown-info>
         </div>
 
@@ -64,10 +64,13 @@
 
     <div class="row save-profile">
       <div class="col">
-        <button class="save-button" (click)="extractUser(createUserComponent.newUser)">
-          Save profile
-        </button>
+        <div *ngIf="notValidUser">Please. filled in all required fields</div>
+        <div>
+          <button class="save-button"
+                  (click)="extractUser(createUserComponent.newUser, createUserComponent.ifChosenDevelopmentDepartment)">
+            Save profile
+          </button>
+        </div>
       </div>
     </div>
   </main>
-</div>

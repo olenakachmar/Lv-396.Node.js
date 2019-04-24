@@ -13,7 +13,7 @@ export class SocialNetworksComponent implements OnInit {
 
   ngOnInit(): void {
     this.networksService.getLinksList()
-    .subscribe(links => this.links = links);
+      .subscribe(links => this.links = links);
   }
 
   trackById(link: any): string {
