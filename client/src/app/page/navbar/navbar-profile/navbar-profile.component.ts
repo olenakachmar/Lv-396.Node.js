@@ -9,20 +9,19 @@ import { User } from '../../../common/models/user';
 import { Task } from '../../common/task';
 import { NavItem } from '../../common/nav-item';
 import { DatesItem } from '../../common/dates-item';
-
 import { switchMap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar-profile',
   templateUrl: './navbar-profile.component.html',
-  styleUrls: ['./navbar-profile.component.scss']
+  styleUrls: ['./navbar-profile.component.scss'],
+  providers: [AuthService]
 })
 
 export class NavbarProfileComponent implements OnInit {
   user = new User();
   avatar: string;
   userType: string;
-  userTasks: Task[];
   newTasks: Task[];
   menuList: NavItem[];
   dateList: DatesItem[];
@@ -40,13 +39,19 @@ export class NavbarProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadUser();
     this.loadDates();
-    this.getUser();
+
     this.navItemsService.getNavList()
       .subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
-    this.newTasksCount = 7;
     this.todayDate = new Date();
+  }
+
+  openTaskByid(id: string): boolean {
+    this.taskService.isOpenTask.next(id);
+
+    return false;
   }
 
   loadDates(): void {
@@ -63,9 +68,9 @@ export class NavbarProfileComponent implements OnInit {
         );
         this.datesCount = this.dateList.length;
       });
-}
+  }
 
-  getUser(): void {
+  loadUser(): void {
     this.userService.getUser()
       .pipe(
         map(user => this.takeUserInfo(user)),
@@ -73,7 +78,8 @@ export class NavbarProfileComponent implements OnInit {
       )
       .subscribe(tasks => {
         if (this.user.watched_issues.length > 0) {
-          this.newTasks = this.takeNewTasks(tasks, this.user.watched_issues);
+          this.newTasks = this.findNewTasks(tasks, this.user.watched_issues);
+          this.newTasks.sort((a, b) => (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0));
           this.newTasksCount = this.newTasks.length;
         }
       });
@@ -86,14 +92,13 @@ export class NavbarProfileComponent implements OnInit {
     return user;
   }
 
-  takeNewTasks(all: any, watched: string[]): Task[] {
+  findNewTasks(all: any, watched: string[]): Task[] {
     if (this.userType === 'hr') {
-      return all.filter(task => task.author !== this.user._id);
+      all.filter(task => task.author !== this.user._id);
     }
     if (this.userType === 'developer') {
-      return all.filter(task => task.resolvedByPerformer);
+      all.filter(task => task.resolvedByPerformer);
     }
-
     return all.filter(task => !(watched.includes(task._id)));
   }
 
@@ -119,6 +124,7 @@ export class NavbarProfileComponent implements OnInit {
 
     return this.active = false;
   }
+
   trackById(link: NavItem): string {
     return link.id;
   }

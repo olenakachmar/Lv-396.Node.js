@@ -29,7 +29,8 @@ export class Task {
               public assignTo?: string,
               public reassigned?: string,
               public resolvedByAuthor?: boolean,
-              public resolvedByPerformer?: boolean) {
+              public resolvedByPerformer?: boolean,
+              public isOpen?: boolean) {
   }
 }
 
