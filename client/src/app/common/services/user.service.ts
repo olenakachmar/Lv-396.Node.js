@@ -77,7 +77,7 @@ export class UserService {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       }),
-      body: {id}
+      body: { id }
     };
 
     return this.http.delete(`${api}users/`, deleteOptions);
@@ -85,5 +85,13 @@ export class UserService {
 
   readonly getHeader = () =>
     httpOptions.headers.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+
+  postImage(avatar: File): Observable<Object> {
+    const id = this.getUserId();
+    const fd = new FormData();
+    fd.append('id', id);
+    fd.append('avatar', avatar);
+    return this.http.post(`${api}users/change_avatar`, fd);
+  }
 
 }

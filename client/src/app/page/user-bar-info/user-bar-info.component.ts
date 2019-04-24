@@ -26,4 +26,8 @@ export class UserBarInfoComponent implements OnInit {
   private  getTeamleadName(): string {
     return `${this.userinfo.teamlead.firstName} ${this.userinfo.teamlead.lastName}`;
   }
+
+  public updateAvatar(newURL: string): void {
+    this.userinfo.photoURL = newURL;
+  }
 }

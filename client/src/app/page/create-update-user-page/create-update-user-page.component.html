@@ -41,16 +41,14 @@
 
       <div class="col-md-5 date-info">
         <div class="info-form">
-          <div class="input-label"><label for="date">Upcoming review date</label></div>
-          <app-dropdown-info class="info-input-area" id="role" [pairList]='roles'
-                             (selected)="retrieveSelected('Role', $event)">
+          <div class="input-label"><label>Upcoming review date</label></div>
+          <app-dropdown-info class="info-input-area">
           </app-dropdown-info>
         </div>
 
         <div class="info-form">
-          <div class="input-label"><label for="role">Data comning</label></div>
-          <app-dropdown-info class="info-input-area" id="role" [pairList]='roles'
-                             (selected)="retrieveSelected('Role', $event)">
+          <div class="input-label"><label>Data comning</label></div>
+          <app-dropdown-info class="info-input-area">
           </app-dropdown-info>
         </div>
 
@@ -61,13 +59,14 @@
         </button>
       </div>
     </div>
-
     <div class="row save-profile">
       <div class="col">
-        <div *ngIf="notValidUser">Please. filled in all required fields</div>
+        <div class="alert alert-danger" *ngIf="notValidUser">Please, filled in all required fields</div>
         <div>
           <button class="save-button"
-                  (click)="extractUser(createUserComponent.newUser, createUserComponent.ifChosenDevelopmentDepartment)">
+                  (click)="extractUser(createUserComponent.newUser,
+                  createUserComponent.ifChosenDevelopmentDepartment,
+                  createUserComponent.ifChosenHrDepartment)">
             Save profile
           </button>
         </div>

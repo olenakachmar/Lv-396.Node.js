@@ -10,10 +10,10 @@ import { ResetPasswordService } from '../../../common/services/reset-password.se
 })
 export class ResetPasswordComponent implements OnInit {
 
-  private frm: FormGroup;
-  private matchFailed: boolean;
+  frm: FormGroup;
+  matchFailed: boolean;
   private resetFailed: boolean;
-  private resetSuccess: boolean;
+  resetSuccess: boolean;
   private getResponse: boolean;
   private message: any;
   private error: string;
