@@ -23,7 +23,7 @@ export class ItemComponent implements OnInit {
   constructor(private readonly router: Router,
               private readonly route: ActivatedRoute,
               private readonly userService: UserService,
-              private readonly tasksService: TasksService) {}
+              private readonly tasksService: TasksService) { }
 
   ngOnInit(): void {
     this.loadUser();
@@ -36,11 +36,11 @@ export class ItemComponent implements OnInit {
   }
 
   checkedAuthorOrPerformer(): any {
-    this.checkedResolve = this.user._id === this.task.author.id ?  this.task.resolvedByAuthor : this.task.resolvedByPerformer;
+    this.checkedResolve = this.user._id === this.task.author.id ? this.task.resolvedByAuthor : this.task.resolvedByPerformer;
     this.cssClass = this.checkedResolve ? 'hiddenMark' : '';
 
     return this.checkedResolve;
-    }
+  }
 
   loadUser(): boolean {
     this.userService.getUser()
@@ -50,7 +50,7 @@ export class ItemComponent implements OnInit {
   }
 
   selectUser(uid: number): void {
-    this.router.navigate(['/profile/my-profile/', uid], {relativeTo: this.route});
+    this.router.navigate(['/profile/my-profile/', uid], { relativeTo: this.route });
   }
 
   resolveClick(): void {

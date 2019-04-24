@@ -39,8 +39,8 @@ import { FilterReturnService } from './common/filter-return.service';
 import { FilterDatesByPipe } from './filter-dates-by.pipe';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'profile', pathMatch: 'full' },
-  { path: '', component: WrapperComponent },
+  { path: '', redirectTo: 'upcoming-tasks', pathMatch: 'full' },
+  { path: 'upcoming-tasks', component: WrapperComponent },
   { path: 'my-profile', component: MyProfileComponent },
   { path: 'my-profile/:id', component: MyProfileComponent },
   { path: 'contact-info', component: ContactInfoComponent },
