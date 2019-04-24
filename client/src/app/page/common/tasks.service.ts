@@ -4,6 +4,7 @@ import { Task, TaskCreateRequestBody, TaskEditRequestBody } from './task';
 import { HttpClient } from '@angular/common/http';
 import { httpOptions } from '../../common/services/user.service';
 import { api } from '../../../environments/environment';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';   
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,10 @@ export class TasksService {
   constructor(private readonly http: HttpClient) { }
   tasks: Task[];
 
+  public isOpenTask: BehaviorSubject<string> = new BehaviorSubject('');
+
   public getUserTasks(id: string): Observable<Task[]> {
-    return  this.http.get<Task[]>(`${api}/issues/${id}`, httpOptions);
+    return this.http.get<Task[]>(`${api}issues/${id}`, httpOptions);
   }
 
   public updateResolvedBy(userId: string, taskId: string): Observable<any> {

@@ -19,6 +19,7 @@ export class ItemComponent implements OnInit {
   cssClassVisible: string;
   markResolve: boolean;
   alertMessage: string;
+  isOpen: boolean;
   constructor(private readonly router: Router,
               private readonly route: ActivatedRoute,
               private readonly userService: UserService,
@@ -26,6 +27,7 @@ export class ItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUser();
+    this.isOpen = this.task.isOpen;
 
     this.userService.getAll()
       .subscribe(users => this.users = users);
@@ -34,7 +36,7 @@ export class ItemComponent implements OnInit {
   }
 
   checkedAuthorOrPerformer(): any {
-    this.checkedResolve = this.user._id === this.task.author.id ?  this.task.resolvedByAuthor : this.task.resolvedByPerformer;
+    this.checkedResolve = this.user._id === this.task.author._id ?  this.task.resolvedByAuthor : this.task.resolvedByPerformer;
     this.cssClass = this.checkedResolve ? 'hiddenMark' : '';
 
     return this.checkedResolve;

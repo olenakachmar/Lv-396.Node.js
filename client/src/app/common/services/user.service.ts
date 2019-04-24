@@ -56,13 +56,15 @@ export class UserService {
 
   getUserId(): any {
     httpOptions.headers = this.getHeader();
-    const helper = new JwtHelperService();
-
-    return helper.decodeToken(localStorage.token).id;
+    if (localStorage.token) {
+      return this.helper.decodeToken(localStorage.token).id;
+    }
   }
 
   getUserType(): any {
-    return this.helper.decodeToken(localStorage.token).type;
+    if (localStorage.token) {
+      return this.helper.decodeToken(localStorage.token).type;
+    }
   }
 
   addUser(user: User): Observable<any> {
