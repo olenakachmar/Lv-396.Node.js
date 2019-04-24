@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../../common/services/user.service';
-import { Contact, User } from '../../common/models/user';
+import { User } from '../../common/models/user';
 import { Subject } from 'rxjs/Rx';
 
 @Component({
@@ -13,24 +13,24 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
 
   newUser: User;
   ifChosenDevelopmentDepartment: boolean;
+  ifChosenHrDepartment: boolean;
   notValidUser: boolean;
 
   constructor(readonly userService: UserService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.notValidUser = false;
   }
 
-  extractUser(user, chosenDevelopmentDepartment): any {
+  extractUser(user, chosenDevelopmentDepartment, chosenHrDepartment): any {
     this.newUser = user;
     this.ifChosenDevelopmentDepartment = chosenDevelopmentDepartment;
+    this.ifChosenHrDepartment = chosenHrDepartment;
 
-    this.newUser.contacts = [new Contact('a', 'b')];
-    this.newUser.type = 'developer';
     this.newUser.phone = '3583996448845';
     this.newUser.email = 'm44llrley@gmail.com';
-    this.newUser.roles = ['HR', 'Manager'];
+    this.newUser.roles = ['Teamlead', 'Manager'];
 
     if (this.validateUser()) {
       this.userService.addUser(this.newUser)
@@ -50,6 +50,8 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
     if (this.ifChosenDevelopmentDepartment) {
       requiredForCreationUserFields = [...requiredForCreationUserFields, this.newUser.teamlead];
     }
+
+    this.ifChosenHrDepartment ? this.newUser.type = 'hr' : this.newUser.type = 'developer';
 
     let requiredField = true;
     requiredForCreationUserFields.map(elem => {
