@@ -17,7 +17,7 @@ const smtpTransport = nodemailer.createTransport({
   },
   tls: {
     rejectUnauthorized: false
-  }
+  },
 });
 
 const handlebarsOptions = {

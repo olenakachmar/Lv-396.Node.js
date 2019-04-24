@@ -4,13 +4,24 @@
   </button>
 </div>
 <div *ngIf="modalType === 'CREATE'">
-  <button type="button" class="btn btn-circle" (click)="openModal(template)">
+  <button type="button" class="btn btn-circle" (click)="openModal(createTask)">
     <img src="assets/img/plus-to-add-button.svg" alt="create task"/>
   </button>
 </div>
-<ng-template #template>
+<ng-template #createTask>
   <div class="modal-header">
     <h4 class="modal-title pull-left">CREATE TASK</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-add-task-form [hideHeader]="true" class="container-fluid"></app-add-task-form>
+  </div>
+</ng-template>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">UPDATE TASK</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>

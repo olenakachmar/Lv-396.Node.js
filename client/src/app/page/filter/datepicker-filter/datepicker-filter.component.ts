@@ -20,7 +20,7 @@ export class DatepickerFilterComponent implements OnInit {
   titleObj: FilterOptions;
   title: string;
   dropDownPositionClassNames: any;
-  choiseReadyFlag: number;
+  choiceReadyFlag: number;
   cancelLinkText: string;
 
   constructor(private readonly dropDownService: DropDownService,
@@ -33,7 +33,7 @@ export class DatepickerFilterComponent implements OnInit {
     this.dateDefault = this.getDateDefault(this.titleObj.value);
     this.isDropup = false;
     this.getDropDownPositionClassNames();
-    this.choiseReadyFlag = 0;
+    this.choiceReadyFlag = 0;
   }
 
   private get defaultTitle(): string {
@@ -66,14 +66,14 @@ export class DatepickerFilterComponent implements OnInit {
   };
 
   cancelFilter = (i: any, event: any): void => {
-    this.choiseReadyFlag ++;
+    this.choiceReadyFlag ++;
     this.filterResult = i;
     this.updateTitle();
     event.preventDefault();
   };
 
   selectDate = (event) => {
-    this.choiseReadyFlag ++;
+    this.choiceReadyFlag ++;
     this.filterResult = this.dateService.convertDate(event);
     if (this.isCalendarReady()) {
       this.title = this.filterResult;
@@ -81,7 +81,7 @@ export class DatepickerFilterComponent implements OnInit {
   };
 
   private readonly isCalendarReady = (): boolean =>
-    (this.choiseReadyFlag - 1) > 0;
+    (this.choiceReadyFlag - 1) > 0;
 
   getDropDownPositionClassNames(): void {
     this.dropDownService.checkDropDownElPosition(this.dropDownWrapperView)
