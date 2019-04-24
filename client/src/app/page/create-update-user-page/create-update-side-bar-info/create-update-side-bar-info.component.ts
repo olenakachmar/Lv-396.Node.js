@@ -23,6 +23,7 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
   managers: OptionPair[] = [];
   errorMsg;
   ifChosenDevelopmentDepartment = false;
+  ifChosenHrDepartment = false;
 
   constructor(readonly departmentService: DepartmentService,
               readonly userService: UserService) {
@@ -67,6 +68,8 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
     this.newUser.department = id;
     id === '5cab28b4e5773a19a4462fd1' ? this.ifChosenDevelopmentDepartment = true
                                       : this.ifChosenDevelopmentDepartment = false;
+    id === '5cb9c437b5cfd134acc5783e' ? this.ifChosenHrDepartment = true :
+                                        this.ifChosenHrDepartment = false;
     this.positions = this.departments
       .filter(elem => elem._id === id)[0].position
       .map(e => new OptionPair(e, e));

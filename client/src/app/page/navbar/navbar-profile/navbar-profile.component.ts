@@ -48,8 +48,13 @@ export class NavbarProfileComponent implements OnInit {
     this.todayDate = new Date();
   }
 
-  openTaskByid(id: string): boolean {
-    this.taskService.isOpenTask.next(id);
+  openTaskByid(taskID: string): boolean {
+    this.taskService.taskIsWatched(this.user._id, taskID);
+    this.taskService.isOpenTask.next(taskID);
+    setTimeout(() => {
+      document.getElementById(taskID)
+        .scrollIntoView();
+    }, 150);
 
     return false;
   }
@@ -92,14 +97,16 @@ export class NavbarProfileComponent implements OnInit {
     return user;
   }
 
-  findNewTasks(all: any, watched: string[]): Task[] {
+  findNewTasks(allTasks: any, watched: string[]): Task[] {
+    let arr = [];
     if (this.userType === 'hr') {
-      all.filter(task => task.author !== this.user._id);
+      arr = allTasks.filter(task => (task.author._id !== this.user._id && !task.resolvedByPerformer));
     }
     if (this.userType === 'developer') {
-      all.filter(task => task.resolvedByPerformer);
+      arr = allTasks.filter(task => task.resolvedByPerformer && !task.resolvedByAuthor);
     }
-    return all.filter(task => !(watched.includes(task._id)));
+
+    return arr.filter(task => !(watched.includes(task._id)));
   }
 
   logout(): boolean {

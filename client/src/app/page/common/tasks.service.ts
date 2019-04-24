@@ -4,7 +4,7 @@ import { Task, TaskCreateRequestBody, TaskEditRequestBody } from './task';
 import { HttpClient } from '@angular/common/http';
 import { httpOptions } from '../../common/services/user.service';
 import { api } from '../../../environments/environment';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';   
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,15 @@ export class TasksService {
   tasks: Task[];
 
   public isOpenTask: BehaviorSubject<string> = new BehaviorSubject('');
+
+  public taskIsWatched(id: string, issueID: string): Observable<Task> {
+    const body = {
+      id,
+      issueID,
+    };
+
+    return this.http.put<Task>(`${api}/users/watched_issues`, body, httpOptions);
+  }
 
   public getUserTasks(id: string): Observable<Task[]> {
     return this.http.get<Task[]>(`${api}issues/${id}`, httpOptions);
