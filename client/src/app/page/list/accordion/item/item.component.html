@@ -1,15 +1,16 @@
 <div class="container-fluid" *ngIf='markResolve'>
-    <div class="row alert alert-success message-position">
-      <span>{{ alertMessage }}</span>
-    </div>
+  <div class="row alert alert-success message-position">
+    <span>{{ alertMessage }}</span>
+  </div>
 </div>
 <accordion>
-  <accordion-group [isOpen]="isOpen" #group>
+  <accordion-group #group [isOpen]="isOpen">
     <div accordion-heading class="heading-grid">
       <span>{{ task.id }}</span>
       <div class="heading-text">
         <h5>{{ task.name }}</h5>
-        <p *ngIf="task.resolvedByAuthor === true || task.resolvedByPerformer === true" class="waiting {{cssClassVisible}}">Waiting for second mark</p>
+        <p *ngIf="task.resolvedByAuthor === true || task.resolvedByPerformer === true"
+          class="waiting {{cssClassVisible}}">Waiting for second mark</p>
       </div>
       <div class="heading-excerpt">
         <p>{{ task.excerpt }}</p>
@@ -29,7 +30,8 @@
     <div class="body-grid">
       <div class="body-from">
         <span>From: </span>
-        <span class="bold pointer" (click)="selectUser(task.author._id)">{{ task.author.firstName }} {{ task.author.lastName }}</span>
+        <span class="bold pointer" (click)="selectUser(task.author._id)">{{ task.author.firstName }}
+          {{ task.author.lastName }}</span>
       </div>
       <div class="body-resolve">
         <button type="submit" (click)="resolveClick()" class="btn btn-outline-primary mark-resolve {{cssClass}}">
