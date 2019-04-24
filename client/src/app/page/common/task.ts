@@ -11,7 +11,7 @@ export class TaskType {
 }
 
 export class TaskAuthor {
-  constructor(public id?: string,
+  constructor(public _id?: string,
               public firstName?: string,
               public lastName?: string) {
   }
