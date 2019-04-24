@@ -18,7 +18,7 @@ import { ModalComponent } from './modal/modal.component';
 
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BsDatepickerModule, DatePickerComponent } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
@@ -33,6 +33,8 @@ import { UpcomingDatesComponent } from './upcoming-dates/upcoming-dates.componen
 import { ListDatesComponent } from './upcoming-dates/list-dates/list-dates.component';
 import { ItemDateComponent } from './upcoming-dates/list-dates/item-date/item-date.component';
 import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
+import { DatepickerComponent } from './create-update-user-page/datepicker/datepicker.component';
+
 
 import { appConfigProviders } from './common/config';
 import { FilterReturnService } from './common/filter-return.service';
@@ -79,6 +81,7 @@ export const routes: Routes = [
     ItemDateComponent,
     AddTaskFormComponent,
     CreateUpdateUserComponent,
+    DatepickerComponent,
   ],
   imports: [
     CommonModule,
