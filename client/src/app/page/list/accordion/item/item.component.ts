@@ -20,6 +20,10 @@ export class ItemComponent implements OnInit {
   markResolve: boolean;
   alertMessage: string;
   isOpen: boolean;
+  unreadClass: string;
+  unreadOpenClass: string;
+  taskIsOpen: boolean;
+
   constructor(private readonly router: Router,
               private readonly route: ActivatedRoute,
               private readonly userService: UserService,
@@ -28,11 +32,21 @@ export class ItemComponent implements OnInit {
   ngOnInit(): void {
     this.loadUser();
     this.isOpen = this.task.isOpen;
-
     this.userService.getAll()
       .subscribe(users => this.users = users);
     this.cssClass = '';
     this.checkedAuthorOrPerformer();
+    this.taskIsOpen = false;
+    this.unreadClass = 'unread';
+  }
+
+  openTask(): any {
+    this.taskIsOpen = true;
+    this.changeClassUnread();
+  }
+
+  changeClassUnread(): void {
+    this.taskIsOpen ? this.unreadClass = 'unread-open' : this.unreadClass = 'unread';
   }
 
   checkedAuthorOrPerformer(): any {
