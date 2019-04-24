@@ -3,8 +3,8 @@
     <div class="col-lg-4 sidebar-wrapper">
       <app-user-bar-info class="user-bar-info" [userinfo]="user"></app-user-bar-info>
     </div>
-    <main class="col-lg-8 content-wrapper">
-      <div class="row first-row" *ngIf="user">
+    <main class="col-lg-8 content-wrapper" *ngIf="user">
+      <div class="row first-row">
 
         <div class="col main-user-info">
           <h1>{{ getFullName() }}</h1>
@@ -18,31 +18,22 @@
               <div>
                 <span class="label">email</span>
               </div>
-              <span class="info">example@gmail.com</span>
+              <span class="info">{{ user.email }}</span>
             </div>
 
             <div class="phone">
               <div>
                 <span class="label">phone</span><br>
               </div>
-              <span class="info">+380 123 45 67 880</span>
+              <span class="info">{{ user.phone }}</span>
             </div>
           </div>
 
-          <div class="contact_down">
-            <div class="skype">
-              <div>
-                <span class="label">skype</span><br>
-              </div>
-              <span class="info">skype</span>
+          <div class="contact_down" *ngFor="let contact of user.contacts">
+            <div>
+              <span class="label">{{ contact.contact_name }}</span><br>
             </div>
-
-            <div class="telegram">
-              <div>
-                <span class="label">telegram</span><br>
-              </div>
-              <span class="info">@telegram</span>
-            </div>
+            <span class="info">{{ contact.contact_value }}</span>
           </div>
         </div>
 
@@ -80,9 +71,19 @@
         </div>
       </div>
       <div class="row third-row">
-        <div class="col">
-          <div class="button_wrapper" [routerLink]="[ '/profile/edit-my-profile' ]">
+        <div class="row w-100">
+          <div class="button_wrapper w-50" [routerLink]="[ '/profile/edit-user' ]">
             <a class="edit_button">Edit Profile</a>
+          </div>
+          <div class="w-50">
+            <button type="button" id="delete-button" (click)="openModal(template)">delete profile</button>
+            <ng-template #template>
+              <div class="modal-body text-center">
+                <p>Do you want to delete {{ getFullName() }}?</p>
+                <button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
+                <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+              </div>
+            </ng-template>
           </div>
         </div>
       </div>

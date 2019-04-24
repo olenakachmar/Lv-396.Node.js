@@ -1,0 +1,72 @@
+<div class="create-user-bar-info row">
+  <div class="column w-100">
+    <div class="upload-image">
+      <app-user-image class="photo"></app-user-image>
+      <button class="update-photo-button">Update Image</button>
+    </div>
+    <div class="info-form">
+      <div class="input-label">
+        <label for="first-name">First Name</label>
+      </div>
+      <input [(ngModel)]="newUser.firstName" class="form-control"
+             type="text" placeholder="Name" id='first-name' aria-label="Username"
+             [ngClass]="!newUser.firstName ? ['border-red'] : ['border-green']">
+    </div>
+    <div class="info-form">
+      <div class="input-label">
+        <label for="last-name">Last Name</label>
+      </div>
+      <input [(ngModel)]="newUser.lastName" class="form-control"
+             type="text" placeholder="Surname" id='last-name' aria-label="UserSurname"
+             aria-describedby="addon-wrapping"
+             [ngClass]="!newUser.lastName ? ['border-red'] : ['border-green']">
+    </div>
+    <div class="info-form">
+      <div class="input-label">
+        <label for="department">Department</label>
+      </div>
+      <app-dropdown-info class="info-input-area" id="department" [pairList]='departmentsOptionPair'
+                         (selected)="selectDepartment($event, id)"
+                         [required]="true">
+      </app-dropdown-info>
+    </div>
+  </div>
+  <div class="column w-100">
+    <div class="info-form">
+      <div class="input-label">
+        <label for="position">Position</label>
+      </div>
+      <app-dropdown-info class="info-input-area" id="position" [pairList]='positions'
+                         (selected)="newUser.position = $event"
+                         [required]="true">
+      </app-dropdown-info>
+    </div>
+    <div class="info-form" *ngIf="ifChosenDevelopmentDepartment">
+      <div class="input-label">
+        <label for="teamLead">Teamlead</label>
+      </div>
+      <app-dropdown-info class="info-input-area" id="teamLead" [pairList]='teamLeads'
+                         (selected)="newUser.teamlead = $event"
+                         [required]="true">
+      </app-dropdown-info>
+    </div>
+    <div class="info-form">
+      <div class="input-label">
+        <label for="hr">HR</label>
+      </div>
+      <app-dropdown-info class="info-input-area" id="hr" [pairList]='hrs'
+                         (selected)="newUser.hr = $event"
+                         [required]="true">
+      </app-dropdown-info>
+    </div>
+    <div class="info-form">
+      <div class="input-label">
+        <label for="manager">Manager</label>
+      </div>
+      <app-dropdown-info class="info-input-area" id="manager" [pairList]='managers'
+                         (selected)="newUser.manager = $event"
+                         [required]="true">
+      </app-dropdown-info>
+    </div>
+  </div>
+</div>

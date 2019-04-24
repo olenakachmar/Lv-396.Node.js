@@ -6,11 +6,21 @@ export const NAVBAR_LIST: NavItem[] = [
     id: 'upcoming-tasks',
     title: 'upcoming tasks',
     current: true,
-    router: '/profile',
+    router: 'upcoming-tasks',
     rightMenu: false,
     burgerMenu: true,
     hr: 'hr',
-    dev: 'development'
+    dev: 'developer'
+  },
+  {
+    id: 'upcoming-dates',
+    title: 'upcoming dates',
+    current: false,
+    router: 'upcoming-dates',
+    rightMenu: false,
+    burgerMenu: true,
+    hr: 'hr',
+    dev: ''
   },
   {
     id: 'issues',
@@ -20,7 +30,7 @@ export const NAVBAR_LIST: NavItem[] = [
     rightMenu: false,
     burgerMenu: true,
     hr: '',
-    dev: 'development'
+    dev: 'developer'
   },
   {
     id: 'contact-info',
@@ -30,7 +40,7 @@ export const NAVBAR_LIST: NavItem[] = [
     rightMenu: false,
     burgerMenu: true,
     hr: 'hr',
-    dev: 'development'
+    dev: 'developer'
   },
   {
     id: 'log-out',
@@ -40,7 +50,7 @@ export const NAVBAR_LIST: NavItem[] = [
     rightMenu: true,
     burgerMenu: false,
     hr: 'hr',
-    dev: 'development',
+    dev: 'developer',
     logout: true
   },
   {
@@ -51,7 +61,7 @@ export const NAVBAR_LIST: NavItem[] = [
     rightMenu: true,
     burgerMenu: true,
     hr: 'hr',
-    dev: 'development'
+    dev: 'developer'
   },
   {
     id: 'edit-profile',

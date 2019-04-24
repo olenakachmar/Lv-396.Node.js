@@ -16,7 +16,9 @@ export class ForgotPasswordComponent implements OnInit {
   message: any;
   error: string;
 
-  constructor(private readonly router: Router, private readonly fb: FormBuilder, private recoverPassword: RecoverPasswordService) {
+  constructor(private readonly router: Router,
+              private readonly fb: FormBuilder,
+              private readonly recoverPassword: RecoverPasswordService) {
     this.frm = fb.group({
       email: ['', Validators.required],
     });
@@ -24,26 +26,27 @@ export class ForgotPasswordComponent implements OnInit {
     this.getResponse = false;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  send(form: any) {
+  send(form: any): void {
     this.frm.valueChanges.subscribe((value: string) => {
-      if(value.length !== 0) {
+      if (value.length !== 0) {
         this.hasFailed = false;
       }
     });
 
-    this.recoverPassword.forgotPassword(form.email).subscribe(
-      (response) => {
-        this.getResponse = true;
-        this.message = response;
-      },
-      (error) => {
-        this.error = error.error.err;
-        this.hasFailed = true;
-      }
-    )
+    this.recoverPassword.forgotPassword(form.email)
+      .subscribe(
+        (response) => {
+          this.getResponse = true;
+          this.message = response;
+        },
+        (error) => {
+          this.error = error.error.err;
+          this.hasFailed = true;
+        }
+      );
   }
 
 }

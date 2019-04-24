@@ -126,7 +126,8 @@ a {
   position: relative;
 }
 
-.dropdown-menu li a:hover {
+
+.dropdown-menu li a:hover, li:hover {
   background: $bg-color !important;
 }
 .dropdown-menu li.current a::after {
@@ -134,6 +135,6 @@ a {
   content: url("../../../../assets/img/symbol_ok.svg");
   left: 140px;
   @include media-breakpoint-up(md) {
-    left: 200px;
+    left: 120px;
   }
 }

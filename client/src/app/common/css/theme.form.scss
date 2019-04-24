@@ -30,7 +30,7 @@ input:not([type='submit']):focus {
 textarea::placeholder,
 input::placeholder,
 input::placeholder {
-  color: $primary-color;
+  color: $border-color;
 }
 
 button,
@@ -52,6 +52,11 @@ input[type='button']:focus {
   background-color: $primary-color;
   border-color: $primary-color;
   color: $bg-color;
+  .add__icon {
+    margin-right: 10px;
+    color: white;
+  }
+
 }
 
 button[type='submit'],
@@ -82,6 +87,12 @@ input[type='submit']:disabled:focus{
   color: $border-color;
 }
 
+.light-button {
+  background-color: $case-color;
+  border-color: $primary-color;
+  color: $primary-color;
+}
+
 label {
   margin-bottom: 5px;
   font-size: $small-font-size;
@@ -94,4 +105,19 @@ label {
   margin: 10px 0;
   border-radius: 0;
   width: 100%;
+}
+
+.alert-danger.visible-temporarily {
+  animation: cssAnimation 0s ease-in 5s forwards;
+  animation-fill-mode: forwards;
+}
+
+@keyframes cssAnimation {
+  to {
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    overflow:hidden;
+  }
 }

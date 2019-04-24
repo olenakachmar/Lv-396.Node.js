@@ -95,6 +95,17 @@
   text-align: center;
   text-transform: uppercase;
   color: $bg2-color;
+  font-weight: bold;
+}
+#delete-button {
+  background-color: #2699fb63;
+  border: 0;
+  width: 100%;
+  height: 37px;
+  text-align: center;
+  text-transform: uppercase;
+  color: white;
+  font-weight: bold;
 }
 
 @media(max-width:767px){
@@ -118,6 +129,12 @@
       }
     }
 
+  }
+}
+
+@media (min-width: 768px) {
+  #delete-button{
+    margin-top: 190px;
   }
 }
 

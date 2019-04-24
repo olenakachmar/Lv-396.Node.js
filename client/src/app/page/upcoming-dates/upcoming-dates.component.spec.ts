@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateSideBarInfoComponent } from './create-side-bar-info.component';
+import { UpcomingDatesComponent } from './upcoming-dates.component';
 
-describe('CreateSideBarInfoComponent', () => {
-  let component: CreateSideBarInfoComponent;
-  let fixture: ComponentFixture<CreateSideBarInfoComponent>;
+describe('UpcomingDatesComponent', () => {
+  let component: UpcomingDatesComponent;
+  let fixture: ComponentFixture<UpcomingDatesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateSideBarInfoComponent ]
+      declarations: [ UpcomingDatesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateSideBarInfoComponent);
+    fixture = TestBed.createComponent(UpcomingDatesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
