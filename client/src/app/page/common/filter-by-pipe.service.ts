@@ -37,6 +37,10 @@ export class FilterByPipeService {
         return !(task.resolvedByAuthor && task.resolvedByPerformer);
       }
 
+      if (meta === 'type' && filter.defaultValue === 2) {
+        return task.resolvedByAuthor && task.resolvedByPerformer;
+      }
+
       if (meta !== 'type' && filter.defaultValue === -1) {
         return true;
       }
