@@ -2,7 +2,7 @@
   <div class="col-lg-4 sidebar-wrapper">
     <app-create-update-side-bar-info #createUserComponent></app-create-update-side-bar-info>
   </div>
-  <main class="col-lg-8 content-wrapper">
+  <!-- <main class="col-lg-8 content-wrapper">
     <div class="row main-user-info">
       <div class="col main-user-info">
         <h1>Name Surname</h1>
@@ -72,4 +72,21 @@
         </div>
       </div>
     </div>
-  </main>
+  </main> -->
+  <div class="col-lg-8 sidebar-wrapper">
+    <app-create-update-user></app-create-update-user>
+  </div>
+</main>
+
+<div class="row save-profile">
+  <div class="col">
+    <div class="alert alert-danger" *ngIf="notValidUser">Please, filled in all required fields</div>
+    <div>
+      <button class="save-button" (click)="extractUser(createUserComponent.newUser,
+              createUserComponent.ifChosenDevelopmentDepartment,
+              createUserComponent.ifChosenHrDepartment)">
+        Save profile
+      </button>
+    </div>
+  </div>
+</div>

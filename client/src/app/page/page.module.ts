@@ -37,6 +37,7 @@ import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
 import { appConfigProviders } from './common/config';
 import { FilterReturnService } from './common/filter-return.service';
 import { FilterDatesByPipe } from './filter-dates-by.pipe';
+import { CreateUpdateUserComponent } from './create-update-user-page/create-update-user/create-update-user.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'profile', pathMatch: 'full' },
@@ -77,6 +78,7 @@ export const routes: Routes = [
     ListDatesComponent,
     ItemDateComponent,
     AddTaskFormComponent,
+    CreateUpdateUserComponent,
   ],
   imports: [
     CommonModule,
