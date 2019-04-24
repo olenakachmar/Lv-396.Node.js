@@ -178,7 +178,7 @@ export class AddTaskFormComponent implements OnInit {
     typeName: this.typeObject.typeName,
     typeValue: this.typeObject.typeValue,
     author: this.user._id,
-    content: formVal.taskDescription || '',
+    content: formVal.taskDescription,
     assignTo: this.getAssignToUserId()
   });
 
