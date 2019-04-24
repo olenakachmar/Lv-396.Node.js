@@ -15,13 +15,10 @@
     <img src="assets/img/navbar-notifications-desk.png" alt="new tasks" class="notifications__icon">
     <span class="notifications__count">({{ newTasksCount }})</span>
   </div>
-  <ul class="user-bar__menu dropdown-menu" *dropdownMenu role="menu" aria-labelledby="button-disabled-item">
+  <ul class="user-bar__menu user-bar__newTasks dropdown-menu" *dropdownMenu role="menu" aria-labelledby="button-disabled-item">
     <li class="user-bar__row user-bar__elem dropdown-item" *ngFor="let newTask of newTasks; trackBy: trackById"
-      role="menuitem" (click)="openTaskByid(newTask._id); currentByRout('upcoming-tasks')">
-      <a href [routerLink]="[ 'upcoming-tasks' ]">
-        <b>{{ newTask.name }}</b> <br>
-        {{ newTask.author.firstName }} {{ newTask.author.lastName}}
-      </a>
+      role="menuitem" (click)="openTaskByid(newTask._id); currentByRout('upcoming-tasks')" [routerLink]="[ 'upcoming-tasks' ]">
+      <a href><b>{{ newTask.name }}</b> <br>{{ newTask.author.firstName }} {{ newTask.author.lastName }}</a> {{ newTask.date | date:"dd/MM/yyyy"}}
     </li>
   </ul>
 </div>

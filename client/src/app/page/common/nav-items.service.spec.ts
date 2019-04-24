@@ -146,7 +146,7 @@ const modifiedList = [
     hr: 'hr',
     dev: ''
   }
-]
+];
 
 describe('SocialNetworkService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
