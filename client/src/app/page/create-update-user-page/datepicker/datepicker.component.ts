@@ -7,13 +7,12 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class DatepickerComponent implements OnInit {
 
-  @Output() public onDateChange: EventEmitter<Date>;
+  @Output() public onDateChange = new EventEmitter<Date>();
   public datepickerModel: Date;
   constructor() { 
   }
 
   ngOnInit() {
-    this.onDateChange = new EventEmitter<Date>();
   }
 
   onValueChange(value: Date): void {
