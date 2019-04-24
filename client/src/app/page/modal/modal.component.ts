@@ -156,7 +156,7 @@ export class ModalComponent implements OnInit {
       statusValue: this.filter.defaultValue,
       excerpt: newExcerpt,
       assignTo: this.usersIds[this.userDropDown.defaultValue],
-      reassigned: this.task.author.id,
+      reassigned: this.task.author._id,
     };
     this.updateTask = false;
     this.tasksService.editTask(this.editTask)

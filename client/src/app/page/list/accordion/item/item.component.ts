@@ -20,27 +20,41 @@ export class ItemComponent implements OnInit {
   markResolve: boolean;
   alertMessage: string;
   isOpen: boolean;
+  unreadClass: string;
+  unreadOpenClass: string;
+  taskIsOpen: boolean;
+
   constructor(private readonly router: Router,
               private readonly route: ActivatedRoute,
               private readonly userService: UserService,
-              private readonly tasksService: TasksService) {}
+              private readonly tasksService: TasksService) { }
 
   ngOnInit(): void {
     this.loadUser();
     this.isOpen = this.task.isOpen;
-
     this.userService.getAll()
       .subscribe(users => this.users = users);
     this.cssClass = '';
     this.checkedAuthorOrPerformer();
+    this.taskIsOpen = false;
+    this.unreadClass = 'unread';
+  }
+
+  openTask(): any {
+    this.taskIsOpen = true;
+    this.changeClassUnread();
+  }
+
+  changeClassUnread(): void {
+    this.taskIsOpen ? this.unreadClass = 'unread-open' : this.unreadClass = 'unread';
   }
 
   checkedAuthorOrPerformer(): any {
-    this.checkedResolve = this.user._id === this.task.author.id ?  this.task.resolvedByAuthor : this.task.resolvedByPerformer;
+    this.checkedResolve = this.user._id === this.task.author._id ?  this.task.resolvedByAuthor : this.task.resolvedByPerformer;
     this.cssClass = this.checkedResolve ? 'hiddenMark' : '';
 
     return this.checkedResolve;
-    }
+  }
 
   loadUser(): boolean {
     this.userService.getUser()
@@ -50,7 +64,7 @@ export class ItemComponent implements OnInit {
   }
 
   selectUser(uid: number): void {
-    this.router.navigate(['/profile/my-profile/', uid], {relativeTo: this.route});
+    this.router.navigate(['/profile/my-profile/', uid], { relativeTo: this.route });
   }
 
   resolveClick(): void {
