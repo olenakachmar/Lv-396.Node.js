@@ -63,7 +63,7 @@ export class ItemComponent implements OnInit {
     return false;
   }
 
-  selectUser(uid: number): void {
+  selectUser(uid: string): void {
     this.router.navigate(['/profile/my-profile/', uid], { relativeTo: this.route });
   }
 
