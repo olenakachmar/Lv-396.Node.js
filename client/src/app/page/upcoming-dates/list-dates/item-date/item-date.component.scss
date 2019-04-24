@@ -1,14 +1,22 @@
 @import "./node_modules/bootstrap/scss/mixins";
 @import "./node_modules/bootstrap/scss/functions";
 @import "./node_modules/bootstrap/scss/variables";
-@import "../../../../common/css/theme";
+@import '../../../../common/css/theme';
+::ng-deep .asd:not(:last-child) .card {
+  border-bottom: 0;
+}
+::ng-deep .card-header {
+  border-bottom: none;
+}
+::ng-deep .card {
+  border-radius: 0;
+}
 
 .list-dates {
-  padding-left: 0;
-  padding-right: 0;
   border: 1px solid $case-color;
   font-size: $base2-font-size;
   background-color: $bg-color;
+  margin: 0;
 
   .box {
     position: relative;
@@ -23,6 +31,11 @@
   }
   .dates-date {
     font-size: 14px;
+    text-align: center;
+  }
+  .dates-icon {
+    display: flex;
+    justify-content: center;
   }
 }
 
