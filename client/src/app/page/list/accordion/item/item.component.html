@@ -4,7 +4,7 @@
     </div>
 </div>
 <accordion>
-  <accordion-group #group>
+  <accordion-group [isOpen]="isOpen" #group>
     <div accordion-heading class="heading-grid">
       <span>{{ task.id }}</span>
       <div class="heading-text">

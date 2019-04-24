@@ -13,6 +13,16 @@ export const NAVBAR_LIST: NavItem[] = [
     dev: 'developer'
   },
   {
+    id: 'upcoming-dates',
+    title: 'upcoming dates',
+    current: false,
+    router: 'upcoming-dates',
+    rightMenu: false,
+    burgerMenu: true,
+    hr: 'hr',
+    dev: ''
+  },
+  {
     id: 'issues',
     title: 'issues',
     current: false,

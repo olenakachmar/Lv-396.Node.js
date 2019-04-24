@@ -30,7 +30,6 @@ export class NavbarComponent implements OnInit {
     this.navItemsService.getNavList()
       .subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
-    this.avatar = 'assets/img/navbar-symbol-desk.png';
   }
 
   currentByRout(currentRouter: string): boolean {
