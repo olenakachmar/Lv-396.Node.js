@@ -72,14 +72,12 @@
     }
   }
 }
-
 .save-profile {
-
   .save-button {
     width: 100%;
     background-color: $primary-color;
     color: $bg-color;
-    margin-top: 103px;
+    margin-top: 30px;
     text-align: center;
     text-transform: uppercase;
     font-weight: bold;
@@ -88,6 +86,14 @@
       margin-top: 20px;
     }
   }
+}
+.alert{
+  color: #ff0000cf;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 0;
 }
 
 .sidebar-wrapper {
