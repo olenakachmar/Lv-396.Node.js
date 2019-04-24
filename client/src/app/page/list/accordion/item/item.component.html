@@ -4,8 +4,9 @@
   </div>
 </div>
 <accordion>
-  <accordion-group #group [isOpen]="isOpen">
+  <accordion-group #group (click)="openTask()">
     <div accordion-heading class="heading-grid">
+      <div class={{unreadClass}}></div>
       <span>{{ task.id }}</span>
       <div class="heading-text">
         <h5>{{ task.name }}</h5>
@@ -24,10 +25,11 @@
       <div class="heading-icon">
       </div>
     </div>
-    <div class="body-text">
-      <p>{{ task.content }}</p>
-    </div>
     <div class="body-grid">
+      <div class="unread-open"></div>
+      <div class="body-text">
+          <p>{{ task.content }}</p>
+      </div>
       <div class="body-from">
         <span>From: </span>
         <span class="bold pointer" (click)="selectUser(task.author._id)">{{ task.author.firstName }}
@@ -38,7 +40,9 @@
           MARK AS RESOLVED
         </button>
       </div>
+      <div class="reassign-button">
       <app-modal [modalType]="'RE-ASSIGNE'" [task]="task"></app-modal>
+      </div>
     </div>
   </accordion-group>
 </accordion>
