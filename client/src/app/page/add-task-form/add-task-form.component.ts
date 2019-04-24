@@ -97,7 +97,6 @@ export class AddTaskFormComponent implements OnInit {
   private createUserDropDown(users): void {
     this.usersIds = users.map(item => (item._id));
     const data = this.createUserDropdownOptions(users);
-    console.log(data);
     this.userDropDown = {
       id: 1,
       name: 'assignTo',
@@ -105,7 +104,6 @@ export class AddTaskFormComponent implements OnInit {
       defaultValue: data.defaultValue,
       options: data.optionsArray,
     };
-    console.log(this.userDropDown);
   }
 
   private createUserDropdownOptions = (users: User[]): {optionsArray: FilterOptions[], defaultValue: number} => {
