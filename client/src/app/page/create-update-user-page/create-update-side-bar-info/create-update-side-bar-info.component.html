@@ -26,7 +26,7 @@
         <label for="department">Department</label>
       </div>
       <app-dropdown-info class="info-input-area" id="department" [pairList]='departmentsOptionPair'
-                         (selected)="selectDepartment($event, id)"
+                         (selected)="selectDepartment($event)"
                          [required]="true">
       </app-dropdown-info>
     </div>
