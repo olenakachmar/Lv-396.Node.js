@@ -36,7 +36,7 @@
       <div class="input-label">
         <label for="position">Position</label>
       </div>
-      <app-dropdown-info class="info-input-area" id="position" disabled [pairList]='positions'
+      <app-dropdown-info class="info-input-area" id="position" [pairList]='positions'
                          (selected)="newUser.position = $event"
                          [required]="true">
       </app-dropdown-info>

@@ -59,6 +59,8 @@ router.post('/signup', upload.single('avatar'), (req, res) => {
     parameters.password = crypto.randomBytes(4).toString('hex');
   }
 
+  parameters.roles = parameters.roles.map(role => role.toLowerCase());
+
   const newUser = User({
     ...parameters,
   });

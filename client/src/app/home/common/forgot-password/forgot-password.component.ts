@@ -31,7 +31,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   send(form: any): void {
     this.frm.valueChanges.subscribe((value: string) => {
-      if(value.length !== 0) {
+      if (value.length !== 0) {
         this.hasFailed = false;
       }
     });
@@ -44,7 +44,6 @@ export class ForgotPasswordComponent implements OnInit {
         },
         (error) => {
           this.error = error.error.err;
-          console.log(error);
           this.hasFailed = true;
         }
       );
