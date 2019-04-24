@@ -36,7 +36,7 @@ export class ItemComponent implements OnInit {
   }
 
   checkedAuthorOrPerformer(): any {
-    this.checkedResolve = this.user._id === this.task.author.id ? this.task.resolvedByAuthor : this.task.resolvedByPerformer;
+    this.checkedResolve = this.user._id === this.task.author._id ?  this.task.resolvedByAuthor : this.task.resolvedByPerformer;
     this.cssClass = this.checkedResolve ? 'hiddenMark' : '';
 
     return this.checkedResolve;

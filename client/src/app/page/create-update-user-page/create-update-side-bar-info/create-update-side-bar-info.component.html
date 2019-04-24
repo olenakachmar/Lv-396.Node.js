@@ -26,7 +26,7 @@
         <label for="department">Department</label>
       </div>
       <app-dropdown-info class="info-input-area" id="department" [pairList]='departmentsOptionPair'
-                         (selected)="selectDepartment($event)"
+                         (selected)="selectDepartment($event, id)"
                          [required]="true">
       </app-dropdown-info>
     </div>
@@ -36,12 +36,12 @@
       <div class="input-label">
         <label for="position">Position</label>
       </div>
-      <app-dropdown-info class="info-input-area" id="position" disabled [pairList]='positions'
+      <app-dropdown-info class="info-input-area" id="position" [pairList]='positions'
                          (selected)="newUser.position = $event"
                          [required]="true">
       </app-dropdown-info>
     </div>
-    <div class="info-form">
+    <div class="info-form" *ngIf="ifChosenDevelopmentDepartment">
       <div class="input-label">
         <label for="teamLead">Teamlead</label>
       </div>
