@@ -20,19 +20,33 @@ export class ItemComponent implements OnInit {
   markResolve: boolean;
   alertMessage: string;
   isOpen: boolean;
+  unreadClass: string;
+  unreadOpenClass: string;
+  taskIsOpen: boolean;
+
   constructor(private readonly router: Router,
               private readonly route: ActivatedRoute,
               private readonly userService: UserService,
-              private readonly tasksService: TasksService) {}
+              private readonly tasksService: TasksService) { }
 
   ngOnInit(): void {
     this.loadUser();
     this.isOpen = this.task.isOpen;
-
     this.userService.getAll()
       .subscribe(users => this.users = users);
     this.cssClass = '';
     this.checkedAuthorOrPerformer();
+    this.taskIsOpen = false;
+    this.unreadClass = 'unread';
+  }
+
+  openTask(): any {
+    this.taskIsOpen = true;
+    this.changeClassUnread();
+  }
+
+  changeClassUnread(): void {
+    this.taskIsOpen ? this.unreadClass = 'unread-open' : this.unreadClass = 'unread';
   }
 
   checkedAuthorOrPerformer(): any {
@@ -40,7 +54,7 @@ export class ItemComponent implements OnInit {
     this.cssClass = this.checkedResolve ? 'hiddenMark' : '';
 
     return this.checkedResolve;
-    }
+  }
 
   loadUser(): boolean {
     this.userService.getUser()
@@ -49,8 +63,8 @@ export class ItemComponent implements OnInit {
     return false;
   }
 
-  selectUser(uid: number): void {
-    this.router.navigate(['/profile/my-profile/', uid], {relativeTo: this.route});
+  selectUser(uid: string): void {
+    this.router.navigate(['/profile/my-profile/', uid], { relativeTo: this.route });
   }
 
   resolveClick(): void {
