@@ -41,7 +41,7 @@
                          [required]="true">
       </app-dropdown-info>
     </div>
-    <div class="info-form">
+    <div class="info-form" *ngIf="ifChosenDevelopmentDepartment">
       <div class="input-label">
         <label for="teamLead">Teamlead</label>
       </div>

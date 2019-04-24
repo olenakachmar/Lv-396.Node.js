@@ -126,7 +126,8 @@ a {
   position: relative;
 }
 
-.dropdown-menu li a:hover {
+
+.dropdown-menu li a:hover, li:hover {
   background: $bg-color !important;
 }
 .dropdown-menu li.current a::after {

@@ -47,7 +47,7 @@ import { ResetPasswordComponent } from './home/common/reset-password/reset-passw
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
-    ModalModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [
     AUTH_PROVIDERS,
