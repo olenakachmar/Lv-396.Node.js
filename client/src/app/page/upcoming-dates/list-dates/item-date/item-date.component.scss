@@ -2,15 +2,6 @@
 @import "./node_modules/bootstrap/scss/functions";
 @import "./node_modules/bootstrap/scss/variables";
 @import '../../../../common/css/theme';
-::ng-deep .asd:not(:last-child) .card {
-  border-bottom: 0;
-}
-::ng-deep .card-header {
-  border-bottom: none;
-}
-::ng-deep .card {
-  border-radius: 0;
-}
 
 .list-dates {
   border: 1px solid $case-color;
