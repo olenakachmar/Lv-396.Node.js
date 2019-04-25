@@ -52,11 +52,15 @@ export class NavbarProfileComponent implements OnInit {
     this.taskService.taskIsWatched(this.user._id, taskID);
     this.taskService.isOpenTask.next(taskID);
     setTimeout(() => {
-      document.getElementById(taskID)
-        .scrollIntoView();
-    }, 150);
+      this.scrollTo(taskID);
+    }, 300);
 
     return false;
+  }
+
+  scrollTo(id: string): void {
+    document.getElementById(id)
+      .scrollIntoView();
   }
 
   loadDates(): void {
@@ -135,4 +139,5 @@ export class NavbarProfileComponent implements OnInit {
   trackById(link: NavItem): string {
     return link.id;
   }
+
 }

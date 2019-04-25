@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { Filter } from '../common/filter';
 import { FilterOptions } from '../common/filter-options';
 import { FilterReturnService } from '../common/filter-return.service';
@@ -15,7 +15,9 @@ import { DURATION } from '../common/config';
   styleUrls: ['./add-task-form.component.scss']
 })
 export class AddTaskFormComponent implements OnInit {
+  @Input() hideHeader: boolean;
   filter: Filter;
+  userDropDown: Filter;
   dropDownCssClassName: string;
   user: User;
   serverErrorMessage: {
@@ -50,6 +52,9 @@ export class AddTaskFormComponent implements OnInit {
       Validators.maxLength(400),
     ]
   });
+  isUserHR: boolean;
+  usersIds: [];
+  typeObject: {typeName: string, typeValue: number};
 
   get taskName(): any {
     return this.addTaskForm.get('taskName');
@@ -80,7 +85,51 @@ export class AddTaskFormComponent implements OnInit {
     this.getTheFilter();
     this.userService.getUser()
       .subscribe(user => this.user = user);
+    this.isUserHR = this.isUserRoleHR();
+    this.userService.getAllHr()
+      .subscribe(users => this.createUserDropDown(users));
+    this.typeObject = this.createTaskType();
   }
+
+  private createTaskType = (): {typeName: string, typeValue: number} =>
+    (this.isUserHR) ? {typeName: 'task', typeValue: 0} : {typeName: 'issue', typeValue: 1};
+
+  private createUserDropDown(users): void {
+    this.usersIds = users.map(item => (item._id));
+    const data = this.createUserDropdownOptions(users);
+    this.userDropDown = {
+      id: 1,
+      name: 'assignTo',
+      isCalendar: false,
+      defaultValue: data.defaultValue,
+      options: data.optionsArray,
+    };
+  }
+
+  private createUserDropdownOptions = (users: User[]): {optionsArray: FilterOptions[], defaultValue: number} => {
+    let defVal = 0;
+    const options: FilterOptions[] = users.map(
+      (item: User, index: number) => {
+        if (item._id === this.user._id) {
+          defVal = index;
+        }
+
+        return {
+          name: `${item.firstName} ${item.lastName}`,
+          value: index,
+        };
+      }
+    );
+
+    return {optionsArray: options, defaultValue: defVal};
+  };
+
+  private readonly isUserRoleHR = (): boolean =>
+    this.userService.getUserType() === 'hr';
+
+  getFilterValUserDropDown = (i: number) => {
+    this.userDropDown.defaultValue = i;
+  };
 
   getFilterVal = (i: number, data: number) => {
     this.filter.defaultValue = data;
@@ -126,12 +175,15 @@ export class AddTaskFormComponent implements OnInit {
     excerpt: formVal.taskSummary,
     statusName: this.getStatusName(),
     statusValue: this.filter.defaultValue,
-    typeName: 'issue',
-    typeValue: 1,
+    typeName: this.typeObject.typeName,
+    typeValue: this.typeObject.typeValue,
     author: this.user._id,
     content: formVal.taskDescription,
-    assignTo: this.user.manager._id
+    assignTo: this.getAssignToUserId()
   });
+
+  private readonly getAssignToUserId = (): string =>
+    (this.isUserHR) ? this.usersIds[this.userDropDown.defaultValue] : this.user.manager._id;
 
   private readonly getStatusName = (): string => {
     const val = this.filter.defaultValue;
