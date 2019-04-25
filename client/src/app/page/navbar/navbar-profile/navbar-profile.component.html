@@ -1,11 +1,11 @@
-<div class="user-bar__item btn-group dates" dropdown *ngIf="datesCount">
+<div class="user-bar__item btn-group dates" dropdown>
   <div class="user-bar__btn" dropdownToggle>
     <img src="assets/img/navbar-dates-desk.svg" alt="all dates" class="dates__icon">
-    <span class="dates__count">({{ datesCount }})</span>
+    <span class="dates__count"  *ngIf="datesCount">({{ datesCount }})</span>
   </div>
   <ul class="user-bar__menu dropdown-menu" *dropdownMenu role="menu" aria-labelledby="button-disabled-item">
     <li class="user-bar__row user-bar__elem  dropdown-item" *ngFor="let dates of dateList; trackBy: trackById"
-      role="menuitem">
+      role="menuitem" [routerLink]="[ 'upcoming-dates' ]" (click)="currentByRout('upcoming-dates')">
       {{ dates.topic }}
     </li>
   </ul>
@@ -15,13 +15,10 @@
     <img src="assets/img/navbar-notifications-desk.png" alt="new tasks" class="notifications__icon">
     <span class="notifications__count">({{ newTasksCount }})</span>
   </div>
-  <ul class="user-bar__menu dropdown-menu" *dropdownMenu role="menu" aria-labelledby="button-disabled-item">
+  <ul class="user-bar__menu user-bar__newTasks dropdown-menu" *dropdownMenu role="menu" aria-labelledby="button-disabled-item">
     <li class="user-bar__row user-bar__elem dropdown-item" *ngFor="let newTask of newTasks; trackBy: trackById"
-      role="menuitem" (click)="openTaskByid(newTask._id); currentByRout('upcoming-tasks')">
-      <a href [routerLink]="[ 'upcoming-tasks' ]">
-        <b>{{ newTask.name }}</b> <br>
-        {{ newTask.author.firstName }} {{ newTask.author.lastName}}
-      </a>
+      role="menuitem" (click)="openTaskByid(newTask._id); currentByRout('upcoming-tasks')" [routerLink]="[ 'upcoming-tasks' ]">
+      <a href><b>{{ newTask.name }}</b> <br>{{ newTask.author.firstName }} {{ newTask.author.lastName }}</a> {{ newTask.date | date:"dd/MM/yyyy"}}
     </li>
   </ul>
 </div>
@@ -34,12 +31,13 @@
   <div class="user-bar__btn" dropdownToggle>
     <img class="user-bar__avatar" src="{{ avatar }}" alt="avatar" *ngIf="avatar">
   </div>
-  <ul class="user-bar__menu dropdown-menu" *dropdownMenu role="menu" aria-labelledby="button-disabled-item">
-    <ng-container *ngFor="let link of menuList; let i = index; trackBy: trackById">
+  <ul class="user-bar__menu dropdown-menu" *dropdownMenu role="menu"
+    aria-labelledby="button-disabled-item">
+    <ng-container *ngFor="let link of menuList; let i = index; trackBy: trackById;">
       <li class="user-bar__row" role="menuitem"
         *ngIf="link.rightMenu && (userType === link.dev || userType === link.hr)" [ngClass]="{'current': link.current}"
         (click)="currentByIndex(i)">
-        <a [routerLink]="[ link.router ]" class="user-bar__elem dropdown-item">{{ link.title }}</a>
+        <a href [routerLink]="[ link.router ]" class="user-bar__elem dropdown-item">{{ link.title }}</a>
       </li>
     </ng-container>
   </ul>

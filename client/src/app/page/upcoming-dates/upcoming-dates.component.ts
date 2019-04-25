@@ -47,6 +47,16 @@ export class UpcomingDatesComponent implements OnInit {
               date: date.date
             };
             this.dateList = [...this.dateList, dateObj ];
+            this.dateList.sort((a, b) => {
+              if (a.date < b.date) {
+                return 1;
+              }
+              if (a.date > b.date) {
+                return -1;
+              }
+
+              return 0;
+            });
           });
         });
       });
