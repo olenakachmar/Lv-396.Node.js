@@ -18,7 +18,7 @@ import { ModalComponent } from './modal/modal.component';
 
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BsDatepickerModule, DatePickerComponent } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
@@ -33,19 +33,21 @@ import { UpcomingDatesComponent } from './upcoming-dates/upcoming-dates.componen
 import { ListDatesComponent } from './upcoming-dates/list-dates/list-dates.component';
 import { ItemDateComponent } from './upcoming-dates/list-dates/item-date/item-date.component';
 import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
-import { NavbarProfileComponent } from './navbar/navbar-profile/navbar-profile.component';
+import { DatepickerComponent } from './create-update-user-page/datepicker/datepicker.component';
+
 
 import { appConfigProviders } from './common/config';
 import { FilterReturnService } from './common/filter-return.service';
+import { FilterDatesByPipe } from './filter-dates-by.pipe';
+import { CreateUpdateUserComponent } from './create-update-user-page/create-update-user/create-update-user.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'profile', pathMatch: 'full' },
-  { path: '', component: WrapperComponent },
+  { path: '', redirectTo: 'upcoming-tasks', pathMatch: 'full' },
+  { path: 'upcoming-tasks', component: WrapperComponent },
   { path: 'my-profile', component: MyProfileComponent },
   { path: 'my-profile/:id', component: MyProfileComponent },
   { path: 'contact-info', component: ContactInfoComponent },
   { path: 'contact-info/:id', component: ContactInfoComponent },
-  { path: 'create-user', component: CreateUpdateUserPageComponent },
   { path: 'create-user', component: CreateUpdateUserPageComponent },
   { path: 'edit-user', component: CreateUpdateUserPageComponent },
   { path: 'upcoming-dates', component: UpcomingDatesComponent }
@@ -62,6 +64,7 @@ export const routes: Routes = [
     DropdownFilterComponent,
     AccordionComponent,
     FilterTasksByPipe,
+    FilterDatesByPipe,
     ItemComponent,
     ModalComponent,
     MyProfileComponent,
@@ -77,7 +80,8 @@ export const routes: Routes = [
     ListDatesComponent,
     ItemDateComponent,
     AddTaskFormComponent,
-/*    NavbarProfileComponent*/
+    CreateUpdateUserComponent,
+    DatepickerComponent,
   ],
   imports: [
     CommonModule,

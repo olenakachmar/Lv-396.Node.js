@@ -11,7 +11,7 @@ export class TaskType {
 }
 
 export class TaskAuthor {
-  constructor(public id?: string,
+  constructor(public _id?: string,
               public firstName?: string,
               public lastName?: string) {
   }
@@ -29,7 +29,8 @@ export class Task {
               public assignTo?: string,
               public reassigned?: string,
               public resolvedByAuthor?: boolean,
-              public resolvedByPerformer?: boolean) {
+              public resolvedByPerformer?: boolean,
+              public isOpen?: boolean) {
   }
 }
 

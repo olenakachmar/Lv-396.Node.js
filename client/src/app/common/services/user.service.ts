@@ -31,19 +31,12 @@ export class UserService {
   getAllTeamLeads(): Observable<any> {
     return this.http.get<any>(`${api}users?roles=teamlead`, httpOptions);
   }
+
   getUsersOfHr(): Observable<User[]> {
     httpOptions.headers = this.getHeader();
     const userId = this.getUserId();
 
     return this.http.get<User[]>(`${api}users?hr=${userId}`, httpOptions);
-  }
-
-  getAllHr(): Observable<any> {
-    return this.http.get<any>(`${api}users?roles=HR`, httpOptions);
-  }
-
-  getAllManagers(): Observable<any> {
-    return this.http.get<any>(`${api}users?roles=Manager`, httpOptions);
   }
 
   getAllHr(): Observable<any> {
@@ -63,13 +56,15 @@ export class UserService {
 
   getUserId(): any {
     httpOptions.headers = this.getHeader();
-    const helper = new JwtHelperService();
-
-    return helper.decodeToken(localStorage.token).id;
+    if (localStorage.token) {
+      return this.helper.decodeToken(localStorage.token).id;
+    }
   }
 
   getUserType(): any {
-    return this.helper.decodeToken(localStorage.token).type;
+    if (localStorage.token) {
+      return this.helper.decodeToken(localStorage.token).type;
+    }
   }
 
   addUser(user: User): Observable<any> {
@@ -82,7 +77,7 @@ export class UserService {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       }),
-      body: {id}
+      body: { id }
     };
 
     return this.http.delete(`${api}users/`, deleteOptions);
@@ -91,5 +86,12 @@ export class UserService {
   readonly getHeader = () =>
     httpOptions.headers.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
 
+  postImage(avatar: File): Observable<Object> {
+    const id = this.getUserId();
+    const fd = new FormData();
+    fd.append('id', id);
+    fd.append('avatar', avatar);
+    return this.http.post(`${api}users/change_avatar`, fd);
+  }
 
 }
