@@ -26,7 +26,7 @@ export class FilterTasksByPipe implements PipeTransform {
 
   private readonly isTaskMatchesFilters = (task: Task, filters: Filter[]): boolean =>
     filters.every(filter => {
-      const meta = filter.name;
+      const meta: string = filter.name;
       if (filter.defaultValue === -1) {
         if (meta === 'type') {
           return !(task.resolvedByAuthor && task.resolvedByPerformer);
@@ -34,7 +34,6 @@ export class FilterTasksByPipe implements PipeTransform {
 
         return true;
       }
-      const meta: string = filter.name;
       if (meta === 'date') {
         const date = (this.dateService.isDateString(task[meta])) ?
           this.dateService.convertStringToDate(task[meta]) :

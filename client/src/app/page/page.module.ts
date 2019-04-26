@@ -39,8 +39,8 @@ import { appConfigProviders } from './common/config';
 import { FilterReturnService } from './common/filter-return.service';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'profile', pathMatch: 'full' },
-  { path: '', component: WrapperComponent },
+  { path: '', redirectTo: 'upcoming-task', pathMatch: 'full' },
+  { path: 'upcoming-task', component: WrapperComponent },
   { path: 'my-profile', component: MyProfileComponent },
   { path: 'my-profile/:id', component: MyProfileComponent },
   { path: 'contact-info', component: ContactInfoComponent },
@@ -77,7 +77,6 @@ export const routes: Routes = [
     ListDatesComponent,
     ItemDateComponent,
     AddTaskFormComponent,
-/*    NavbarProfileComponent*/
   ],
   imports: [
     CommonModule,

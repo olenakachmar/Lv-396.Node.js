@@ -14,7 +14,7 @@ import { ForgotPasswordComponent } from './home/common/forgot-password/forgot-pa
 import { ResetPasswordComponent } from './home/common/reset-password/reset-password.component';
 
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [LoggedOutGuard, CheckDevGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [LoggedOutGuard, CheckDevGuard] },
