@@ -18,7 +18,7 @@ import { ModalComponent } from './modal/modal.component';
 
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { BsDatepickerModule, DatePickerComponent } from 'ngx-bootstrap/datepicker';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
