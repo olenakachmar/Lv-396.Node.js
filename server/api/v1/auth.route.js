@@ -59,7 +59,9 @@ router.post('/signup', upload.single('avatar'), (req, res) => {
     parameters.password = crypto.randomBytes(4).toString('hex');
   }
 
-  parameters.roles = parameters.roles.map(role => role.toLowerCase());
+  if (parameters.roles) {
+    parameters.roles = parameters.roles.map(role => role.toLowerCase());
+  }
 
   const newUser = User({
     ...parameters,
@@ -130,6 +132,7 @@ router.post('/signup', upload.single('avatar'), (req, res) => {
       });
     })
     .catch((err) => {
+      console.log(err);
       res.status(500).json({
         err,
       });
