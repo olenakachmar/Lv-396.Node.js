@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
-  newUser: User = new User();
+  user: User = new User();
   ifChosenDevelopmentDepartment: boolean;
   ifChosenHrDepartment: boolean;
   notValidUser: boolean;
@@ -38,7 +38,7 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
     if (id) {
       this.userService.getUser(id)
         .subscribe(user => {
-          this.newUser = user;
+          this.user = user;
           this.gotUser = true;
         });
     } else {
@@ -47,25 +47,25 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   }
 
   extractUser(user, chosenDevelopmentDepartment, chosenHrDepartment): any {
-    this.newUser = user;
+    this.user = user;
     this.ifChosenDevelopmentDepartment = chosenDevelopmentDepartment;
     this.ifChosenHrDepartment = chosenHrDepartment;
 
-    this.newUser.phone = '35839946448845';
-    this.newUser.email = 'trley@gmail.com';
-    this.newUser.roles = ['Teamlead', 'Manager'];
+    this.user.phone = '35839946448845';
+    this.user.email = 'trley@gmail.com';
+    this.user.roles = ['Teamlead', 'Manager'];
 
 
     if (this.validateUser()) {
-      if (this.newUser._id) {
-        this.userService.updateUser(this.newUser)
+      if (this.user._id) {
+        this.userService.updateUser(this.user)
           .takeUntil(this.destroy$)
           .subscribe((data: any) => {
 
-            this.router.navigate(['/profile/my-profile/', this.newUser._id], {relativeTo: this.route});
+            this.router.navigate(['/profile/my-profile/', this.user._id], {relativeTo: this.route});
           });
       } else {
-        this.userService.addUser(this.newUser)
+        this.userService.addUser(this.user)
           .takeUntil(this.destroy$)
           .subscribe((data: any) => {
             this.router.navigate(['/profile/my-profile/', data.newUser._id], {relativeTo: this.route});
@@ -77,14 +77,14 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   }
 
   validateUser(): boolean {
-    let requiredForCreationUserFields = [this.newUser.firstName, this.newUser.lastName, this.newUser.department,
-                                         this.newUser.position, this.newUser.hr, this.newUser.manager];
+    let requiredForCreationUserFields = [this.user.firstName, this.user.lastName, this.user.department,
+                                         this.user.position, this.user.hr, this.user.manager];
 
     if (this.ifChosenDevelopmentDepartment) {
-      requiredForCreationUserFields = [...requiredForCreationUserFields, this.newUser.teamlead];
+      requiredForCreationUserFields = [...requiredForCreationUserFields, this.user.teamlead];
     }
 
-    this.ifChosenHrDepartment ? this.newUser.type = 'hr' : this.newUser.type = 'developer';
+    this.ifChosenHrDepartment ? this.user.type = 'hr' : this.user.type = 'developer';
 
     let requiredField = true;
     requiredForCreationUserFields.map(elem => {

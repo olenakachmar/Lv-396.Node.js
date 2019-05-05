@@ -14,7 +14,7 @@ import { Subject } from 'rxjs/Rx';
 export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
-  @Input() newUser: User;
+  @Input() user: User;
   departmentsOptionPair: OptionPair[] = [];
   departments: IDepartment[] = [];
   positions: OptionPair[] = [];
@@ -36,9 +36,9 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         this.departmentsOptionPair = data.map(o => new OptionPair(o._id, o.name));
         this.departments = data;
-        if (this.newUser.department !== undefined) {
+        if (this.user.department !== undefined) {
           this.positions = this.departments
-            .filter(elem => elem._id === this.newUser.department._id)[0].position
+            .filter(elem => elem._id === this.user.department._id)[0].position
             .map(e => new OptionPair(e, e));
         }
       });
@@ -70,7 +70,7 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
   }
 
   selectDepartment(id: any): void {
-    this.newUser.department = id;
+    this.user.department = id;
     id === '5cab28b4e5773a19a4462fd1' ? this.ifChosenDevelopmentDepartment = true
                                       : this.ifChosenDevelopmentDepartment = false;
     id === '5cb9c437b5cfd134acc5783e' ? this.ifChosenHrDepartment = true :

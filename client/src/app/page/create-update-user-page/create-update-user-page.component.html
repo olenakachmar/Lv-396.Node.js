@@ -1,7 +1,7 @@
 <main class="row ">
   <div class="col-lg-4 sidebar-wrapper">
     <app-create-update-side-bar-info #createUserComponent [showModal]="gotUser || create"
-                                     [newUser]="newUser"></app-create-update-side-bar-info>
+                                     [user]="user"></app-create-update-side-bar-info>
   </div>
   <div class="col-lg-8 sidebar-wrapper">
     <app-create-update-user></app-create-update-user>
@@ -11,7 +11,7 @@
   <div class="col">
     <div class="alert alert-danger" *ngIf="notValidUser">Please, fill in all required fields</div>
     <div>
-      <button class="save-button" (click)="extractUser(createUserComponent.newUser,
+      <button class="save-button" (click)="extractUser(createUserComponent.user,
               createUserComponent.ifChosenDevelopmentDepartment,
               createUserComponent.ifChosenHrDepartment)">
         Save profile
