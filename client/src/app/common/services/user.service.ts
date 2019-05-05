@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../models/user';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { api } from '../../../environments/environment';
+import { UpdateUser } from '../models/update-user';
 
 export const httpOptions = {
   headers: new HttpHeaders({
@@ -17,9 +18,10 @@ export const httpOptions = {
 })
 export class UserService {
 
+  chosenDepartment = new EventEmitter();
+
   constructor(private readonly http: HttpClient) {
   }
-
   helper = new JwtHelperService();
 
   getAll(): Observable<User[]> {
@@ -83,6 +85,13 @@ export class UserService {
     return this.http.delete(`${api}users/`, deleteOptions);
   }
 
+  updateUser(user: User): Observable<any> {
+    const updateUser = new UpdateUser();
+    updateUser.mapUser(user);
+
+    return this.http.put<User>(`${api}users`, updateUser, httpOptions);
+  }
+
   readonly getHeader = () =>
     httpOptions.headers.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
 
@@ -91,6 +100,7 @@ export class UserService {
     const fd = new FormData();
     fd.append('id', id);
     fd.append('avatar', avatar);
+
     return this.http.post(`${api}users/change_avatar`, fd);
   }
 

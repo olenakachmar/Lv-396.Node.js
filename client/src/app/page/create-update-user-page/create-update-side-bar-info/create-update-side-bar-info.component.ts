@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { IDepartment } from '../../../common/models/department';
 import { DepartmentService } from '../../../common/services/department.service';
 import { OptionPair } from '../../../common/models/option-pair';
@@ -14,7 +14,7 @@ import { Subject } from 'rxjs/Rx';
 export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
-  newUser = new User();
+  @Input() newUser: User;
   departmentsOptionPair: OptionPair[] = [];
   departments: IDepartment[] = [];
   positions: OptionPair[] = [];
@@ -24,18 +24,23 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
   errorMsg;
   ifChosenDevelopmentDepartment = false;
   ifChosenHrDepartment = false;
+  @Input() showModal: boolean;
 
   constructor(readonly departmentService: DepartmentService,
               readonly userService: UserService) {
   }
 
   ngOnInit(): void {
-
     this.departmentService.getAllDepartments()
       .takeUntil(this.destroy$)
       .subscribe(data => {
         this.departmentsOptionPair = data.map(o => new OptionPair(o._id, o.name));
         this.departments = data;
+        if (this.newUser.department !== undefined) {
+          this.positions = this.departments
+            .filter(elem => elem._id === this.newUser.department._id)[0].position
+            .map(e => new OptionPair(e, e));
+        }
       });
 
     this.userService.getAllTeamLeads()
@@ -50,7 +55,7 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
       .takeUntil(this.destroy$)
       .subscribe(data => {
         this.hrs = data.map(elem => new OptionPair(elem._id, `${elem.firstName} ${elem.lastName}`));
-      });
+        });
 
     this.userService.getAllManagers()
       .takeUntil(this.destroy$)
@@ -73,5 +78,6 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
     this.positions = this.departments
       .filter(elem => elem._id === id)[0].position
       .map(e => new OptionPair(e, e));
+    this.userService.chosenDepartment.emit();
   }
 }

@@ -1,4 +1,4 @@
-<div class="create-user-bar-info row">
+<div class="create-user-bar-info row" *ngIf="showModal">
   <div class="column w-100">
     <div class="upload-image">
       <app-user-image class="photo"></app-user-image>
@@ -25,8 +25,10 @@
       <div class="input-label">
         <label for="department">Department</label>
       </div>
-      <app-dropdown-info class="info-input-area" id="department" [pairList]='departmentsOptionPair'
+      <app-dropdown-info class="info-input-area" id="department"
+                         [pairList]='departmentsOptionPair'
                          (selected)="selectDepartment($event)"
+                         [update]="newUser.department?newUser.department._id:newUser.department"
                          [required]="true">
       </app-dropdown-info>
     </div>
@@ -36,17 +38,22 @@
       <div class="input-label">
         <label for="position">Position</label>
       </div>
-      <app-dropdown-info class="info-input-area" id="position" [pairList]='positions'
+      <app-dropdown-info class="info-input-area" id="position"
+                         [pairList]='positions'
                          (selected)="newUser.position = $event"
-                         [required]="true">
+                         [required]="true"
+                         [update]="newUser.position"
+                         [positionIdentifier]="'position'">
       </app-dropdown-info>
     </div>
     <div class="info-form" *ngIf="ifChosenDevelopmentDepartment">
       <div class="input-label">
         <label for="teamLead">Teamlead</label>
       </div>
-      <app-dropdown-info class="info-input-area" id="teamLead" [pairList]='teamLeads'
+      <app-dropdown-info class="info-input-area" id="teamLead"
+                         [pairList]='teamLeads'
                          (selected)="newUser.teamlead = $event"
+                         [update]="newUser.teamlead?newUser.teamlead._id:newUser.teamlead"
                          [required]="true">
       </app-dropdown-info>
     </div>
@@ -54,8 +61,10 @@
       <div class="input-label">
         <label for="hr">HR</label>
       </div>
-      <app-dropdown-info class="info-input-area" id="hr" [pairList]='hrs'
+      <app-dropdown-info class="info-input-area" id="hr"
+                         [pairList]='hrs'
                          (selected)="newUser.hr = $event"
+                         [update]="newUser.hr"
                          [required]="true">
       </app-dropdown-info>
     </div>
@@ -63,9 +72,19 @@
       <div class="input-label">
         <label for="manager">Manager</label>
       </div>
-      <app-dropdown-info class="info-input-area" id="manager" [pairList]='managers'
+      <app-dropdown-info class="info-input-area" id="manager"
+                         [pairList]='managers'
                          (selected)="newUser.manager = $event"
+                         [update]="newUser.manager?newUser.manager._id:newUser.manager"
                          [required]="true">
+      </app-dropdown-info>
+    </div>
+    <div class="info-form">
+      <div class="input-label">
+        <label for="roles">Roles</label>
+      </div>
+      <app-dropdown-info class="info-input-area" id="roles"
+                         [roles]="true">
       </app-dropdown-info>
     </div>
   </div>

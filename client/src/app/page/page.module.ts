@@ -49,7 +49,7 @@ export const routes: Routes = [
   { path: 'contact-info', component: ContactInfoComponent },
   { path: 'contact-info/:id', component: ContactInfoComponent },
   { path: 'create-user', component: CreateUpdateUserPageComponent },
-  { path: 'edit-user', component: CreateUpdateUserPageComponent },
+  { path: 'edit-user/:id', component: CreateUpdateUserPageComponent },
   { path: 'upcoming-dates', component: UpcomingDatesComponent }
 ];
 
