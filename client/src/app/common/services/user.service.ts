@@ -92,8 +92,9 @@ export class UserService {
     return this.http.put<User>(`${api}users`, updateUser, httpOptions);
   }
 
-  readonly getHeader = () =>
-    httpOptions.headers.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+  getHeader(): any {
+    return httpOptions.headers.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+  }
 
   postImage(avatar: File): Observable<Object> {
     const id = this.getUserId();

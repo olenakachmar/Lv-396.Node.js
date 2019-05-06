@@ -7,7 +7,7 @@ import { UserService } from '../../../../common/services/user.service';
   templateUrl: './dropdown-info.component.html',
   styleUrls: ['./dropdown-info.component.scss']
 })
-export class DropdownInfoComponent implements OnInit {
+export class DropdownInfoComponent implements OnInit, OnChanges {
   @Input() pairList: OptionPair[];
   @Output() readonly selected = new EventEmitter<any>();
   @Input() required: boolean;
@@ -24,14 +24,13 @@ export class DropdownInfoComponent implements OnInit {
       this.title = 'Choose';
     }
     if (this.positionIdentifier === 'position') {
-      this.userService.chosenDepartment.subscribe(
-        () => this.title = 'Choose'
-      );
+      this.userService.chosenDepartment.subscribe(this.title = 'Choose');
     }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.pairList && changes.pairList.currentValue && changes.pairList.currentValue.length > 0) {
+    const checkedChangedValues = changes.pairList && changes.pairList.currentValue && changes.pairList.currentValue.length > 0;
+    if (checkedChangedValues) {
       if (this.update) {
         this.title = changes.pairList.currentValue.find(elem => elem._id === this.update).name;
       }

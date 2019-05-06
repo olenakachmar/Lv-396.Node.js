@@ -16,8 +16,6 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   ifChosenDevelopmentDepartment: boolean;
   ifChosenHrDepartment: boolean;
   notValidUser: boolean;
-  existedUser: boolean;
-  gotUser: boolean;
   create: boolean;
 
   constructor(readonly userService: UserService,
@@ -39,7 +37,6 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
       this.userService.getUser(id)
         .subscribe(user => {
           this.user = user;
-          this.gotUser = true;
         });
     } else {
       this.create = true;
@@ -47,6 +44,7 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   }
 
   extractUser(user, chosenDevelopmentDepartment, chosenHrDepartment): any {
+    console.log(user);
     this.user = user;
     this.ifChosenDevelopmentDepartment = chosenDevelopmentDepartment;
     this.ifChosenHrDepartment = chosenHrDepartment;
@@ -58,10 +56,10 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
 
     if (this.validateUser()) {
       if (this.user._id) {
+        console.log(this.user._id);
         this.userService.updateUser(this.user)
           .takeUntil(this.destroy$)
           .subscribe((data: any) => {
-
             this.router.navigate(['/profile/my-profile/', this.user._id], {relativeTo: this.route});
           });
       } else {

@@ -36,7 +36,7 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         this.departmentsOptionPair = data.map(o => new OptionPair(o._id, o.name));
         this.departments = data;
-        if (this.user.department !== undefined) {
+        if (this.user.department) {
           this.positions = this.departments
             .filter(elem => elem._id === this.user.department._id)[0].position
             .map(e => new OptionPair(e, e));
@@ -71,10 +71,8 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
 
   selectDepartment(id: any): void {
     this.user.department = id;
-    id === '5cab28b4e5773a19a4462fd1' ? this.ifChosenDevelopmentDepartment = true
-                                      : this.ifChosenDevelopmentDepartment = false;
-    id === '5cb9c437b5cfd134acc5783e' ? this.ifChosenHrDepartment = true :
-                                        this.ifChosenHrDepartment = false;
+    this.ifChosenDevelopmentDepartment = id === '5cab28b4e5773a19a4462fd1';
+    this.ifChosenHrDepartment = id === '5cb9c437b5cfd134acc5783e';
     this.positions = this.departments
       .filter(elem => elem._id === id)[0].position
       .map(e => new OptionPair(e, e));
