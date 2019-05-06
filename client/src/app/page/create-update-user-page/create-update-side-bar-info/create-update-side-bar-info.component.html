@@ -28,7 +28,7 @@
       <app-dropdown-info class="info-input-area" id="department"
                          [pairList]="departmentsOptionPair"
                          (selected)="selectDepartment($event)"
-                         [update]="user.department?user.department._id:user.department"
+                         [update]="user.department ? user.department._id : user.department"
                          [required]="true">
       </app-dropdown-info>
     </div>
@@ -53,7 +53,7 @@
       <app-dropdown-info class="info-input-area" id="teamLead"
                          [pairList]="teamLeads"
                          (selected)="user.teamlead = $event"
-                         [update]="user.teamlead?user.teamlead._id:user.teamlead"
+                         [update]="user.teamlead ? user.teamlead._id : user.teamlead"
                          [required]="true">
       </app-dropdown-info>
     </div>
@@ -75,7 +75,7 @@
       <app-dropdown-info class="info-input-area" id="manager"
                          [pairList]="managers"
                          (selected)="user.manager = $event"
-                         [update]="user.manager?user.manager._id:user.manager"
+                         [update]="user.manager ? user.manager._id : user.manager"
                          [required]="true">
       </app-dropdown-info>
     </div>
