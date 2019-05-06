@@ -44,7 +44,6 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   }
 
   extractUser(user, chosenDevelopmentDepartment, chosenHrDepartment): any {
-    console.log(user);
     this.user = user;
     this.ifChosenDevelopmentDepartment = chosenDevelopmentDepartment;
     this.ifChosenHrDepartment = chosenHrDepartment;
@@ -56,7 +55,6 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
 
     if (this.validateUser()) {
       if (this.user._id) {
-        console.log(this.user._id);
         this.userService.updateUser(this.user)
           .takeUntil(this.destroy$)
           .subscribe((data: any) => {
