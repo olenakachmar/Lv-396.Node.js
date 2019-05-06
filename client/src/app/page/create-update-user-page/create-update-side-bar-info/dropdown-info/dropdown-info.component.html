@@ -4,9 +4,20 @@
           aria-controls="dropdown-basic"> {{ title }}
     <span class="caret"></span>
   </button>
-  <ul id="dropdown-basic top" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-    <li role="menuitem" *ngFor="let pair of pairList">
-      <a class="dropdown-item" href="#" (click)="selectIt(pair, $event)"> {{ pair.name }}</a>
-    </li>
-  </ul>
+  <div *ngIf="!roles">
+    <ul id="dropdown-basic top" *dropdownMenu class="dropdown-menu" role="menu"
+        aria-labelledby="button-basic">
+      <li role="menuitem" *ngFor="let pair of pairList">
+        <a class="dropdown-item" href="#" (click)="selectIt(pair, $event)"> {{ pair.name }}</a>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="roles">
+    <ul *dropdownMenu class="dropdown-menu" role="menu"
+        aria-labelledby="button-basic">
+      <li role="menuitem">
+        <a class="dropdown-item" href="#" (click)="selectIt(pair, $event)"> test </a>
+      </li>
+    </ul>
+  </div>
 </div>

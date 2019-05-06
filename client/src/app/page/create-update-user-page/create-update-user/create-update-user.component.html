@@ -1,0 +1,78 @@
+<div class="row main-user-info">
+  <div class="col main-user-info">
+    <h1>Name Surname</h1>
+    <p>position</p>
+  </div>
+  <button class="light-button update-button">Update</button>
+</div>
+<form [formGroup]="profileForm">
+  <div class="row additional-info">
+    <div class="col-md-6 user-info">
+      <div class="info-form">
+        <div class="input-label"><label for="email">Email</label></div>
+        <input formControlName="email" class="form-control" type="text" placeholder="Email" id='email'
+          aria-label="Email">
+      </div>
+
+      <div class="info-form">
+        <div class="input-label"><label for="phone">Phone</label></div>
+        <input formControlName="phone" class="form-control" type="text" placeholder="Phone" id='phone'
+          aria-label="Phone">
+      </div>
+
+      <div class="info-form">
+        <div class="input-label"><label for="skype">Skype</label></div>
+        <input formControlName="skype" class="form-control" type="text" placeholder="Skype" id='skype'
+          aria-label="Skype">
+      </div>
+
+      <div class="info-form">
+        <div class="input-label"><label for="telegram">Telegram</label></div>
+        <input formControlName="telegram" class="form-control" type="text" placeholder="Telegram" id='telegram'
+          aria-label="Telegram">
+      </div>
+      <form [formGroup]="profileForm.get('contacts')">
+        <div class="row add-contact" *ngFor="let contact of contacts; let i = index">
+          <div class="col-md-4 dropdown-contact">
+            <app-dropdown-info class="dropdown-contact" [pairList]='pairList'>
+            </app-dropdown-info>
+          </div>
+          <div class="col-md-6 input-contact">
+            <input [formControlName]="contact" class="form-control" type="text" placeholder="Contact"
+              aria-label="Add Contact">
+          </div>
+          <div (click)="removeContact()" class="col-md-2 dlete-icon">
+            <img _ngcontent-c4="" alt="delete" class="delete__icon" src="assets/img/delete.svg">
+          </div>
+        </div>
+      </form>
+
+      <button class="light-button fields-button" (click)="addContact()">
+        <img _ngcontent-c4="" alt="add" class="add__icon" src="assets/img/add.svg">
+        Add fields
+      </button>
+    </div>
+
+    <div class="col-md-5 date-info">
+      <div class="info-form">
+        <div class="input-label"><label for="date">Upcoming review date</label></div>
+        <app-dropdown-info class="info-input-area" id="role" [pairList]='roles'
+          (selected)="retrieveSelected('Role', $event)">
+        </app-dropdown-info>
+      </div>
+
+      <div class="info-form">
+        <div class="input-label"><label for="role">Data comning</label></div>
+        <app-dropdown-info class="info-input-area" id="role" [pairList]='roles'
+          (selected)="retrieveSelected('Role', $event)">
+        </app-dropdown-info>
+      </div>
+
+      <button class="light-button date-button">
+        <img _ngcontent-c4="" alt="add" class="add__icon" src="assets/img/add.svg">
+        Add date
+      </button>
+
+    </div>
+  </div>
+</form>
