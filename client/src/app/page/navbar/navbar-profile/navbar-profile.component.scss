@@ -109,6 +109,13 @@ a {
         width: auto;
       }
     }
+    &__newTasks {
+      right: auto !important;
+      left: auto !important;
+      & a {
+        color: $primary-color;
+      } 
+    }
     &__elem {
       font: normal 12px $font-stack;
       color: $primary-color;
@@ -126,7 +133,8 @@ a {
   position: relative;
 }
 
-.dropdown-menu li a:hover {
+.dropdown-menu li a:hover,
+li:hover {
   background: $bg-color !important;
 }
 .dropdown-menu li.current a::after {

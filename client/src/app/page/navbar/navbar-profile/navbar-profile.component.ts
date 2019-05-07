@@ -9,20 +9,19 @@ import { User } from '../../../common/models/user';
 import { Task } from '../../common/task';
 import { NavItem } from '../../common/nav-item';
 import { DatesItem } from '../../common/dates-item';
-
 import { switchMap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar-profile',
   templateUrl: './navbar-profile.component.html',
-  styleUrls: ['./navbar-profile.component.scss']
+  styleUrls: ['./navbar-profile.component.scss'],
+  providers: [AuthService]
 })
 
 export class NavbarProfileComponent implements OnInit {
   user = new User();
   avatar: string;
   userType: string;
-  userTasks: Task[];
   newTasks: Task[];
   menuList: NavItem[];
   dateList: DatesItem[];
@@ -40,13 +39,28 @@ export class NavbarProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadUser();
     this.loadDates();
-    this.getUser();
+
     this.navItemsService.getNavList()
       .subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
-    this.newTasksCount = 7;
     this.todayDate = new Date();
+  }
+
+  openTaskByid(taskID: string): boolean {
+    this.taskService.taskIsWatched(this.user._id, taskID);
+    this.taskService.isOpenTask.next(taskID);
+    setTimeout(() => {
+      this.scrollTo(taskID);
+    }, 300);
+
+    return false;
+  }
+
+  scrollTo(id: string): void {
+    document.getElementById(id)
+      .scrollIntoView();
   }
 
   loadDates(): void {
@@ -63,9 +77,9 @@ export class NavbarProfileComponent implements OnInit {
         );
         this.datesCount = this.dateList.length;
       });
-}
+  }
 
-  getUser(): void {
+  loadUser(): void {
     this.userService.getUser()
       .pipe(
         map(user => this.takeUserInfo(user)),
@@ -73,7 +87,8 @@ export class NavbarProfileComponent implements OnInit {
       )
       .subscribe(tasks => {
         if (this.user.watched_issues.length > 0) {
-          this.newTasks = this.takeNewTasks(tasks, this.user.watched_issues);
+          this.newTasks = this.findNewTasks(tasks, this.user.watched_issues);
+          this.newTasks.sort((a, b) => (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0));
           this.newTasksCount = this.newTasks.length;
         }
       });
@@ -86,15 +101,16 @@ export class NavbarProfileComponent implements OnInit {
     return user;
   }
 
-  takeNewTasks(all: any, watched: string[]): Task[] {
+  findNewTasks(allTasks: any, watched: string[]): Task[] {
+    let arr = [];
     if (this.userType === 'hr') {
-      return all.filter(task => task.author !== this.user._id);
+      arr = allTasks.filter(task => (task.author._id !== this.user._id && !task.resolvedByPerformer));
     }
     if (this.userType === 'developer') {
-      return all.filter(task => task.resolvedByPerformer);
+      arr = allTasks.filter(task => task.resolvedByPerformer && !task.resolvedByAuthor);
     }
 
-    return all.filter(task => !(watched.includes(task._id)));
+    return arr.filter(task => !(watched.includes(task._id)));
   }
 
   logout(): boolean {
@@ -119,7 +135,9 @@ export class NavbarProfileComponent implements OnInit {
 
     return this.active = false;
   }
+
   trackById(link: NavItem): string {
     return link.id;
   }
+
 }

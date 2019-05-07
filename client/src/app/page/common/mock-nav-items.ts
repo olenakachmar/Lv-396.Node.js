@@ -6,11 +6,21 @@ export const NAVBAR_LIST: NavItem[] = [
     id: 'upcoming-tasks',
     title: 'upcoming tasks',
     current: true,
-    router: 'upcoming-task',
+    router: 'upcoming-tasks',
     rightMenu: false,
     burgerMenu: true,
     hr: 'hr',
     dev: 'developer'
+  },
+  {
+    id: 'upcoming-dates',
+    title: 'upcoming dates',
+    current: false,
+    router: 'upcoming-dates',
+    rightMenu: false,
+    burgerMenu: true,
+    hr: 'hr',
+    dev: ''
   },
   {
     id: 'issues',

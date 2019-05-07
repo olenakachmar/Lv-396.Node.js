@@ -41,7 +41,7 @@ const issueSchema = new Schema(
     },
     content: {
       type: String,
-      required: true,
+      default: '',
     },
     assignTo: {
       type: mongoose.Schema.Types.ObjectId,

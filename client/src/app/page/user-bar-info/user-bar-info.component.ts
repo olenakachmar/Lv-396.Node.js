@@ -15,6 +15,7 @@ export class UserBarInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userinfo = new User();
     this.userType = this.userService.getUserType();
   }
 
@@ -24,5 +25,9 @@ export class UserBarInfoComponent implements OnInit {
 
   private  getTeamleadName(): string {
     return `${this.userinfo.teamlead.firstName} ${this.userinfo.teamlead.lastName}`;
+  }
+
+  public updateAvatar(newURL: string): void {
+    this.userinfo.photoURL = newURL;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Inject } from '@angular/core';
 import { UserService } from '../../common/services/user.service';
 import { User } from '../../common/models/user';
 import { FilterOptions } from '../common/filter-options';
@@ -6,6 +6,7 @@ import { Filter } from '../common/filter';
 import { FiltersService } from '../common/filters.service';
 import { Task } from '../common/task';
 import { TasksService } from '../common/tasks.service';
+import { FILTER_CSS_CLASS_PREFIX } from '../common/config';
 
 @Component({
   selector: 'app-wrapper',
@@ -19,7 +20,6 @@ export class WrapperComponent implements OnInit {
   task: Task;
   filters: Filter[];
   tasks: Task[];
-  filterCssClassPrefix: string;
   modalTypeVal: string;
   filterGrids: string;
   users: User[];
@@ -30,14 +30,15 @@ export class WrapperComponent implements OnInit {
     private readonly filtersService: FiltersService,
     private readonly tasksService: TasksService,
     private readonly ref: ChangeDetectorRef,
+    @Inject(FILTER_CSS_CLASS_PREFIX) public filterCssClassPrefix: string
   ) { }
 
   ngOnInit(): void {
-    this.filterCssClassPrefix = 'filter-col-';
     this.modalTypeVal = 'CREATE';
     this.getFilters();
     this.getTasks();
     this.loadUser();
+    this.openTaskById();
     this.filterGrids = this.filters.length ? this.filterCssClassPrefix + this.filters.length.toString() : '';
     this.userRole = this.checkUserRole();
   }
@@ -77,6 +78,7 @@ export class WrapperComponent implements OnInit {
             reassigned: item.reassigned,
             resolvedByAuthor: item.resolvedByAuthor,
             resolvedByPerformer: item.resolvedByPerformer,
+            isOpen: false
           })
         )
           .sort((a, b) => (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0));
@@ -97,6 +99,14 @@ export class WrapperComponent implements OnInit {
       );
     }
   };
+
+  openTaskById(): void {
+    this.tasksService.isOpenTask.subscribe((isOpenID: string) => {
+      if (this.tasks && isOpenID) {
+        this.tasks.map(task => task.isOpen = task.id === isOpenID);
+      }
+    });
+  }
 
   private readonly setOptions = (isCalendar: boolean, options: FilterOptions[], data: any) => {
     if (isCalendar) {

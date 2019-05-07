@@ -4,6 +4,9 @@ import { Filter } from './filter';
 export const DURATION = new InjectionToken<number>('duration');
 const duration = 10000;
 
+export const FILTER_CSS_CLASS_PREFIX = new InjectionToken<string>('filterCssClassPrefix');
+const filterCssClassPrefix = 'filter-col-';
+
 export const FILTERS = new InjectionToken<Filter[]>('filters-mock');
 const filters: Filter[] = [
   {
@@ -50,5 +53,9 @@ export const appConfigProviders = [
   {
     provide: DURATION,
     useValue: duration
+  },
+  {
+    provide: FILTER_CSS_CLASS_PREFIX,
+    useValue: filterCssClassPrefix
   }
 ];

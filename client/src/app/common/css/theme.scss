@@ -8,6 +8,7 @@ $container-max-widths: (
 );
 
 $font-stack: Arial, sans-serif;
+$danger-color:#ff0000cf;
 $primary-color: #2699FB;
 $border-color: #7FC4FD;
 $case-color: #BCE0FD;
@@ -25,8 +26,7 @@ $border-sides: #BCE0FD solid 1px;
 .col,
 [class*="col-"],
 .container-fluid,
-.container,
-.row {
+.container {
   padding-right: 10px;
   padding-left: 10px;
 }

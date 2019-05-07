@@ -5,6 +5,7 @@
   font-size: 11px;
   font-weight: bold;
   padding: 15px;
+  height: 48px;
 }
 
 .filter-item-container {
@@ -25,10 +26,6 @@
 
 .modal-header {
   border-bottom: none;
-}
-
-.re-assign {
-  margin-left: 20%;
 }
 
 .btn-circle {
@@ -128,18 +125,31 @@
   width: 40px;
   height: 40px;
   opacity: 1;
+  border: 0;
+  text-align: center;
+}
+
+.close:focus {
+  outline: 0;
 }
 
 .close span {
   position: absolute;
   top: 13px;
-  left: 10px;
+  left: 0;
+  width: 100%;
   color: $border-color;
   font-size: 32px;
+  line-height: 16px;
 }
 
-.re-assign {
-  float: right;
+.close:not(:disabled):not(.disabled):hover {
+  background: $primary-color;
+  opacity: 1;
+}
+
+.close:hover span {
+  text-shadow: none;
 }
 
 @media(max-width:610px) {

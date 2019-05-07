@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IDepartment } from '../../../common/models/department';
 import { DepartmentService } from '../../../common/services/department.service';
 import { OptionPair } from '../../../common/models/option-pair';
@@ -15,9 +15,6 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   newUser = new User();
-
-  @Output() readonly getUserBarInfo = new EventEmitter();
-
   departmentsOptionPair: OptionPair[] = [];
   departments: IDepartment[] = [];
   positions: OptionPair[] = [];
@@ -25,12 +22,15 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
   hrs: OptionPair[] = [];
   managers: OptionPair[] = [];
   errorMsg;
+  ifChosenDevelopmentDepartment = false;
+  ifChosenHrDepartment = false;
 
   constructor(readonly departmentService: DepartmentService,
               readonly userService: UserService) {
   }
 
   ngOnInit(): void {
+
     this.departmentService.getAllDepartments()
       .takeUntil(this.destroy$)
       .subscribe(data => {
@@ -66,6 +66,10 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
 
   selectDepartment(id: any): void {
     this.newUser.department = id;
+    id === '5cab28b4e5773a19a4462fd1' ? this.ifChosenDevelopmentDepartment = true
+                                      : this.ifChosenDevelopmentDepartment = false;
+    id === '5cb9c437b5cfd134acc5783e' ? this.ifChosenHrDepartment = true :
+                                        this.ifChosenHrDepartment = false;
     this.positions = this.departments
       .filter(elem => elem._id === id)[0].position
       .map(e => new OptionPair(e, e));
