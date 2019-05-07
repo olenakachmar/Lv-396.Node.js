@@ -8,9 +8,14 @@ const passport = require('../../../config/passport');
 
 const router = express.Router();
 
+router.use((req, res, next) => {
+  console.log(1482, req.body.id);
+  next();
+});
+
 router.use('/users', passport.authenticate('jwt', {
   session: false,
-}), upload.single('avatar'), usersRouter);
+}), usersRouter);
 
 router.use('/departments', passport.authenticate('jwt', {
   session: false,

@@ -148,7 +148,6 @@ const changeAvatar = async (req, res) => {
   const {
     id,
   } = req.body;
-  console.log(id);
   try {
     const user = await User.findById(id);
     if (user.photoID) {
@@ -159,7 +158,6 @@ const changeAvatar = async (req, res) => {
     await user.save();
     res.json(req.file);
   } catch (err) {
-    console.log(err);
     res.status(500).json({
       err,
     });
