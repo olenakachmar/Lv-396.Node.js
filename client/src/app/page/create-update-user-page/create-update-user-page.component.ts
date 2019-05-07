@@ -17,6 +17,7 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   ifChosenHrDepartment: boolean;
   notValidUser: boolean;
   create: boolean;
+  requiredForCreationUserFields: any[];
 
   constructor(readonly userService: UserService,
               private readonly router: Router,
@@ -30,6 +31,8 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
 
       this.getEmployee(id);
     });
+
+    this.deleteNotValidValuesFromUserObjectOnDepartmentChoose();
   }
 
   private getEmployee(id: string): void {
@@ -52,7 +55,6 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
     this.user.email = 'trley@gmail.com';
     this.user.roles = ['Teamlead', 'Manager'];
 
-
     if (this.validateUser()) {
       if (this.user._id) {
         this.userService.updateUser(this.user)
@@ -73,17 +75,18 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   }
 
   validateUser(): boolean {
-    let requiredForCreationUserFields = [this.user.firstName, this.user.lastName, this.user.department,
-                                         this.user.position, this.user.hr, this.user.manager];
+
+    this.user.type = this.ifChosenHrDepartment ? 'hr' : 'developer';
+
+    this.requiredForCreationUserFields = [this.user.firstName, this.user.lastName, this.user.department,
+                                          this.user.position, this.user.hr, this.user.manager];
 
     if (this.ifChosenDevelopmentDepartment) {
-      requiredForCreationUserFields = [...requiredForCreationUserFields, this.user.teamlead];
+      this.requiredForCreationUserFields = [...this.requiredForCreationUserFields, this.user.teamlead];
+
     }
-
-    this.ifChosenHrDepartment ? this.user.type = 'hr' : this.user.type = 'developer';
-
     let requiredField = true;
-    requiredForCreationUserFields.map(elem => {
+    this.requiredForCreationUserFields.map(elem => {
       if (!elem) {
         requiredField = false;
       }
@@ -91,6 +94,13 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
 
     return requiredField;
 
+  }
+
+  deleteNotValidValuesFromUserObjectOnDepartmentChoose(): void {
+    this.userService.chosenDepartment.subscribe(() => {
+      delete this.user.teamlead;
+      delete this.user.position;
+    });
   }
 
   ngOnDestroy(): void {

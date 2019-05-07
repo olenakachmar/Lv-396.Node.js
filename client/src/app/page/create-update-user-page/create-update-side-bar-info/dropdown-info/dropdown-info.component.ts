@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { OptionPair } from '../../../../common/models/option-pair';
 import { UserService } from '../../../../common/services/user.service';
 
@@ -15,6 +15,7 @@ export class DropdownInfoComponent implements OnInit, OnChanges {
   @Input() positionIdentifier: string;
   @Input() update: string;
   @Input() roles: boolean;
+  active: boolean;
 
   constructor(private userService: UserService) {
   }
@@ -24,7 +25,9 @@ export class DropdownInfoComponent implements OnInit, OnChanges {
       this.title = 'Choose';
     }
     if (this.positionIdentifier === 'position') {
-      this.userService.chosenDepartment.subscribe(this.title = 'Choose');
+      this.userService.chosenDepartment.subscribe(() => {
+        this.title = 'Choose';
+      });
     }
   }
 
@@ -50,5 +53,9 @@ export class DropdownInfoComponent implements OnInit, OnChanges {
       this.title = pair.name;
     }
   };
+
+  @HostListener('mouseleave') onMouseLeave(): void {
+    this.active = false;
+  }
 
 }
