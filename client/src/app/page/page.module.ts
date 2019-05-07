@@ -18,7 +18,7 @@ import { ModalComponent } from './modal/modal.component';
 
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { BsDatepickerModule, DatePickerComponent } from 'ngx-bootstrap/datepicker';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
@@ -49,7 +49,7 @@ export const routes: Routes = [
   { path: 'contact-info', component: ContactInfoComponent },
   { path: 'contact-info/:id', component: ContactInfoComponent },
   { path: 'create-user', component: CreateUpdateUserPageComponent },
-  { path: 'edit-user', component: CreateUpdateUserPageComponent },
+  { path: 'edit-user/:id', component: CreateUpdateUserPageComponent },
   { path: 'upcoming-dates', component: UpcomingDatesComponent }
 ];
 
