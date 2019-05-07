@@ -1,17 +1,11 @@
 const express = require('express');
 const usersRouter = require('./users.route');
-const upload = require('../../../config/multer');
 const authRouter = require('./auth.route');
 const departmentsRouter = require('./departments.route');
 const issuesRouter = require('./issues.route');
 const passport = require('../../../config/passport');
 
 const router = express.Router();
-
-router.use((req, res, next) => {
-  console.log(1482, req.body.id);
-  next();
-});
 
 router.use('/users', passport.authenticate('jwt', {
   session: false,
