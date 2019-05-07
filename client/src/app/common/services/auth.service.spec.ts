@@ -21,6 +21,8 @@ describe('AuthService', () => {
 
   afterEach(() => {
     httpTestingController.verify();
+    service = null;
+    localStorage.removeItem('type');
   });
 
   it('should be created', () => {
@@ -54,16 +56,24 @@ describe('AuthService', () => {
       });
 
       backend.expectOne(`${api}auth/login`).flush({ status: 200, statusText: 'Ok' });
-  })));
+    })));
 
   it(`should emit 'false' for 404 User not found`, async(inject([AuthService, HttpTestingController],
     (service: AuthService, backend: HttpTestingController) => {
       service.auth('das', '456')
-      .subscribe(() => {}, err => {
-        expect(err).toBe(`User not found`);
-      });
+        .subscribe(() => { }, err => {
+          expect(err).toBe(`User not found`);
+        });
 
       backend.expectOne(`${api}auth/login`).flush({ status: 404, statusText: 'Not Found' });
-  })));
+    })));
 
+  it('should return false from isLoggedIn when there is no token', () => {
+    expect(service.isLoggedIn()).toBeFalsy();
+  });
+
+  it('should return true from isLoggedIn when there is a token', () => {
+    localStorage.setItem('type', 'hr');
+    expect(service.isLoggedIn()).toBeTruthy();
+  });
 });
