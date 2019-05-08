@@ -25,8 +25,6 @@ export class UserService {
   helper = new JwtHelperService();
 
   getAll(): Observable<User[]> {
-    httpOptions.headers = this.getHeader();
-
     return this.http.get<User[]>(`${api}users`, httpOptions);
   }
 
@@ -35,7 +33,6 @@ export class UserService {
   }
 
   getUsersOfHr(): Observable<User[]> {
-    httpOptions.headers = this.getHeader();
     const userId = this.getUserId();
 
     return this.http.get<User[]>(`${api}users?hr=${userId}`, httpOptions);
@@ -50,14 +47,12 @@ export class UserService {
   }
 
   getUser(id?: string): Observable<User> {
-    httpOptions.headers = this.getHeader();
     const userId = this.getUserId();
 
     return this.http.get<User>(`${api}users/${id || userId}`, httpOptions);
   }
 
   getUserId(): any {
-    httpOptions.headers = this.getHeader();
     if (localStorage.token) {
       return this.helper.decodeToken(localStorage.token).id;
     }
