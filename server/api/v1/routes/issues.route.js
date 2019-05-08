@@ -14,4 +14,6 @@ router.get('/all', controller.getAll);
 
 router.put('/resolve', controller.updateForResolve);
 
+router.put('/comment', controller.updateForComment);
+
 module.exports = router;

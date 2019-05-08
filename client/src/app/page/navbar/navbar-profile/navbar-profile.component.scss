@@ -114,7 +114,7 @@ a {
       left: auto !important;
       & a {
         color: $primary-color;
-      } 
+      }
     }
     &__elem {
       font: normal 12px $font-stack;
@@ -144,4 +144,12 @@ li:hover {
   @include media-breakpoint-up(md) {
     left: 120px;
   }
+}
+.dates-topic{
+  display: flex;
+  text-transform: capitalize;
+}
+
+.dates-topic span{
+  margin-left: 5px;
 }

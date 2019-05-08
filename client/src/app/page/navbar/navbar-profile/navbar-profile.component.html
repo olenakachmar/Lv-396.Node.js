@@ -1,12 +1,15 @@
-<div class="user-bar__item btn-group dates" dropdown>
+<div class="user-bar__item btn-group dates" dropdown *ngIf="datesCount">
   <div class="user-bar__btn" dropdownToggle>
     <img src="assets/img/navbar-dates-desk.svg" alt="all dates" class="dates__icon">
-    <span class="dates__count"  *ngIf="datesCount">({{ datesCount }})</span>
+    <span class="dates__count">({{ datesCount }})</span>
   </div>
   <ul class="user-bar__menu dropdown-menu" *dropdownMenu role="menu" aria-labelledby="button-disabled-item">
     <li class="user-bar__row user-bar__elem  dropdown-item" *ngFor="let dates of dateList; trackBy: trackById"
       role="menuitem" [routerLink]="[ 'upcoming-dates' ]" (click)="currentByRout('upcoming-dates')">
-      {{ dates.topic }}
+      <div class="dates-topic">
+        <div *ngIf ="typeOfUser"> {{ dates.firstName }} {{ dates.lastName }}'s </div>
+        <span> {{ dates.topic }}</span>
+      </div>
     </li>
   </ul>
 </div>

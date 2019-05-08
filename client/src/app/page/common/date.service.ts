@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { DatesItem } from './dates-item';
 
 @Injectable({
   providedIn: 'root'
@@ -54,5 +55,30 @@ export class DateService {
     }
 
     return month.toString();
+  };
+
+  public readonly setDateList = (user, dateArray): DatesItem[] => {
+    let dateList = dateArray;
+    user.dates.map((date) => {
+      const dateObj = {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        topic: date.topic,
+        date: date.date
+      };
+      dateList = [...dateList, dateObj];
+      dateList.sort((a, b) => {
+        if (a.date < b.date) {
+          return 1;
+        }
+        if (a.date > b.date) {
+          return -1;
+        }
+
+        return 0;
+      });
+    });
+
+    return dateList;
   };
 }

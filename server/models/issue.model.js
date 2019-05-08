@@ -58,6 +58,10 @@ const issueSchema = new Schema(
     resolvedByPerformer: {
       type: Boolean,
     },
+    commentContent: {
+      type: String,
+      default: '',
+    },
   },
 );
 

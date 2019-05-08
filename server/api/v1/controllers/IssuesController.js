@@ -11,7 +11,13 @@ const getOneByQuery = async (req, res) => {
     const {
       status, type, date, userId,
     } = query;
-    const issues = await Issues.find({ $or: [{ 'status.name': status }, { 'type.name': type }, { date }, { author: userId }, { assignTo: userId }] })
+    const issues = await Issues.find({
+      $or: [{ 'status.name': status },
+        { 'type.name': type },
+        { date },
+        { author: userId },
+        { assignTo: userId }],
+    })
       .populate('assignTo', ['firstName', 'lastName'])
       .populate('author', ['firstName', 'lastName'])
       .exec();
@@ -205,6 +211,27 @@ const updateForResolve = async (req, res) => {
   }
 };
 
+const updateForComment = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const { comment } = req.body;
+    const issues = await Issues.findByIdAndUpdate(id, { commentContent: comment }, { new: true })
+      .exec();
+    if (!issues) {
+      res.status(404).json({
+        err: 'Issue not found',
+      });
+    }
+    res.json({
+      updated: 'Successfully',
+    });
+  } catch (err) {
+    res.status(500).json({
+      err,
+    });
+  }
+};
+
 module.exports = {
   getOneByQuery,
   createOne,
@@ -212,4 +239,5 @@ module.exports = {
   deleteOne,
   getAll,
   updateForResolve,
+  updateForComment
 };
