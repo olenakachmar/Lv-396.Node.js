@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <div class="row list-users" *ngFor="let user of users | filterUsersBy: filterText"
+  <div class="row list-users" *ngFor="let user of users | filterUsersBy: filterText; trackBy: trackByFn;"
     (click)="selectUser(user._id)">
     <div class="col-md-4 box font-weight-bold">
       {{ user.firstName }} {{ user.lastName }}
