@@ -3,11 +3,11 @@ const controller = require('../controllers/DepartmentsController');
 
 const router = express.Router();
 
-router.route('/departments')
+router.route('/')
   .get(controller.getAll)
   .post(controller.createOne)
   .delete(controller.deleteOne);
 
-router.get('/departments/:id', controller.getOne);
-router.post('/departments/users', controller.addEmployee);
+router.get('/:id', controller.getOne);
+router.post('/users', controller.addEmployee);
 module.exports = router;

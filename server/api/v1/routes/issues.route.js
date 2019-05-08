@@ -3,7 +3,7 @@ const controller = require('../controllers/IssuesController');
 
 const router = express.Router();
 
-router.route('/issues')
+router.route('/')
   .get(controller.getOneByQuery)
   .post(controller.createOne)
   .put(controller.updateOne);
