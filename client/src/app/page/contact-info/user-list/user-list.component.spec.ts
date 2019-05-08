@@ -3,9 +3,7 @@ import { FilterUsersByPipe } from '../filter-users-by.pipe';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
-import { User } from '../../../common/models/user';
 import { UserService } from '../../../common/services/user.service';
-
 import { UserListComponent } from './user-list.component';
 
 describe('UserListComponent', () => {
@@ -14,11 +12,11 @@ describe('UserListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserListComponent, FilterUsersByPipe ],
-      imports: [ RouterModule, RouterTestingModule, HttpClientModule ],
-      providers: [ UserService ]
+      declarations: [UserListComponent, FilterUsersByPipe],
+      imports: [RouterModule, RouterTestingModule, HttpClientModule],
+      providers: [UserService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

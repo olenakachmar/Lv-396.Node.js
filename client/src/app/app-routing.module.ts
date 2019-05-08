@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { routes as childRoutes, PageModule } from './page/page.module';
+import { PageModule } from './page/page.module';
+import { routes as childRoutes } from './page/page-routing.module';
 
 import { PageComponent } from './page/page.component';
 import { HomeComponent } from './home/home.component';
@@ -14,7 +15,7 @@ import { ForgotPasswordComponent } from './home/common/forgot-password/forgot-pa
 import { ResetPasswordComponent } from './home/common/reset-password/reset-password.component';
 
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [LoggedOutGuard, CheckDevGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [LoggedOutGuard, CheckDevGuard] },

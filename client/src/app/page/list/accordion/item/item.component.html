@@ -40,6 +40,9 @@
           MARK AS RESOLVED
         </button>
       </div>
+      <div class="comment">
+        <app-comment-modal [task]="emptytask"></app-comment-modal>
+      </div>
       <div class="reassign-button">
       <app-modal [modalType]="'RE-ASSIGNE'" [task]="task"></app-modal>
       </div>
