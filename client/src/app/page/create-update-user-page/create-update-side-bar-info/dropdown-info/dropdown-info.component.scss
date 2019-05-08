@@ -49,9 +49,12 @@
   display: block;
   position: relative;
   padding-left: 35px;
-  margin-bottom: 12px;
   cursor: pointer;
-  font-size: 22px;
+  margin: 15px 15px 10px 15px;
+  color: $primary-color;
+  font-family: $font-stack;
+  white-space: inherit;
+  line-height: normal;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -72,8 +75,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  height: 25px;
-  width: 25px;
+  height: 20px;
+  width: 20px;
   background-color: #eee;
 }
 

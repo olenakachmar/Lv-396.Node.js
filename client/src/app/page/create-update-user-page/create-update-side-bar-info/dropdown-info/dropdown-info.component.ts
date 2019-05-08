@@ -30,7 +30,11 @@ export class DropdownInfoComponent implements OnInit, OnChanges {
       });
     }
   }
-
+  functionForRoles(): void {
+    if(this.roles) {
+      console.log('bla bla');
+    }
+  }
   ngOnChanges(changes: SimpleChanges): void {
     const checkedChangedValues = changes.pairList && changes.pairList.currentValue && changes.pairList.currentValue.length > 0;
     if (checkedChangedValues) {
@@ -53,9 +57,5 @@ export class DropdownInfoComponent implements OnInit, OnChanges {
       this.title = pair.name;
     }
   };
-
-  @HostListener('mouseleave') onMouseLeave(): void {
-    this.active = false;
-  }
 
 }

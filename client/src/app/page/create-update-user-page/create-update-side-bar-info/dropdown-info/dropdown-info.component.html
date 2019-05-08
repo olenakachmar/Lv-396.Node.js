@@ -1,7 +1,8 @@
-<div class="btn-group" dropdown placement="bottom right">
+<script src="dropdown-info.component.ts"></script>
+<div class="btn-group" dropdown placement="bottom right" [autoClose]="roles ? false : true">
   <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle option-el"
           [ngClass]=" !required ? []: title === 'Choose' ? ['border-red'] : ['border-green']"
-          aria-controls="dropdown-basic"> {{ title }}
+          aria-controls="dropdown-basic" (click)="functionForRoles()"> {{ title }}
     <span class="caret"></span>
   </button>
   <div *ngIf="!roles">
@@ -16,12 +17,16 @@
     <ul *dropdownMenu class="dropdown-menu" role="menu"
         aria-labelledby="button-basic">
       <li role="menuitem">
-        <label class="container">One
-          <input type="checkbox">
+        <label class="container">Manager
+          <input type="radio" (click)="checkCheckbox()">
           <span class="checkmark"></span>
         </label>
-        <label class="container">Two
-          <input type="checkbox">
+        <label class="container">Teamlead
+          <input type="radio"/>
+          <span class="checkmark"></span>
+        </label>
+        <label class="container">Both
+          <input type="radio">
           <span class="checkmark"></span>
         </label>
       </li>
