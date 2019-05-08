@@ -9,7 +9,6 @@ import { Filter } from '../common/filter';
 import { FilterReturnService } from '../common/filter-return.service';
 import { FilterOptions } from '../common/filter-options';
 import { Task } from '../common/task';
-import { errorHandler } from '@angular/platform-browser/src/browser';
 
 @Component({
   selector: 'app-modal',
@@ -170,10 +169,6 @@ export class ModalComponent implements OnInit {
 
   private successHandling(): void {
     this.updateTask = true;
-  }
-
-  private errorHandling(): void {
-    this.updateTask = false;
   }
 
   private readonly getStatusName = (): string => {

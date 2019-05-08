@@ -4,7 +4,7 @@
   </div>
 </div>
 <accordion>
-  <accordion-group #group (click)="openTask(); taskIsWatched()">
+  <accordion-group #group [isOpen]="isOpen" (click)="openTask(); taskIsWatched()">
     <div accordion-heading class="heading-grid">
       <div class={{unreadClass}}></div>
       <span>{{ task.id }}</span>
@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="body-grid">
-      <div class={{unread-open}}></div>
+      <div class={{unreadClass}}></div>
       <div class="body-text">
           <p>{{ task.content }}</p>
       </div>
@@ -39,6 +39,9 @@
         <button type="submit" (click)="resolveClick()" class="btn btn-outline-primary mark-resolve {{cssClass}}">
           MARK AS RESOLVED
         </button>
+      </div>
+      <div class="comment">
+        <app-comment-modal [task]="emptytask"></app-comment-modal>
       </div>
       <div class="reassign-button">
       <app-modal [modalType]="'RE-ASSIGNE'" [task]="task"></app-modal>

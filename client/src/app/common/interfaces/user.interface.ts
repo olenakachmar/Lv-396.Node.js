@@ -1,6 +1,7 @@
 import { IManager } from './manager.interface';
 
 export interface IUser {
+  _id: any;
   firstName: string;
   lastName: string;
   position: string;
