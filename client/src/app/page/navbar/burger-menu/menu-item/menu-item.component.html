@@ -1,0 +1,4 @@
+<li class="burger-menu__item" *ngIf="link.burgerMenu && (userType === link.hr || userType === link.dev)"
+  [ngClass]="{'current': link.current}">
+  <a href [routerLink]="[ link.router ]" (click)="currentByIndex(i)">{{ link.title }}</a>
+</li>

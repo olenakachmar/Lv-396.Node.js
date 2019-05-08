@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../common/services/auth.service';
 import { UserService } from '../../../common/services/user.service';
 import { NavItemsService } from '../../common/nav-items.service';
@@ -19,9 +19,9 @@ import { DatesItem } from '../../common/dates-item';
 
 export class NavbarProfileComponent implements OnInit {
   @Input() user: User;
+  @Input() public userType: string;
 
-  avatar: string;
-  userType: string;
+  userId: string;
   newTasks: Task[];
   menuList: NavItem[];
   dateList: DatesItem[];
@@ -32,6 +32,7 @@ export class NavbarProfileComponent implements OnInit {
 
   constructor(private readonly authService: AuthService,
               private readonly router: Router,
+              private readonly route: ActivatedRoute,
               private readonly navItemsService: NavItemsService,
               private readonly userService: UserService,
               private readonly taskService: TasksService,
@@ -39,15 +40,16 @@ export class NavbarProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadUserTasks();
-    this.loadDates();
-
     this.navItemsService.getNavList()
       .subscribe(list => this.menuList = list);
-    this.userType = this.userService.getUserType();
+    this.userId = this.userService.getUserId();
 
-    this.avatar = this.user.photoURL;
+    this.loadDates();
+    this.loadUserTasks();
+    this.currentByRout(this.router.url);
+
     this.todayDate = new Date();
+    this.user.photoURL = this.user.photoURL || 'assets/img/userimg.jpg';
   }
 
   openTaskByid(taskID: string): boolean {
@@ -83,7 +85,7 @@ export class NavbarProfileComponent implements OnInit {
   }
 
   loadUserTasks(): void {
-    this.taskService.getUserTasks(this.user._id)
+    this.taskService.getUserTasks(this.userId)
       .subscribe(tasks => {
         this.newTasks = this.findNewTasks(tasks, this.user.watched_issues);
         this.newTasks.sort((a, b) => (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0));
@@ -109,11 +111,18 @@ export class NavbarProfileComponent implements OnInit {
     return false;
   }
 
+  editUser(): void {
+    this.router.navigate(['/profile/edit-user', this.user._id], { relativeTo: this.route });
+  }
+
   currentByIndex(i: number): boolean {
     this.navItemsService.currentIndex(i);
     if (this.menuList[i].logout) {
       this.menuList[i].current = false;
       this.logout();
+    }
+    if (this.menuList[i].router === 'edit-user/:id') {
+      this.editUser();
     }
 
     return false;

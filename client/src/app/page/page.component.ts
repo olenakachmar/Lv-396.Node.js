@@ -8,7 +8,6 @@ import { User } from '../common/models/user';
   styleUrls: ['./page.component.scss']
 })
 export class PageComponent implements OnInit {
-  jsonData;
   user = new User();
 
   constructor(private readonly userService: UserService) {}
@@ -16,17 +15,6 @@ export class PageComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUser()
       .subscribe(user => this.user = user);
-
-    this.jsonData = {
-      userinfo: {
-        name: 'Name',
-        surname: 'Surname',
-        position: 'position',
-        managerName: 'Manager Has',
-        managerSurname: 'Name',
-        departament: 'Departament Has Name'
-      }
-    };
   }
 
   updateDataFilterOptions = (options: any, dateValue: any): [] => {
