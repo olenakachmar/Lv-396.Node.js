@@ -31,6 +31,7 @@ export class ModalComponent implements OnInit {
   usersIds: [];
   userDropDown: Filter;
   updateTask: boolean;
+  errorAssignTo: boolean;
 
   constructor(private readonly modalService: BsModalService,
               private readonly tasksService: TasksService,
@@ -66,6 +67,7 @@ export class ModalComponent implements OnInit {
     this.userService.getUser()
       .subscribe(user => this.user = user);
     this.getFilterStatus();
+    this.errorAssignTo = false;
   }
 
   get name(): any {
@@ -158,6 +160,9 @@ export class ModalComponent implements OnInit {
       assignTo: this.usersIds[this.userDropDown.defaultValue],
       reassigned: this.task.author._id,
     };
+    if (this.editTask.assignTo === this.user._id) {
+      this.errorAssignTo = true;
+    }
     this.updateTask = false;
     this.tasksService.editTask(this.editTask)
       .subscribe((item: any) => this.successHandling());
