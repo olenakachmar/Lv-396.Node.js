@@ -65,4 +65,8 @@ export class UserListComponent implements OnInit {
     return this.loadAllUsers();
   }
 
+  trackByFn(item): any {
+    return(item.id);
+  }
+
 }

@@ -23,6 +23,10 @@ export class AuthService {
     return localStorage.getItem('type');
   }
 
+  getToken(): any {
+    return localStorage.getItem('token');
+  }
+
   isLoggedIn(): boolean {
     return this.getUser() !== null;
   }
