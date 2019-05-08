@@ -1,9 +1,9 @@
 const express = require('express');
-const passport = require('../../config/passport');
-const User = require('../../models/user.model');
-const upload = require('../../config/multer');
-const config = require('../../config/config');
-const cloudinary = require('../../config/cloudinary');
+const passport = require('../../../config/passport');
+const User = require('../../../models/user.model');
+const upload = require('../../../config/multer');
+const config = require('../../../config/config');
+const cloudinary = require('../../../config/cloudinary');
 
 const {
   arrKeys,

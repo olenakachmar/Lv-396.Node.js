@@ -1,8 +1,8 @@
 const reducePropsToObject = (propsArray, req) => propsArray.reduce((obj, el) => {
-  if (req.query[el]) {
+  if (req.body[el]) {
     return {
       ...obj,
-      [el]: req.query[el],
+      [el]: req.body[el],
     };
   }
   return {

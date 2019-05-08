@@ -4,10 +4,10 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
 const config = require('./config/config');
-const authRouter = require('./api/v1/auth.route');
-const usersRouter = require('./api/v1/users.route');
-const issuesRouter = require('./api/v1/issues.route');
-const departmentsRouter = require('./api/v1/departments.route');
+const authRouter = require('./api/v1/routes/auth.route');
+const usersRouter = require('./api/v1/routes/users.route');
+const issuesRouter = require('./api/v1/routes/issues.route');
+const departmentsRouter = require('./api/v1/routes/departments.route');
 const mongoose = require('./config/mongoose');
 
 const { port } = config;

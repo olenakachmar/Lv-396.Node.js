@@ -1,15 +1,15 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
-const smtpTransport = require('../../config/smtpTransport');
-const upload = require('../../config/multer');
-const User = require('../../models/user.model');
+const smtpTransport = require('../../../config/smtpTransport');
+const upload = require('../../../config/multer');
+const User = require('../../../models/user.model');
 const {
   JWT_SECRET,
   smtpEmail,
   arrKeys,
   frontURI,
-} = require('../../config/config');
+} = require('../../../config/config');
 
 const router = express.Router();
 
