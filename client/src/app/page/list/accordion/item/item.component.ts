@@ -35,7 +35,6 @@ export class ItemComponent implements OnInit {
     this.userService.getAll()
       .subscribe(users => this.users = users);
     this.cssClass = '';
-    this.checkedAuthorOrPerformer();
     this.taskIsOpen = false;
     this.unreadClass = 'unread';
   }
@@ -43,6 +42,7 @@ export class ItemComponent implements OnInit {
   openTask(): any {
     this.taskIsOpen = true;
     this.changeClassUnread();
+    this.checkedAuthorOrPerformer();
   }
 
   changeClassUnread(): void {

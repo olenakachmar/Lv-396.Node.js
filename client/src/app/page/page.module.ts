@@ -18,7 +18,7 @@ import { ModalComponent } from './modal/modal.component';
 
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { BsDatepickerModule, DatePickerComponent } from 'ngx-bootstrap/datepicker';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
@@ -40,18 +40,8 @@ import { appConfigProviders } from './common/config';
 import { FilterReturnService } from './common/filter-return.service';
 import { FilterDatesByPipe } from './filter-dates-by.pipe';
 import { CreateUpdateUserComponent } from './create-update-user-page/create-update-user/create-update-user.component';
+import { CommentModalComponent } from './comment-modal/comment-modal.component';
 
-export const routes: Routes = [
-  { path: '', redirectTo: 'upcoming-tasks', pathMatch: 'full' },
-  { path: 'upcoming-tasks', component: WrapperComponent },
-  { path: 'my-profile', component: MyProfileComponent },
-  { path: 'my-profile/:id', component: MyProfileComponent },
-  { path: 'contact-info', component: ContactInfoComponent },
-  { path: 'contact-info/:id', component: ContactInfoComponent },
-  { path: 'create-user', component: CreateUpdateUserPageComponent },
-  { path: 'edit-user', component: CreateUpdateUserPageComponent },
-  { path: 'upcoming-dates', component: UpcomingDatesComponent }
-];
 
 @NgModule({
   declarations: [
@@ -82,6 +72,7 @@ export const routes: Routes = [
     AddTaskFormComponent,
     CreateUpdateUserComponent,
     DatepickerComponent,
+    CommentModalComponent,
   ],
   imports: [
     CommonModule,

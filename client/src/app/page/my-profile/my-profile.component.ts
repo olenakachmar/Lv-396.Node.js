@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../common/services/user.service';
 import { User } from '../../common/models/user';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
@@ -17,13 +17,18 @@ export class MyProfileComponent implements OnInit, OnDestroy {
 
   constructor(private readonly userInfoService: UserService,
               private readonly route: ActivatedRoute,
-              private modalService: BsModalService) { }
+              private modalService: BsModalService,
+              private readonly router: Router) { }
 
   user: User;
   id: any;
 
   ngOnInit() {
     this.checkIdParam();
+  }
+
+  editUser() {
+    this.router.navigate(['/profile/edit-user', this.user._id], {relativeTo: this.route});
   }
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
@@ -33,7 +38,7 @@ export class MyProfileComponent implements OnInit, OnDestroy {
     this.userInfoService.deleteUser(this.user._id)
       .takeUntil(this.destroy$)
       .subscribe(() =>
-    window.location.href = `/profile/contact-info`);
+        this.router.navigate(['/profile/contact-info'], {relativeTo: this.route}));
     this.modalRef.hide();
   }
 
