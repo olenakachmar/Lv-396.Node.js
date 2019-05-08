@@ -1,7 +1,8 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NavItemsService } from '../common/nav-items.service';
 import { UserService } from '../../common/services/user.service';
 import { NavItem } from '../common/nav-item';
+import { User } from '../../common/models/user';
 
 @Component({
   selector: 'app-navbar',
@@ -10,8 +11,8 @@ import { NavItem } from '../common/nav-item';
 })
 
 export class NavbarComponent implements OnInit {
+  @Input() user: User;
 
-  constructor(private readonly navItemsService: NavItemsService, private readonly userService: UserService) { }
   name: string;
   surname: string;
   avatar: string;
@@ -19,12 +20,7 @@ export class NavbarComponent implements OnInit {
   menuList: NavItem[];
   userType: string;
 
-  @HostListener('mouseleave') onMouseLeave(): void {
-    this.active = false;
-  }
-  @HostListener('window:scroll') onScroll(): void {
-    this.active = false;
-  }
+  constructor(private readonly navItemsService: NavItemsService, private readonly userService: UserService) { }
 
   ngOnInit(): void {
     this.navItemsService.getNavList()
@@ -42,6 +38,10 @@ export class NavbarComponent implements OnInit {
     this.navItemsService.currentIndex(i);
 
     return this.active = false;
+  }
+
+  closeBurger(event): void {
+    this.active = event;
   }
 
   toggleIsActive(): boolean {

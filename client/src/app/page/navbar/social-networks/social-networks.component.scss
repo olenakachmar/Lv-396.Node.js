@@ -5,20 +5,16 @@
 :host {
   display: flex;
   justify-content: flex-start;
-  padding-left: 15px;
-  @include media-breakpoint-up(lg) {
-    padding-left: 35px;
-  }
   .item {
     height: 4vmin;
     width: 4vmin;
-    margin: 25px;
+    margin-right: 50px;
     @include media-breakpoint-up(sm) {
       height: 3vmin;
       width: 3vmin;
     }
     @include media-breakpoint-up(lg) {
-      margin: 10px;
+      margin-right: 20px;
     }
   }
   .icon {
