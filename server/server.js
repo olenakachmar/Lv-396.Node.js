@@ -5,8 +5,7 @@ const cors = require('cors');
 const config = require('./config/config');
 const apiRouter = require('./api/v1/routes/index.route');
 const upload = require('./config/multer');
-
-const mongoose = require('./config/mongoose');
+require('./config/mongoose');
 
 const { port } = config;
 
