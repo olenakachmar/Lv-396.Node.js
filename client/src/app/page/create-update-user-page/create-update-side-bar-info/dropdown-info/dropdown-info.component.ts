@@ -1,4 +1,13 @@
-import { Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import { OptionPair } from '../../../../common/models/option-pair';
 import { UserService } from '../../../../common/services/user.service';
 
@@ -21,7 +30,6 @@ export class DropdownInfoComponent implements OnInit, OnChanges {
   selectTeamleadRole: boolean;
   rolesList: string[] = [];
 
-
   constructor(private userService: UserService) {
   }
 
@@ -37,13 +45,15 @@ export class DropdownInfoComponent implements OnInit, OnChanges {
     if (this.updateRolesList) {
       this.updateRolesList.map(elem => {
         elem === 'manager' ? this.selectManagerRole = true : this.selectTeamleadRole = true;
-        });
+      });
       this.checkRolesForTitle();
     }
   }
 
   @HostListener('click') onClick() {
-    this.checkRolesForTitle();
+    if (this.roles) {
+      this.checkRolesForTitle();
+    }
   }
 
   checkRolesForTitle(): void {
@@ -72,25 +82,24 @@ export class DropdownInfoComponent implements OnInit, OnChanges {
     }
   }
 
-  checkCheckbox(role) {
+  checkCheckbox(role): void {
     if (role === 'manager') {
       this.selectManagerRole = !this.selectManagerRole;
-      if (this.selectManagerRole) {
-        this.rolesList.push(role);
-      } else {
-        this.rolesList = this.rolesList
-          .filter(elem => elem !== role);
-      }
+      this.addRemoveRole(role, this.selectManagerRole);
     } else {
       this.selectTeamleadRole = !this.selectTeamleadRole;
-      if (this.selectTeamleadRole) {
-        this.rolesList.push(role);
-      } else {
-        this.rolesList = this.rolesList
-          .filter(elem => elem !== role);
-      }
+      this.addRemoveRole(role, this.selectTeamleadRole);
     }
     this.selectedRoles.emit(this.rolesList);
+  }
+
+  private addRemoveRole(role, selectedRole): void {
+    if (selectedRole) {
+      this.rolesList.push(role);
+    } else {
+      this.rolesList = this.rolesList
+        .filter(elem => elem !== role);
+    }
   }
 
   selectIt = (pair: OptionPair, event: any) => {

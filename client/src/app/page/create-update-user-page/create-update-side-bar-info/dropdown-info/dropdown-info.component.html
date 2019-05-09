@@ -1,7 +1,7 @@
 <script src="dropdown-info.component.ts"></script>
 <div class="btn-group" dropdown placement="bottom right" [autoClose]="roles ? false : true">
   <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle option-el"
-          [ngClass]=" !required ? []: title === 'Choose' ? ['border-red'] : ['border-green']"
+          [ngClass]=" !required ? ['border-blue']: title === 'Choose' ? ['border-red'] : ['border-green']"
           aria-controls="dropdown-basic"> {{ title }}
     <span class="caret"></span>
   </button>
@@ -17,12 +17,14 @@
     <ul *dropdownMenu class="dropdown-menu" role="menu"
         aria-labelledby="button-basic">
       <li role="menuitem">
-        <label class="container">Manager
-          <input type="checkbox" (click)="checkCheckbox('manager')"/>
-          <span [ngClass]="selectManagerRole ? ['checked', 'check-symbol'] : ['unchecked']"></span>
+        <label class="container-for-checkbox">Manager
+          <input type="checkbox" [attr.checked]="selectManagerRole ? 'checked' : null"
+                 (click)="checkCheckbox('manager')"/>
+          <span class="checkmark"></span>
         </label>
-        <label class="container">Teamlead
-          <input type="checkbox" (click)="checkCheckbox('teamlead')"/>
+        <label class="container-for-checkbox">Teamlead
+          <input type="checkbox" [attr.checked]="selectTeamleadRole ? 'checked' : null"
+                 (click)="checkCheckbox('teamlead')"/>
           <span class="checkmark"></span>
         </label>
       </li>

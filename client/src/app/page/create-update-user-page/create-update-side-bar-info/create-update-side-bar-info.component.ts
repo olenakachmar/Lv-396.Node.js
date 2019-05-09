@@ -21,7 +21,6 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
   teamLeads: OptionPair[] = [];
   hrs: OptionPair[] = [];
   managers: OptionPair[] = [];
-  errorMsg;
   ifChosenDevelopmentDepartment = false;
   ifChosenHrDepartment = false;
   @Input() showModal: boolean;
@@ -31,7 +30,7 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-        this.departmentService.getAllDepartments()
+    this.departmentService.getAllDepartments()
       .takeUntil(this.destroy$)
       .subscribe(data => {
         this.departmentsOptionPair = data.map(o => new OptionPair(o._id, o.name));
@@ -48,14 +47,13 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
       .subscribe((data: any) => {
           this.teamLeads = data.map(elem => new OptionPair(elem._id, `${elem.firstName} ${elem.lastName}`));
         },
-        error => this.errorMsg = error
       );
 
     this.userService.getAllHr()
       .takeUntil(this.destroy$)
       .subscribe(data => {
         this.hrs = data.map(elem => new OptionPair(elem._id, `${elem.firstName} ${elem.lastName}`));
-        });
+      });
 
     this.userService.getAllManagers()
       .takeUntil(this.destroy$)
@@ -65,16 +63,14 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
   }
 
   selectDepartment(id: any): void {
-    console.log(this.user.roles);
     this.user.department = id;
     this.ifChosenDevelopmentDepartment = id === '5cab28b4e5773a19a4462fd1';
     this.ifChosenHrDepartment = id === '5cb9c437b5cfd134acc5783e';
     this.positions = this.departments
-      .filter(elem => elem._id === id)[0].position
+      .find(elem => elem._id === id).position
       .map(e => new OptionPair(e, e));
     this.userService.chosenDepartment.emit();
   }
-
 
   ngOnDestroy(): void {
     this.destroy$.next();

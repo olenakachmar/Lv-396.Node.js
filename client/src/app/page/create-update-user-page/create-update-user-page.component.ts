@@ -3,7 +3,7 @@ import { UserService } from '../../common/services/user.service';
 import { User } from '../../common/models/user';
 import { Subject } from 'rxjs/Rx';
 import { ActivatedRoute, Router } from '@angular/router';
-import {ToastrService} from "ngx-toastr";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-update-user-page',
@@ -19,7 +19,6 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   notValidUser: boolean;
   create: boolean;
   requiredForCreationUserFields: any[];
-  updateRolesValue: string;
 
   constructor(readonly userService: UserService,
               private readonly router: Router,
@@ -35,10 +34,8 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
     this.notValidUser = false;
     this.route.paramMap.subscribe(parameterMap => {
       const id = parameterMap.get('id');
-
       this.getEmployee(id);
     });
-
     this.deleteNotValidValuesFromUserObjectOnDepartmentChoose();
   }
 
@@ -47,7 +44,6 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
       this.userService.getUser(id)
         .subscribe(user => {
           this.user = user;
-          console.log(user.roles);
         });
     } else {
       this.create = true;
@@ -58,7 +54,6 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
     this.user = user;
     this.ifChosenDevelopmentDepartment = chosenDevelopmentDepartment;
     this.ifChosenHrDepartment = chosenHrDepartment;
-
     this.user.phone = '35839946448845';
     this.user.email = 'trley@gmail.com';
 
@@ -82,15 +77,11 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   }
 
   validateUser(): boolean {
-
     this.user.type = this.ifChosenHrDepartment ? 'hr' : 'developer';
-
     this.requiredForCreationUserFields = [this.user.firstName, this.user.lastName, this.user.department,
                                           this.user.position, this.user.hr, this.user.manager];
-
     if (this.ifChosenDevelopmentDepartment) {
       this.requiredForCreationUserFields = [...this.requiredForCreationUserFields, this.user.teamlead];
-
     }
     let requiredField = true;
     this.requiredForCreationUserFields.map(elem => {
@@ -100,7 +91,6 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
     });
 
     return requiredField;
-
   }
 
   deleteNotValidValuesFromUserObjectOnDepartmentChoose(): void {
@@ -114,7 +104,6 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
 }
 
 
