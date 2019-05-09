@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { DatesItem } from './dates-item';
+import { HelperService } from './helper.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class DateService {
+
+  constructor(private readonly helperService: HelperService) { }
+
   public isDateString = (dateStr: string): boolean => {
     const str = `${dateStr}`;
     const time = str.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
@@ -67,17 +71,8 @@ export class DateService {
         date: date.date
       };
       dateList = [...dateList, dateObj];
-      dateList.sort((a, b) => {
-        if (a.date < b.date) {
-          return 1;
-        }
-        if (a.date > b.date) {
-          return -1;
-        }
-
-        return 0;
-      });
-    });
+      this.helperService.sortList(dateList);
+  });
 
     return dateList;
   };

@@ -42,7 +42,7 @@ export class UpcomingDatesComponent implements OnInit {
       this.userService.getUsersOfHr()
         .subscribe(users => {
           this.dateList = [];
-          users.map((user) => {
+          users.forEach((user) => {
             this.dateList = this.dateService.setDateList(user, this.dateList);
           });
         });
