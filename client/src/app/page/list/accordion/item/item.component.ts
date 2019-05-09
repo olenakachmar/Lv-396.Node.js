@@ -67,15 +67,14 @@ export class ItemComponent implements OnInit {
     const condHrTasks = !this.user.watched_issues.includes(this.task.id) &&
                         this.userId !== this.task.author._id &&
                         !this.checkedAuthorOrPerformer();
-    if (this.isHr()) {
-      if (condHrTasks) {
-       this.setStyle();
-      }
+
+    const condDevTasks = !this.task.resolvedByAuthor &&
+                         this.task.resolvedByPerformer;
+    if (this.isHr() && condHrTasks) {
+      this.setStyle();
     }
-    if (this.isDev()) {
-      if (!this.task.resolvedByAuthor && this.task.resolvedByPerformer) {
-        this.setStyle();
-      }
+    if (this.isDev() && condDevTasks) {
+      this.setStyle();
     }
   }
 
