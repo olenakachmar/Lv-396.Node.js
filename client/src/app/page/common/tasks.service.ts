@@ -18,8 +18,8 @@ export class TasksService {
 
   public taskIsWatched(id: string, issueID: string): Observable<Task> {
     const body = {
-      id,
       issueID,
+      id
     };
 
     return this.http.put<Task>(`${api}/users/watched_issues`, body, httpOptions);

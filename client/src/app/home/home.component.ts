@@ -19,7 +19,7 @@ export class HomeComponent {
   showInputErrorslogin = false;
   showInputErrorsPassword = false;
 
-  constructor(private readonly authService: AuthService, private readonly router: Router, private readonly fb: FormBuilder) {
+  constructor(private readonly authService: AuthService, public router: Router, private readonly fb: FormBuilder) {
     this.frm = fb.group({
       login: ['', Validators.required],
       password: ['', Validators.required]

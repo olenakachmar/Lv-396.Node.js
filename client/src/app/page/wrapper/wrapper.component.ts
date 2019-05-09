@@ -17,6 +17,7 @@ import { FILTER_CSS_CLASS_PREFIX } from '../common/config';
 export class WrapperComponent implements OnInit {
   emptyTask: Task;
   user: User;
+  userID: string;
   task: Task;
   filters: Filter[];
   tasks: Task[];
@@ -41,6 +42,7 @@ export class WrapperComponent implements OnInit {
     this.openTaskById();
     this.filterGrids = this.filters.length ? this.filterCssClassPrefix + this.filters.length.toString() : '';
     this.userRole = this.checkUserRole();
+    this.userID = this.userInfoService.getUserId();
   }
 
   loadUser(): void {
@@ -57,7 +59,7 @@ export class WrapperComponent implements OnInit {
   }
 
   updateResolve(): void {
-    this.tasksService.updateResolvedBy(this.user._id, this.task.id)
+    this.tasksService.updateResolvedBy(this.userInfoService.getUserId(), this.task.id)
       .subscribe(tasks => { this.tasks = tasks; });
   }
 
