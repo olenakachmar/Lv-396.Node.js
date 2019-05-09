@@ -1,6 +1,7 @@
+/* eslint-disable no-underscore-dangle */
 const express = require('express');
-const Departments = require('../../models/department.model');
-const passport = require('../../config/passport');
+const Departments = require('../../../models/department.model');
+const passport = require('../../../config/passport');
 
 const router = express.Router();
 

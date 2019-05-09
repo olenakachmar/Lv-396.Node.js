@@ -1,8 +1,9 @@
+/* eslint-disable no-underscore-dangle */
 const express = require('express');
 const url = require('url');
-const Issues = require('../../models/issue.model');
-const config = require('../../config/config');
-const passport = require('../../config/passport');
+const Issues = require('../../../models/issue.model');
+const config = require('../../../config/config');
+const passport = require('../../../config/passport');
 
 const router = express.Router();
 

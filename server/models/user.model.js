@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 /* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');

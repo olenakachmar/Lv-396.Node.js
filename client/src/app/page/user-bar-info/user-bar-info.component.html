@@ -2,10 +2,10 @@
   <div class="photo">
     <app-user-image (onUpload)="updateAvatar($event)" [imageURL]="userinfo.photoURL"></app-user-image>
   </div>
-  <input type="checkbox" id="bt"/>
+  <input type="checkbox" id="bt" />
   <label class="check-button" for="bt">Show more</label>
   <div class="toggle-show">
-    <div class="main-user-info" >
+    <div class="main-user-info">
       <div>{{ userinfo.firstName }} {{ userinfo.lastName }}</div>
       <div>{{ userinfo.position }}</div>
     </div>
@@ -23,4 +23,3 @@
     </app-link-to-profile>
   </div>
 </div>
-

@@ -24,6 +24,8 @@ import { PageComponent } from './page/page.component';
 import { NavbarComponent } from './page/navbar/navbar.component';
 import { NavbarProfileComponent } from './page/navbar/navbar-profile/navbar-profile.component';
 import { SocialNetworksComponent } from './page/navbar/social-networks/social-networks.component';
+import { BurgerMenuComponent } from './page/navbar/burger-menu/burger-menu.component';
+import { MenuItemComponent } from './page/navbar/burger-menu/menu-item/menu-item.component';
 import { ForgotPasswordComponent } from './home/common/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './home/common/reset-password/reset-password.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -39,6 +41,8 @@ import { ToastrModule } from 'ngx-toastr';
     NavbarComponent,
     NavbarProfileComponent,
     SocialNetworksComponent,
+    BurgerMenuComponent,
+    MenuItemComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
   ],
