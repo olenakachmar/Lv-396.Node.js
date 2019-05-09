@@ -10,12 +10,17 @@ import { UserService } from '../../../../common/services/user.service';
 export class DropdownInfoComponent implements OnInit, OnChanges {
   @Input() pairList: OptionPair[];
   @Output() readonly selected = new EventEmitter<any>();
+  @Output() readonly selectedRoles = new EventEmitter<any>();
   @Input() required: boolean;
   title: string;
   @Input() positionIdentifier: string;
   @Input() update: string;
   @Input() roles: boolean;
-  active: boolean;
+  @Input() updateRolesList: string[];
+  selectManagerRole: boolean;
+  selectTeamleadRole: boolean;
+  rolesList: string[] = [];
+
 
   constructor(private userService: UserService) {
   }
@@ -29,12 +34,30 @@ export class DropdownInfoComponent implements OnInit, OnChanges {
         this.title = 'Choose';
       });
     }
-  }
-  functionForRoles(): void {
-    if(this.roles) {
-      console.log('bla bla');
+    if (this.updateRolesList) {
+      this.updateRolesList.map(elem => {
+        elem === 'manager' ? this.selectManagerRole = true : this.selectTeamleadRole = true;
+        });
+      this.checkRolesForTitle();
     }
   }
+
+  @HostListener('click') onClick() {
+    this.checkRolesForTitle();
+  }
+
+  checkRolesForTitle(): void {
+    if (this.selectManagerRole && this.selectTeamleadRole) {
+      this.title = 'Teamlead & Manager';
+    } else if (!this.selectManagerRole && !this.selectTeamleadRole) {
+      this.title = 'Choose';
+    } else if (this.selectManagerRole) {
+      this.title = 'Manager';
+    } else {
+      this.title = 'Teamlead';
+    }
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     const checkedChangedValues = changes.pairList && changes.pairList.currentValue && changes.pairList.currentValue.length > 0;
     if (checkedChangedValues) {
@@ -42,12 +65,32 @@ export class DropdownInfoComponent implements OnInit, OnChanges {
         this.title = changes.pairList.currentValue.find(elem => elem._id === this.update).name;
       }
     }
-
     if (changes.update && changes.update.currentValue) {
       if (this.pairList && this.pairList.length > 0) {
         this.title = this.pairList.find(elem => elem._id === this.update).name;
       }
     }
+  }
+
+  checkCheckbox(role) {
+    if (role === 'manager') {
+      this.selectManagerRole = !this.selectManagerRole;
+      if (this.selectManagerRole) {
+        this.rolesList.push(role);
+      } else {
+        this.rolesList = this.rolesList
+          .filter(elem => elem !== role);
+      }
+    } else {
+      this.selectTeamleadRole = !this.selectTeamleadRole;
+      if (this.selectTeamleadRole) {
+        this.rolesList.push(role);
+      } else {
+        this.rolesList = this.rolesList
+          .filter(elem => elem !== role);
+      }
+    }
+    this.selectedRoles.emit(this.rolesList);
   }
 
   selectIt = (pair: OptionPair, event: any) => {

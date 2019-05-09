@@ -18,6 +18,7 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   notValidUser: boolean;
   create: boolean;
   requiredForCreationUserFields: any[];
+  updateRolesValue: string;
 
   constructor(readonly userService: UserService,
               private readonly router: Router,
@@ -40,6 +41,7 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
       this.userService.getUser(id)
         .subscribe(user => {
           this.user = user;
+          console.log(user.roles);
         });
     } else {
       this.create = true;
@@ -53,7 +55,6 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
 
     this.user.phone = '35839946448845';
     this.user.email = 'trley@gmail.com';
-    this.user.roles = ['Teamlead', 'Manager'];
 
     if (this.validateUser()) {
       if (this.user._id) {

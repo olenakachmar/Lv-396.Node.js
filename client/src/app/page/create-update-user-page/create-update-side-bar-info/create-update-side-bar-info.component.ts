@@ -31,7 +31,7 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.departmentService.getAllDepartments()
+        this.departmentService.getAllDepartments()
       .takeUntil(this.destroy$)
       .subscribe(data => {
         this.departmentsOptionPair = data.map(o => new OptionPair(o._id, o.name));
@@ -64,12 +64,8 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
   selectDepartment(id: any): void {
+    console.log(this.user.roles);
     this.user.department = id;
     this.ifChosenDevelopmentDepartment = id === '5cab28b4e5773a19a4462fd1';
     this.ifChosenHrDepartment = id === '5cb9c437b5cfd134acc5783e';
@@ -77,5 +73,11 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
       .filter(elem => elem._id === id)[0].position
       .map(e => new OptionPair(e, e));
     this.userService.chosenDepartment.emit();
+  }
+
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

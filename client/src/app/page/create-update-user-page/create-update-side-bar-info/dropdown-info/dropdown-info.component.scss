@@ -114,6 +114,34 @@
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+ .unchecked {
+   position: absolute;
+   top: 0;
+   left: 0;
+   height: 20px;
+   width: 20px;
+   background-color: #eee;
+ }
+ .checked {
+   position: absolute;
+   top: 0;
+   left: 0;
+   height: 20px;
+   width: 20px;
+   background-color: #2196F3;
+ }
+ .check-symbol {
+   display: block;
+   left: 9px;
+   top: 5px;
+   width: 5px;
+   height: 10px;
+   border: solid white;
+   border-width: 0 3px 3px 0;
+   -webkit-transform: rotate(45deg);
+   -ms-transform: rotate(45deg);
+   transform: rotate(45deg);
+ }
 @media (max-width: 991px) {
   @media (min-width: 600px) {
     .dropdown-menu {

@@ -81,10 +81,12 @@
     </div>
     <div class="info-form">
       <div class="input-label">
-        <label for="roles">Roles</label>
+        <label for="roles">Role</label>
       </div>
       <app-dropdown-info class="info-input-area" id="roles"
                          [roles]="true"
+                         (selectedRoles)="user.roles = $event"
+                         [updateRolesList] = user.roles
                          [positionIdentifier]="'roles'">
       </app-dropdown-info>
     </div>
