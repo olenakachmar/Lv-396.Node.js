@@ -42,40 +42,39 @@ export class ItemComponent implements OnInit {
     this.unreadClass = '';
     this.userType = this.userService.getUserType();
     this.userId = this.userService.getUserId();
-    console.log(this.isDev());
   }
 
   openTask(): void {
     this.taskIsOpen = true;
     this.changeClassUnread();
     this.checkedAuthorOrPerformer();
+    this.taskIsWatched();
   }
 
   private isHr(): boolean {
-    if (this.userType !== 'hr') {
-      return false;
-    }
-
-    return true;
+    return this.userType === 'hr';
   }
 
   private isDev(): boolean {
-    if (this.userType !== 'developer') {
-      return false;
-    }
+    return this.userType === 'developer';
+  }
 
-    return true;
+  private setStyle(): void {
+    this.taskIsOpen ? this.unreadClass = 'unread-open' : this.unreadClass = 'unread';
   }
 
   changeClassUnread(): void {
+    const condHrTasks = !this.user.watched_issues.includes(this.task.id) &&
+                        this.userId !== this.task.author._id &&
+                        !this.checkedAuthorOrPerformer();
     if (this.isHr()) {
-      if (!this.user.watched_issues.includes(this.task.id) && this.userId !== this.task.author._id && !this.checkedAuthorOrPerformer()) {
-        this.taskIsOpen ? this.unreadClass = 'unread-open' : this.unreadClass = 'unread';
+      if (condHrTasks) {
+       this.setStyle();
       }
     }
     if (this.isDev()) {
       if (!this.task.resolvedByAuthor && this.task.resolvedByPerformer) {
-        this.taskIsOpen ? this.unreadClass = 'unread-open' : this.unreadClass = 'unread';
+        this.setStyle();
       }
     }
   }

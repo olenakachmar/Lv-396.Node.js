@@ -4,7 +4,7 @@
   </div>
 </div>
 <accordion>
-  <accordion-group #group [isOpen]="isOpen" (click)="openTask(); taskIsWatched()">
+  <accordion-group #group [isOpen]="isOpen" (click)="openTask()">
     <div accordion-heading class="heading-grid">
       <div class={{unreadClass}}></div>
       <span>{{ task.id }}</span>
