@@ -26,6 +26,9 @@ import { NavbarProfileComponent } from './page/navbar/navbar-profile/navbar-prof
 import { SocialNetworksComponent } from './page/navbar/social-networks/social-networks.component';
 import { ForgotPasswordComponent } from './home/common/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './home/common/reset-password/reset-password.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -47,7 +50,9 @@ import { ResetPasswordComponent } from './home/common/reset-password/reset-passw
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot() // ToastrModule added
   ],
   providers: [
     AUTH_PROVIDERS,

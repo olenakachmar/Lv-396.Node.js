@@ -3,6 +3,7 @@ import { UserService } from '../../common/services/user.service';
 import { User } from '../../common/models/user';
 import { Subject } from 'rxjs/Rx';
 import { ActivatedRoute, Router } from '@angular/router';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-create-update-user-page',
@@ -22,7 +23,12 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
 
   constructor(readonly userService: UserService,
               private readonly router: Router,
-              private  route: ActivatedRoute) {
+              private  route: ActivatedRoute,
+              private toastr: ToastrService) {
+  }
+
+  showSuccess() {
+    this.toastr.success('Hello world!', 'Toastr fun!');
   }
 
   ngOnInit(): void {
