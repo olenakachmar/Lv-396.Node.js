@@ -50,17 +50,25 @@ export class ItemComponent implements OnInit {
     this.checkedAuthorOrPerformer();
   }
 
-  changeClassUnread(): void {
+  private isHr(): void {
     if (this.userType === 'hr') {
       if (!this.user.watched_issues.includes(this.task.id) && this.userId !== this.task.author._id && !this.checkedAuthorOrPerformer()) {
         this.taskIsOpen ? this.unreadClass = 'unread-open' : this.unreadClass = 'unread';
       }
     }
+  }
+
+  private isDev(): void {
     if (this.userType === 'developer') {
       if (!this.task.resolvedByAuthor && this.task.resolvedByPerformer) {
         this.taskIsOpen ? this.unreadClass = 'unread-open' : this.unreadClass = 'unread';
       }
     }
+  }
+
+  changeClassUnread(): void {
+    this.isHr();
+    this.isDev();
   }
 
   checkedAuthorOrPerformer(): boolean {
@@ -74,8 +82,6 @@ export class ItemComponent implements OnInit {
     if (!this.user.watched_issues.includes(this.task.id)) {
       this.tasksService.taskIsWatched(this.user._id, this.task.id)
         .subscribe(task => task);
-    } else {
-      return;
     }
   }
 
