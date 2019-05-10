@@ -77,10 +77,26 @@
   }
 }
 
+.dlete-icon{
+  cursor: pointer
+}
+
 .add-contact {
-  margin-top: 15px; 
+  margin-top: 15px;
   .dropdown-contact {
     margin: 0;
     padding: 0;
   }
+}
+
+.add-date {
+  margin-top: 15px;
+  .dropdown-contact {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.date-topic {
+  margin-bottom: 5px;
 }

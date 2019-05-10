@@ -55,20 +55,29 @@
 
     <div class="col-md-5 date-info">
       <div class="info-form">
-        <div class="input-label"><label for="date">Upcoming review date</label></div>
-        <app-dropdown-info class="info-input-area" id="role" [pairList]='roles'
-          (selected)="retrieveSelected('Role', $event)">
-        </app-dropdown-info>
+        <div class="input-label">Upcoming review date</div>
+        <app-datepicker></app-datepicker>
       </div>
 
       <div class="info-form">
-        <div class="input-label"><label for="role">Data comning</label></div>
-        <app-dropdown-info class="info-input-area" id="role" [pairList]='roles'
-          (selected)="retrieveSelected('Role', $event)">
-        </app-dropdown-info>
+        <div class="input-label">Birthday date</div>
+        <app-datepicker></app-datepicker>
       </div>
 
-      <button class="light-button date-button">
+      <form [formGroup]="datesForm.get('dates')">
+        <div class="row add-date" *ngFor="let date of dates; let i = index">
+          <div class="col-md-10 date-topic">
+            <input class="form-control" type="text" placeholder="Date topic"
+                   aria-label="Add Date">
+          </div>
+          <div (click)="removeDate()" class="col-md-2 dlete-icon">
+            <img _ngcontent-c4="" alt="delete" class="delete__icon" src="assets/img/delete.svg">
+          </div>
+          <app-datepicker class="col-md-10"></app-datepicker>
+        </div>
+      </form>
+
+      <button class="light-button date-button" (click)="addDate()">
         <img _ngcontent-c4="" alt="add" class="add__icon" src="assets/img/add.svg">
         Add date
       </button>
