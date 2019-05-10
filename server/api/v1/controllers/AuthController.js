@@ -1,56 +1,54 @@
-const express = require('express');
+/* eslint-disable consistent-return */
+/* eslint-disable no-underscore-dangle */
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
-const smtpTransport = require('../../config/smtpTransport');
-const upload = require('../../config/multer');
-const User = require('../../models/user.model');
+const smtpTransport = require('../../../config/smtpTransport');
+const User = require('../../../models/user.model');
+const helpers = require('../../../utils/helpers');
 const {
   JWT_SECRET,
   smtpEmail,
   arrKeys,
   frontURI,
-} = require('../../config/config');
+} = require('../../../config/config');
 
-const router = express.Router();
-
-router.post('/login', (req, res) => {
+const signin = async (req, res) => {
   const {
     login,
+    password,
   } = req.body;
-  User.findOne({
-    login,
-  }, (err, user) => {
-    if (err || !user) {
+  try {
+    const user = await User.findOne({ login }).exec();
+
+    if (!user) {
       res.status(404).json({
         err: 'User not found',
       });
-    } else if (user.checkPassword(req.body.password)) {
+      return 0;
+    }
+
+    if (user.checkPassword(password)) {
       res.json({
         token: jwt.sign({
           id: user._id,
           type: user.type,
         }, JWT_SECRET, {}),
       });
-    } else {
-      res.status(400).json({
-        err: 'passwords don\'t match',
-      });
+      return 0;
     }
-  });
-});
 
-router.post('/signup', upload.single('avatar'), (req, res) => {
-  const parameters = arrKeys.reduce((obj, el) => {
-    if (req.body[el]) {
-      return {
-        ...obj,
-        [el]: req.body[el],
-      };
-    }
-    return {
-      ...obj,
-    };
-  }, {});
+    res.status(400).json({
+      err: 'passwords don\'t match',
+    });
+  } catch (err) {
+    res.status(500).json({
+      err,
+    });
+  }
+};
+
+const signup = async (req, res) => {
+  const parameters = helpers.reducePropsToObject(arrKeys, req.body);
 
   if (!parameters.login) {
     parameters.login = `${parameters.firstName.toLowerCase()[0]}${parameters.lastName.toLowerCase().substring(0, 5)}hrms`;
@@ -66,45 +64,22 @@ router.post('/signup', upload.single('avatar'), (req, res) => {
   const newUser = User({
     ...parameters,
   });
-  let {
-    contactName,
-    contactValue,
-  } = req.body;
 
-  if (contactName && contactValue) {
-    contactValue = Array.isArray(contactValue) ? contactValue : Array(contactValue);
-    contactName = Array.isArray(contactName) ? contactName : Array(contactName);
-
-    const contacts = contactName.reduce((obj, el, idx) => {
-      if (contactValue[idx]) {
-        return [...obj, {
-          contact_name: el,
-          contact_value: contactValue[idx],
-        }];
-      }
-      return [...obj];
-    }, []);
-
+  let contacts = helpers.readInsertedObject('contactName', 'contactValue', req);
+  if (contacts) {
+    contacts = contacts.map(el => ({
+      contact_name: el.contactName,
+      contact_value: el.contactValue,
+    }));
     newUser.contacts = [...contacts];
   }
 
-  let {
-    dateTopic,
-    date,
-  } = req.body;
-  if (dateTopic && date) {
-    dateTopic = Array.isArray(dateTopic) ? dateTopic : Array(dateTopic);
-    date = Array.isArray(date) ? date : Array(date);
-    const dates = dateTopic.reduce((obj, el, idx) => {
-      if (date[idx]) {
-        return [...obj, {
-          topic: el,
-          date: new Date(date[idx]),
-        }];
-      }
-      return [...obj];
-    }, []);
-
+  let dates = helpers.readInsertedObject('dateTopic', 'date', req);
+  if (dates) {
+    dates = dates.map(el => ({
+      topic: el.dateTopic,
+      date: el.date,
+    }));
     newUser.dates = [...dates];
   }
 
@@ -125,22 +100,24 @@ router.post('/signup', upload.single('avatar'), (req, res) => {
     },
   };
 
-  Promise.all([newUser.save(), smtpTransport.sendMail(mailData)])
-    .then(() => {
-      res.status(201).json({
-        newUser,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({
-        err,
-      });
+  let savedUser;
+  try {
+    savedUser = await newUser.save();
+    smtpTransport.sendMail(mailData);
+    res.status(201).json({
+      newUser,
     });
-});
+  } catch (err) {
+    if (savedUser) {
+      User.findByIdAndDelete(savedUser._id);
+    }
+    res.status(500).json({
+      err,
+    });
+  }
+};
 
-// eslint-disable-next-line consistent-return
-router.post('/forgot_password', async (req, res) => {
+const forgotPassword = async (req, res) => {
   const {
     email,
   } = req.body;
@@ -180,9 +157,9 @@ router.post('/forgot_password', async (req, res) => {
   } catch (err) {
     res.status(500).json({ err });
   }
-});
+};
 
-router.post('/recover_password', async (req, res) => {
+const recoverPassword = async (req, res) => {
   const {
     token,
     newPass,
@@ -227,9 +204,9 @@ router.post('/recover_password', async (req, res) => {
     res.status(500).json({ err });
   }
   return 0;
-});
+};
 
-router.post('/validate_recovery', async (req, res) => {
+const validateRecovery = async (req, res) => {
   const {
     token,
   } = req.body;
@@ -254,6 +231,12 @@ router.post('/validate_recovery', async (req, res) => {
   } catch (err) {
     res.status(500).json({ err });
   }
-});
+};
 
-module.exports = router;
+module.exports = {
+  signin,
+  signup,
+  forgotPassword,
+  recoverPassword,
+  validateRecovery,
+};
