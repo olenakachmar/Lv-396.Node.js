@@ -6,7 +6,7 @@ import { DatesItem } from './dates-item';
 })
 export class HelperService {
 
-  public readonly sortList = (list): void => {
+  public readonly sortList = (list): DatesItem[] => {
     list.sort((a, b) => {
       if (a.date < b.date) {
         return 1;
@@ -17,5 +17,7 @@ export class HelperService {
 
       return 0;
     });
+
+    return list;
   };
 }

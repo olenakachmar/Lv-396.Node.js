@@ -71,7 +71,7 @@ export class DateService {
         date: date.date
       };
       dateList = [...dateList, dateObj];
-      this.helperService.sortList(dateList);
+      dateList = this.helperService.sortList(dateList);
   });
 
     return dateList;
