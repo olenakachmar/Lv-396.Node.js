@@ -29,7 +29,6 @@ import { MenuItemComponent } from './page/navbar/burger-menu/menu-item/menu-item
 import { ForgotPasswordComponent } from './home/common/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './home/common/reset-password/reset-password.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({

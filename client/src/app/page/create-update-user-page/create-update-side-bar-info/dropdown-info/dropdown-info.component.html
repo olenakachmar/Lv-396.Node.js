@@ -1,7 +1,7 @@
 <script src="dropdown-info.component.ts"></script>
 <div class="btn-group" dropdown placement="bottom right" [autoClose]="roles ? false : true">
   <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle option-el"
-          [ngClass]=" !required ? ['border-blue']: title === 'Choose' ? ['border-red'] : ['border-green']"
+          [ngClass]="setLeftBorderStylesToDropdowns()"
           aria-controls="dropdown-basic"> {{ title }}
     <span class="caret"></span>
   </button>

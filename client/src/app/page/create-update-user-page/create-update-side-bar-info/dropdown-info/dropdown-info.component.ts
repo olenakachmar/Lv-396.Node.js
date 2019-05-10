@@ -43,14 +43,34 @@ export class DropdownInfoComponent implements OnInit, OnChanges {
       });
     }
     if (this.updateRolesList) {
-      this.updateRolesList.map(elem => {
-        elem === 'manager' ? this.selectManagerRole = true : this.selectTeamleadRole = true;
-      });
+      this.checkTypeOfRoleOnUpdate();
       this.checkRolesForTitle();
     }
   }
 
-  @HostListener('click') onClick() {
+  checkTypeOfRoleOnUpdate(): void {
+    this.updateRolesList.forEach(elem => {
+      if (elem === 'manager') {
+        this.selectManagerRole = true;
+      } else {
+        this.selectTeamleadRole = true;
+      }
+    });
+  }
+
+  setLeftBorderStylesToDropdowns(value: boolean): string {
+    if (this.required) {
+      if (this.title === 'Choose') {
+        return 'border-red';
+      } else {
+        return 'border-green';
+      }
+    } else {
+      return 'border-blue';
+    }
+  }
+
+  @HostListener('click') onClick(): void {
     if (this.roles) {
       this.checkRolesForTitle();
     }
