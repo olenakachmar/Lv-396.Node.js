@@ -60,7 +60,7 @@ export class ItemComponent implements OnInit {
   }
 
   private setStyle(): void {
-    this.taskIsOpen ? this.unreadClass = 'unread-open' : this.unreadClass = 'unread';
+    this.unreadClass = this.taskIsOpen ? 'unread-open' : 'unread';
   }
 
   changeClassUnread(): void {
