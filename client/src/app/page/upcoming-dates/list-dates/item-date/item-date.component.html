@@ -1,7 +1,8 @@
 <div class="wrapper">
   <div class="row list-dates">
     <div class="col-md-6 box font-weight-bold dates-topic">
-      {{ date.firstName }} {{ date.lastName }}'s {{ date.topic }}
+      <div *ngIf ="typeOfUser">{{ date.firstName }} {{ date.lastName }}'s </div>
+      <span>{{ date.topic }}</span>
       <span *ngIf="(convertDate(date.date))">TODAY</span>
     </div>
     <div class="col-md-3 box dates-icon">
