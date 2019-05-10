@@ -32,11 +32,12 @@ export class BurgerMenuComponent implements OnInit {
     this.focusOut.emit(event);
   }
 
-  currentByIndex(i: number): boolean {
+  currentByIndex(i): boolean {
     this.navItemsService.currentIndex(i);
+    // this.closeMenu.emit(false);
     this.focusOut.emit(false);
 
-    return this.active = false;
+    return false;
   }
 
   trackById(link: NavItem): string {

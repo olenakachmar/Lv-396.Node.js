@@ -92,4 +92,4 @@ import { CommentModalComponent } from './comment-modal/comment-modal.component';
   ],
   bootstrap: [WrapperComponent]
 })
-export class PageModule {}
+export class PageModule { }

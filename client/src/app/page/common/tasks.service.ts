@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { httpOptions } from '../../common/services/user.service';
 import { api } from '../../../environments/environment';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class TasksService {
   tasks: Task[];
 
   public isOpenTask: BehaviorSubject<string> = new BehaviorSubject('');
+  public allUserTasks: BehaviorSubject<Task[]> = new BehaviorSubject([]);
 
   public taskIsWatched(id: string, issueID: string): Observable<Task> {
     const body = {
@@ -26,7 +28,29 @@ export class TasksService {
   }
 
   public getUserTasks(id: string): Observable<Task[]> {
-    return this.http.get<Task[]>(`${api}issues/${id}`, httpOptions);
+    return this.http.get<Task[]>(`${api}issues/${id}`, httpOptions)
+      .pipe(tap(res => {
+        res.map((item: any) =>
+          ({
+            id: item._id,
+            name: item.name,
+            excerpt: item.excerpt,
+            status: { name: item.status.name, value: item.status.value },
+            type: { name: item.type.name, value: item.type.value },
+            date: item.date,
+            author: item.author,
+            content: item.content,
+            assignTo: item.assignTo,
+            reassigned: item.reassigned,
+            resolvedByAuthor: item.resolvedByAuthor,
+            resolvedByPerformer: item.resolvedByPerformer,
+            isOpen: false
+          }))
+          .sort((a, b) => (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0));
+      }),
+        tap(res => {
+          this.allUserTasks.next(res);
+        }));
   }
 
   public updateResolvedBy(userId: string, taskId: string): Observable<any> {

@@ -53,8 +53,8 @@ export class NavbarProfileComponent implements OnInit {
   }
 
   openTaskByid(taskID: string): boolean {
-    this.taskService.taskIsWatched(this.user._id, taskID)
-      .subscribe();
+    // this.taskService.taskIsWatched(this.user._id, taskID)
+    //   .subscribe();
     this.taskService.isOpenTask.next(taskID);
     setTimeout(() => {
       this.scrollTo(taskID);
@@ -85,10 +85,11 @@ export class NavbarProfileComponent implements OnInit {
   }
 
   loadUserTasks(): void {
-    this.taskService.getUserTasks(this.userId)
+    // this.taskService.getUserTasks(this.userId)
+    this.taskService.allUserTasks
       .subscribe(tasks => {
         this.newTasks = this.findNewTasks(tasks, this.user.watched_issues);
-        this.newTasks.sort((a, b) => (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0));
+        // this.newTasks.sort((a, b) => (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0));
         this.newTasksCount = this.newTasks.length;
       });
   }
@@ -121,7 +122,7 @@ export class NavbarProfileComponent implements OnInit {
       this.menuList[i].current = false;
       this.logout();
     }
-    if (this.menuList[i].router === 'edit-user/:id') {
+    if (this.menuList[i].router === '/profile/edit-user/:id') {
       this.editUser();
     }
 

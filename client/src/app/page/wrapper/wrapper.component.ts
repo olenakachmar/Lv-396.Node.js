@@ -11,7 +11,7 @@ import { FILTER_CSS_CLASS_PREFIX } from '../common/config';
 @Component({
   selector: 'app-wrapper',
   templateUrl: './wrapper.component.html',
-  styleUrls: ['./wrapper.component.scss']
+  styleUrls: ['./wrapper.component.scss'],
 })
 
 export class WrapperComponent implements OnInit {
@@ -25,6 +25,7 @@ export class WrapperComponent implements OnInit {
   filterGrids: string;
   users: User[];
   userRole: string;
+  openTaskId: string;
 
   constructor(
     private readonly userInfoService: UserService,
@@ -39,6 +40,8 @@ export class WrapperComponent implements OnInit {
     this.getFilters();
     this.getTasks();
     this.loadUser();
+    // this.tasksService.isOpenTask
+    //   .subscribe(isOpenID => this.openTaskId = isOpenID);
     this.openTaskById();
     this.filterGrids = this.filters.length ? this.filterCssClassPrefix + this.filters.length.toString() : '';
     this.userRole = this.checkUserRole();
@@ -56,6 +59,20 @@ export class WrapperComponent implements OnInit {
   getFilters(): void {
     this.filtersService.getFilters()
       .subscribe(filters => this.filters = filters);
+  }
+
+  openTaskById(): void {
+    this.tasksService.isOpenTask.subscribe((isOpenID: string) => {
+      if (this.tasks && isOpenID) {
+        this.tasks = this.tasks.map(task => {
+          task.isOpen = task.id === isOpenID;
+          console.log(task)
+
+          return task;
+        });
+        // this.tasks.find(task => task.id === isOpenID ? );
+      }
+    });
   }
 
   updateResolve(): void {
@@ -101,14 +118,6 @@ export class WrapperComponent implements OnInit {
       );
     }
   };
-
-  openTaskById(): void {
-    this.tasksService.isOpenTask.subscribe((isOpenID: string) => {
-      if (this.tasks && isOpenID) {
-        this.tasks.map(task => task.isOpen = task.id === isOpenID);
-      }
-    });
-  }
 
   private readonly setOptions = (isCalendar: boolean, options: FilterOptions[], data: any) => {
     if (isCalendar) {

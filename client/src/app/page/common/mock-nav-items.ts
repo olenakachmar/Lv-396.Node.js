@@ -67,7 +67,7 @@ export const NAVBAR_LIST: NavItem[] = [
     id: 'edit-profile',
     title: 'edit profile',
     current: false,
-    router: 'edit-user/:id',
+    router: '/profile/edit-user/:id',
     rightMenu: true,
     burgerMenu: false,
     hr: 'hr',
