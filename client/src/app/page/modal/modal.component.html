@@ -26,9 +26,14 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="container-fluid" *ngIf="updateTask">
+  <div class="container-fluid" *ngIf="updateTask && !errorAssignTo">
     <div class="row alert alert-success">
       <span>Your issue was update.</span>
+    </div>
+  </div>
+  <div class="container-fluid" *ngIf="errorAssignTo">
+    <div class="row alert alert-danger">
+      <span>You can't assign to yourself!</span>
     </div>
   </div>
   <div *ngIf="isFieldCorrectLength('name') === true" class="alert alert-danger visible-temporarily">

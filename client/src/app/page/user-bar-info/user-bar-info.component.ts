@@ -8,14 +8,13 @@ import { User } from '../../common/models/user';
   styleUrls: ['./user-bar-info.component.scss']
 })
 export class UserBarInfoComponent implements OnInit {
-  @Input() userinfo: User;
+  @Input() userinfo: User = new User();
   userType: string;
 
   constructor(readonly userService: UserService) {
   }
 
   ngOnInit(): void {
-    this.userinfo = new User();
     this.userType = this.userService.getUserType();
   }
 
