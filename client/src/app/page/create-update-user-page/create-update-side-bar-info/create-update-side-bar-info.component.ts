@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { IDepartment } from '../../../common/models/department';
+import { Department } from '../../../common/models/department';
 import { DepartmentService } from '../../../common/services/department.service';
 import { OptionPair } from '../../../common/models/option-pair';
 import { UserService } from '../../../common/services/user.service';
@@ -16,7 +16,7 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
 
   @Input() user: User;
   departmentsOptionPair: OptionPair[] = [];
-  departments: IDepartment[] = [];
+  departments: Department[] = [];
   positions: OptionPair[] = [];
   teamLeads: OptionPair[] = [];
   hrs: OptionPair[] = [];
