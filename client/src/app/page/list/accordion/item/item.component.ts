@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Injectable } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Task } from '../../../common/task';
 import { TasksService } from '../../../common/tasks.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,16 +13,16 @@ import { User } from '../../../../common/models/user';
 export class ItemComponent implements OnInit {
   @Input() task: Task;
   user = new User();
+  userId: string;
   users: User[];
   checkedResolve: boolean;
   cssClass: string;
   cssClassVisible: string;
   markResolve: boolean;
   alertMessage: string;
-  isOpen: boolean;
   unreadClass: string;
-  unreadOpenClass: string;
   taskIsOpen: boolean;
+  userType: string;
 
   constructor(private readonly router: Router,
               private readonly route: ActivatedRoute,
@@ -30,30 +30,66 @@ export class ItemComponent implements OnInit {
               private readonly tasksService: TasksService) { }
 
   ngOnInit(): void {
-    this.loadUser();
-    this.isOpen = this.task.isOpen;
+    this.userService.getUser()
+      .subscribe(user => {
+        this.user = user;
+        this.changeClassUnread();
+    });
     this.userService.getAll()
       .subscribe(users => this.users = users);
     this.cssClass = '';
-    this.checkedAuthorOrPerformer();
     this.taskIsOpen = false;
-    this.unreadClass = 'unread';
+    this.unreadClass = '';
+    this.userType = this.userService.getUserType();
+    this.userId = this.userService.getUserId();
   }
 
-  openTask(): any {
+  openTask(): void {
     this.taskIsOpen = true;
     this.changeClassUnread();
+    this.checkedAuthorOrPerformer();
+    this.taskIsWatched();
+  }
+
+  private isHr(): boolean {
+    return this.userType === 'hr';
+  }
+
+  private isDev(): boolean {
+    return this.userType === 'developer';
+  }
+
+  private setStyle(): void {
+    this.unreadClass = this.taskIsOpen ? 'unread-open' : 'unread';
   }
 
   changeClassUnread(): void {
-    this.taskIsOpen ? this.unreadClass = 'unread-open' : this.unreadClass = 'unread';
+    const condHrTasks = !this.user.watched_issues.includes(this.task.id) &&
+                        this.userId !== this.task.author._id &&
+                        !this.checkedAuthorOrPerformer();
+
+    const condDevTasks = !this.task.resolvedByAuthor &&
+                         this.task.resolvedByPerformer;
+    if (this.isHr() && condHrTasks) {
+      this.setStyle();
+    }
+    if (this.isDev() && condDevTasks) {
+      this.setStyle();
+    }
   }
 
-  checkedAuthorOrPerformer(): any {
+  checkedAuthorOrPerformer(): boolean {
     this.checkedResolve = this.user._id === this.task.author._id ?  this.task.resolvedByAuthor : this.task.resolvedByPerformer;
     this.cssClass = this.checkedResolve ? 'hiddenMark' : '';
 
     return this.checkedResolve;
+  }
+
+  taskIsWatched(): void {
+    if (!this.user.watched_issues.includes(this.task.id)) {
+      this.tasksService.taskIsWatched(this.user._id, this.task.id)
+        .subscribe(task => task);
+    }
   }
 
   loadUser(): boolean {
