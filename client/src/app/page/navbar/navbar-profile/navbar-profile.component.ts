@@ -29,6 +29,7 @@ export class NavbarProfileComponent implements OnInit {
   datesCount: number;
   active: boolean;
   todayDate: Date;
+  typeOfUser: boolean;
 
   constructor(private readonly authService: AuthService,
               private readonly router: Router,
@@ -42,12 +43,11 @@ export class NavbarProfileComponent implements OnInit {
   ngOnInit(): void {
     this.navItemsService.getNavList()
       .subscribe(list => this.menuList = list);
-    this.userId = this.userService.getUserId();
-
     this.loadDates();
     this.loadUserTasks();
     this.currentByRout(this.router.url);
 
+    this.userId = this.userService.getUserId();
     this.todayDate = new Date();
     this.user.photoURL = this.user.photoURL || 'assets/img/userimg.jpg';
   }
@@ -69,19 +69,26 @@ export class NavbarProfileComponent implements OnInit {
   }
 
   loadDates(): void {
-    this.userService.getUsersOfHr()
-      .subscribe(user => {
-        this.dateList = [];
-        user.map((item) => {
-          item.dates.map((items) => {
-            this.dateList = [...this.dateList, items];
+    if (this.userService.getUserType() === 'hr') {
+      this.typeOfUser = true;
+      this.userService.getUsersOfHr()
+        .subscribe(users => {
+          this.dateList = [];
+          users.forEach((user) => {
+            this.dateList = this.dateService.setDateList(user, this.dateList);
           });
+          this.dateList = this.checkTodayDate(this.dateList);
+          this.datesCount = this.dateList.length;
         });
-        this.dateList = this.dateList.filter(date =>
-          this.dateService.convertDate(date.date) === this.dateService.convertDate(this.todayDate)
-        );
-        this.datesCount = this.dateList.length;
-      });
+    } else if (this.userService.getUserType() === 'developer') {
+      this.userService.getUser()
+        .subscribe(user => {
+          this.dateList = [];
+          this.dateList = this.dateService.setDateList(user, this.dateList);
+          this.dateList = this.checkTodayDate(this.dateList);
+          this.datesCount = this.dateList.length;
+        });
+    }
   }
 
   loadUserTasks(): void {
@@ -139,4 +146,9 @@ export class NavbarProfileComponent implements OnInit {
     return link.id;
   }
 
+  checkTodayDate(dateList): DatesItem[] {
+    return dateList.filter(date =>
+      this.dateService.convertDate(date.date) === this.dateService.convertDate(this.todayDate)
+    );
+  }
 }
