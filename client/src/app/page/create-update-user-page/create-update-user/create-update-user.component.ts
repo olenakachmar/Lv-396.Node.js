@@ -9,14 +9,11 @@ import { OptionPair } from '../../../common/models/option-pair';
 })
 export class CreateUpdateUserComponent implements OnInit {
   profileForm: FormGroup;
-  datesForm: FormGroup;
   pairList: OptionPair[];
   contacts: string[];
-  dates: string[];
 
 
-  constructor(private readonly fb: FormBuilder,
-              private readonly date: FormBuilder) {
+  constructor(private readonly fb: FormBuilder) {
     this.profileForm = fb.group({
       email: ['', Validators.required],
       phone: ['', Validators.required],
@@ -25,15 +22,10 @@ export class CreateUpdateUserComponent implements OnInit {
       contacts: this.fb.group({
       })
     });
-    this.datesForm = date.group({
-      dates: this.date.group({
-      })
-    });
   }
 
   ngOnInit(): void {
     this.contacts = [];
-    this.dates = [];
     this.pairList = [{_id: 1, name: 'telegram'}, {_id: 2, name: 'skype'}];
   }
 
@@ -48,22 +40,7 @@ export class CreateUpdateUserComponent implements OnInit {
     this.contacts.pop();
   }
 
-  get getContacts() {
+  get getContacts(): any {
     return this.profileForm.get('contacts') as FormGroup;
-  }
-
-  addDate(): void {
-    const item = `date-${this.dates.length}`;
-    this.getDate.addControl(item, new FormControl('', [Validators.required]));
-    this.dates = [...this.dates, item];
-  }
-
-  removeDate(control: string): void {
-    this.getDate.removeControl(control) ;
-    this.dates.pop();
-  }
-
-  get getDate(): any {
-    return this.datesForm.get('dates') as FormGroup;
   }
 }

@@ -52,36 +52,6 @@
         Add fields
       </button>
     </div>
-
-    <div class="col-md-5 date-info">
-      <div class="info-form">
-        <div class="input-label">Upcoming review date</div>
-        <app-datepicker></app-datepicker>
-      </div>
-
-      <div class="info-form">
-        <div class="input-label">Birthday date</div>
-        <app-datepicker></app-datepicker>
-      </div>
-
-      <form [formGroup]="datesForm.get('dates')">
-        <div class="row add-date" *ngFor="let date of dates; let i = index">
-          <div class="col-md-10 date-topic">
-            <input class="form-control" type="text" placeholder="Date topic"
-                   aria-label="Add Date">
-          </div>
-          <div (click)="removeDate()" class="col-md-2 dlete-icon">
-            <img _ngcontent-c4="" alt="delete" class="delete__icon" src="assets/img/delete.svg">
-          </div>
-          <app-datepicker class="col-md-10"></app-datepicker>
-        </div>
-      </form>
-
-      <button class="light-button date-button" (click)="addDate()">
-        <img _ngcontent-c4="" alt="add" class="add__icon" src="assets/img/add.svg">
-        Add date
-      </button>
-
-    </div>
+    <app-create-update-date class="col-md-5 date-info"></app-create-update-date>
   </div>
 </form>
