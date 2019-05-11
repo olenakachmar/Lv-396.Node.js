@@ -41,6 +41,6 @@ export class CreateUpdateUserComponent implements OnInit {
   }
 
   get getContacts(): any {
-    return this.profileForm.get('contacts') as FormGroup;
+    return this.profileForm.get('contacts');
   }
 }

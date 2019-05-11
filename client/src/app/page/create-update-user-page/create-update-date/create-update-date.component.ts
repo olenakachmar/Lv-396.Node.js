@@ -10,16 +10,13 @@ export class CreateUpdateDateComponent implements OnInit {
   dates: string[];
 
   addDatesForm = this.fb.group({
-    dateName: [
-      '',
-      [
+    dateName: ['', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(20),
       ]
     ],
-    datesCount: this.fb.group({
-    })
+    datesCount: this.fb.group({})
   });
 
   constructor(private fb: FormBuilder) {
@@ -36,11 +33,11 @@ export class CreateUpdateDateComponent implements OnInit {
   }
 
   removeDate(control: string): void {
-    this.getDate.removeControl(control) ;
+    this.getDate.removeControl(control);
     this.dates.pop();
   }
 
   get getDate(): any {
-    return this.addDatesForm.get('datesCount') as FormGroup;
+    return this.addDatesForm.get('datesCount');
   }
 }

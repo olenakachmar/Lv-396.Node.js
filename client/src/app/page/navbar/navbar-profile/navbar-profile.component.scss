@@ -150,6 +150,7 @@ li:hover {
 }
 .dates-topic {
   display: flex;
+  justify-content: flex-start !important;
   text-transform: capitalize;
 }
 
@@ -157,7 +158,3 @@ li:hover {
    margin-left: 5px;
  }
 
-.dates-topic:first-child {
-  justify-content: flex-start !important;;
-  margin-left: 5px;
-}
