@@ -110,7 +110,7 @@ export class AddTaskFormComponent implements OnInit {
     let defVal = 0;
     const options: FilterOptions[] = users.map(
       (item: User, index: number) => {
-        if (item._id === this.user._id) {
+        if (item._id === this.userService.getUserId()) {
           defVal = index;
         }
 

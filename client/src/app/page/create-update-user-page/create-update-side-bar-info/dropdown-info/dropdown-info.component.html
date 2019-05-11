@@ -1,12 +1,33 @@
-<div class="btn-group" dropdown placement="bottom right">
+<script src="dropdown-info.component.ts"></script>
+<div class="btn-group" dropdown placement="bottom right" [autoClose]="roles ? false : true">
   <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle option-el"
-          [ngClass]=" !required ? []: title === 'Choose' ? ['border-red'] : ['border-green']"
+          [ngClass]="setLeftBorderStylesToDropdowns()"
           aria-controls="dropdown-basic"> {{ title }}
     <span class="caret"></span>
   </button>
-  <ul id="dropdown-basic top" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-    <li role="menuitem" *ngFor="let pair of pairList">
-      <a class="dropdown-item" href="#" (click)="selectIt(pair, $event)"> {{ pair.name }}</a>
-    </li>
-  </ul>
+  <div *ngIf="!roles">
+    <ul id="dropdown-basic top" *dropdownMenu class="dropdown-menu" role="menu"
+        aria-labelledby="button-basic">
+      <li role="menuitem" *ngFor="let pair of pairList">
+        <a class="dropdown-item" href="#" (click)="selectIt(pair, $event)"> {{ pair.name }}</a>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="roles">
+    <ul *dropdownMenu class="dropdown-menu" role="menu"
+        aria-labelledby="button-basic">
+      <li role="menuitem">
+        <label class="container-for-checkbox">Manager
+          <input type="checkbox" [attr.checked]="selectManagerRole ? 'checked' : null"
+                 (click)="checkCheckbox('manager')"/>
+          <span class="checkmark"></span>
+        </label>
+        <label class="container-for-checkbox">Teamlead
+          <input type="checkbox" [attr.checked]="selectTeamleadRole ? 'checked' : null"
+                 (click)="checkCheckbox('teamlead')"/>
+          <span class="checkmark"></span>
+        </label>
+      </li>
+    </ul>
+  </div>
 </div>
