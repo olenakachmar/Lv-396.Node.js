@@ -41,7 +41,6 @@ export class CreateUpdateUserComponent implements OnInit {
     const item = `contact-${this.contacts.length}`;
     this.getContacts.addControl(item, new FormControl('', [Validators.required]));
     this.contacts = [...this.contacts, item];
-    console.log(this.contacts);
   }
 
   removeContact(control: string): void {
