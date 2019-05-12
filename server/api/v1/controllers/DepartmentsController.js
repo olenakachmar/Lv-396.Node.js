@@ -8,7 +8,7 @@ const getAll = async (req, res) => {
     const departments = await Departments.find()
       .populate('employees', arrKeys)
       .exec();
-    res.json(departments);
+    res.status(200).json(departments);
   } catch (err) {
     res.status(500).json({
       err,
@@ -23,7 +23,7 @@ const createOne = async (req, res) => {
       position: req.body.position,
     });
     await newDepartment.save();
-    res.json({
+    res.status(201).json({
       added: 'Successfully',
     });
   } catch (err) {
@@ -43,7 +43,7 @@ const deleteOne = async (req, res) => {
         err: 'Department not found',
       });
     }
-    res.json({
+    res.status(204).json({
       deleted: 'Successfully',
     });
   } catch (err) {
@@ -64,7 +64,7 @@ const getOne = async (req, res) => {
         err: 'Department not found',
       });
     }
-    res.json(departments);
+    res.status(200).json(departments);
   } catch (err) {
     res.status(500).json({
       err,
@@ -97,7 +97,7 @@ const addEmployee = async (req, res) => {
     }
     department.employees = [...department.employees, ...employees];
     department.save();
-    res.send('User(s) added to department');
+    res.status(200).send('User(s) added to department');
   } catch (err) {
     res.status(500).json({
       err,
