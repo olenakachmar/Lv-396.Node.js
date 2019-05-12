@@ -148,3 +148,13 @@ li:hover {
     left: 120px;
   }
 }
+.dates-topic {
+  display: flex;
+  justify-content: flex-start !important;
+  text-transform: capitalize;
+}
+
+.dates-topic span {
+   margin-left: 5px;
+ }
+
