@@ -24,23 +24,23 @@ export class CreateUpdateUserComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.contacts = [];
     this.pairList = [{_id: 1, name: 'telegram'}, {_id: 2, name: 'skype'}];
   }
 
-  addContact() {
+  addContact(): void {
     const item = `contact-${this.contacts.length}`;
     this.getContacts.addControl(item, new FormControl('', [Validators.required]));
     this.contacts = [...this.contacts, item];
   }
 
-  removeContact(control: string) {
+  removeContact(control: string): void {
     this.getContacts.removeControl(control) ;
     this.contacts.pop();
   }
 
-  get getContacts() {
-    return this.profileForm.get('contacts') as FormGroup;
+  get getContacts(): any {
+    return this.profileForm.get('contacts');
   }
 }
