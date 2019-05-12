@@ -38,6 +38,15 @@ export class TasksService {
     return this.http.put<Task>(`${api}/issues/resolve`, body, httpOptions);
   }
 
+  public createComment(id: string, comment: string): Observable<any> {
+    const body = {
+      id,
+      comment
+    };
+
+    return this.http.put<Task>(`${api}/issues/comment`, body);
+  }
+
   public editTask(requestBody: TaskEditRequestBody): Observable<any> {
     return this.http.put<TaskEditRequestBody>(`${api}/issues`, requestBody, httpOptions);
   }
