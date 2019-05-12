@@ -1,0 +1,34 @@
+<div class="row additional-info">
+  <form [formGroup]="addDatesForm">
+    <div class="date-form col-md-12">
+      <div class="info-form">
+        <div class="input-label"><label for="">Upcoming review date</label></div>
+        <app-datepicker></app-datepicker>
+      </div>
+
+      <div class="info-form">
+        <div class="input-label"><label for="">Birthday date</label></div>
+        <app-datepicker></app-datepicker>
+      </div>
+
+      <form [formGroup]="addDatesForm">
+        <div class="row add-date" *ngFor="let date of dates">
+          <div class="col-md-10 date-topic">
+            <input class="form-control" type="text" placeholder="Date topic"
+                   aria-label="Add Date">
+          </div>
+          <div (click)="removeDate()" class="col-md-2 dlete-icon">
+            <img _ngcontent-c4="" alt="delete" class="delete__icon" src="assets/img/delete.svg">
+          </div>
+          <app-datepicker class="col-md-10"></app-datepicker>
+        </div>
+      </form>
+
+      <button class="light-button date-button" (click)="addDate()">
+        <img _ngcontent-c4="" alt="add" class="add__icon" src="assets/img/add.svg">
+        Add date
+      </button>
+
+    </div>
+  </form>
+</div>
