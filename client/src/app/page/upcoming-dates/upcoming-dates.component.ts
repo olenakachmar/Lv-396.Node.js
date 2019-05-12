@@ -6,7 +6,7 @@ import { FilterOptions } from '../common/filter-options';
 import { Filter } from '../common/filter';
 import { FiltersService } from '../common/filters.service';
 import { FILTER_CSS_CLASS_PREFIX } from '../common/config';
-
+import { DateService } from '../common/date.service';
 
 @Component({
   selector: 'app-upcoming-dates',
@@ -14,7 +14,7 @@ import { FILTER_CSS_CLASS_PREFIX } from '../common/config';
   styleUrls: ['./upcoming-dates.component.scss']
 })
 export class UpcomingDatesComponent implements OnInit {
-  user = new User();
+  user: User;
   filter: Filter[];
   dateList: DatesItem[];
   modalTypeVal: string;
@@ -23,6 +23,7 @@ export class UpcomingDatesComponent implements OnInit {
   constructor(
     private readonly userService: UserService,
     private readonly filtersService: FiltersService,
+    private readonly dateService: DateService,
     @Inject(FILTER_CSS_CLASS_PREFIX) public filterCssClassPrefix: string
   ) {}
 
@@ -34,32 +35,24 @@ export class UpcomingDatesComponent implements OnInit {
 
   loadUser(): void {
     this.userService.getUser()
-      .subscribe(user => { this.user = user; });
-    this.userService.getUsersOfHr()
-      .subscribe(users => {
-        this.dateList = [];
-        users.map((user) => {
-          user.dates.map((date) => {
-            const dateObj = {
-              firstName: user.firstName,
-              lastName: user.lastName,
-              topic: date.topic,
-              date: date.date
-            };
-            this.dateList = [...this.dateList, dateObj ];
-            this.dateList.sort((a, b) => {
-              if (a.date < b.date) {
-                return 1;
-              }
-              if (a.date > b.date) {
-                return -1;
-              }
-
-              return 0;
-            });
+      .subscribe(user => {
+        this.user = user;
+      });
+    if (this.userService.getUserType() === 'hr') {
+      this.userService.getUsersOfHr()
+        .subscribe(users => {
+          this.dateList = [];
+          users.forEach((user) => {
+            this.dateList = this.dateService.setDateList(user, this.dateList);
           });
         });
-      });
+    } else if (this.userService.getUserType() === 'developer') {
+      this.userService.getUser()
+        .subscribe(user => {
+          this.dateList = [];
+          this.dateList = this.dateService.setDateList(user, this.dateList);
+        });
+    }
   }
 
   getFilters(): void {

@@ -1,30 +1,47 @@
-import { IDepartment } from './department';
-import { IUser } from '../interfaces/user.interface';
-import { IManager } from '../interfaces/manager.interface';
 import { DatesItem } from '../../page/common/dates-item';
 
 export class Contact {
-  constructor(
-    contact_name?: string,
-    contact_value?: string
-  ){}
+  constructor(public contact_name?: string,
+              public contact_value?: string) {}
+}
+
+export class Department {
+  constructor(public _id?: string,
+              public name?: string,
+              public position?: []) {}
+}
+
+export class Manager {
+  constructor(public _id?: any,
+              public firstName?: string,
+              public lastName?: string,
+              public position?: string,
+              public manager?: Manager,
+              public teamlead?: User,
+              public department?: Department,
+              public email?: string,
+              public phone?: string,
+              public contacts?: object,
+              public photoURL?: string,
+              public hrID?: number,
+              public date?: object) {}
 }
 
 export  class User {
-  _id: any;
-  firstName: string;
-  lastName: string;
-  position: string;
-  manager?: IManager;
-  teamlead: IUser;
-  department?: IDepartment;
-  email: string;
-  phone: string;
-  contacts: Contact[];
-  photoURL: string;
-  hr: object;
-  dates: DatesItem[];
-  watched_issues?: string[];
-  roles: string[];
-  type: string;
+  constructor(public _id?: any,
+              public firstName?: string,
+              public lastName?: string,
+              public position?: string,
+              public manager?: Manager,
+              public teamlead?: User,
+              public department?: Department,
+              public email?: string,
+              public phone?: string,
+              public contacts?: Contact[],
+              public photoURL?: string,
+              public hr?: object,
+              public dates?: DatesItem[],
+              public watched_issues?: string[],
+              public roles?: string[],
+              public type?: string) {}
 }

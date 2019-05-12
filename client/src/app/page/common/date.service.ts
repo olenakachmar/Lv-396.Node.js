@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
+import { DatesItem } from './dates-item';
+import { HelperService } from './helper.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class DateService {
+
+  constructor(private readonly helperService: HelperService) { }
+
   public isDateString = (dateStr: string): boolean => {
     const str = `${dateStr}`;
     const time = str.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
@@ -54,5 +59,21 @@ export class DateService {
     }
 
     return month.toString();
+  };
+
+  public readonly setDateList = (user, dateArray): DatesItem[] => {
+    let dateList = dateArray;
+    user.dates.map((date) => {
+      const dateObj = {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        topic: date.topic,
+        date: date.date
+      };
+      dateList = [...dateList, dateObj];
+      dateList = this.helperService.sortList(dateList);
+  });
+
+    return dateList;
   };
 }

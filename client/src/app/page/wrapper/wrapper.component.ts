@@ -78,8 +78,8 @@ export class WrapperComponent implements OnInit {
             content: item.content,
             assignTo: item.assignTo,
             reassigned: item.reassigned,
-            resolvedByAuthor: item.resolvedByAuthor,
-            resolvedByPerformer: item.resolvedByPerformer,
+            resolvedByAuthor: !!item.resolvedByAuthor,
+            resolvedByPerformer: !!item.resolvedByPerformer,
             isOpen: false
           })
         )
