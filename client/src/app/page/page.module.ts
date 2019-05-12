@@ -33,7 +33,7 @@ import { UpcomingDatesComponent } from './upcoming-dates/upcoming-dates.componen
 import { ListDatesComponent } from './upcoming-dates/list-dates/list-dates.component';
 import { ItemDateComponent } from './upcoming-dates/list-dates/item-date/item-date.component';
 import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
-import { DatepickerComponent } from './create-update-user-page/datepicker/datepicker.component';
+import { DatepickerComponent } from './create-update-user-page/create-update-date/datepicker/datepicker.component';
 
 
 import { appConfigProviders } from './common/config';
@@ -41,6 +41,7 @@ import { FilterReturnService } from './common/filter-return.service';
 import { FilterDatesByPipe } from './filter-dates-by.pipe';
 import { CreateUpdateUserComponent } from './create-update-user-page/create-update-user/create-update-user.component';
 import { CommentModalComponent } from './comment-modal/comment-modal.component';
+import { CreateUpdateDateComponent } from './create-update-user-page/create-update-date/create-update-date.component';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { CommentModalComponent } from './comment-modal/comment-modal.component';
     CreateUpdateUserComponent,
     DatepickerComponent,
     CommentModalComponent,
+    CreateUpdateDateComponent,
   ],
   imports: [
     CommonModule,

@@ -3,6 +3,7 @@ import { UserService } from '../../common/services/user.service';
 import { User } from '../../common/models/user';
 import { Subject } from 'rxjs/Rx';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-update-user-page',
@@ -17,19 +18,25 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   ifChosenHrDepartment: boolean;
   notValidUser: boolean;
   create: boolean;
+  requiredForCreationUserFields: any[];
 
   constructor(readonly userService: UserService,
               private readonly router: Router,
-              private  route: ActivatedRoute) {
+              private  route: ActivatedRoute,
+              private toastr: ToastrService) {
+  }
+
+  showSuccess() {
+    this.toastr.success('Hello world!', 'Toastr fun!');
   }
 
   ngOnInit(): void {
     this.notValidUser = false;
     this.route.paramMap.subscribe(parameterMap => {
       const id = parameterMap.get('id');
-
       this.getEmployee(id);
     });
+    this.deleteNotValidValuesFromUserObjectOnDepartmentChoose();
   }
 
   private getEmployee(id: string): void {
@@ -47,11 +54,8 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
     this.user = user;
     this.ifChosenDevelopmentDepartment = chosenDevelopmentDepartment;
     this.ifChosenHrDepartment = chosenHrDepartment;
-
     this.user.phone = '35839946448845';
     this.user.email = 'trley@gmail.com';
-    this.user.roles = ['Teamlead', 'Manager'];
-
 
     if (this.validateUser()) {
       if (this.user.id) {
@@ -73,31 +77,33 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   }
 
   validateUser(): boolean {
-    let requiredForCreationUserFields = [this.user.firstName, this.user.lastName, this.user.department,
-                                         this.user.position, this.user.hr, this.user.manager];
-
+    this.user.type = this.ifChosenHrDepartment ? 'hr' : 'developer';
+    this.requiredForCreationUserFields = [this.user.firstName, this.user.lastName, this.user.department,
+                                          this.user.position, this.user.hr, this.user.manager];
     if (this.ifChosenDevelopmentDepartment) {
-      requiredForCreationUserFields = [...requiredForCreationUserFields, this.user.teamlead];
+      this.requiredForCreationUserFields = [...this.requiredForCreationUserFields, this.user.teamlead];
     }
-
-    this.ifChosenHrDepartment ? this.user.type = 'hr' : this.user.type = 'developer';
-
     let requiredField = true;
-    requiredForCreationUserFields.map(elem => {
+    this.requiredForCreationUserFields.map(elem => {
       if (!elem) {
         requiredField = false;
       }
     });
 
     return requiredField;
+  }
 
+  deleteNotValidValuesFromUserObjectOnDepartmentChoose(): void {
+    this.userService.chosenDepartment.subscribe(() => {
+      delete this.user.teamlead;
+      delete this.user.position;
+    });
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
 }
 
 

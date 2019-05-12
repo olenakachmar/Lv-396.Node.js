@@ -14,6 +14,7 @@ export class UpdateUser {
               public hr?: object,
               public roles?: string[]) {
   }
+
   mapUser(user: User): void {
     this.id = user.id;
     this.firstName = user.firstName;
@@ -23,7 +24,9 @@ export class UpdateUser {
     this.phone = user.phone;
     this.type = user.type;
     this.manager = user.manager._id;
-    this.teamlead = user.teamlead ? user.teamlead.id : undefined;
+    if (user.teamlead) {
+      this.teamlead = user.teamlead.id;
+    }
     this.department = user.department._id;
     this.hr = user.hr;
     this.roles = user.roles;
