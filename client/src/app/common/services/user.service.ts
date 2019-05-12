@@ -1,6 +1,8 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { tap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { User } from '../models/user';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { api } from '../../../environments/environment';
@@ -20,9 +22,12 @@ export class UserService {
 
   chosenDepartment = new EventEmitter();
 
-  constructor(private readonly http: HttpClient) {
-  }
+  constructor(private readonly http: HttpClient) {}
+
+  user: User;
   helper = new JwtHelperService();
+
+  public takeUser: BehaviorSubject<User> = new BehaviorSubject({});
 
   getAll(): Observable<User[]> {
     return this.http.get<User[]>(`${api}users`, httpOptions);
@@ -49,7 +54,55 @@ export class UserService {
   getUser(id?: string): Observable<User> {
     const userId = this.getUserId();
 
-    return this.http.get<User>(`${api}users/${id || userId}`, httpOptions);
+    return this.http.get<any>(`${api}users/${id || userId}`, httpOptions)
+      .pipe(tap(res => {
+        this.user = {
+            contacts: res.contacts,
+            dates: res.dates,
+            department: { _id: res.department._id, name: res.department.name, position: res.department.position },
+            email: res.email,
+            firstName: res.firstName,
+            hr: res.hr,
+            lastName: res.lastName,
+            manager: {
+              contacts: res.manager.contacts,
+              date: res.manager.dates,
+              department: res.manager.department,
+              email: res.manager.email,
+              firstName: res.manager.firstName,
+              lastName: res.manager.lastName,
+              hrID: res.manager.hr,
+              manager: res.manager.manager,
+              phone: res.manager.phone,
+              position: res.manager.position
+            },
+            phone: res.phone,
+            photoID: res.photoID,
+            photoURL: res.photoURL,
+            position: res.position,
+            roles: res.roles,
+            teamlead: {
+              contacts: res.teamlead.contacts,
+              dates: res.teamlead.dates,
+              department: res.teamlead.department,
+              email: res.teamlead.email,
+              firstName: res.teamlead.firstName,
+              lastName: res.teamlead.lastName,
+              hr: res.teamlead.hr,
+              manager: res.teamlead.manager,
+              phone: res.teamlead.phone,
+              position: res.teamlead.position,
+              roles: res.teamlead.roles,
+              teamlead: res.teamlead.teamlead,
+              watchedIssues: res.teamlead.watchedIssues
+            },
+            watchedIssues: res.watched_issues,
+            id: res._id,
+            type: res.type
+          };
+        this.takeUser.next(this.user);
+        })
+      );
   }
 
   getUserId(): any {

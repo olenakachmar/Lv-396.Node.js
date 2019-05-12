@@ -18,10 +18,9 @@ import { DatesItem } from '../../common/dates-item';
 })
 
 export class NavbarProfileComponent implements OnInit {
-  @Input() user: User;
   @Input() public userType: string;
 
-  userId: string;
+  user: User;
   newTasks: Task[];
   menuList: NavItem[];
   dateList: DatesItem[];
@@ -36,26 +35,29 @@ export class NavbarProfileComponent implements OnInit {
               private readonly route: ActivatedRoute,
               private readonly navItemsService: NavItemsService,
               private readonly userService: UserService,
-              private readonly taskService: TasksService,
+              private readonly tasksService: TasksService,
               private readonly dateService: DateService) {
   }
 
   ngOnInit(): void {
     this.navItemsService.getNavList()
       .subscribe(list => this.menuList = list);
+    this.userService.takeUser
+      .subscribe(user => {
+        this.user = user;
+      })
     this.loadDates();
     this.loadUserTasks();
     this.currentByRout(this.router.url);
-
-    this.userId = this.userService.getUserId();
     this.todayDate = new Date();
     this.user.photoURL = this.user.photoURL || 'assets/img/userimg.jpg';
   }
 
   openTaskByid(taskID: string): boolean {
-    // this.taskService.taskIsWatched(this.user._id, taskID)
-    //   .subscribe();
-    this.taskService.isOpenTask.next(taskID);
+    this.tasksService.taskIsWatched(this.user.id, taskID)
+      .subscribe();
+    this.tasksService.openTaskById(taskID);
+    this.removeFormNew(taskID);
     setTimeout(() => {
       this.scrollTo(taskID);
     }, 300);
@@ -81,7 +83,7 @@ export class NavbarProfileComponent implements OnInit {
           this.datesCount = this.dateList.length;
         });
     } else if (this.userService.getUserType() === 'developer') {
-      this.userService.getUser()
+      this.userService.takeUser
         .subscribe(user => {
           this.dateList = [];
           this.dateList = this.dateService.setDateList(user, this.dateList);
@@ -92,20 +94,23 @@ export class NavbarProfileComponent implements OnInit {
   }
 
   loadUserTasks(): void {
-    // this.taskService.getUserTasks(this.userId)
-    this.taskService.allUserTasks
+    this.tasksService.takeUserTasks
       .subscribe(tasks => {
-        this.newTasks = this.findNewTasks(tasks, this.user.watched_issues);
-        // this.newTasks.sort((a, b) => (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0));
+        this.newTasks = this.findNewTasks(tasks, this.user.watchedIssues);
         this.newTasksCount = this.newTasks.length;
       });
   }
 
+  removeFormNew(taskID): void {
+    this.newTasks = this.newTasks.filter(task => task.id !== taskID);
+    this.newTasksCount -= 1;
+  }
+
   findNewTasks(allTasks: any, watched: string[]): Task[] {
     if (this.userType === 'hr') {
-      const arr = allTasks.filter(task => (task.author._id !== this.user._id && !task.resolvedByPerformer));
+      const arr = allTasks.filter(task => (task.author._id !== this.user.id && !task.resolvedByPerformer));
 
-      return arr.filter(task => !(watched.includes(task._id)));
+      return arr.filter(task => !(watched.includes(task.id)));
     }
     if (this.userType === 'developer') {
       return allTasks.filter(task => task.resolvedByPerformer && !task.resolvedByAuthor);
@@ -119,8 +124,8 @@ export class NavbarProfileComponent implements OnInit {
     return false;
   }
 
-  editUser(): void {
-    this.router.navigate(['/profile/edit-user', this.user._id], { relativeTo: this.route });
+  editUserPage(): void {
+    this.router.navigate(['/profile/edit-user', this.user.id], { relativeTo: this.route });
   }
 
   currentByIndex(i: number): boolean {
@@ -130,7 +135,8 @@ export class NavbarProfileComponent implements OnInit {
       this.logout();
     }
     if (this.menuList[i].router === '/profile/edit-user/:id') {
-      this.editUser();
+      this.editUserPage();
+      this.currentByRout('/profile/edit-user/:id');
     }
 
     return false;
@@ -142,7 +148,7 @@ export class NavbarProfileComponent implements OnInit {
     return this.active = false;
   }
 
-  trackById(link: NavItem): string {
+  trackById(index: number, link: NavItem): string {
     return link.id;
   }
 

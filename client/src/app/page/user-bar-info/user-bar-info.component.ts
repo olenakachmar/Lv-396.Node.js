@@ -18,11 +18,11 @@ export class UserBarInfoComponent implements OnInit {
     this.userType = this.userService.getUserType();
   }
 
-  private getManagerName(): string {
+  public getManagerName(): string {
     return `${this.userinfo.manager.firstName} ${this.userinfo.manager.lastName}`;
   }
 
-  private getTeamleadName(): string {
+  public getTeamleadName(): string {
     return `${this.userinfo.teamlead.firstName} ${this.userinfo.teamlead.lastName}`;
   }
 

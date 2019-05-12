@@ -10,6 +10,16 @@ export const NAVBAR_LIST: NavItem[] = [
     rightMenu: false,
     burgerMenu: true,
     hr: 'hr',
+    dev: ''
+  },
+  {
+    id: 'issues',
+    title: 'issues',
+    current: false,
+    router: '/profile/upcoming-tasks',
+    rightMenu: false,
+    burgerMenu: true,
+    hr: '',
     dev: 'developer'
   },
   {
@@ -20,16 +30,6 @@ export const NAVBAR_LIST: NavItem[] = [
     rightMenu: false,
     burgerMenu: true,
     hr: 'hr',
-    dev: 'developer'
-  },
-  {
-    id: 'issues',
-    title: 'issues',
-    current: false,
-    router: '',
-    rightMenu: false,
-    burgerMenu: true,
-    hr: '',
     dev: 'developer'
   },
   {

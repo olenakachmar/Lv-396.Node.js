@@ -34,7 +34,6 @@ export class BurgerMenuComponent implements OnInit {
 
   currentByIndex(i): boolean {
     this.navItemsService.currentIndex(i);
-    // this.closeMenu.emit(false);
     this.focusOut.emit(false);
 
     return false;

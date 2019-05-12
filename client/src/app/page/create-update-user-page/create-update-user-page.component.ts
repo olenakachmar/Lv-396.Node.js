@@ -54,11 +54,11 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
 
 
     if (this.validateUser()) {
-      if (this.user._id) {
+      if (this.user.id) {
         this.userService.updateUser(this.user)
           .takeUntil(this.destroy$)
           .subscribe((data: any) => {
-            this.router.navigate(['/profile/my-profile/', this.user._id], {relativeTo: this.route});
+            this.router.navigate(['/profile/my-profile/', this.user.id], {relativeTo: this.route});
           });
       } else {
         this.userService.addUser(this.user)

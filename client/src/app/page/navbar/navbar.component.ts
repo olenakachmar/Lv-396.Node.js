@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavItemsService } from '../common/nav-items.service';
 import { UserService } from '../../common/services/user.service';
 import { NavItem } from '../common/nav-item';
@@ -11,7 +11,6 @@ import { User } from '../../common/models/user';
 })
 
 export class NavbarComponent implements OnInit {
-  @Input() user: User;
 
   name: string;
   surname: string;
@@ -50,7 +49,7 @@ export class NavbarComponent implements OnInit {
     return false;
   }
 
-  trackById(link: NavItem): string {
+  trackById(index: number, link: NavItem): string {
     return link.id;
   }
 }

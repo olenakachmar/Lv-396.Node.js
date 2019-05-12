@@ -28,14 +28,14 @@ export class MyProfileComponent implements OnInit, OnDestroy {
   }
 
   editUser() {
-    this.router.navigate(['/profile/edit-user', this.user._id], {relativeTo: this.route});
+    this.router.navigate(['/profile/edit-user', this.user.id], {relativeTo: this.route});
   }
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
 
   confirm(): void {
-    this.userInfoService.deleteUser(this.user._id)
+    this.userInfoService.deleteUser(this.user.id)
       .takeUntil(this.destroy$)
       .subscribe(() =>
         this.router.navigate(['/profile/contact-info'], {relativeTo: this.route}));
