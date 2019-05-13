@@ -41,7 +41,7 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
 
   private getEmployee(id: string): void {
     if (id) {
-      this.userService.getUser(id)
+      this.userService.takeUser
         .subscribe(user => {
           this.user = user;
         });

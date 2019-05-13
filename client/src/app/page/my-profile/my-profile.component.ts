@@ -20,7 +20,7 @@ export class MyProfileComponent implements OnInit, OnDestroy {
               private modalService: BsModalService,
               private readonly router: Router) { }
 
-  user: User;
+  user;
   id: any;
 
   ngOnInit() {
@@ -28,7 +28,7 @@ export class MyProfileComponent implements OnInit, OnDestroy {
   }
 
   editUser() {
-    this.router.navigate(['/profile/edit-user', this.user.id], {relativeTo: this.route});
+    this.router.navigate(['/profile/edit-user', this.user._id], {relativeTo: this.route});
   }
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
@@ -47,8 +47,8 @@ export class MyProfileComponent implements OnInit, OnDestroy {
   }
 
   private readonly checkIdParam = () => {
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.loadUser(this.id);
+    const id = this.route.snapshot.paramMap.get('id');
+    this.loadUser(id);
   };
 
   private getFullName(): string {
@@ -56,8 +56,8 @@ export class MyProfileComponent implements OnInit, OnDestroy {
   }
 
   private readonly loadUser = (id: string) => {
-    this.userInfoService.getUser(this.id)
-      .subscribe(user => { this.user = user; });
+    this.userInfoService.getUser(id, true)
+      .subscribe(user => this.user = user);
   };
 
   ngOnDestroy(): void {

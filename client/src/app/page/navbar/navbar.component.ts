@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NavItemsService } from '../common/nav-items.service';
 import { UserService } from '../../common/services/user.service';
 import { NavItem } from '../common/nav-item';
-import { User } from '../../common/models/user';
 
 @Component({
   selector: 'app-navbar',

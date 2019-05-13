@@ -51,7 +51,7 @@ export class UserService {
     return this.http.get<any>(`${api}users?roles=Manager`, httpOptions);
   }
 
-  getUser(id?: string): Observable<User> {
+  getUser(id?: string, required?: boolean): Observable<User> {
     const userId = this.getUserId();
 
     return this.http.get<any>(`${api}users/${id || userId}`, httpOptions)
@@ -59,51 +59,27 @@ export class UserService {
         this.user = {
             contacts: res.contacts,
             dates: res.dates,
-            department: { _id: res.department._id, name: res.department.name, position: res.department.position },
             email: res.email,
             firstName: res.firstName,
             hr: res.hr,
             lastName: res.lastName,
-            manager: {
-              contacts: res.manager.contacts,
-              date: res.manager.dates,
-              department: res.manager.department,
-              email: res.manager.email,
-              firstName: res.manager.firstName,
-              lastName: res.manager.lastName,
-              hrID: res.manager.hr,
-              manager: res.manager.manager,
-              phone: res.manager.phone,
-              position: res.manager.position
-            },
             phone: res.phone,
             photoID: res.photoID,
             photoURL: res.photoURL,
             position: res.position,
             roles: res.roles,
-            teamlead: {
-              contacts: res.teamlead.contacts,
-              dates: res.teamlead.dates,
-              department: res.teamlead.department,
-              email: res.teamlead.email,
-              firstName: res.teamlead.firstName,
-              lastName: res.teamlead.lastName,
-              hr: res.teamlead.hr,
-              manager: res.teamlead.manager,
-              phone: res.teamlead.phone,
-              position: res.teamlead.position,
-              roles: res.teamlead.roles,
-              teamlead: res.teamlead.teamlead,
-              watchedIssues: res.teamlead.watchedIssues
-            },
             watchedIssues: res.watched_issues,
             id: res._id,
-            type: res.type
+            type: res.type,
+            department: this.checkProperty(res.department),
+            manager: this.checkProperty(res.manager),
+            teamlead: this.checkProperty(res.teamlead)
           };
-        this.takeUser.next(this.user);
+        this.currentUser(required, this.user);
         })
       );
   }
+
 
   getUserId(): any {
     if (localStorage.token) {
@@ -144,13 +120,25 @@ export class UserService {
     return httpOptions.headers.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
   }
 
-  postImage(avatar: File): Observable<Object> {
+  postImage(avatar: File): Observable<object> {
     const id = this.getUserId();
     const fd = new FormData();
     fd.append('id', id);
     fd.append('avatar', avatar);
 
     return this.http.post(`${api}users/change_avatar`, fd);
+  }
+
+  checkProperty(property): object {
+    if (property) {
+      return property;
+    }
+  }
+
+  currentUser(required: boolean, data: User): void {
+    if (!required) {
+      this.takeUser.next(data);
+    }
   }
 
 }

@@ -8,7 +8,7 @@ import { User } from '../../common/models/user';
   styleUrls: ['./user-bar-info.component.scss']
 })
 export class UserBarInfoComponent implements OnInit {
-  @Input() userinfo: User = new User();
+  @Input() userinfo: User;
   userType: string;
 
   constructor(readonly userService: UserService) {
@@ -18,15 +18,15 @@ export class UserBarInfoComponent implements OnInit {
     this.userType = this.userService.getUserType();
   }
 
-  public getManagerName(): string {
+  getManagerName(): string {
     return `${this.userinfo.manager.firstName} ${this.userinfo.manager.lastName}`;
   }
 
-  public getTeamleadName(): string {
+  getTeamleadName(): string {
     return `${this.userinfo.teamlead.firstName} ${this.userinfo.teamlead.lastName}`;
   }
 
-  public updateAvatar(newURL: string): void {
+  updateAvatar(newURL: string): void {
     this.userinfo.photoURL = newURL;
   }
 }

@@ -34,7 +34,7 @@ export class UpcomingDatesComponent implements OnInit {
   }
 
   loadUser(): void {
-    this.userService.takeUser
+    this.userService.getUser(this.userService.getUserId())
       .subscribe(user => {
         this.user = user;
       });

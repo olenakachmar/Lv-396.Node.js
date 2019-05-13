@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../common/services/auth.service';
 import { UserService } from '../../../common/services/user.service';
@@ -17,7 +17,7 @@ import { DatesItem } from '../../common/dates-item';
   providers: [AuthService]
 })
 
-export class NavbarProfileComponent implements OnInit {
+export class NavbarProfileComponent implements OnInit, OnChanges {
   @Input() public userType: string;
 
   user: User;
@@ -39,25 +39,31 @@ export class NavbarProfileComponent implements OnInit {
               private readonly dateService: DateService) {
   }
 
+  ngOnChanges(): void {
+    this.currentByRout(this.router.url);
+  }
+
   ngOnInit(): void {
     this.navItemsService.getNavList()
       .subscribe(list => this.menuList = list);
     this.userService.takeUser
       .subscribe(user => {
         this.user = user;
-      })
+      });
     this.loadDates();
     this.loadUserTasks();
-    this.currentByRout(this.router.url);
     this.todayDate = new Date();
     this.user.photoURL = this.user.photoURL || 'assets/img/userimg.jpg';
   }
 
   openTaskByid(taskID: string): boolean {
-    this.tasksService.taskIsWatched(this.user.id, taskID)
-      .subscribe();
+    if (this.typeOfUser) {
+      this.tasksService.taskIsWatched(this.user.id, taskID)
+        .subscribe(res => {
+          this.removeFromNew(taskID);
+        });
+    }
     this.tasksService.openTaskById(taskID);
-    this.removeFormNew(taskID);
     setTimeout(() => {
       this.scrollTo(taskID);
     }, 300);
@@ -83,7 +89,7 @@ export class NavbarProfileComponent implements OnInit {
           this.datesCount = this.dateList.length;
         });
     } else if (this.userService.getUserType() === 'developer') {
-      this.userService.takeUser
+      this.userService.getUser(this.userService.getUserId())
         .subscribe(user => {
           this.dateList = [];
           this.dateList = this.dateService.setDateList(user, this.dateList);
@@ -101,7 +107,7 @@ export class NavbarProfileComponent implements OnInit {
       });
   }
 
-  removeFormNew(taskID): void {
+  removeFromNew(taskID): void {
     this.newTasks = this.newTasks.filter(task => task.id !== taskID);
     this.newTasksCount -= 1;
   }
@@ -148,8 +154,8 @@ export class NavbarProfileComponent implements OnInit {
     return this.active = false;
   }
 
-  trackById(index: number, link: NavItem): string {
-    return link.id;
+  trackById(index: number, item: NavItem): string {
+    return item.id;
   }
 
   checkTodayDate(dateList): DatesItem[] {

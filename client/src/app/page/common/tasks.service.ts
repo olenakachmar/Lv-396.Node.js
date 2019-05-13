@@ -52,8 +52,8 @@ export class TasksService {
             commentContent: item.commentContent,
             assignTo: item.assignTo,
             reassigned: item.reassigned,
-            resolvedByAuthor: item.resolvedByAuthor,
-            resolvedByPerformer: item.resolvedByPerformer,
+            resolvedByAuthor: !!item.resolvedByAuthor,
+            resolvedByPerformer: !!item.resolvedByPerformer,
             isOpen: false
           })
         )
