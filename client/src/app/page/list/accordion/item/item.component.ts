@@ -15,6 +15,7 @@ export class ItemComponent implements OnInit {
   user = new User();
   userId: string;
   users: User[];
+  tasks: object;
   checkedResolve: boolean;
   cssClass: string;
   cssClassVisible: string;

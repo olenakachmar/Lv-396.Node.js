@@ -80,7 +80,8 @@ export class WrapperComponent implements OnInit {
             reassigned: item.reassigned,
             resolvedByAuthor: !!item.resolvedByAuthor,
             resolvedByPerformer: !!item.resolvedByPerformer,
-            isOpen: false
+            isOpen: false,
+            comments: item.comments
           })
         )
           .sort((a, b) => (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0));

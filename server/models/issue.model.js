@@ -58,10 +58,17 @@ const issueSchema = new Schema(
     resolvedByPerformer: {
       type: Boolean,
     },
-    commentContent: {
-      type: String,
-      default: '',
+    comments: [{
+      content: {
+        type: String,
+        default: '',
+      },
+      creator: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
     },
+    ],
   },
 );
 

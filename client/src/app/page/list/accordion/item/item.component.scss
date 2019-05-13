@@ -108,6 +108,18 @@
   text-align: center;
 }
 
+.view-comment {
+  text-align: left;
+  padding: 10px 30px;
+
+  span {
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 .reassign-button {
   grid-column-start: 5;
   grid-column-end: 6;
