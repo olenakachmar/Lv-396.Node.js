@@ -118,6 +118,16 @@
       text-decoration: underline;
     }
   }
+
+  .comment-creator {
+    font-size: $base-line-height;
+    color: $primary-color;
+  }
+
+  .comment-content {
+    font-size: $base-font-size;
+    color: $primary-color;
+  }
 }
 
 .reassign-button {
