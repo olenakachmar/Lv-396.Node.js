@@ -46,8 +46,6 @@ export class NavbarProfileComponent implements OnInit {
     this.loadDates();
     this.loadUserTasks();
     this.currentByRout(this.router.url);
-
-    this.userId = this.userService.getUserId();
     this.todayDate = new Date();
     this.user.photoURL = this.user.photoURL || 'assets/img/userimg.jpg';
   }
@@ -92,7 +90,7 @@ export class NavbarProfileComponent implements OnInit {
   }
 
   loadUserTasks(): void {
-    this.taskService.getUserTasks(this.userId)
+    this.taskService.getUserTasks(this.userService.getUserId())
       .subscribe(tasks => {
         this.newTasks = this.findNewTasks(tasks, this.user.watched_issues);
         this.newTasks.sort((a, b) => (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0));

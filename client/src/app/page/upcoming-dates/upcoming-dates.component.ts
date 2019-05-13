@@ -14,7 +14,7 @@ import { DateService } from '../common/date.service';
   styleUrls: ['./upcoming-dates.component.scss']
 })
 export class UpcomingDatesComponent implements OnInit {
-  user = new User();
+  user: User;
   filter: Filter[];
   dateList: DatesItem[];
   modalTypeVal: string;
