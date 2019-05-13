@@ -28,6 +28,8 @@ import { BurgerMenuComponent } from './page/navbar/burger-menu/burger-menu.compo
 import { MenuItemComponent } from './page/navbar/burger-menu/menu-item/menu-item.component';
 import { ForgotPasswordComponent } from './home/common/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './home/common/reset-password/reset-password.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { ResetPasswordComponent } from './home/common/reset-password/reset-passw
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot() // ToastrModule added
   ],
   providers: [
     AUTH_PROVIDERS,
