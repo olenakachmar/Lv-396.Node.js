@@ -55,9 +55,7 @@ export class UserListComponent implements OnInit {
 
   getAllUsers(): any  {
     this.userService.getAll()
-      .subscribe(users => {
-        this.users = users;
-      });
+      .subscribe(users => this.users = users);
   }
 
   showOrHide(): any {
