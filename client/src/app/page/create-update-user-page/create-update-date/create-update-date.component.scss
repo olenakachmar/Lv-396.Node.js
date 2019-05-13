@@ -1,0 +1,50 @@
+@import '../../../common/css/theme';
+@import '../../../common/css/theme.form';
+.additional-info {
+  .add__icon {
+    margin-right: 10px;
+  }
+  .delete__icon {
+    cursor: pointer;
+    margin: 16px;
+  }
+
+  .user-info {
+    padding-top: 25px;
+
+    .fields-button {
+      width: 100%;
+      margin-top: 24px;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+  }
+
+  .date-form {
+    .info-form {
+      padding: 10px 0 10px 0;
+
+      .form-control {
+        height: 50px;
+        width: 100%;
+
+      }
+    }
+
+    .add-date {
+      margin-top: 15px;
+      margin-bottom: 15px;
+      .dropdown-contact {
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .date-topic {
+      margin-bottom: 5px;
+    }
+  }
+}
+
+
