@@ -46,7 +46,6 @@ export class NavbarProfileComponent implements OnInit {
     this.loadDates();
     this.loadUserTasks();
     this.currentByRout(this.router.url);
-
     this.todayDate = new Date();
     this.user.photoURL = this.user.photoURL || 'assets/img/userimg.jpg';
   }
