@@ -39,7 +39,7 @@ export class ItemComponent implements OnInit {
     this.userService.getAll()
       .subscribe(users => this.users = users);
     this.cssClass = '';
-    this.isOpen = false;  ////////////
+    this.isOpen = false;
     this.isOpen = this.task.isOpen;
     this.unreadClass = '';
     this.userType = this.userService.getUserType();
