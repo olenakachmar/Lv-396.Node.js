@@ -34,7 +34,7 @@ export class UpcomingDatesComponent implements OnInit {
   }
 
   loadUser(): void {
-    this.userService.getUser()
+    this.userService.getUser(this.userService.getUserId())
       .subscribe(user => {
         this.user = user;
       });
@@ -47,7 +47,7 @@ export class UpcomingDatesComponent implements OnInit {
           });
         });
     } else if (this.userService.getUserType() === 'developer') {
-      this.userService.getUser()
+      this.userService.takeUser
         .subscribe(user => {
           this.dateList = [];
           this.dateList = this.dateService.setDateList(user, this.dateList);

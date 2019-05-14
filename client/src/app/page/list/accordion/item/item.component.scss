@@ -109,6 +109,28 @@
   text-align: center;
 }
 
+.view-comment {
+  text-align: left;
+  padding: 10px 30px;
+
+  span {
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .comment-creator {
+    font-size: $base-line-height;
+    color: $primary-color;
+  }
+
+  .comment-content {
+    font-size: $base-font-size;
+    color: $primary-color;
+  }
+}
+
 .reassign-button {
   grid-column-start: 4;
   grid-column-end: 5;
@@ -309,4 +331,8 @@ p {
 
 .pointer {
   cursor: pointer;
+}
+
+.open {
+  border: 1px solid $primary-color;
 }
