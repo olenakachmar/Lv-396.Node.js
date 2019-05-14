@@ -30,6 +30,12 @@ export class HomeComponent {
   auth(form: any): boolean {
     this.submitted = true;
     const helper = new JwtHelperService();
+    if (this.frm.untouched) {
+      this.hasFailed = true;
+
+      return undefined;
+    }
+
     if (this.frm.invalid && this.frm.get('login').value === '') {
       this.showInputErrorslogin = true;
 

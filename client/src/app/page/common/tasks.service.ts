@@ -54,11 +54,12 @@ export class TasksService {
             reassigned: item.reassigned,
             resolvedByAuthor: !!item.resolvedByAuthor,
             resolvedByPerformer: !!item.resolvedByPerformer,
-            isOpen: false
+            isOpen: false,
+            comments: item.comments
           })
         )
           .sort((a, b) => (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0));
-          this.takeUserTasks.next(this.tasks);
+        this.takeUserTasks.next(this.tasks);
       }));
   }
 
@@ -71,7 +72,17 @@ export class TasksService {
     return this.http.put<Task>(`${api}/issues/resolve`, body, httpOptions);
   }
 
-  public editTask(requestBody: TaskEditRequestBody): Observable < any > {
+  public createComment(id: string, content: string, creator: string): Observable<any> {
+    const body = {
+      id,
+      content,
+      creator
+    };
+
+    return this.http.put<Task>(`${api}/issues/comment`, body);
+  }
+
+  public editTask(requestBody: TaskEditRequestBody): Observable<any> {
     return this.http.put<TaskEditRequestBody>(`${api}/issues`, requestBody, httpOptions);
   }
 
