@@ -42,7 +42,7 @@ export  class User {
               public photoID?: string,
               public hr?: object,
               public dates?: DatesItem[],
-              public watchedIssues?: string[],
+              public watched_issues?: string[],
               public roles?: string[],
               public type?: string) {}
 }

@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
-  user: User = new User();
+  user = new User();
   ifChosenDevelopmentDepartment: boolean;
   ifChosenHrDepartment: boolean;
   notValidUser: boolean;
@@ -45,12 +45,11 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   }
 
   extractUser(user, chosenDevelopmentDepartment, chosenHrDepartment): any {
-    console.log(user);
     this.user = user;
     this.ifChosenDevelopmentDepartment = chosenDevelopmentDepartment;
     this.ifChosenHrDepartment = chosenHrDepartment;
-    this.user.phone = '83994633448845';
-    this.user.email = 'tyrley23@gmail.com';
+    this.user.phone = '8399463344845';
+    this.user.email = 'tyrleyl23@gmail.com';
 
     if (this.validateUser()) {
       if (this.user._id) {
@@ -65,7 +64,6 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
             }, error => this.errorHandling(error)
           );
       } else {
-        console.log(this.user);
         this.userService.addUser(this.user)
           .takeUntil(this.destroy$)
           .subscribe((data: any) => {

@@ -102,7 +102,7 @@ export class NavbarProfileComponent implements OnInit, OnChanges {
   loadUserTasks(): void {
     this.tasksService.takeUserTasks
       .subscribe(tasks => {
-        this.newTasks = this.findNewTasks(tasks, this.user.watchedIssues);
+        this.newTasks = this.findNewTasks(tasks, this.user.watched_issues);
         this.newTasksCount = this.newTasks.length;
       });
   }

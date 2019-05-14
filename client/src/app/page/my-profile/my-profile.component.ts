@@ -35,7 +35,7 @@ export class MyProfileComponent implements OnInit, OnDestroy {
   }
 
   confirm(): void {
-    this.userInfoService.deleteUser(this.id)
+    this.userInfoService.deleteUser(this.user._id)
       .takeUntil(this.destroy$)
       .subscribe(() =>
         this.router.navigate(['/profile/contact-info'], {relativeTo: this.route}));

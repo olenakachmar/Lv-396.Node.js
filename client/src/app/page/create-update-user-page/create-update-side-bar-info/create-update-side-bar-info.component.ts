@@ -25,8 +25,6 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
   ifChosenHrDepartment = false;
   @Input() showModal: boolean;
 
-  timeoutMS = 1000;
-
   constructor(readonly departmentService: DepartmentService,
               readonly userService: UserService) {
   }
@@ -43,22 +41,6 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy {
             .map(e => new OptionPair(e, e));
         }
       });
-    // this.departmentService.getAllDepartments()
-    //   .then(data => {
-    //     this.departmentsOptionPair = data.map(o => new OptionPair(o._id, o.name));
-    //     this.departments = data;
-    //   })
-    //   .then(() => {
-    //     setTimeout(() => {
-    //         if (this.user.department) {
-    //           this.positions = this.departments
-    //             .filter(elem => elem._id === this.user.department._id)[0].position
-    //             .map(e => new OptionPair(e, e));
-    //         }
-    //       },
-    //       this.timeoutMS
-    //     );
-    //   });
 
     this.userService.getAllTeamLeads()
       .takeUntil(this.destroy$)

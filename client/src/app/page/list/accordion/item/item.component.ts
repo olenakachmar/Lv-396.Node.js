@@ -73,7 +73,7 @@ export class ItemComponent implements OnInit {
   }
 
   changeClassUnread(): void {
-    const condHrTasks = !this.user.watchedIssues.includes(this.task.id) &&
+    const condHrTasks = !this.user.watched_issues.includes(this.task.id) &&
                         this.userId !== this.task.author._id &&
                         !this.checkedAuthorOrPerformer();
 
@@ -95,7 +95,7 @@ export class ItemComponent implements OnInit {
   }
 
   taskIsWatched(): void {
-    if (!this.user.watchedIssues.includes(this.task.id)) {
+    if (!this.user.watched_issues.includes(this.task.id)) {
       this.tasksService.taskIsWatched(this.user._id, this.task.id)
         .subscribe(task => task);
     }

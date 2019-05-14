@@ -77,7 +77,6 @@ export class UserService {
   }
 
   addUser(user: User): Observable<any> {
-    console.log(user);
     return this.http.post<User>(`${api}auth/signup`, user, httpOptions);
   }
 
@@ -96,7 +95,6 @@ export class UserService {
   updateUser(user: User): Observable<any> {
     const updateUser = new UpdateUser();
     updateUser.mapUser(user);
-    console.log('on servise', updateUser);
 
     return this.http.put<User>(`${api}users`, updateUser, httpOptions);
   }
