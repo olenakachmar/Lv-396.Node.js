@@ -87,7 +87,7 @@ export class ItemComponent implements OnInit {
   }
 
   checkedAuthorOrPerformer(): boolean {
-    this.checkedResolve = this.user.id === this.task.author._id ?  this.task.resolvedByAuthor : this.task.resolvedByPerformer;
+    this.checkedResolve = this.user._id === this.task.author._id ?  this.task.resolvedByAuthor : this.task.resolvedByPerformer;
     this.cssClass = this.checkedResolve ? 'hiddenMark' : '';
 
     return this.checkedResolve;
@@ -95,7 +95,7 @@ export class ItemComponent implements OnInit {
 
   taskIsWatched(): void {
     if (!this.user.watchedIssues.includes(this.task.id)) {
-      this.tasksService.taskIsWatched(this.user.id, this.task.id)
+      this.tasksService.taskIsWatched(this.user._id, this.task.id)
         .subscribe(task => task);
     }
   }
@@ -112,7 +112,7 @@ export class ItemComponent implements OnInit {
   }
 
   resolveClick(): void {
-    this.tasksService.updateResolvedBy(this.user.id, this.task.id)
+    this.tasksService.updateResolvedBy(this.user._id, this.task.id)
       .subscribe((item: any) => item);
     this.cssClass = 'hiddenMark';
     this.cssClassVisible = 'visible';

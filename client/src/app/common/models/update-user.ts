@@ -15,8 +15,8 @@ export class UpdateUser {
               public roles?: string[]) {
   }
 
-  mapUser(user: User): void {
-    this.id = user.id;
+  mapUser(user): void {
+    this.id = user._id;
     this.firstName = user.firstName;
     this.lastName = user.lastName;
     this.position = user.position;

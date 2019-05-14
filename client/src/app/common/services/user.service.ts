@@ -22,7 +22,8 @@ export class UserService {
 
   chosenDepartment = new EventEmitter();
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {
+  }
 
   user: User;
   helper = new JwtHelperService();
@@ -56,26 +57,8 @@ export class UserService {
 
     return this.http.get<any>(`${api}users/${id || userId}`, httpOptions)
       .pipe(tap(res => {
-        this.user = {
-            contacts: res.contacts,
-            dates: res.dates,
-            email: res.email,
-            firstName: res.firstName,
-            hr: res.hr,
-            lastName: res.lastName,
-            phone: res.phone,
-            photoID: res.photoID,
-            photoURL: res.photoURL,
-            position: res.position,
-            roles: res.roles,
-            watchedIssues: res.watched_issues,
-            id: res._id,
-            type: res.type,
-            department: this.checkProperty(res.department),
-            manager: this.checkProperty(res.manager),
-            teamlead: this.checkProperty(res.teamlead)
-          };
-        this.currentUser(required, this.user);
+          this.user = res;
+          this.currentUser(required, this.user);
         })
       );
   }
@@ -94,6 +77,7 @@ export class UserService {
   }
 
   addUser(user: User): Observable<any> {
+    console.log(user);
     return this.http.post<User>(`${api}auth/signup`, user, httpOptions);
   }
 
@@ -103,7 +87,7 @@ export class UserService {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       }),
-      body: { id }
+      body: {id}
     };
 
     return this.http.delete(`${api}users/`, deleteOptions);

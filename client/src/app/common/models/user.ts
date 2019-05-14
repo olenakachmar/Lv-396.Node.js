@@ -28,7 +28,7 @@ export class Manager {
 }
 
 export  class User {
-  constructor(public id?: any,
+  constructor(public _id?: any,
               public firstName?: string,
               public lastName?: string,
               public position?: string,
