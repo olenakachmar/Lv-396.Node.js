@@ -39,7 +39,7 @@ export class CommentModalComponent implements OnInit {
 
   createComment(form: any): boolean {
     this.tasksService
-      .createComment(this.task.id, form.commen, this.userService.getUserId())
+      .createComment(this.task.id, form.comment, this.userService.getUserId())
       .subscribe(
         (response: any) => {
           this.toastr.success(response.updated, 'Request is');

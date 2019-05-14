@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NavItem } from '../../../common/nav-item';
-import { NavItemsService } from '../../../common/nav-items.service';
 
 @Component({
   selector: 'app-menu-item',
@@ -10,18 +9,7 @@ import { NavItemsService } from '../../../common/nav-items.service';
 export class MenuItemComponent implements OnInit {
   @Input() public userType: string;
   @Input() public link: NavItem;
-  @Output() readonly closeMenu: EventEmitter<boolean> = new EventEmitter();
-
-  constructor(private readonly navItemsService: NavItemsService) { }
 
   ngOnInit(): void {
   }
-
-  currentByIndex(i: number): boolean {
-    this.navItemsService.currentIndex(i);
-    this.closeMenu.emit(false);
-
-    return false;
-  }
-
 }
