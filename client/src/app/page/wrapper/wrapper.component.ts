@@ -11,7 +11,7 @@ import { FILTER_CSS_CLASS_PREFIX } from '../common/config';
 @Component({
   selector: 'app-wrapper',
   templateUrl: './wrapper.component.html',
-  styleUrls: ['./wrapper.component.scss']
+  styleUrls: ['./wrapper.component.scss'],
 })
 
 export class WrapperComponent implements OnInit {
@@ -39,15 +39,12 @@ export class WrapperComponent implements OnInit {
     this.getFilters();
     this.getTasks();
     this.loadUser();
-    this.openTaskById();
-    this.filterGrids = this.filters.length ? this.filterCssClassPrefix + this.filters.length.toString() : '';
     this.userRole = this.checkUserRole();
-    this.userID = this.userInfoService.getUserId();
   }
 
   loadUser(): void {
     this.userInfoService.getUser()
-      .subscribe(user => { this.user = user; });
+      .subscribe(user => this.user = user);
   }
 
   private readonly checkUserRole = (): any =>
@@ -55,37 +52,20 @@ export class WrapperComponent implements OnInit {
 
   getFilters(): void {
     this.filtersService.getFilters()
-      .subscribe(filters => this.filters = filters);
+      .subscribe(filters => {
+        this.filters = filters;
+        this.filterGrids = filters.length ? this.filterCssClassPrefix + filters.length.toString() : '';
+      });
+  }
+
+  getTasks(): void {
+    this.tasksService.takeUserTasks
+      .subscribe(tasks => this.tasks = tasks);
   }
 
   updateResolve(): void {
     this.tasksService.updateResolvedBy(this.userInfoService.getUserId(), this.task.id)
       .subscribe(tasks => { this.tasks = tasks; });
-  }
-
-  getTasks(): void {
-    this.tasksService.getUserTasks(this.userInfoService.getUserId())
-      .subscribe(tasks => {
-        this.tasks = tasks.map((item: any) =>
-          ({
-            id: item._id,
-            name: item.name,
-            excerpt: item.excerpt,
-            status: { name: item.status.name, value: item.status.value },
-            type: { name: item.type.name, value: item.type.value },
-            date: item.date,
-            author: item.author,
-            content: item.content,
-            assignTo: item.assignTo,
-            reassigned: item.reassigned,
-            resolvedByAuthor: !!item.resolvedByAuthor,
-            resolvedByPerformer: !!item.resolvedByPerformer,
-            isOpen: false
-          })
-        )
-          .sort((a, b) => (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0));
-        this.ref.detectChanges();
-      });
   }
 
   selectFilterOption = (data: any) => {
@@ -101,14 +81,6 @@ export class WrapperComponent implements OnInit {
       );
     }
   };
-
-  openTaskById(): void {
-    this.tasksService.isOpenTask.subscribe((isOpenID: string) => {
-      if (this.tasks && isOpenID) {
-        this.tasks.map(task => task.isOpen = task.id === isOpenID);
-      }
-    });
-  }
 
   private readonly setOptions = (isCalendar: boolean, options: FilterOptions[], data: any) => {
     if (isCalendar) {

@@ -16,7 +16,7 @@ export class UpdateUser {
   }
 
   mapUser(user: User): void {
-    this.id = user._id;
+    this.id = user.id;
     this.firstName = user.firstName;
     this.lastName = user.lastName;
     this.position = user.position;
@@ -25,7 +25,7 @@ export class UpdateUser {
     this.type = user.type;
     this.manager = user.manager._id;
     if (user.teamlead) {
-      this.teamlead = user.teamlead._id;
+      this.teamlead = user.teamlead.id;
     }
     this.department = user.department._id;
     this.hr = user.hr;

@@ -7,7 +7,7 @@
     <app-filter class="container-fluid filter-wrapper {{filterGrids}}" [cssClass]="filterGrids"
                 [filters]="filters" (getFilter)="selectFilterOption($event)"></app-filter>
     <div class="container-fluid list-wrapper">
-      <app-list [tasks]="tasks | filterTasksBy: filters"></app-list>
+      <app-list [tasks]="tasks| filterTasksBy: filters"></app-list>
     </div>
     <app-modal *ngIf="userRole !== 'developer'" [modalType]="modalTypeVal" [task]="emptyTask"></app-modal>
   </main>

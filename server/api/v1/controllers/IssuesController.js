@@ -36,7 +36,7 @@ const getOneByQuery = async (req, res) => {
 
 const createOne = async (req, res) => {
   try {
-    const parameters = helper.reducePropsToObject(arrKeys, req);
+    const parameters = helper.reducePropsToObject(arrKeys, req.body);
     const newIssue = Issues({
       ...parameters,
       status: {
