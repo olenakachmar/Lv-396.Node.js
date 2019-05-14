@@ -83,11 +83,11 @@ export class AddTaskFormComponent implements OnInit {
     this.isSuccessfullyDeleted = false;
     this.filterDefaultVal = 1;
     this.getTheFilter();
-    this.userService.getUser()
+    this.userService.takeUser
       .subscribe(user => this.user = user);
     this.isUserHR = this.isUserRoleHR();
     this.userService.getAllHr()
-      .subscribe(users => this.createUserDropDown(users));
+      .subscribe(users => { this.createUserDropDown(users); });
     this.typeObject = this.createTaskType();
   }
 
@@ -110,7 +110,7 @@ export class AddTaskFormComponent implements OnInit {
     let defVal = 0;
     const options: FilterOptions[] = users.map(
       (item: User, index: number) => {
-        if (item._id === this.user._id) {
+        if (item.id === this.userService.getUserId()) {
           defVal = index;
         }
 
@@ -142,8 +142,8 @@ export class AddTaskFormComponent implements OnInit {
   onSubmit(): void {
     const requestBody: TaskCreateRequestBody = this.getRequestBody(this.addTaskForm.value);
     this.tasksService.createTask(requestBody)
-      .subscribe((result: {id: string}) => this.successHandling(result.id),
-        error => this.errorHandling(error)
+      .subscribe((result: { id: string }) => { this.successHandling(result.id); },
+        error => { this.errorHandling(error); }
       );
   }
 
@@ -177,7 +177,7 @@ export class AddTaskFormComponent implements OnInit {
     statusValue: this.filter.defaultValue,
     typeName: this.typeObject.typeName,
     typeValue: this.typeObject.typeValue,
-    author: this.user._id,
+    author: this.user.id,
     content: formVal.taskDescription,
     assignTo: this.getAssignToUserId()
   });
@@ -196,8 +196,8 @@ export class AddTaskFormComponent implements OnInit {
     event.preventDefault();
     this.tasksService.deleteTask(this.newTaskId)
       .subscribe(
-        () => this.deleteIsSuccess(),
-        error => this.errorHandling(error)
+        () => { this.deleteIsSuccess(); },
+        error => { this.errorHandling(error); }
       );
   }
 

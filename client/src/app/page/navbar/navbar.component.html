@@ -8,25 +8,16 @@
           </a>
         </div>
         <div class="navbar-item">
-          <a href [routerLink]="[ '/profile' ]" (click)="currentByRout('/profile');" class="navbar-item__logo">
+          <a href [routerLink]="[ '/profile/upcoming-tasks' ]" (click)="currentByRout('/profile/upcoming-tasks');"
+            class="navbar-item__logo">
             <img src='assets/img/logo-desk.png' alt="logo/main-page">
           </a>
         </div>
       </div>
-      <div class="burger-menu" [ngClass]="{'active': active}">
-        <ul class="burger-menu__list">
-          <ng-container *ngFor="let link of menuList; let i = index; trackBy: trackById;">
-            <li class="burger-menu__item" *ngIf="link.burgerMenu && (userType === link.hr || userType === link.dev)"
-              [ngClass]="{'current': link.current}">
-              <a href [routerLink]="[ link.router ]" (click)="active = !active; currentByIndex(i)">{{ link.title }}</a>
-            </li>
-          </ng-container>
-        </ul>
-        <app-social-networks class="w-100"></app-social-networks>
-      </div>
+      <app-burger-menu [active]="active" [menuList]="menuList" [userType]="userType" (focusOut)="closeBurger($event)"></app-burger-menu>
     </div>
     <div class="col-7 col-lg-7 d-flex pl-0 h-100">
-      <app-navbar-profile class="flex-grow-1 h-100"></app-navbar-profile>
+      <app-navbar-profile [userType]="userType" class="flex-grow-1 h-100"></app-navbar-profile>
     </div>
   </nav>
 </div>

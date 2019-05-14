@@ -15,19 +15,18 @@ export class UserBarInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userinfo = new User();
     this.userType = this.userService.getUserType();
   }
 
-  private  getManagerName(): string {
+  getManagerName(): string {
     return `${this.userinfo.manager.firstName} ${this.userinfo.manager.lastName}`;
   }
 
-  private  getTeamleadName(): string {
+  getTeamleadName(): string {
     return `${this.userinfo.teamlead.firstName} ${this.userinfo.teamlead.lastName}`;
   }
 
-  public updateAvatar(newURL: string): void {
+  updateAvatar(newURL: string): void {
     this.userinfo.photoURL = newURL;
   }
 }

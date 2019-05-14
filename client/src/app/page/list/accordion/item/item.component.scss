@@ -1,4 +1,4 @@
-@import '../../../../common/css/theme';
+@import "../../../../common/css/theme";
 
 ::ng-deep .accordion-wrapper:not(:last-child) .card {
   border-bottom: 0;
@@ -10,11 +10,12 @@
   grid-template-rows: 1fr auto;
 }
 
-.heading-text, .heading-excerpt {
+.heading-text,
+.heading-excerpt {
   padding-left: 20px;
 }
 
-.unread{
+.unread {
   background-color: $primary-color;
   grid-column-start: 1;
   grid-column-end: 2;
@@ -22,7 +23,7 @@
   grid-row-end: 3;
 }
 
-.heading-text h5{
+.heading-text h5 {
   margin-top: 8px;
 }
 
@@ -30,7 +31,8 @@
   display: none;
 }
 
-.heading-filter, .heading-date {
+.heading-filter,
+.heading-date {
   text-align: center;
 }
 
@@ -70,11 +72,15 @@
   grid-gap: 5px;
 }
 
-.body-text, .body-from {
+.body-text,
+.body-from {
   padding-left: 15px;
 }
 
-.heading-excerpt, .body-from, .body-resolve, .reassign-button {
+.heading-excerpt,
+.body-from,
+.body-resolve,
+.reassign-button {
   padding-bottom: 20px;
 }
 
@@ -94,9 +100,17 @@
   grid-row-end: 3;
 }
 
-.reassign-button {
+.comment {
   grid-column-start: 4;
   grid-column-end: 5;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  text-align: center;
+}
+
+.reassign-button {
+  grid-column-start: 5;
+  grid-column-end: 6;
   grid-row-start: 2;
   grid-row-end: 3;
 }
@@ -152,7 +166,7 @@ p {
   grid-row-end: 2;
 }
 
-.body-text p{
+.body-text p {
   margin-top: 0;
 }
 
@@ -167,7 +181,7 @@ p {
 .message-position {
   margin-top: 16px;
 }
-@media(max-width:530px) {
+@media (max-width: 530px) {
   .heading-grid {
     grid-template-rows: 1fr auto;
     grid-template-columns: 10px auto 10%;
@@ -176,7 +190,7 @@ p {
   .re-assign {
     margin-left: 0;
   }
-  
+
   .body-grid {
     grid-template-columns: 10px auto 44%;
     grid-template-rows: auto auto;
@@ -206,8 +220,8 @@ p {
   }
 }
 
-@media(max-width: 768px) {
-  .unread{
+@media (max-width: 768px) {
+  .unread {
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 1;
@@ -232,7 +246,7 @@ p {
     grid-row-start: 1;
     grid-row-end: 2;
   }
-  .heading-excerpt{
+  .heading-excerpt {
     grid-column-start: 2;
     grid-column-end: 4;
     grid-row-start: 3;
@@ -266,8 +280,10 @@ p {
     margin-top: auto;
     margin-bottom: auto;
   }
-  
-  .panel-open .heading-date, .panel-open .heading-filter, .panel-open .body-text {
+
+  .panel-open .heading-date,
+  .panel-open .heading-filter,
+  .panel-open .body-text {
     margin-top: 0;
   }
 }
@@ -286,9 +302,13 @@ p {
 
 .waiting {
   color: $primary-color;
-  font-style: italic;;
+  font-style: italic;
 }
 
 .pointer {
   cursor: pointer;
+}
+
+.open {
+  border: 1px solid $primary-color;
 }

@@ -9,7 +9,6 @@ import { Filter } from '../common/filter';
 import { FilterReturnService } from '../common/filter-return.service';
 import { FilterOptions } from '../common/filter-options';
 import { Task } from '../common/task';
-import { errorHandler } from '@angular/platform-browser/src/browser';
 
 @Component({
   selector: 'app-modal',
@@ -31,6 +30,7 @@ export class ModalComponent implements OnInit {
   usersIds: [];
   userDropDown: Filter;
   updateTask: boolean;
+  errorAssignTo: boolean;
 
   constructor(private readonly modalService: BsModalService,
               private readonly tasksService: TasksService,
@@ -62,10 +62,13 @@ export class ModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getAllHr()
-      .subscribe(users => this.createUserDropDown(users));
+      .subscribe(users => {
+        this.createUserDropDown(users);
+      });
     this.userService.getUser()
       .subscribe(user => this.user = user);
     this.getFilterStatus();
+    this.errorAssignTo = false;
   }
 
   get name(): any {
@@ -99,7 +102,7 @@ export class ModalComponent implements OnInit {
     };
   }
 
-  private createUserDropdownOptions = (users: User[]): FilterOptions[] => {
+  private readonly createUserDropdownOptions = (users: User[]): FilterOptions[] => {
     let options: FilterOptions[] = users.map(
       (item: User, index: number) =>
       ({
@@ -158,17 +161,18 @@ export class ModalComponent implements OnInit {
       assignTo: this.usersIds[this.userDropDown.defaultValue],
       reassigned: this.task.author._id,
     };
+    if (this.editTask.assignTo === this.user.id) {
+      this.errorAssignTo = true;
+    }
     this.updateTask = false;
     this.tasksService.editTask(this.editTask)
-      .subscribe((item: any) => this.successHandling());
+      .subscribe((item: any) => {
+        this.successHandling();
+      });
   }
 
   private successHandling(): void {
     this.updateTask = true;
-  }
-
-  private errorHandling(): void {
-    this.updateTask = false;
   }
 
   private readonly getStatusName = (): string => {

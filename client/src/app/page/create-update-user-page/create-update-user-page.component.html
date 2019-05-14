@@ -1,6 +1,7 @@
 <main class="row ">
   <div class="col-lg-4 sidebar-wrapper">
-    <app-create-update-side-bar-info #createUserComponent></app-create-update-side-bar-info>
+    <app-create-update-side-bar-info #createUserComponent [showModal]="user.id || create"
+                                     [user]="user"></app-create-update-side-bar-info>
   </div>
   <div class="col-lg-8 sidebar-wrapper">
     <app-create-update-user></app-create-update-user>
@@ -8,13 +9,14 @@
 </main>
 <div class="row save-profile">
   <div class="col">
-    <div class="alert alert-danger" *ngIf="notValidUser">Please, filled in all required fields</div>
+    <div class="alert alert-danger" *ngIf="notValidUser">Please, fill in all required fields</div>
     <div>
-      <button class="save-button" (click)="extractUser(createUserComponent.newUser,
+      <button class="save-button" (click)="extractUser(createUserComponent.user,
               createUserComponent.ifChosenDevelopmentDepartment,
               createUserComponent.ifChosenHrDepartment)">
         Save profile
       </button>
+      <button (click)="showSuccess()">Press me</button>
     </div>
   </div>
 </div>

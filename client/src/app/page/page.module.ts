@@ -33,25 +33,16 @@ import { UpcomingDatesComponent } from './upcoming-dates/upcoming-dates.componen
 import { ListDatesComponent } from './upcoming-dates/list-dates/list-dates.component';
 import { ItemDateComponent } from './upcoming-dates/list-dates/item-date/item-date.component';
 import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
-import { DatepickerComponent } from './create-update-user-page/datepicker/datepicker.component';
+import { DatepickerComponent } from './create-update-user-page/create-update-date/datepicker/datepicker.component';
 
 
 import { appConfigProviders } from './common/config';
 import { FilterReturnService } from './common/filter-return.service';
 import { FilterDatesByPipe } from './filter-dates-by.pipe';
 import { CreateUpdateUserComponent } from './create-update-user-page/create-update-user/create-update-user.component';
+import { CommentModalComponent } from './comment-modal/comment-modal.component';
+import { CreateUpdateDateComponent } from './create-update-user-page/create-update-date/create-update-date.component';
 
-export const routes: Routes = [
-  { path: '', redirectTo: 'upcoming-tasks', pathMatch: 'full' },
-  { path: 'upcoming-tasks', component: WrapperComponent },
-  { path: 'my-profile', component: MyProfileComponent },
-  { path: 'my-profile/:id', component: MyProfileComponent },
-  { path: 'contact-info', component: ContactInfoComponent },
-  { path: 'contact-info/:id', component: ContactInfoComponent },
-  { path: 'create-user', component: CreateUpdateUserPageComponent },
-  { path: 'edit-user', component: CreateUpdateUserPageComponent },
-  { path: 'upcoming-dates', component: UpcomingDatesComponent }
-];
 
 @NgModule({
   declarations: [
@@ -82,6 +73,8 @@ export const routes: Routes = [
     AddTaskFormComponent,
     CreateUpdateUserComponent,
     DatepickerComponent,
+    CommentModalComponent,
+    CreateUpdateDateComponent,
   ],
   imports: [
     CommonModule,
@@ -101,4 +94,4 @@ export const routes: Routes = [
   ],
   bootstrap: [WrapperComponent]
 })
-export class PageModule {}
+export class PageModule { }

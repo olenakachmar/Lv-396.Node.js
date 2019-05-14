@@ -1,9 +1,12 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { tap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { User } from '../models/user';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { api } from '../../../environments/environment';
+import { UpdateUser } from '../models/update-user';
 
 export const httpOptions = {
   headers: new HttpHeaders({
@@ -17,14 +20,16 @@ export const httpOptions = {
 })
 export class UserService {
 
-  constructor(private readonly http: HttpClient) {
-  }
+  chosenDepartment = new EventEmitter();
 
+  constructor(private readonly http: HttpClient) {}
+
+  user: User;
   helper = new JwtHelperService();
 
-  getAll(): Observable<User[]> {
-    httpOptions.headers = this.getHeader();
+  public takeUser: BehaviorSubject<User> = new BehaviorSubject({});
 
+  getAll(): Observable<User[]> {
     return this.http.get<User[]>(`${api}users`, httpOptions);
   }
 
@@ -33,7 +38,6 @@ export class UserService {
   }
 
   getUsersOfHr(): Observable<User[]> {
-    httpOptions.headers = this.getHeader();
     const userId = this.getUserId();
 
     return this.http.get<User[]>(`${api}users?hr=${userId}`, httpOptions);
@@ -47,15 +51,37 @@ export class UserService {
     return this.http.get<any>(`${api}users?roles=Manager`, httpOptions);
   }
 
-  getUser(id?: string): Observable<User> {
-    httpOptions.headers = this.getHeader();
+  getUser(id?: string, required?: boolean): Observable<User> {
     const userId = this.getUserId();
 
-    return this.http.get<User>(`${api}users/${id || userId}`, httpOptions);
+    return this.http.get<any>(`${api}users/${id || userId}`, httpOptions)
+      .pipe(tap(res => {
+        this.user = {
+            contacts: res.contacts,
+            dates: res.dates,
+            email: res.email,
+            firstName: res.firstName,
+            hr: res.hr,
+            lastName: res.lastName,
+            phone: res.phone,
+            photoID: res.photoID,
+            photoURL: res.photoURL,
+            position: res.position,
+            roles: res.roles,
+            watchedIssues: res.watched_issues,
+            id: res._id,
+            type: res.type,
+            department: this.checkProperty(res.department),
+            manager: this.checkProperty(res.manager),
+            teamlead: this.checkProperty(res.teamlead)
+          };
+        this.currentUser(required, this.user);
+        })
+      );
   }
 
+
   getUserId(): any {
-    httpOptions.headers = this.getHeader();
     if (localStorage.token) {
       return this.helper.decodeToken(localStorage.token).id;
     }
@@ -83,15 +109,36 @@ export class UserService {
     return this.http.delete(`${api}users/`, deleteOptions);
   }
 
-  readonly getHeader = () =>
-    httpOptions.headers.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+  updateUser(user: User): Observable<any> {
+    const updateUser = new UpdateUser();
+    updateUser.mapUser(user);
 
-  postImage(avatar: File): Observable<Object> {
+    return this.http.put<User>(`${api}users`, updateUser, httpOptions);
+  }
+
+  getHeader(): any {
+    return httpOptions.headers.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+  }
+
+  postImage(avatar: File): Observable<object> {
     const id = this.getUserId();
     const fd = new FormData();
     fd.append('id', id);
     fd.append('avatar', avatar);
+
     return this.http.post(`${api}users/change_avatar`, fd);
+  }
+
+  checkProperty(property): object {
+    if (property) {
+      return property;
+    }
+  }
+
+  currentUser(required: boolean, data: User): void {
+    if (!required) {
+      this.takeUser.next(data);
+    }
   }
 
 }

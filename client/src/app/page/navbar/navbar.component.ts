@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavItemsService } from '../common/nav-items.service';
 import { UserService } from '../../common/services/user.service';
 import { NavItem } from '../common/nav-item';
@@ -11,7 +11,6 @@ import { NavItem } from '../common/nav-item';
 
 export class NavbarComponent implements OnInit {
 
-  constructor(private readonly navItemsService: NavItemsService, private readonly userService: UserService) { }
   name: string;
   surname: string;
   avatar: string;
@@ -19,12 +18,7 @@ export class NavbarComponent implements OnInit {
   menuList: NavItem[];
   userType: string;
 
-  @HostListener('mouseleave') onMouseLeave(): void {
-    this.active = false;
-  }
-  @HostListener('window:scroll') onScroll(): void {
-    this.active = false;
-  }
+  constructor(private readonly navItemsService: NavItemsService, private readonly userService: UserService) { }
 
   ngOnInit(): void {
     this.navItemsService.getNavList()
@@ -44,13 +38,17 @@ export class NavbarComponent implements OnInit {
     return this.active = false;
   }
 
+  closeBurger(event): void {
+    this.active = event;
+  }
+
   toggleIsActive(): boolean {
     this.active = !this.active;
 
     return false;
   }
 
-  trackById(link: NavItem): string {
+  trackById(index: number, link: NavItem): string {
     return link.id;
   }
 }

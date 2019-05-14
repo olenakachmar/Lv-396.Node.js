@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../common/services/auth.service';
 import { UserService } from '../../../common/services/user.service';
 import { NavItemsService } from '../../common/nav-items.service';
@@ -9,7 +9,6 @@ import { User } from '../../../common/models/user';
 import { Task } from '../../common/task';
 import { NavItem } from '../../common/nav-item';
 import { DatesItem } from '../../common/dates-item';
-import { switchMap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar-profile',
@@ -18,10 +17,10 @@ import { switchMap, map } from 'rxjs/operators';
   providers: [AuthService]
 })
 
-export class NavbarProfileComponent implements OnInit {
-  user = new User();
-  avatar: string;
-  userType: string;
+export class NavbarProfileComponent implements OnInit, OnChanges {
+  @Input() public userType: string;
+
+  user: User;
   newTasks: Task[];
   menuList: NavItem[];
   dateList: DatesItem[];
@@ -29,28 +28,42 @@ export class NavbarProfileComponent implements OnInit {
   datesCount: number;
   active: boolean;
   todayDate: Date;
+  typeOfUser: boolean;
 
   constructor(private readonly authService: AuthService,
               private readonly router: Router,
+              private readonly route: ActivatedRoute,
               private readonly navItemsService: NavItemsService,
               private readonly userService: UserService,
-              private readonly taskService: TasksService,
+              private readonly tasksService: TasksService,
               private readonly dateService: DateService) {
   }
 
-  ngOnInit(): void {
-    this.loadUser();
-    this.loadDates();
+  ngOnChanges(): void {
+    this.currentByRout(this.router.url);
+  }
 
+  ngOnInit(): void {
     this.navItemsService.getNavList()
       .subscribe(list => this.menuList = list);
-    this.userType = this.userService.getUserType();
+    this.userService.takeUser
+      .subscribe(user => {
+        this.user = user;
+      });
+    this.loadDates();
+    this.loadUserTasks();
     this.todayDate = new Date();
+    this.user.photoURL = this.user.photoURL || 'assets/img/userimg.jpg';
   }
 
   openTaskByid(taskID: string): boolean {
-    this.taskService.taskIsWatched(this.user._id, taskID);
-    this.taskService.isOpenTask.next(taskID);
+    if (this.typeOfUser) {
+      this.tasksService.taskIsWatched(this.user.id, taskID)
+        .subscribe(res => {
+          this.removeFromNew(taskID);
+        });
+    }
+    this.tasksService.openTaskById(taskID);
     setTimeout(() => {
       this.scrollTo(taskID);
     }, 300);
@@ -64,53 +77,50 @@ export class NavbarProfileComponent implements OnInit {
   }
 
   loadDates(): void {
-    this.userService.getUsersOfHr()
-      .subscribe(user => {
-        this.dateList = [];
-        user.map((item) => {
-          item.dates.map((items) => {
-            this.dateList = [...this.dateList, items];
+    if (this.userService.getUserType() === 'hr') {
+      this.typeOfUser = true;
+      this.userService.getUsersOfHr()
+        .subscribe(users => {
+          this.dateList = [];
+          users.forEach((user) => {
+            this.dateList = this.dateService.setDateList(user, this.dateList);
           });
+          this.dateList = this.checkTodayDate(this.dateList);
+          this.datesCount = this.dateList.length;
         });
-        this.dateList = this.dateList.filter(date =>
-          this.dateService.convertDate(date.date) === this.dateService.convertDate(this.todayDate)
-        );
-        this.datesCount = this.dateList.length;
-      });
+    } else if (this.userService.getUserType() === 'developer') {
+      this.userService.getUser(this.userService.getUserId())
+        .subscribe(user => {
+          this.dateList = [];
+          this.dateList = this.dateService.setDateList(user, this.dateList);
+          this.dateList = this.checkTodayDate(this.dateList);
+          this.datesCount = this.dateList.length;
+        });
+    }
   }
 
-  loadUser(): void {
-    this.userService.getUser()
-      .pipe(
-        map(user => this.takeUserInfo(user)),
-        switchMap(user => this.taskService.getUserTasks(user._id))
-      )
+  loadUserTasks(): void {
+    this.tasksService.takeUserTasks
       .subscribe(tasks => {
-        if (this.user.watched_issues.length > 0) {
-          this.newTasks = this.findNewTasks(tasks, this.user.watched_issues);
-          this.newTasks.sort((a, b) => (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0));
-          this.newTasksCount = this.newTasks.length;
-        }
+        this.newTasks = this.findNewTasks(tasks, this.user.watchedIssues);
+        this.newTasksCount = this.newTasks.length;
       });
   }
 
-  takeUserInfo(user: User): User {
-    this.user = user;
-    this.avatar = user.photoURL || 'assets/img/userimg.jpg';
-
-    return user;
+  removeFromNew(taskID): void {
+    this.newTasks = this.newTasks.filter(task => task.id !== taskID);
+    this.newTasksCount -= 1;
   }
 
   findNewTasks(allTasks: any, watched: string[]): Task[] {
-    let arr = [];
     if (this.userType === 'hr') {
-      arr = allTasks.filter(task => (task.author._id !== this.user._id && !task.resolvedByPerformer));
+      const arr = allTasks.filter(task => (task.author._id !== this.user.id && !task.resolvedByPerformer));
+
+      return arr.filter(task => !(watched.includes(task.id)));
     }
     if (this.userType === 'developer') {
-      arr = allTasks.filter(task => task.resolvedByPerformer && !task.resolvedByAuthor);
+      return allTasks.filter(task => task.resolvedByPerformer && !task.resolvedByAuthor);
     }
-
-    return arr.filter(task => !(watched.includes(task._id)));
   }
 
   logout(): boolean {
@@ -120,11 +130,19 @@ export class NavbarProfileComponent implements OnInit {
     return false;
   }
 
+  editUserPage(): void {
+    this.router.navigate(['/profile/edit-user', this.user.id], { relativeTo: this.route });
+  }
+
   currentByIndex(i: number): boolean {
     this.navItemsService.currentIndex(i);
     if (this.menuList[i].logout) {
       this.menuList[i].current = false;
       this.logout();
+    }
+    if (this.menuList[i].router === '/profile/edit-user/:id') {
+      this.editUserPage();
+      this.currentByRout('/profile/edit-user/:id');
     }
 
     return false;
@@ -136,8 +154,13 @@ export class NavbarProfileComponent implements OnInit {
     return this.active = false;
   }
 
-  trackById(link: NavItem): string {
-    return link.id;
+  trackById(index: number, item: NavItem): string {
+    return item.id;
   }
 
+  checkTodayDate(dateList): DatesItem[] {
+    return dateList.filter(date =>
+      this.dateService.convertDate(date.date) === this.dateService.convertDate(this.todayDate)
+    );
+  }
 }
