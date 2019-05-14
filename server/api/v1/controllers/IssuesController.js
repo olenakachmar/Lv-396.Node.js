@@ -36,7 +36,7 @@ const getOneByQuery = async (req, res) => {
 
 const createOne = async (req, res) => {
   try {
-    const parameters = helper.reducePropsToObject(arrKeys, req);
+    const parameters = helper.reducePropsToObject(arrKeys, req.body);
     const newIssue = Issues({
       ...parameters,
       status: {
@@ -50,7 +50,7 @@ const createOne = async (req, res) => {
       date: new Date().getTime(),
     });
     await newIssue.save();
-    res.json({
+    res.status(201).json({
       id: newIssue._id,
     });
   } catch (err) {
@@ -125,7 +125,7 @@ const updateOne = async (req, res) => {
         err: 'You should enter assignTo and reassigned options',
       });
     }
-    res.json({
+    res.status(200).json({
       updated: 'Successfully',
     });
   } catch (err) {
@@ -145,7 +145,7 @@ const deleteOne = async (req, res) => {
         err: 'Issue not found',
       });
     }
-    res.status(200).json({
+    res.status(204).json({
       deleted: 'Successfully',
     });
   } catch (err) {
@@ -162,7 +162,7 @@ const getAll = async (req, res) => {
       .populate('author', ['firstName', 'lastName'])
       .populate('reassigned', ['firstName', 'lastName'])
       .exec();
-    res.json(issues);
+    res.status(200).json(issues);
   } catch (err) {
     res.status(500).json({
       err,
@@ -201,7 +201,7 @@ const updateForResolve = async (req, res) => {
     }
     await Issues.findByIdAndUpdate(id, resolve, { new: true })
       .exec();
-    res.json({
+    res.status(200).json({
       updated: 'Successfully',
     });
   } catch (err) {
@@ -222,7 +222,7 @@ const updateForComment = async (req, res) => {
         err: 'Issue not found',
       });
     }
-    res.json({
+    res.status(200).json({
       updated: 'Successfully',
     });
   } catch (err) {

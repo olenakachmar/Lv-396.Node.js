@@ -4,7 +4,6 @@ import { User } from '../../common/models/user';
 import { Subject } from 'rxjs/Rx';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-// import { throwError } from 'rxjs/index';
 
 @Component({
   selector: 'app-create-update-user-page',
@@ -27,6 +26,10 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
               private toastr: ToastrService) {
   }
 
+  showSuccess() {
+    this.toastr.success('Hello world!', 'Toastr fun!');
+  }
+
   ngOnInit(): void {
     this.notValidUser = false;
     this.route.paramMap.subscribe(parameterMap => {
@@ -38,7 +41,7 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
 
   private getEmployee(id: string): void {
     if (id) {
-      this.userService.getUser(id)
+      this.userService.takeUser
         .subscribe(user => {
           this.user = user;
         });
@@ -55,26 +58,25 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
     this.user.email = 'tyyrley23@gmail.com';
 
     if (this.validateUser()) {
-      if (this.user._id) {
-        console.log(this.user);
+      if (this.user.id) {
         this.userService.updateUser(this.user)
           .takeUntil(this.destroy$)
           .subscribe((data: any) => {
-            this.toastr.success('Profile successfully updated', 'Result', {
-              positionClass: 'toast-top-full-width',
-            });
-            this.router.navigate(['/profile/my-profile/', this.user._id], {relativeTo: this.route});
-          }, error => this.errorHandling(error)
+              this.toastr.success('Profile successfully updated', 'Result', {
+                positionClass: 'toast-top-full-width',
+              });
+              this.router.navigate(['/profile/my-profile/', this.user.id], {relativeTo: this.route});
+            }, error => this.errorHandling(error)
           );
       } else {
         this.userService.addUser(this.user)
           .takeUntil(this.destroy$)
           .subscribe((data: any) => {
-            this.toastr.success('Profile successfully created', 'Result', {
-              positionClass: 'toast-top-full-width',
-            });
-            this.router.navigate(['/profile/my-profile/', data.newUser._id], {relativeTo: this.route});
-          }, error => this.errorHandling(error)
+              this.toastr.success('Profile successfully created', 'Result', {
+                positionClass: 'toast-top-full-width',
+              });
+              this.router.navigate(['/profile/my-profile/', data.newUser._id], {relativeTo: this.route});
+            }, error => this.errorHandling(error)
           );
       }
     } else {
@@ -109,7 +111,7 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  errorHandling(error) {
+  errorHandling(error): void {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       errorMessage = `Error: ${error.error.message}`;
