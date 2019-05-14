@@ -94,4 +94,4 @@ import { CreateUpdateDateComponent } from './create-update-user-page/create-upda
   ],
   bootstrap: [WrapperComponent]
 })
-export class PageModule {}
+export class PageModule { }
