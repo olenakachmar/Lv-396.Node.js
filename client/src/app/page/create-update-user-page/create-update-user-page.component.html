@@ -9,14 +9,12 @@
 </main>
 <div class="row save-profile">
   <div class="col">
-    <div class="alert alert-danger" *ngIf="notValidUser">Please, fill in all required fields</div>
     <div>
       <button class="save-button" (click)="extractUser(createUserComponent.user,
               createUserComponent.ifChosenDevelopmentDepartment,
               createUserComponent.ifChosenHrDepartment)">
         Save profile
       </button>
-      <button (click)="showSuccess()">Press me</button>
     </div>
   </div>
 </div>

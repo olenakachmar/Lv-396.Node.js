@@ -16,4 +16,11 @@ export class DepartmentService {
   getAllDepartments(): Observable<Department[]> {
     return this.http.get<Department[]>(`${api}/departments`, httpOptions);
   }
+
+  // getAllDepartmentsPromise(): Promise<Department[]> {
+  //   return this.http.get<Department[]>(`${api}/departments`, httpOptions)
+  //     .toPromise()
+  //     .catch()
+  //     ;
+  // }
 }

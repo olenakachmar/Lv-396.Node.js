@@ -4,7 +4,7 @@
   </div>
 </div>
 <accordion>
-  <accordion-group #group [isOpen]="isOpen" (click)="openTask()">
+  <accordion-group #group (click)="openTask()">
     <div accordion-heading class="heading-grid">
       <div class={{unreadClass}}></div>
       <span>{{ task.id }}</span>
@@ -41,7 +41,7 @@
         </button>
       </div>
       <div class="comment">
-        <app-comment-modal [task]="emptytask"></app-comment-modal>
+        <app-comment-modal ></app-comment-modal>
       </div>
       <div class="reassign-button">
       <app-modal [modalType]="'RE-ASSIGNE'" [task]="task"></app-modal>

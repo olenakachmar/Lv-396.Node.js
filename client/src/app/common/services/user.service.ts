@@ -83,6 +83,7 @@ export class UserService {
   updateUser(user: User): Observable<any> {
     const updateUser = new UpdateUser();
     updateUser.mapUser(user);
+    console.log('on servise', updateUser);
 
     return this.http.put<User>(`${api}users`, updateUser, httpOptions);
   }
