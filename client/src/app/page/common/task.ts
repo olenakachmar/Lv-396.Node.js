@@ -30,7 +30,8 @@ export class Task {
               public reassigned?: string,
               public resolvedByAuthor?: boolean,
               public resolvedByPerformer?: boolean,
-              public isOpen?: boolean) {
+              public isOpen?: boolean,
+              public comments?: any[]) {
   }
 }
 

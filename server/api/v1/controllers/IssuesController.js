@@ -20,6 +20,7 @@ const getOneByQuery = async (req, res) => {
     })
       .populate('assignTo', ['firstName', 'lastName'])
       .populate('author', ['firstName', 'lastName'])
+      .populate('comments.creator', ['firstName', 'lastName'])
       .exec();
     if (!status && !type && !date && !userId) {
       res.status(404).json({
@@ -36,7 +37,7 @@ const getOneByQuery = async (req, res) => {
 
 const createOne = async (req, res) => {
   try {
-    const parameters = helper.reducePropsToObject(arrKeys, req);
+    const parameters = helper.reducePropsToObject(arrKeys, req.body);
     const newIssue = Issues({
       ...parameters,
       status: {
@@ -50,7 +51,7 @@ const createOne = async (req, res) => {
       date: new Date().getTime(),
     });
     await newIssue.save();
-    res.json({
+    res.status(201).json({
       id: newIssue._id,
     });
   } catch (err) {
@@ -125,7 +126,7 @@ const updateOne = async (req, res) => {
         err: 'You should enter assignTo and reassigned options',
       });
     }
-    res.json({
+    res.status(200).json({
       updated: 'Successfully',
     });
   } catch (err) {
@@ -145,7 +146,7 @@ const deleteOne = async (req, res) => {
         err: 'Issue not found',
       });
     }
-    res.status(200).json({
+    res.status(204).json({
       deleted: 'Successfully',
     });
   } catch (err) {
@@ -162,7 +163,7 @@ const getAll = async (req, res) => {
       .populate('author', ['firstName', 'lastName'])
       .populate('reassigned', ['firstName', 'lastName'])
       .exec();
-    res.json(issues);
+    res.status(200).json(issues);
   } catch (err) {
     res.status(500).json({
       err,
@@ -201,7 +202,7 @@ const updateForResolve = async (req, res) => {
     }
     await Issues.findByIdAndUpdate(id, resolve, { new: true })
       .exec();
-    res.json({
+    res.status(200).json({
       updated: 'Successfully',
     });
   } catch (err) {
@@ -214,15 +215,16 @@ const updateForResolve = async (req, res) => {
 const updateForComment = async (req, res) => {
   try {
     const { id } = req.body;
-    const { comment } = req.body;
-    const issues = await Issues.findByIdAndUpdate(id, { commentContent: comment }, { new: true })
-      .exec();
-    if (!issues) {
+    const issue = await Issues.findById(id);
+    if (!issue) {
       res.status(404).json({
         err: 'Issue not found',
       });
     }
-    res.json({
+    const comments = helper.readInsertedObject('content', 'creator', req);
+    issue.comments = [...issue.comments, ...comments];
+    issue.save();
+    res.status(200).json({
       updated: 'Successfully',
     });
   } catch (err) {
