@@ -39,7 +39,7 @@ export class CreateUpdateUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkIdParam();
-    console.log(this.id);
+
     if (this.id) {
       this.loadUser(this.id);
     } else {
@@ -68,7 +68,6 @@ export class CreateUpdateUserComponent implements OnInit {
   }
   updateMContact(): void {
     this.MContacts = this.profileForm.value;
-    console.log(this.MContacts);
     this.sendMContacts.emit(this.MContacts);
   }
 
