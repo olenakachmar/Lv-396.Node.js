@@ -59,7 +59,7 @@ export class TasksService {
           })
         )
           .sort((a, b) => (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0));
-          this.takeUserTasks.next(this.tasks);
+        this.takeUserTasks.next(this.tasks);
       }));
   }
 
