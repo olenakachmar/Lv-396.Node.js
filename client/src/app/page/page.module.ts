@@ -26,9 +26,9 @@ import { UserListComponent } from './contact-info/user-list/user-list.component'
 import { UserFilterComponent } from './contact-info/user-filter/user-filter.component';
 import { FilterUsersByPipe } from './contact-info/filter-users-by.pipe';
 import { DatepickerFilterComponent } from './filter/datepicker-filter/datepicker-filter.component';
-import { CreateUpdateSideBarInfoComponent } from './create-update-user-page/create-update-side-bar-info/create-update-side-bar-info.component';
 import { CreateUpdateUserPageComponent } from './create-update-user-page/create-update-user-page.component';
 import { DropdownInfoComponent } from './create-update-user-page/create-update-side-bar-info/dropdown-info/dropdown-info.component';
+import { CreateUpdateSideBarInfoComponent } from './create-update-user-page/create-update-side-bar-info/create-update-side-bar-info.component';
 import { UpcomingDatesComponent } from './upcoming-dates/upcoming-dates.component';
 import { ListDatesComponent } from './upcoming-dates/list-dates/list-dates.component';
 import { ItemDateComponent } from './upcoming-dates/list-dates/item-date/item-date.component';
@@ -41,6 +41,8 @@ import { FilterReturnService } from './common/filter-return.service';
 import { FilterDatesByPipe } from './filter-dates-by.pipe';
 import { CreateUpdateUserComponent } from './create-update-user-page/create-update-user/create-update-user.component';
 import { CommentModalComponent } from './comment-modal/comment-modal.component';
+import { AdditionalContactsComponent } from './create-update-user-page/additional-contacts/additional-contacts.component';
+import { ContactTypesComponent } from './create-update-user-page/additional-contacts/contact-types/contact-types.component';
 import { CreateUpdateDateComponent } from './create-update-user-page/create-update-date/create-update-date.component';
 
 
@@ -74,6 +76,8 @@ import { CreateUpdateDateComponent } from './create-update-user-page/create-upda
     CreateUpdateUserComponent,
     DatepickerComponent,
     CommentModalComponent,
+    AdditionalContactsComponent,
+    ContactTypesComponent,
     CreateUpdateDateComponent,
   ],
   imports: [
