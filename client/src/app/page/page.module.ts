@@ -42,6 +42,7 @@ import { FilterDatesByPipe } from './filter-dates-by.pipe';
 import { CreateUpdateUserComponent } from './create-update-user-page/create-update-user/create-update-user.component';
 import { CommentModalComponent } from './comment-modal/comment-modal.component';
 import { CreateUpdateDateComponent } from './create-update-user-page/create-update-date/create-update-date.component';
+import { UpdateAvatarComponent } from './create-update-user-page/update-avatar/update-avatar.component';
 
 
 @NgModule({
@@ -75,6 +76,7 @@ import { CreateUpdateDateComponent } from './create-update-user-page/create-upda
     DatepickerComponent,
     CommentModalComponent,
     CreateUpdateDateComponent,
+    UpdateAvatarComponent,
   ],
   imports: [
     CommonModule,
