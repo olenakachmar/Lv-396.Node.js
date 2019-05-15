@@ -28,6 +28,9 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.userService.chosenDatesForUser.subscribe((date) => {
+      this.user.dates = date;
+    });
     this.notValidUser = false;
     this.route.paramMap.subscribe(parameterMap => {
       const id = parameterMap.get('id');

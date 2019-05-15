@@ -51,7 +51,7 @@
         Add fields
       </button>
     </div>
-    <app-create-update-date (gainedNewDate) = "user.dates = $event" class="col-md-5 date-info"></app-create-update-date>
+    <app-create-update-date (onDateChange) = "($event)" class="col-md-5 date-info"></app-create-update-date>
   </div>
 
 </form>

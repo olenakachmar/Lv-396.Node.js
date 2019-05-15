@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { OptionPair } from '../../../common/models/option-pair';
+import { DatesItem } from '../../common/dates-item';
 
 @Component({
   selector: 'app-create-update-user',
@@ -12,6 +13,7 @@ export class CreateUpdateUserComponent implements OnInit {
   profileForm: FormGroup;
   pairList: OptionPair[];
   contacts: string[];
+  date: DatesItem[];
 
 
   constructor(private readonly fb: FormBuilder) {
@@ -26,6 +28,13 @@ export class CreateUpdateUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.date = [{
+      topic: 'dasdasd',
+      date: new Date()
+    },           {
+      topic: 'dada',
+      date: new Date()
+    }];
     this.contacts = [];
     this.pairList = [{_id: 1, name: 'telegram'}, {_id: 2, name: 'skype'}];
   }
@@ -43,5 +52,12 @@ export class CreateUpdateUserComponent implements OnInit {
 
   get getContacts(): any {
     return this.profileForm.get('contacts');
+  }
+
+  onDateChange(date: any): void {
+    this.user.dates = this.date;
+
+    console.log(this.user.dates);
+
   }
 }

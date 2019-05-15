@@ -1,5 +1,5 @@
 <div class="row additional-info">
-  <form [formGroup]="addDatesForm" novalidate (ngSubmit)="save(addDatesForm)">
+  <form [formGroup]="addDatesForm" novalidate>
     <div class="date-form">
       <div class="row add-date" formArrayName="datesCount"
            *ngFor="let date of addDatesForm.controls.datesCount.controls; let i = index">
@@ -22,10 +22,6 @@
         <img _ngcontent-c4="" alt="add" class="add__icon" src="assets/img/add.svg">
         Add date
       </button>
-      <div class="margin-20">
-        <div>myForm details:-</div>
-        <pre>form value: <br>{{addDatesForm.value | json}}</pre>
-      </div>
     </div>
   </form>
 </div>
