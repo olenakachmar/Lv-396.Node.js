@@ -13,8 +13,8 @@ import { Subject } from 'rxjs/Rx';
 export class MyProfileComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   modalRef: BsModalRef;
-  message: string
-  userType: string;
+  message: string;
+  isHr: boolean;
 
   constructor(private readonly userInfoService: UserService,
               private readonly route: ActivatedRoute,
@@ -25,8 +25,11 @@ export class MyProfileComponent implements OnInit, OnDestroy {
   id: any;
 
   ngOnInit(): void {
-    this.userType = this.userInfoService.getUserType();
     this.checkIdParam();
+  }
+
+  private isHr(): boolean {
+    return  this.userInfoService.getUserType() === 'hr';
   }
 
   editUser(): void {
