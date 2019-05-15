@@ -14,6 +14,8 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   user: User = new User();
+  finalContacts: [];
+  finalMContacts: [];
   ifChosenDevelopmentDepartment: boolean;
   ifChosenHrDepartment: boolean;
   notValidUser: boolean;
@@ -30,8 +32,12 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
     this.toastr.success('Hello world!', 'Toastr fun!');
   }
 
+
   ngOnInit(): void {
     this.notValidUser = false;
+    this.finalContacts = [];
+    this.finalMContacts = [];
+
     this.route.paramMap.subscribe(parameterMap => {
       const id = parameterMap.get('id');
       this.getEmployee(id);
@@ -48,6 +54,16 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
     } else {
       this.create = true;
     }
+  }
+
+  getContacts(contacts: []): void {
+    this.finalContacts = contacts;
+    console.log(this.finalContacts);
+  }
+
+  getMContacts(contacts: []): void {
+    this.finalMContacts = contacts;
+    console.log("MAN", this.finalMContacts);
   }
 
   extractUser(user, chosenDevelopmentDepartment, chosenHrDepartment): any {
