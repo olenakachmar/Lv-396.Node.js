@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../../common/services/user.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { User } from '../../../common/models/user';
 
@@ -15,6 +15,7 @@ export class CreateUpdateUserComponent implements OnInit {
 
   @Output() readonly sendContacts: EventEmitter<[]> = new EventEmitter<[]>();
   @Output() readonly sendMContacts: EventEmitter<[]> = new EventEmitter<[]>();
+
   profileForm: FormGroup;
   contactsForm: FormGroup;
   user: User;

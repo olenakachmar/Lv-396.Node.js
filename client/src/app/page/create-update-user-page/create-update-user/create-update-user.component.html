@@ -19,23 +19,22 @@
           placeholder="Phone" id='phone' aria-label="Phone">
       </div>
     </form>
-    <form [formGroup]="contactsForm">
-      <div formArrayName="form_contacts">
-        <div class="info-form" *ngFor="let contact of form_contacts.controls; let i = index">
+
+    <div class="info-form" *ngFor="let contact of form_contacts.controls; let i = index">
+      <form [formGroup]="contactsForm">
+        <div formArrayName="form_contacts">
           <form [formGroup]="contact">
             <div class="input-label"><label for="name">{{contact.controls['contact_name'].value}}</label></div>
             <input formControlName="contact_value" (blur)="updateData()" value="contact_value" class="form-control"
-              type="text" placeholder="contact_name" id="contact_name">
+              type="text" placeholder="contact login" id="contact_name">
           </form>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
 
     <app-additional-contacts (sendContacts)="getData($event)">
     </app-additional-contacts>
-
   </div>
-
   <app-create-update-date class="col-md-5 date-info"></app-create-update-date>
 
 </div>

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../../common/services/user.service';
-import { User } from '../../common/models/user';
+import { User, Contact } from '../../common/models/user';
 import { Subject } from 'rxjs/Rx';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -51,10 +51,13 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
 
   setContacts(contacts: []): void {
     this.finalContacts = contacts;
+    this.user.contacts =  this.finalContacts;
   }
 
   setMContacts(contacts: []): void {
     this.finalMContacts = contacts;
+    this.user.phone = this.finalMContacts['phone'];
+    this.user.email =  this.finalMContacts['email'];
   }
 
   extractUser(user, chosenDevelopmentDepartment, chosenHrDepartment): any {
@@ -62,9 +65,7 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
     this.ifChosenDevelopmentDepartment = chosenDevelopmentDepartment;
     this.ifChosenHrDepartment = chosenHrDepartment;
 
-    this.user.phone = '8399463344845';
-    this.user.email = 'tyrleyl23@gmail.com';
-    console.log('fss', this.finalMContacts);
+    this.user.contacts =  this.finalContacts;
 
     if (this.validateUser()) {
       if (this.user._id) {
