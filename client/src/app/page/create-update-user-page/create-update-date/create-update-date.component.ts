@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
 import { DatesItem } from '../../common/dates-item';
 import { UserService } from '../../../common/services/user.service';
 
@@ -13,15 +13,12 @@ export class CreateUpdateDateComponent implements OnInit {
   @Output() public readonly onDateChange = new EventEmitter<DatesItem[]>();
   public addDatesForm: FormGroup;
   dates: string[];
-  newDate: DatesItem[];
 
   constructor(private fb: FormBuilder,
               private userService: UserService) {
   }
 
   ngOnInit(): void {
-    this.newDate = [];
-
     this.addDatesForm = this.fb.group({
       datesCount: this.fb.array([
         {
@@ -49,6 +46,7 @@ export class CreateUpdateDateComponent implements OnInit {
   removeDate(i: number): void {
     const control = this.addDatesForm.controls.datesCount as FormArray;
     control.removeAt(i);
+    this.userService.chosenDatesForUser.emit(this.addDatesForm.controls.datesCount.value);
   }
 
   checkFirstElement(i: number): boolean {

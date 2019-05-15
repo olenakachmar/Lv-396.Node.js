@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from '../../../common/models/user';
 
 import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
+import { DatesItem } from '../../common/dates-item';
 
 @Component({
   selector: 'app-create-update-user',
@@ -24,6 +25,7 @@ export class CreateUpdateUserComponent implements OnInit {
   addContacts;
   allContacts;
   id: string;
+  date: DatesItem[];
 
   constructor(private readonly userInfoService: UserService,
     private readonly route: ActivatedRoute,
