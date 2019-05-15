@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+///<reference path="../../../../../node_modules/@angular/forms/src/model.d.ts"/>
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
+import { DatesItem } from '../../common/dates-item';
+import { DateService } from '../../common/date.service';
 
 @Component({
   selector: 'app-create-update-date',
@@ -7,37 +10,52 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
   styleUrls: ['./create-update-date.component.scss']
 })
 export class CreateUpdateDateComponent implements OnInit {
+  @Output() public readonly onDateChange = new EventEmitter<Date>();
+  public addDatesForm: FormGroup;
   dates: string[];
-
-  addDatesForm = this.fb.group({
-    dateName: ['', [
-        Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(20),
-      ]
-    ],
-    datesCount: this.fb.group({})
-  });
+  newDate: DatesItem[];
+  dateFromDatepicker: string;
 
   constructor(private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
-    this.dates = [];
+    this.newDate = [];
+    this.addDatesForm = this.fb.group({
+      datesCount: this.fb.array([
+        {
+          topic: 'Upcoming review date',
+          date: [''],
+        },
+        this.initDates(),
+      ])
+    });
+  }
+
+  initDates(): any {
+    return this.fb.group({
+      topic: [''],
+      date: [''],
+    });
   }
 
   addDate(): void {
-    const item = `date-${this.dates.length}`;
-    this.getDate.addControl(item, new FormControl('', [Validators.required]));
-    this.dates = [...this.dates, item];
+    const control = this.addDatesForm.controls.datesCount as FormArray;
+    control.push(this.initDates());
+    console.log(control);
+  }
+  removeDate(i: number): void {
+    const control = this.addDatesForm.controls.datesCount as FormArray;
+    control.removeAt(i);
   }
 
-  removeDate(control: string): void {
-    this.getDate.removeControl(control);
-    this.dates.pop();
+  save(): void {}
+
+  onValueChange(value: Date): void {
+    this.onDateChange.emit(value);
+  }
+  checkFirstElement(i: number): boolean{
+    return i === 0;
   }
 
-  get getDate(): any {
-    return this.addDatesForm.get('datesCount');
-  }
 }

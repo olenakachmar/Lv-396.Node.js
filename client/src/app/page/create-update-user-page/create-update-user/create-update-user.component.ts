@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { OptionPair } from '../../../common/models/option-pair';
 
@@ -8,6 +8,7 @@ import { OptionPair } from '../../../common/models/option-pair';
   styleUrls: ['./create-update-user.component.scss']
 })
 export class CreateUpdateUserComponent implements OnInit {
+  @Input() user;
   profileForm: FormGroup;
   pairList: OptionPair[];
   contacts: string[];
