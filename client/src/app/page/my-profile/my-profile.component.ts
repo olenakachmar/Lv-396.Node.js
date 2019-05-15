@@ -17,20 +17,20 @@ export class MyProfileComponent implements OnInit, OnDestroy {
 
   constructor(private readonly userInfoService: UserService,
               private readonly route: ActivatedRoute,
-              private modalService: BsModalService,
+              private readonly modalService: BsModalService,
               private readonly router: Router) { }
 
   user;
   id: any;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.checkIdParam();
   }
 
-  editUser() {
+  editUser(): void {
     this.router.navigate(['/profile/edit-user', this.id], {relativeTo: this.route});
   }
-  openModal(template: TemplateRef<any>) {
+  openModal(template: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
 

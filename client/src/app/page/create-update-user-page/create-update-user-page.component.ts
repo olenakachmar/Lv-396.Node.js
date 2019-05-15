@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
-  user = new User();
+  user: User = new User();
   ifChosenDevelopmentDepartment: boolean;
   ifChosenHrDepartment: boolean;
   notValidUser: boolean;
