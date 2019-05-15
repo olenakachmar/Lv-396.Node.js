@@ -39,6 +39,7 @@ export  class User {
               public phone?: string,
               public contacts?: Contact[],
               public photoURL?: string,
+              public photoID?: string,
               public hr?: object,
               public dates?: DatesItem[],
               public watched_issues?: string[],

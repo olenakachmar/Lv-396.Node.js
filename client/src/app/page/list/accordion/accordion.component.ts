@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Task } from '../../common/task';
+import { User } from '../../../common/models/user';
 
 @Component({
   selector: 'app-accordion',
@@ -8,10 +9,13 @@ import { Task } from '../../common/task';
 })
 export class AccordionComponent implements OnInit {
   @Input() tasks: Task[];
+
   ngOnInit(): void {
   }
 
-  trackElement(index: number, element: any): any {
-    return element ? element.id : 0;
+  trackElement(index: number, task: Task): string {
+    const uniqueCode = task.id + task.isOpen.toString();
+
+    return uniqueCode;
   }
 }

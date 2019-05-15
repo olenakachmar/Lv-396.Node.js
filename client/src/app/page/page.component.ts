@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../common/services/user.service';
+import { TasksService } from '../page/common/tasks.service';
 import { User } from '../common/models/user';
 
 @Component({
@@ -10,11 +11,22 @@ import { User } from '../common/models/user';
 export class PageComponent implements OnInit {
   user = new User();
 
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService,
+              private readonly tasksService: TasksService) { }
 
   ngOnInit(): void {
+    this.loadUser();
+    this.loadTasks(this.userService.getUserId());
+  }
+
+  loadUser(): void {
     this.userService.getUser()
-      .subscribe(user => this.user = user);
+      .subscribe();
+  }
+
+  loadTasks(userID): void {
+    this.tasksService.getUserTasks(userID)
+      .subscribe();
   }
 
   updateDataFilterOptions = (options: any, dateValue: any): [] => {
@@ -23,6 +35,6 @@ export class PageComponent implements OnInit {
     }
 
     return options.map(opt =>
-      opt.name === 'date' ? {name: opt.name, value: dateValue} : opt);
+      opt.name === 'date' ? { name: opt.name, value: dateValue } : opt);
   };
 }
