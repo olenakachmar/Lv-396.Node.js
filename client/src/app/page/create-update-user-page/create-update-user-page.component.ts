@@ -62,6 +62,7 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
 
   extractUser(user, chosenDevelopmentDepartment, chosenHrDepartment): any {
     this.user = user;
+    console.log(this.user)
     this.ifChosenDevelopmentDepartment = chosenDevelopmentDepartment;
     this.ifChosenHrDepartment = chosenHrDepartment;
 

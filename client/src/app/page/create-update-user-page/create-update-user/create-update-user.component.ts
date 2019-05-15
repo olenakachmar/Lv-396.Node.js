@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@ang
 })
 export class CreateUpdateUserComponent implements OnInit {
 
+
   @Output() readonly sendContacts: EventEmitter<[]> = new EventEmitter<[]>();
   @Output() readonly sendMContacts: EventEmitter<[]> = new EventEmitter<[]>();
 
@@ -38,7 +39,16 @@ export class CreateUpdateUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkIdParam();
-    this.loadUser(this.id);
+    console.log(this.id);
+    if (this.id) {
+      this.loadUser(this.id);
+    } else {
+      this.user = new User();
+      this.profileForm = this.fb.group({
+        email: new FormControl('', { validators: Validators.required, updateOn: 'blur' }),
+        phone: new FormControl('', { validators: Validators.required, updateOn: 'blur' })
+      });
+    }
 
     this.addContacts = [];
     this.contacts = [];
@@ -58,6 +68,7 @@ export class CreateUpdateUserComponent implements OnInit {
   }
   updateMContact(): void {
     this.MContacts = this.profileForm.value;
+    console.log(this.MContacts);
     this.sendMContacts.emit(this.MContacts);
   }
 
