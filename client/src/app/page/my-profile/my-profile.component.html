@@ -70,7 +70,7 @@
           </div>
         </div>
       </div>
-      <div class="row third-row">
+      <div *ngIf="userType === 'hr'" class="row third-row">
         <div class="row w-100">
           <div class="button_wrapper w-50" (click)="editUser()">
             <a class="edit_button">Edit Profile</a>
