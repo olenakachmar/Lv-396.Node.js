@@ -28,15 +28,10 @@ export class BurgerMenuComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  closeBurgerMenu(event): void {
-    this.focusOut.emit(event);
-  }
-
-  currentByIndex(i: number): boolean {
-    this.navItemsService.currentIndex(i);
+  closeBurgerMenu(): boolean {
     this.focusOut.emit(false);
 
-    return this.active = false;
+    return false;
   }
 
   trackById(link: NavItem): string {

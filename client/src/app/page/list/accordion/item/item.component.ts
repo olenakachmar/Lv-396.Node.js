@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { Task } from '../../../common/task';
 import { TasksService } from '../../../common/tasks.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,14 +15,15 @@ export class ItemComponent implements OnInit {
   user = new User();
   userId: string;
   users: User[];
+  tasks: object;
   checkedResolve: boolean;
   cssClass: string;
   cssClassVisible: string;
   markResolve: boolean;
   alertMessage: string;
   unreadClass: string;
-  taskIsOpen: boolean;
   userType: string;
+  isOpen: boolean;
 
   constructor(private readonly router: Router,
               private readonly route: ActivatedRoute,
@@ -30,7 +31,7 @@ export class ItemComponent implements OnInit {
               private readonly tasksService: TasksService) { }
 
   ngOnInit(): void {
-    this.userService.getUser()
+    this.userService.takeUser
       .subscribe(user => {
         this.user = user;
         this.changeClassUnread();
@@ -38,14 +39,15 @@ export class ItemComponent implements OnInit {
     this.userService.getAll()
       .subscribe(users => this.users = users);
     this.cssClass = '';
-    this.taskIsOpen = false;
+    this.isOpen = false;
+    this.isOpen = this.task.isOpen;
     this.unreadClass = '';
     this.userType = this.userService.getUserType();
     this.userId = this.userService.getUserId();
   }
 
   openTask(): void {
-    this.taskIsOpen = true;
+    this.isOpen = true;
     this.changeClassUnread();
     this.checkedAuthorOrPerformer();
     this.taskIsWatched();
@@ -60,7 +62,7 @@ export class ItemComponent implements OnInit {
   }
 
   private setStyle(): void {
-    this.unreadClass = this.taskIsOpen ? 'unread-open' : 'unread';
+    this.unreadClass = this.isOpen ? 'unread-open' : 'unread';
   }
 
   changeClassUnread(): void {

@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NavItemsService } from '../common/nav-items.service';
 import { UserService } from '../../common/services/user.service';
 import { NavItem } from '../common/nav-item';
-import { User } from '../../common/models/user';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +11,6 @@ import { User } from '../../common/models/user';
 })
 
 export class NavbarComponent implements OnInit {
-  @Input() user: User;
 
   name: string;
   surname: string;
@@ -20,27 +19,21 @@ export class NavbarComponent implements OnInit {
   menuList: NavItem[];
   userType: string;
 
-  constructor(private readonly navItemsService: NavItemsService, private readonly userService: UserService) { }
+  constructor(private readonly navItemsService: NavItemsService,
+              private readonly userService: UserService,
+              private readonly router: Router) { }
 
   ngOnInit(): void {
     this.navItemsService.getNavList()
       .subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
+    this.navItemsService.currentRouter(this.router.url);
+    this.router.events.subscribe((event) => {
+      this.navItemsService.currentRouter(this.router.url);
+    });
   }
 
-  currentByRout(currentRouter: string): boolean {
-    this.navItemsService.currentRouter(currentRouter);
-
-    return this.active = false;
-  }
-
-  currentByIndex(i: number): boolean {
-    this.navItemsService.currentIndex(i);
-
-    return this.active = false;
-  }
-
-  closeBurger(event): void {
+  closeBurgerMenu(event): void {
     this.active = event;
   }
 
@@ -50,7 +43,7 @@ export class NavbarComponent implements OnInit {
     return false;
   }
 
-  trackById(link: NavItem): string {
+  trackById(index: number, link: NavItem): string {
     return link.id;
   }
 }

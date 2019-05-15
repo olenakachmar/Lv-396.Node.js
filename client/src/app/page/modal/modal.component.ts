@@ -62,7 +62,9 @@ export class ModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getAllHr()
-      .subscribe(users => this.createUserDropDown(users));
+      .subscribe(users => {
+        this.createUserDropDown(users);
+      });
     this.userService.getUser()
       .subscribe(user => this.user = user);
     this.getFilterStatus();
@@ -100,7 +102,7 @@ export class ModalComponent implements OnInit {
     };
   }
 
-  private createUserDropdownOptions = (users: User[]): FilterOptions[] => {
+  private readonly createUserDropdownOptions = (users: User[]): FilterOptions[] => {
     let options: FilterOptions[] = users.map(
       (item: User, index: number) =>
       ({
@@ -164,7 +166,9 @@ export class ModalComponent implements OnInit {
     }
     this.updateTask = false;
     this.tasksService.editTask(this.editTask)
-      .subscribe((item: any) => this.successHandling());
+      .subscribe((item: any) => {
+        this.successHandling();
+      });
   }
 
   private successHandling(): void {
