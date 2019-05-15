@@ -28,7 +28,7 @@ export class MyProfileComponent implements OnInit, OnDestroy {
   }
 
   editUser(): void {
-    this.router.navigate(['/profile/edit-user', this.id], {relativeTo: this.route});
+    this.router.navigate(['/profile/edit-user', this.user._id], {relativeTo: this.route});
   }
   openModal(template: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
