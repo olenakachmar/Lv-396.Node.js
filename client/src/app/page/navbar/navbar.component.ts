@@ -27,11 +27,11 @@ export class NavbarComponent implements OnInit {
     this.navItemsService.getNavList()
       .subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
+    this.navItemsService.currentRouter(this.router.url);
     this.router.events.subscribe((event) => {
       this.navItemsService.currentRouter(this.router.url);
     });
   }
-
 
   closeBurgerMenu(event): void {
     this.active = event;
