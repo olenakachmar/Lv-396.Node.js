@@ -15,13 +15,13 @@ export class ItemComponent implements OnInit {
   user = new User();
   userId: string;
   users: User[];
+  tasks: object;
   checkedResolve: boolean;
   cssClass: string;
   cssClassVisible: string;
   markResolve: boolean;
   alertMessage: string;
   unreadClass: string;
-  taskIsOpen: boolean;
   userType: string;
   isOpen: boolean;
 
@@ -29,12 +29,6 @@ export class ItemComponent implements OnInit {
               private readonly route: ActivatedRoute,
               private readonly userService: UserService,
               private readonly tasksService: TasksService) { }
-
-  @HostListener('mouseleave') mouseleave(): void {
-    setTimeout(() => {
-      this.isOpen = false;
-    }, 500);
-  }
 
   ngOnInit(): void {
     this.userService.takeUser
@@ -45,7 +39,7 @@ export class ItemComponent implements OnInit {
     this.userService.getAll()
       .subscribe(users => this.users = users);
     this.cssClass = '';
-    this.taskIsOpen = false;
+    this.isOpen = false;
     this.isOpen = this.task.isOpen;
     this.unreadClass = '';
     this.userType = this.userService.getUserType();
@@ -53,7 +47,7 @@ export class ItemComponent implements OnInit {
   }
 
   openTask(): void {
-    this.taskIsOpen = true;
+    this.isOpen = true;
     this.changeClassUnread();
     this.checkedAuthorOrPerformer();
     this.taskIsWatched();
@@ -68,11 +62,11 @@ export class ItemComponent implements OnInit {
   }
 
   private setStyle(): void {
-    this.unreadClass = this.taskIsOpen ? 'unread-open' : 'unread';
+    this.unreadClass = this.isOpen ? 'unread-open' : 'unread';
   }
 
   changeClassUnread(): void {
-    const condHrTasks = !this.user.watchedIssues.includes(this.task.id) &&
+    const condHrTasks = !this.user.watched_issues.includes(this.task.id) &&
                         this.userId !== this.task.author._id &&
                         !this.checkedAuthorOrPerformer();
 
@@ -87,15 +81,15 @@ export class ItemComponent implements OnInit {
   }
 
   checkedAuthorOrPerformer(): boolean {
-    this.checkedResolve = this.user.id === this.task.author._id ?  this.task.resolvedByAuthor : this.task.resolvedByPerformer;
+    this.checkedResolve = this.user._id === this.task.author._id ?  this.task.resolvedByAuthor : this.task.resolvedByPerformer;
     this.cssClass = this.checkedResolve ? 'hiddenMark' : '';
 
     return this.checkedResolve;
   }
 
   taskIsWatched(): void {
-    if (!this.user.watchedIssues.includes(this.task.id)) {
-      this.tasksService.taskIsWatched(this.user.id, this.task.id)
+    if (!this.user.watched_issues.includes(this.task.id)) {
+      this.tasksService.taskIsWatched(this.user._id, this.task.id)
         .subscribe(task => task);
     }
   }
@@ -112,7 +106,7 @@ export class ItemComponent implements OnInit {
   }
 
   resolveClick(): void {
-    this.tasksService.updateResolvedBy(this.user.id, this.task.id)
+    this.tasksService.updateResolvedBy(this.user._id, this.task.id)
       .subscribe((item: any) => item);
     this.cssClass = 'hiddenMark';
     this.cssClassVisible = 'visible';

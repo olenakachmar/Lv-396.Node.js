@@ -20,6 +20,7 @@ const getOneByQuery = async (req, res) => {
     })
       .populate('assignTo', ['firstName', 'lastName'])
       .populate('author', ['firstName', 'lastName'])
+      .populate('comments.creator', ['firstName', 'lastName'])
       .exec();
     if (!status && !type && !date && !userId) {
       res.status(404).json({
@@ -214,14 +215,15 @@ const updateForResolve = async (req, res) => {
 const updateForComment = async (req, res) => {
   try {
     const { id } = req.body;
-    const { comment } = req.body;
-    const issues = await Issues.findByIdAndUpdate(id, { commentContent: comment }, { new: true })
-      .exec();
-    if (!issues) {
+    const issue = await Issues.findById(id);
+    if (!issue) {
       res.status(404).json({
         err: 'Issue not found',
       });
     }
+    const comments = helper.readInsertedObject('content', 'creator', req);
+    issue.comments = [...issue.comments, ...comments];
+    issue.save();
     res.status(200).json({
       updated: 'Successfully',
     });
