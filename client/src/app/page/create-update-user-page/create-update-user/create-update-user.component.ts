@@ -28,8 +28,7 @@ export class CreateUpdateUserComponent implements OnInit {
     private readonly route: ActivatedRoute,
     private readonly fb: FormBuilder) {
 
-    this.profileForm = fb.group({
-    });
+    this.profileForm = fb.group({});
 
     this.contactsForm = fb.group({
       form_contacts: new FormArray([])
@@ -59,10 +58,7 @@ export class CreateUpdateUserComponent implements OnInit {
   updateMContact(): void {
     this.MContacts = this.profileForm.value;
     this.sendMContacts.emit(this.MContacts);
-
-    console.log(this.MContacts);
   }
-
 
   mergeContacts(): void {
     this.allContacts = [...this.contacts, ...this.addContacts];
@@ -102,7 +98,6 @@ export class CreateUpdateUserComponent implements OnInit {
       email: new FormControl(email, { validators: Validators.required, updateOn: 'blur' }),
       phone: new FormControl(phone, { validators: Validators.required, updateOn: 'blur' })
     });
-    console.log(this.profileForm);
   }
 
   get form_contacts(): FormArray {

@@ -12,21 +12,21 @@ export class UserImageComponent implements OnInit {
   @ViewChild('fileInput') inputEl: ElementRef;
   @Output() onUpload = new EventEmitter<string>();
   @Input() imageURL: string;
-  
-  constructor(private fb: FormBuilder, private userService: UserService, private cd: ChangeDetectorRef) {
+
+  constructor(private fb: FormBuilder, private readonly userService: UserService, private cd: ChangeDetectorRef) {
     this.form = fb.group({
       avatar: null
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.imageURL = this.imageURL || 'assets/img/userimg.jpg';
   }
 
-  public upload() {
-    let inputEl: HTMLInputElement = this.inputEl.nativeElement;
+  public upload(): void {
+    const inputEl: HTMLInputElement = this.inputEl.nativeElement;
     this.userService.postImage(inputEl.files[0])
-      .subscribe((data: {url: string})=> {
+      .subscribe((data: {url: string}) => {
         this.onUpload.emit(data.url);
       })
   }

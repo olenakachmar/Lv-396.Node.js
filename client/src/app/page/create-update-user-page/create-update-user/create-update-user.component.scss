@@ -32,6 +32,7 @@
   }
   .delete__icon {
     margin: 16px;
+    cursor: pointer;
   }
 
   .user-info {
@@ -51,7 +52,7 @@
 
     .date-button {
       width: 100%;
-      margin-top: 28px;
+      margin-top: 24px;
       text-align: center;
       text-transform: uppercase;
       font-weight: bold;

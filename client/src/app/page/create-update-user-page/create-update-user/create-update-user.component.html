@@ -3,73 +3,39 @@
     <h1>{{ getFullName() }}</h1>
     <p>{{ user.position }}</p>
   </div>
-  <button class="light-button update-button">Update</button>
 </div>
 <div class="row additional-info" *ngIf="user">
   <div class="col-md-6 user-info">
     <form [formGroup]="profileForm">
       <div class="info-form">
         <div class="input-label"><label for="email">Email</label></div>
-        <input formControlName="email" (blur)="updateMContact()" value="{{user.email}}" class="form-control" type="text" placeholder="Email" id='email'
-          aria-label="Email">
+        <input formControlName="email" (blur)="updateMContact()" value="{{user.email}}" class="form-control" type="text"
+          placeholder="Email" id='email' aria-label="Email">
       </div>
 
       <div class="info-form">
         <div class="input-label"><label for="phone">Phone</label></div>
-        <input formControlName="phone" (blur)="updateMContact()" value="{{user.phone}}" class="form-control" type="text" placeholder="Phone" id='phone'
-          aria-label="Phone">
+        <input formControlName="phone" (blur)="updateMContact()" value="{{user.phone}}" class="form-control" type="text"
+          placeholder="Phone" id='phone' aria-label="Phone">
+      </div>
+    </form>
+    <form [formGroup]="contactsForm">
+      <div formArrayName="form_contacts">
+        <div class="info-form" *ngFor="let contact of form_contacts.controls; let i = index">
+          <form [formGroup]="contact">
+            <div class="input-label"><label for="name">{{contact.controls['contact_name'].value}}</label></div>
+            <input formControlName="contact_value" (blur)="updateData()" value="contact_value" class="form-control"
+              type="text" placeholder="contact_name" id="contact_name">
+          </form>
+        </div>
       </div>
     </form>
 
-    <!-- <form [formGroup]="contactsForm">
-      <div class="info-form" *ngFor="let contact of user.contacts" (click)="showForm()">
-        <div class="input-label"><label for="name">{{contact['contact_name']}}</label></div>
-        <input formControlName="{{contact['contact_value']}}" (blur)="mergeContacts"value="{{contact['contact_value']}}" class="form-control" type="text" placeholder="{{contact['contact_name']}}" 
-        id="{{contact['contact_name']}}">
-      </div>
-    </form> -->
-
-    <form [formGroup]="contactsForm">
-        <div formArrayName="form_contacts">
-          <div class="info-form" *ngFor="let contact of form_contacts.controls; let i = index">
-            <form [formGroup]="contact">
-              <div class="input-label"><label for="name">{{contact.controls['contact_name'].value}}</label></div>
-              <input formControlName="contact_value" (blur)="updateData()" value="contact_value" class="form-control"
-                type="text" placeholder="contact_name" id="contact_name">
-            </form>
-          </div>
-        </div>
-      </form>
-      <!-- <button (click)="mergeContacts()"></button> -->
-
-    <app-additional-contacts  (sendContacts)="getData($event)">
-
+    <app-additional-contacts (sendContacts)="getData($event)">
     </app-additional-contacts>
 
   </div>
 
-
-
-  <div class="col-md-5 date-info">
-    <div class="info-form">
-      <div class="input-label"><label for="date">Upcoming review date</label></div>
-      <app-dropdown-info class="info-input-area" id="role" [pairList]='roles'
-        (selected)="retrieveSelected('Role', $event)">
-      </app-dropdown-info>
-    </div>
-
-    <div class="info-form">
-      <div class="input-label"><label for="role">Data comning</label></div>
-      <app-dropdown-info class="info-input-area" id="role" [pairList]='roles'
-        (selected)="retrieveSelected('Role', $event)">
-      </app-dropdown-info>
-    </div>
-
-    <button class="light-button date-button">
-      <img _ngcontent-c4="" alt="add" class="add__icon" src="assets/img/add.svg">
-      Add date
-    </button>
-
-  </div>
+  <app-create-update-date class="col-md-5 date-info"></app-create-update-date>
 
 </div>

@@ -1,7 +1,7 @@
 <div class="main-wrapper">
   <div class="card">
     <p class="card-title">LOGIN TO <span class="font-weight-bold">HRMS</span></p>
-    <div class="card-body">
+    <div [ngClass]="card-body">
       <form class="container" [formGroup]="frm" (ngSubmit)="auth(frm.value)">
         <div class="form-group">
           <label for="login">LOGIN:</label>
@@ -34,7 +34,7 @@
           </div>
         </div>
 
-    		<div class="alert alert-danger" *ngIf="hasFailed">
+    		<div class="alert alert-danger mt-2" *ngIf="hasFailed">
           Invalid login or password.
         </div>
       </form>

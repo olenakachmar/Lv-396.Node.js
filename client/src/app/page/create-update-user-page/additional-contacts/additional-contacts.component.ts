@@ -27,12 +27,10 @@ export class AdditionalContactsComponent implements OnInit {
 
   getContacts(): void {
     this.contacts = this.form_contacts.value;
-    console.log(this.form_contacts.status);
     if (this.form_contacts.status !== 'VALID') {
       this.isValid = false;
     } else {
       this.isValid = true;
-      console.log("Sending");
       this.sendContacts.emit(this.contacts);
     }
   }
@@ -55,7 +53,6 @@ export class AdditionalContactsComponent implements OnInit {
       contact_value: new FormControl('', { validators: Validators.required, updateOn: 'blur' })
     }));
 
-    console.log(this.form_contacts);
     this.getContacts();
 
     return false;
