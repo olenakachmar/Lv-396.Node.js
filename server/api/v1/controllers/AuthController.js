@@ -60,9 +60,11 @@ const signup = async (req, res) => {
   if (parameters.roles) {
     parameters.roles = parameters.roles.map(role => role.toLowerCase());
   }
+
   if (parameters.type) {
     parameters.type = parameters.type.toLowerCase();
   }
+
   const newUser = User({
     ...parameters,
   });
