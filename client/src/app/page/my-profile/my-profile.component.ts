@@ -14,7 +14,6 @@ export class MyProfileComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   modalRef: BsModalRef;
   message: string;
-  isHr: boolean;
 
   constructor(private readonly userInfoService: UserService,
               private readonly route: ActivatedRoute,
