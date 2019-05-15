@@ -46,7 +46,7 @@ export class AdditionalContactsComponent implements OnInit {
     return this.addContacts.get('form_contacts') as FormArray;
   }
 
-  addContact(type: string): boolean {
+  addContact(): boolean {
 
     this.form_contacts.push(this.fb.group({
       contact_name: new FormControl('', { validators: Validators.required, updateOn: 'blur' }),
