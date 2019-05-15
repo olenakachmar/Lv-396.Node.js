@@ -44,6 +44,7 @@ import { CommentModalComponent } from './comment-modal/comment-modal.component';
 import { AdditionalContactsComponent } from './create-update-user-page/additional-contacts/additional-contacts.component';
 import { ContactTypesComponent } from './create-update-user-page/additional-contacts/contact-types/contact-types.component';
 import { CreateUpdateDateComponent } from './create-update-user-page/create-update-date/create-update-date.component';
+import { UpdateAvatarComponent } from './create-update-user-page/update-avatar/update-avatar.component';
 
 
 @NgModule({
@@ -79,6 +80,7 @@ import { CreateUpdateDateComponent } from './create-update-user-page/create-upda
     AdditionalContactsComponent,
     ContactTypesComponent,
     CreateUpdateDateComponent,
+    UpdateAvatarComponent,
   ],
   imports: [
     CommonModule,
