@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
+
   user: User = new User();
   finalContacts: [];
   finalMContacts: [];
@@ -29,6 +30,9 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.userService.chosenDatesForUser.subscribe((date) => {
+      this.user.dates = date;
+    });
     this.notValidUser = false;
     this.finalContacts = [];
     this.finalMContacts = [];
