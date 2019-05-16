@@ -1,4 +1,4 @@
-<div class="row main-user-info" *ngIf="user">
+<div class="row main-user-info" *ngIf="user && id">
   <div class="col main-user-info">
     <h1>{{ getFullName() }}</h1>
     <p>{{ user.position }}</p>
@@ -32,7 +32,7 @@
       </form>
     </div>
 
-    <app-additional-contacts (sendContacts)="getData($event)">
+    <app-additional-contacts (sendContacts)="getData($event)" *ngIf="id">
     </app-additional-contacts>
   </div>
   <app-create-update-date class="col-md-5 date-info"></app-create-update-date>
