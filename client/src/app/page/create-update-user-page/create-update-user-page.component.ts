@@ -51,13 +51,13 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
 
   setContacts(contacts: []): void {
     this.finalContacts = contacts;
-    this.user.contacts = this.finalContacts;
+    this.user.contacts =  this.finalContacts;
   }
 
   setMContacts(contacts: []): void {
     this.finalMContacts = contacts;
-    this.user.phone = this.finalMContacts.phone;
-    this.user.email = this.finalMContacts.email;
+    this.user.phone = this.finalMContacts['phone'];
+    this.user.email =  this.finalMContacts['email'];
   }
 
   extractUser(user, chosenDevelopmentDepartment, chosenHrDepartment): any {
@@ -65,7 +65,7 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
     this.ifChosenDevelopmentDepartment = chosenDevelopmentDepartment;
     this.ifChosenHrDepartment = chosenHrDepartment;
 
-    this.user.contacts = this.finalContacts;
+    this.user.contacts =  this.finalContacts;
 
     if (this.validateUser()) {
       if (this.user._id) {
@@ -103,8 +103,7 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   validateUser(): boolean {
     this.user.type = this.ifChosenHrDepartment ? 'hr' : 'developer';
     this.requiredForCreationUserFields = [this.user.firstName, this.user.lastName, this.user.department,
-                                          this.user.position, this.user.hr, this.user.manager,
-                                          this.user.email, this.user.phone];
+                                          this.user.position, this.user.hr, this.user.manager];
     if (this.ifChosenDevelopmentDepartment) {
       this.requiredForCreationUserFields = [...this.requiredForCreationUserFields, this.user.teamlead];
     }
