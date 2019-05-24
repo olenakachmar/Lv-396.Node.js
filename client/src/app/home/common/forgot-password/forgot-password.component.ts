@@ -13,7 +13,6 @@ export class ForgotPasswordComponent implements OnInit {
   frm: FormGroup;
   hasFailed: boolean;
   getResponse: boolean;
-  submitted: boolean;
   message: any;
   error: string;
 
@@ -25,14 +24,12 @@ export class ForgotPasswordComponent implements OnInit {
     });
     this.hasFailed = false;
     this.getResponse = false;
-    this.submitted = false;
   }
 
   ngOnInit(): void {
   }
 
   send(form: any): void {
-    this.submitted = true;
     this.frm.valueChanges.subscribe((value: string) => {
       if (value.length !== 0) {
         this.hasFailed = false;
