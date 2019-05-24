@@ -13,6 +13,7 @@ export class ForgotPasswordComponent implements OnInit {
   frm: FormGroup;
   hasFailed: boolean;
   getResponse: boolean;
+  submitted: boolean;
   message: any;
   error: string;
 
@@ -20,16 +21,18 @@ export class ForgotPasswordComponent implements OnInit {
               private readonly fb: FormBuilder,
               private readonly recoverPassword: RecoverPasswordService) {
     this.frm = fb.group({
-      email: ['', Validators.compose([Validators.required, Validators.pattern('^[^\s@]+@[^\s@]+\.[^\s@]{2,}$')])],
+      email: ['', [Validators.required, Validators.email]],
     });
     this.hasFailed = false;
     this.getResponse = false;
+    this.submitted = false;
   }
 
   ngOnInit(): void {
   }
 
   send(form: any): void {
+    this.submitted = true;
     this.frm.valueChanges.subscribe((value: string) => {
       if (value.length !== 0) {
         this.hasFailed = false;
