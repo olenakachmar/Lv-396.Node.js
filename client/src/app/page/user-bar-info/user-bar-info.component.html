@@ -1,23 +1,23 @@
 <div class="user-bar-info" *ngIf="userinfo">
-  <input type="checkbox" id="bt" />
+  <div class="photo">
+    <app-user-image [imageURL]="userinfo.photoURL"></app-user-image>
+    <app-update-avatar (onUpload)="updateAvatar($event)"></app-update-avatar>
+  </div>
+  <input type="checkbox" id="bt"/>
   <label class="check-button" for="bt">Show more</label>
 
   <div class="toggle-show">
-    <div class="photo">
-      <app-user-image [imageURL]="userinfo.photoURL"></app-user-image>
-      <app-update-avatar (onUpload)="updateAvatar($event)"></app-update-avatar>
-    </div>
     <div class="main-user-info">
       <div>{{ userinfo.firstName }} {{ userinfo.lastName }}</div>
       <div>{{ userinfo.position }}</div>
     </div>
     <app-link-to-profile class="additional-info" [idLinks]="userinfo.manager._id" [info]="getManagerName()"
-      [label]="'My manager'">
+                         [label]="'My manager'">
     </app-link-to-profile>
     <app-link-to-profile class="additional-info" [info]="userinfo.department.name" [label]="'My department'">
     </app-link-to-profile>
     <app-link-to-profile *ngIf="userType !== 'hr'" class="additional-info" [idLinks]="userinfo.manager.teamlead"
-      [info]="getTeamleadName()" [label]="'My Team Lead'">
+                         [info]="getTeamleadName()" [label]="'My Team Lead'">
     </app-link-to-profile>
   </div>
 </div>
