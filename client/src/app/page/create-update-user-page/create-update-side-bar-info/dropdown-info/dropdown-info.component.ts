@@ -96,8 +96,9 @@ export class DropdownInfoComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     const checkedChangedValues = changes.pairList && changes.pairList.currentValue && changes.pairList.currentValue.length > 0;
     if (checkedChangedValues) {
-      if (this.update) {
-        this.title = changes.pairList.currentValue.find(elem => elem._id === this.update).name;
+      const checkIfValueHasCome = changes.pairList.currentValue.find(elem => elem._id === this.update);
+      if (this.update && checkIfValueHasCome) {
+        this.title = checkIfValueHasCome.name;
       }
     }
     if (changes.update && changes.update.currentValue) {

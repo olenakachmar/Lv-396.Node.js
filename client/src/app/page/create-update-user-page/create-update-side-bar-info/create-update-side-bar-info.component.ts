@@ -14,7 +14,7 @@ import { Subject } from 'rxjs/Rx';
 export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy, OnChanges {
   private destroy$ = new Subject<void>();
 
-  @Input() user;
+  @Input() user: User;
   departmentsOptionPair: OptionPair[] = [];
   departments: Department[] = [];
   positions: OptionPair[] = [];
@@ -51,6 +51,11 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy, OnCh
   }
 
   ngOnChanges(): void {
+    if (this.user.department) {
+      if (this.user.department.name === 'Development') {
+        this.ifChosenDevelopmentDepartment = true;
+      }
+    }
     this.departmentService.getAllDepartments()
       .takeUntil(this.destroy$)
       .subscribe(data => {
