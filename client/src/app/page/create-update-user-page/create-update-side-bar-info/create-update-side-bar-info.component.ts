@@ -23,6 +23,7 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy, OnCh
   managers: OptionPair[] = [];
   ifChosenDevelopmentDepartment = false;
   ifChosenHrDepartment = false;
+  warningForChoosingDepartment: boolean;
   @Input() showModal: boolean;
 
   constructor(readonly departmentService: DepartmentService,
@@ -48,6 +49,14 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy, OnCh
       .subscribe(data => {
         this.managers = data.map(elem => new OptionPair(elem._id, `${elem.firstName} ${elem.lastName}`));
       });
+  }
+
+  warningToChooseDepartmentFirst(): void {
+    this.warningForChoosingDepartment = this.user.department ? false : true;
+
+    setTimeout(() => {
+      this.warningForChoosingDepartment = false;
+    }, 3000);
   }
 
   ngOnChanges(): void {
