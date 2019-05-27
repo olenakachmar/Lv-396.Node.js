@@ -28,7 +28,7 @@ export class NavbarComponent implements OnInit {
       .subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
     this.navItemsService.currentRouter(this.router.url);
-    this.router.events.subscribe((event) => {
+    this.router.events.subscribe(e => {
       this.navItemsService.currentRouter(this.router.url);
     });
   }
