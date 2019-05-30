@@ -4,6 +4,8 @@ import { User, Contact } from '../../common/models/user';
 import { Subject } from 'rxjs/Rx';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CreateUpdateUserService } from '../common/create-update-user.service';
+import { DatesItem } from '../common/dates-item';
 
 @Component({
   selector: 'app-create-update-user-page',
@@ -16,6 +18,7 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
 
   user: User = new User();
   finalContacts: [];
+  finalDates: DatesItem[];
   finalMContacts: [];
   ifChosenDevelopmentDepartment: boolean;
   ifChosenHrDepartment: boolean;
@@ -26,6 +29,7 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   constructor(readonly userService: UserService,
               private readonly router: Router,
               private  route: ActivatedRoute,
+              private createUpdateUserService: CreateUpdateUserService,
               private toastr: ToastrService) {
   }
 
@@ -33,8 +37,10 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
     this.userService.chosenDatesForUser.subscribe((date) => {
       this.user.dates = date;
     });
+    this.subscribeForUpdates();
     this.notValidUser = false;
     this.finalContacts = [];
+    this.finalDates = [];
     this.finalMContacts = [];
 
     this.route.paramMap.subscribe(parameterMap => {
@@ -42,6 +48,12 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
       this.getEmployee(id);
     });
     this.deleteNotValidValuesFromUserObjectOnDepartmentChoose();
+  }
+
+  private subscribeForUpdates(): void {
+    this.createUpdateUserService.userDataUpdator.subscribe((date) => {
+      this[date.name] = date.value;
+    });
   }
 
   private getEmployee(id: string): void {
@@ -68,8 +80,9 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
     this.user = user;
     this.ifChosenDevelopmentDepartment = chosenDevelopmentDepartment;
     this.ifChosenHrDepartment = chosenHrDepartment;
-
     this.user.contacts =  this.finalContacts;
+    this.user.dates =  this.finalDates;
+    console.log('test', this.user);
 
     if (this.validateUser()) {
       if (this.user._id) {
@@ -144,6 +157,7 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+    this.createUpdateUserService.userDataUpdator.unsubscribe();
   }
 }
 

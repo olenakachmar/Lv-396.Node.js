@@ -1,8 +1,6 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
-import { DatesItem } from '../../common/dates-item';
-import { UserService } from '../../../common/services/user.service';
-
+import { CreateUpdateUserService } from '../../../common/create-update-user.service';
 
 @Component({
   selector: 'app-create-update-date',
@@ -10,22 +8,20 @@ import { UserService } from '../../../common/services/user.service';
   styleUrls: ['./create-update-date.component.scss']
 })
 export class CreateUpdateDateComponent implements OnInit {
-  @Output() public readonly onDateChange = new EventEmitter<DatesItem[]>();
   public addDatesForm: FormGroup;
   dates: string[];
 
   constructor(private fb: FormBuilder,
-              private userService: UserService) {
+              private createUpdateUser: CreateUpdateUserService) {
   }
 
   ngOnInit(): void {
     this.addDatesForm = this.fb.group({
       datesCount: this.fb.array([
         {
-          topic: 'Upcoming review date',
+          topic: 'Upcoming review',
           date: [''],
         },
-        this.initDates(),
       ])
     });
   }
@@ -33,23 +29,36 @@ export class CreateUpdateDateComponent implements OnInit {
   initDates(): any {
     return this.fb.group({
       topic: [''],
-      date: [''],
+      date: [],
     });
   }
 
   addDate(): void {
     const control = this.addDatesForm.controls.datesCount as FormArray;
     control.push(this.initDates());
-    this.userService.chosenDatesForUser.emit(this.addDatesForm.controls.datesCount.value);
   }
 
   removeDate(i: number): void {
     const control = this.addDatesForm.controls.datesCount as FormArray;
     control.removeAt(i);
-    this.userService.chosenDatesForUser.emit(this.addDatesForm.controls.datesCount.value);
+    this.updateDates();
   }
 
   checkFirstElement(i: number): boolean {
     return i === 0;
+  }
+
+  updateDates(): void {
+    this.createUpdateUser.updateUserData('finalDates', this.addDatesForm.controls.datesCount.value);
+  }
+
+  updateDatePicker($event: any, i: number): void {
+    this.addDatesForm.controls.datesCount.value[i].date = $event;
+    this.updateDates();
+  }
+
+  updateTopic($event, i: number): void {
+    this.addDatesForm.controls.datesCount.value[i].topic = $event.target.value;
+    this.updateDates();
   }
 }

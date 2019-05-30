@@ -33,11 +33,4 @@ describe('DateService', () => {
     expect(service)
       .toBeTruthy();
   });
-  it('should return items list', fakeAsync(inject([DateService], (service: DateService) => {
-    service.setDateList()
-      .subscribe(list => {
-        expect(list)
-          .toEqual(mockDateItemsList);
-      });
-  })));
 });
