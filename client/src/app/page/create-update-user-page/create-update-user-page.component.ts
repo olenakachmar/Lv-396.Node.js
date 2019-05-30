@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
+
   user: User = new User();
   finalContacts: [];
   finalMContacts: [];
@@ -29,6 +30,9 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.userService.chosenDatesForUser.subscribe((date) => {
+      this.user.dates = date;
+    });
     this.notValidUser = false;
     this.finalContacts = [];
     this.finalMContacts = [];
@@ -41,9 +45,11 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   }
 
   private getEmployee(id: string): void {
-    if (id) {
+    if (id && !this.userService.user) {
       this.userService.getUser(id, true)
         .subscribe(user => this.user = user);
+    } else if (id && this.userService.user) {
+      this.user = this.userService.user;
     } else {
       this.create = true;
     }

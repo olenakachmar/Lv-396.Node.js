@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from '../../../common/models/user';
 
 import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
+import { DatesItem } from '../../common/dates-item';
 
 @Component({
   selector: 'app-create-update-user',
@@ -12,6 +13,7 @@ import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@ang
   styleUrls: ['./create-update-user.component.scss']
 })
 export class CreateUpdateUserComponent implements OnInit {
+
 
   @Output() readonly sendContacts: EventEmitter<[]> = new EventEmitter<[]>();
   @Output() readonly sendMContacts: EventEmitter<[]> = new EventEmitter<[]>();
@@ -24,6 +26,7 @@ export class CreateUpdateUserComponent implements OnInit {
   addContacts;
   allContacts;
   id: string;
+  date: DatesItem[];
 
   constructor(private readonly userInfoService: UserService,
     private readonly route: ActivatedRoute,
@@ -38,7 +41,16 @@ export class CreateUpdateUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkIdParam();
-    this.loadUser(this.id);
+
+    if (this.id) {
+      this.loadUser(this.id);
+    } else {
+      this.user = new User();
+      this.profileForm = this.fb.group({
+        email: new FormControl('', { validators: Validators.required, updateOn: 'blur' }),
+        phone: new FormControl('', { validators: Validators.required, updateOn: 'blur' })
+      });
+    }
 
     this.addContacts = [];
     this.contacts = [];
