@@ -83,11 +83,6 @@ describe('HomeComponent', () => {
     expect(component.frm.valid).toBeFalsy();
   });
 
-  it('should set submitted to true', () => {
-    component.auth({login: 'asd', password: '456'});
-    expect(component.submitted).toBeTruthy();
-  });
-
   it('should call the auth method', async(() => {
     fixture.detectChanges();
     spyOn(component, 'auth');
