@@ -50,7 +50,7 @@ export class UserService {
   }
 
   getAllManagers(): Observable<any> {
-    return this.http.get<any>(`${api}users?roles=Manager`, httpOptions);
+    return this.http.get<any>(`${api}users?roles=manager`, httpOptions);
   }
 
   getUser(id?: string, required?: boolean): Observable<User> {
@@ -63,7 +63,6 @@ export class UserService {
         })
       );
   }
-
 
   getUserId(): any {
     if (localStorage.token) {
