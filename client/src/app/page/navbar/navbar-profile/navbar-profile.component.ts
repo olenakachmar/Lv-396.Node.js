@@ -29,6 +29,7 @@ export class NavbarProfileComponent implements OnInit {
   active: boolean;
   todayDate: Date;
   typeOfUser: boolean;
+  avatar: string;
 
   constructor(private readonly authService: AuthService,
               private readonly router: Router,
@@ -49,7 +50,7 @@ export class NavbarProfileComponent implements OnInit {
       });
     this.loadDates();
     this.todayDate = new Date();
-    this.user.photoURL = this.user.photoURL || 'assets/img/userimg.jpg';
+    this.avatar =  this.user.photoURL || 'assets/img/userimg.jpg';
   }
 
   openTaskByid(taskID: string): boolean {

@@ -29,8 +29,8 @@ export class CreateUpdateUserComponent implements OnInit {
   date: DatesItem[];
 
   constructor(private readonly userInfoService: UserService,
-    private readonly route: ActivatedRoute,
-    private readonly fb: FormBuilder) {
+              private readonly route: ActivatedRoute,
+              private readonly fb: FormBuilder) {
 
     this.profileForm = fb.group({});
 
@@ -78,7 +78,7 @@ export class CreateUpdateUserComponent implements OnInit {
   }
 
   private readonly loadUser = (id: string) => {
-    this.userInfoService.getUser(this.id)
+    this.userInfoService.getUser(this.id, true)
       .subscribe((user) => {
         this.user = user;
         this.contacts = user.contacts;
