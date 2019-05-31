@@ -1,6 +1,7 @@
 import { FilterUsersByPipe } from './filter-users-by.pipe';
 import { User } from '../../common/models/user';
 import { } from '../contact-info/contact-info.component';
+import { throwError } from 'rxjs';
 
 describe('FilterUsersByPipe', () => {
   let filter: string;
@@ -29,8 +30,6 @@ describe('FilterUsersByPipe', () => {
             contact_value: 'myskype'
           }
         ],
-        // department: new Department('', '', []),
-        // manager: new Manager('5cbb6d7ba4908a0db878c37a'),
       },
       teamlead: {
         photoURL: '',
@@ -51,11 +50,9 @@ describe('FilterUsersByPipe', () => {
             contact_name: 'skype',
             contact_value: 'myskype'
           }],
-          // department: new Department('5cab274ece3843324cc6d774'),
           email: 'dplscode@gmail.com',
           firstName: 'Skype',
           lastName: 'FileExchanger',
-          // manager: new Manager('5cbb6d7ba4908a0db878c37a'),
           phone: '3802281488',
           position: 'Middle QA',
           _id: '5c9a065b8c40cb0e8cd39d11',
@@ -73,7 +70,8 @@ describe('FilterUsersByPipe', () => {
 
   it('create an instance', () => {
     const pipe = new FilterUsersByPipe();
-    expect(pipe).toBeTruthy();
+    expect(pipe)
+      .toBeTruthy();
   });
 
   it('if there is no filters return all users', () => {
