@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateUpdateSideBarInfoComponent } from './create-update-side-bar-info.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+
 
 describe('CreateSideBarInfoComponent', () => {
   let component: CreateUpdateSideBarInfoComponent;
@@ -8,7 +11,11 @@ describe('CreateSideBarInfoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateUpdateSideBarInfoComponent ]
+      declarations: [
+        CreateUpdateSideBarInfoComponent,
+        HttpClientTestingModule
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));
