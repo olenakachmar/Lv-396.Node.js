@@ -1,12 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import 'rxjs/add/observable/of';
+// import 'rxjs/add/observable/of';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NavbarComponent } from './navbar.component';
 import { NavbarProfileComponent } from './navbar-profile/navbar-profile.component';
 import { SocialNetworksComponent } from './social-networks/social-networks.component';
 import { NavItemsService } from '../common/nav-items.service';
-import { Observable } from 'rxjs';
+import { Observable, throwError, of } from 'rxjs';
 
 
 describe('NavbarComponent', () => {
@@ -102,7 +102,8 @@ describe('NavbarComponent', () => {
       ],
       providers: [NavItemsService]
     })
-      .compileComponents();
+      .compileComponents()
+      .catch(err => throwError(new Error(err)));
   }));
 
   beforeEach(() => {
@@ -114,24 +115,28 @@ describe('NavbarComponent', () => {
 
   it('should create', () => {
     expect(component)
-      .toBeTruthy();
+      .toBeTruthy()
+      .catch(err => throwError(new Error(err)));
   });
 
   it(`should set menuList`, () => {
     spy = spyOn(NavItemsService.prototype, 'getNavList').and
       .returnValue(Observable.of(mockMenuList));
     expect(component.menuList)
-      .toEqual(mockMenuList);
+      .toEqual(mockMenuList)
+      .catch(err => throwError(new Error(err)));
   });
 
   it('should change property active to false on window scroll', () => {
     window.dispatchEvent(new Event('scroll'));
     expect(component.active)
-      .toBe(false);
+      .toBe(false)
+      .catch(err => throwError(new Error(err)));
   });
 
   it(`should return item id`, () => {
-    expect(component.trackById(mockMenuList[0]))
-      .toEqual('upcoming-tasks');
+    expect(component.trackById(1, mockMenuList[0]))
+      .toEqual('upcoming-tasks')
+      .catch(err => throwError(new Error(err)));
   });
 });

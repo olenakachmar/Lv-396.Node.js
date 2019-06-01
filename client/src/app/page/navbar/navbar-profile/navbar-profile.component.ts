@@ -1,14 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { throwError } from 'rxjs';
 import { AuthService } from '../../../common/services/auth.service';
 import { UserService } from '../../../common/services/user.service';
 import { DateService } from '../../common/date.service';
 import { TasksService } from '../../common/tasks.service';
 import { User } from '../../../common/models/user';
 import { Task } from '../../common/task';
-import { NavItem } from '../../common/nav-item';
+import { NavItem, NavItemSet } from '../../common/nav-item';
 import { DatesItem } from '../../common/dates-item';
-import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-navbar-profile',
@@ -26,10 +26,12 @@ export class NavbarProfileComponent implements OnInit {
   dateList: DatesItem[];
   newTasksCount: number;
   datesCount: number;
-  active: boolean;
   todayDate: Date;
   typeOfUser: boolean;
-  defaultAvatar: '../../../../assets/img/userimg.jpg';
+  active: boolean;
+  itemMenuSettings: NavItemSet;
+  avatar: string;
+
 
   constructor(private readonly authService: AuthService,
               private readonly router: Router,
@@ -42,11 +44,18 @@ export class NavbarProfileComponent implements OnInit {
     this.userService.takeUser
       .subscribe(user => {
         this.user = user;
-        this.loadUserTasks();
+        this.avatar = user.photoURL || '../../../../assets/img/userimg.jpg';
+        if (user.watched_issues) {
+          this.loadUserTasks(user.watched_issues);
+        }
       });
     this.loadDates();
     this.todayDate = new Date();
-    this.user.photoURL = this.user.photoURL;
+    this.itemMenuSettings = {
+      type: 'rightMenu',
+      style: 'right-menu-elem dropdown-item'
+    };
+
   }
 
   openTaskByid(taskID: string): boolean {
@@ -94,10 +103,10 @@ export class NavbarProfileComponent implements OnInit {
     }
   }
 
-  loadUserTasks(): void {
+  loadUserTasks(watchedTasks): void {
     this.tasksService.takeUserTasks
       .subscribe(tasks => {
-        this.newTasks = this.findNewTasks(tasks, this.user.watched_issues);
+        this.newTasks = this.findNewTasks(tasks, watchedTasks);
         this.newTasksCount = this.newTasks.length;
       });
   }
@@ -151,4 +160,5 @@ export class NavbarProfileComponent implements OnInit {
       this.dateService.convertDate(date.date) === this.dateService.convertDate(this.todayDate)
     );
   }
+
 }

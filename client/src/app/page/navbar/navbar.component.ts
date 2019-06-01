@@ -12,12 +12,13 @@ import { NavItem } from '../common/nav-item';
 
 export class NavbarComponent implements OnInit {
 
+  active: boolean;
   name: string;
   surname: string;
   avatar: string;
-  active: boolean;
-  menuList: NavItem[];
   userType: string;
+  menuList: NavItem[];
+
 
   constructor(private readonly navItemsService: NavItemsService,
               private readonly userService: UserService,
