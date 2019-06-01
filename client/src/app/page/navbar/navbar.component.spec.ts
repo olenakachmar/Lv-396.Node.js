@@ -136,7 +136,6 @@ describe('NavbarComponent', () => {
 
   it(`should return item id`, () => {
     expect(component.trackById(1, mockMenuList[0]))
-      .toEqual('upcoming-tasks')
-      .catch(err => throwError(new Error(err)));
+      .toEqual('upcoming-tasks');
   });
 });
