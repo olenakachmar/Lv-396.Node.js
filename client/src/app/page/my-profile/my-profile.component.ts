@@ -20,7 +20,7 @@ export class MyProfileComponent implements OnInit, OnDestroy {
               private readonly modalService: BsModalService,
               private readonly router: Router) { }
 
-  user;
+  user: User;
   id: any;
 
   ngOnInit(): void {

@@ -15,7 +15,6 @@ import { DatesItem } from '../common/dates-item';
 export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
-
   user: User = new User();
   finalContacts: [];
   finalDates: DatesItem[];
@@ -25,6 +24,7 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   notValidUser: boolean;
   create: boolean;
   requiredForCreationUserFields: any[];
+  emptyDates: boolean;
 
   constructor(readonly userService: UserService,
               private readonly router: Router,
@@ -34,14 +34,12 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.userService.chosenDatesForUser.subscribe((date) => {
-      this.user.dates = date;
-    });
     this.subscribeForUpdates();
     this.notValidUser = false;
     this.finalContacts = [];
     this.finalDates = [];
     this.finalMContacts = [];
+    this.emptyDates = false;
 
     this.route.paramMap.subscribe(parameterMap => {
       const id = parameterMap.get('id');
@@ -51,15 +49,20 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   }
 
   private subscribeForUpdates(): void {
-    this.createUpdateUserService.userDataUpdator.subscribe((date) => {
+    this.createUpdateUserService.userDataUpdator
+      .takeUntil(this.destroy$)
+      .subscribe((date) => {
       this[date.name] = date.value;
     });
   }
 
   private getEmployee(id: string): void {
-    if (id) {
+    if (id && !this.userService.user) {
       this.userService.getUser(id, true)
+        .takeUntil(this.destroy$)
         .subscribe(user => this.user = user);
+    } else if (id && this.userService.user) {
+      this.user = this.userService.user;
     } else {
       this.create = true;
     }
@@ -76,13 +79,21 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
     this.user.email =  this.finalMContacts['email'];
   }
 
+  checkOnEmptyDates(): void {
+    this.finalDates.map(item => {
+      console.log('itemTopic ' + item.topic);
+      console.log('itemDate ' + item.date);
+      this.emptyDates = !item.topic || !item.date ? true : false;
+    });
+    console.log('emptyDates ' + this.emptyDates);
+  }
+
   extractUser(user, chosenDevelopmentDepartment, chosenHrDepartment): any {
     this.user = user;
     this.ifChosenDevelopmentDepartment = chosenDevelopmentDepartment;
     this.ifChosenHrDepartment = chosenHrDepartment;
     this.user.contacts =  this.finalContacts;
     this.user.dates =  this.finalDates;
-    console.log('test', this.user);
 
     if (this.validateUser()) {
       if (this.user._id) {
@@ -110,7 +121,7 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
       }
     } else {
       this.notValidUser = true;
-      this.toastr.error('Please, fill in all requiredfields', 'Result', {
+      this.toastr.error('Please, fill in all required fields', 'Result', {
         positionClass: 'toast-top-full-width',
         closeButton: true
       });
@@ -126,10 +137,12 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
     }
     let requiredField = true;
     this.requiredForCreationUserFields.map(elem => {
-      if (!elem) {
+      this.checkOnEmptyDates();
+      if (!elem ||  this.emptyDates) {
         requiredField = false;
       }
     });
+    console.log(requiredField);
 
     return requiredField;
   }
@@ -157,7 +170,6 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
-    this.createUpdateUserService.userDataUpdator.unsubscribe();
   }
 }
 

@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Subject} from 'rxjs/Rx';
-
-interface UserData {
-  name: string;
-  value: any;
-}
+import { Subject } from 'rxjs/Rx';
+import { UserData } from './user-data';
 
 @Injectable({
   providedIn: 'root'

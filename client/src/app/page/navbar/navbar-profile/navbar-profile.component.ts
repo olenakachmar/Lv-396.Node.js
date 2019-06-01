@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../common/services/auth.service';
 import { UserService } from '../../../common/services/user.service';
@@ -9,6 +9,7 @@ import { User } from '../../../common/models/user';
 import { Task } from '../../common/task';
 import { NavItem } from '../../common/nav-item';
 import { DatesItem } from '../../common/dates-item';
+import { Subject } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-navbar-profile',
@@ -17,7 +18,9 @@ import { DatesItem } from '../../common/dates-item';
   providers: [AuthService]
 })
 
-export class NavbarProfileComponent implements OnInit {
+export class NavbarProfileComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
+
   @Input() public userType: string;
 
   user: User;
@@ -41,8 +44,10 @@ export class NavbarProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.navItemsService.getNavList()
+      .takeUntil(this.destroy$)
       .subscribe(list => this.menuList = list);
     this.userService.takeUser
+      .takeUntil(this.destroy$)
       .subscribe(user => {
         this.user = user;
         this.loadUserTasks();
@@ -55,6 +60,7 @@ export class NavbarProfileComponent implements OnInit {
   openTaskByid(taskID: string): boolean {
     if (this.typeOfUser) {
       this.tasksService.taskIsWatched(this.user._id, taskID)
+        .takeUntil(this.destroy$)
         .subscribe(res => {
           this.removeFromNew(taskID);
         });
@@ -76,6 +82,7 @@ export class NavbarProfileComponent implements OnInit {
     if (this.userService.getUserType() === 'hr') {
       this.typeOfUser = true;
       this.userService.getUsersOfHr()
+        .takeUntil(this.destroy$)
         .subscribe(users => {
           this.dateList = [];
           users.forEach((user) => {
@@ -86,6 +93,7 @@ export class NavbarProfileComponent implements OnInit {
         });
     } else if (this.userService.getUserType() === 'developer') {
       this.userService.getUser(this.userService.getUserId())
+        .takeUntil(this.destroy$)
         .subscribe(user => {
           this.dateList = [];
           this.dateList = this.dateService.setDateList(user, this.dateList);
@@ -97,6 +105,7 @@ export class NavbarProfileComponent implements OnInit {
 
   loadUserTasks(): void {
     this.tasksService.takeUserTasks
+      .takeUntil(this.destroy$)
       .subscribe(tasks => {
         this.newTasks = this.findNewTasks(tasks, this.user.watched_issues);
         this.newTasksCount = this.newTasks.length;
@@ -149,5 +158,10 @@ export class NavbarProfileComponent implements OnInit {
     return dateList.filter(date =>
       this.dateService.convertDate(date.date) === this.dateService.convertDate(this.todayDate)
     );
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

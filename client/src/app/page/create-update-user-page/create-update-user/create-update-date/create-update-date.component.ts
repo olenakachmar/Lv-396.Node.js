@@ -57,8 +57,16 @@ export class CreateUpdateDateComponent implements OnInit {
     this.updateDates();
   }
 
-  updateTopic($event, i: number): void {
+  updateTopic($event: any, i: number): void {
     this.addDatesForm.controls.datesCount.value[i].topic = $event.target.value;
     this.updateDates();
+  }
+
+  leftBorderStylesForDate(date: string, i: number): string {
+    if (date === 'topic') {
+      return this.addDatesForm.controls.datesCount.value[i].topic ? 'border-green' : 'border-red';
+      }
+
+    return this.addDatesForm.controls.datesCount.value[i].date ? 'border-green' : 'border-red';
   }
 }

@@ -45,6 +45,7 @@ import { AdditionalContactsComponent } from './create-update-user-page/additiona
 import { ContactTypesComponent } from './create-update-user-page/additional-contacts/contact-types/contact-types.component';
 import { CreateUpdateDateComponent } from './create-update-user-page/create-update-user/create-update-date/create-update-date.component';
 import { UpdateAvatarComponent } from './create-update-user-page/update-avatar/update-avatar.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 
 @NgModule({
@@ -92,7 +93,8 @@ import { UpdateAvatarComponent } from './create-update-user-page/update-avatar/u
     BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    ScrollingModule
   ],
   providers: [
     appConfigProviders,

@@ -12,10 +12,12 @@
               class="form-control"
               type="text" placeholder="Date topic"
               aria-label="Add Date"
+              formControlName="topic"
               minlength="3"
               maxlength="20"
-              (change)="updateTopic($event, i)"
               required
+              (change)="updateTopic($event, i)"
+              [ngClass]="leftBorderStylesForDate('topic', i)"
             >
           </div>
           <div class="col-md-2 dlete-icon">
@@ -24,7 +26,8 @@
         </div>
         <app-datepicker
           (onDateChange) = 'updateDatePicker($event, i)'
-          class="col-md-10"
+          class="col-md-10 datepicker"
+          [ngClass]="leftBorderStylesForDate('date', i)"
         ></app-datepicker>
       </div>
       <button type="submit" class="col-md-12 light-button" (click)="addDate()">
