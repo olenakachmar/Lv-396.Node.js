@@ -4,7 +4,6 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { HttpClientModule } from '@angular/common/http';
 import { switchMap, map } from 'rxjs/operators';
 import { Observable, throwError, of } from 'rxjs';
-// import 'rxjs/add/observable/of';
 
 import { RouterTestingModule } from '@angular/router/testing';
 import { NavbarProfileComponent } from './navbar-profile.component';
