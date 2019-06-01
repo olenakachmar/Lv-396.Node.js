@@ -6,13 +6,14 @@ import { UserService } from '../../../common/services/user.service';
 import { User } from '../../../common/models/user';
 import { Subject } from 'rxjs/Rx';
 
+
 @Component({
   selector: 'app-create-update-side-bar-info',
   templateUrl: './create-update-side-bar-info.component.html',
   styleUrls: ['./create-update-side-bar-info.component.scss']
 })
 export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy, OnChanges {
-  private destroy$ = new Subject<void>();
+  private readonly destroy$ = new Subject<void>();
 
   @Input() user: User;
   departmentsOptionPair: OptionPair[] = [];

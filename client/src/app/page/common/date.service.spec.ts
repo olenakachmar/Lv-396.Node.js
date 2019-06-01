@@ -1,29 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DateService } from './date.service';
-
 import { expect } from '@angular/core/testing/src/testing_internal';
-
-const mockDateItemsList = [
-  {
-    firstName: '',
-    lastName: 'upcoming tasks',
-    topic: 'upcoming date',
-    date: '2019-05-15T19:59:34.830Z',
-  },
-  {
-    firstName: '',
-    lastName: 'upcoming tasks',
-    topic: 'upcoming date',
-    date: '2019-05-15T19:59:34.830Z',
-  },
-  {
-    firstName: '',
-    lastName: 'upcoming tasks',
-    topic: 'upcoming date',
-    date: '2019-05-15T19:59:34.830Z',
-  }
-];
+import { DateService } from './date.service';
+import { describe } from 'selenium-webdriver/testing';
 
 describe('DateService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 import { OptionPair } from '../../../../common/models/option-pair';
 import { UserService } from '../../../../common/services/user.service';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dropdown-info',
@@ -31,8 +30,7 @@ export class DropdownInfoComponent implements OnInit, OnChanges {
   selectTeamleadRole: boolean;
   rolesList: string[] = [];
 
-  constructor(private userService: UserService,
-              private toastr: ToastrService) {
+  constructor(private readonly userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -67,12 +65,12 @@ export class DropdownInfoComponent implements OnInit, OnChanges {
     if (this.required) {
       if (this.title === 'Choose') {
         return 'border-red';
-      } else {
-        return 'border-green';
       }
-    } else {
-      return 'border-blue';
+
+      return 'border-green';
     }
+
+    return 'border-blue';
   }
 
   @HostListener('click') onClick(): void {

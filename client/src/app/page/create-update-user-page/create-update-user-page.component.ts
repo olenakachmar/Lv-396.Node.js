@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../../common/services/user.service';
-import { User, Contact } from '../../common/models/user';
-import { Subject } from 'rxjs/Rx';
+import { User } from '../../common/models/user';
+import { Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CreateUpdateUserService } from '../common/create-update-user.service';
@@ -13,7 +13,7 @@ import { DatesItem } from '../common/dates-item';
   styleUrls: ['./create-update-user-page.component.scss']
 })
 export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
-  private destroy$ = new Subject<void>();
+  private readonly destroy$ = new Subject<void>();
 
   user: User = new User();
   finalContacts: [];
@@ -26,11 +26,11 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   requiredForCreationUserFields: any[];
   emptyDates: boolean;
 
-  constructor(readonly userService: UserService,
+  constructor(private readonly userService: UserService,
               private readonly router: Router,
-              private  route: ActivatedRoute,
-              private createUpdateUserService: CreateUpdateUserService,
-              private toastr: ToastrService) {
+              private readonly route: ActivatedRoute,
+              private readonly toastr: ToastrService,
+              private readonly createUpdateUserService: CreateUpdateUserService){
   }
 
   ngOnInit(): void {
@@ -142,7 +142,6 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
         requiredField = false;
       }
     });
-    console.log(requiredField);
 
     return requiredField;
   }
@@ -155,12 +154,9 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   }
 
   errorHandling(error): void {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = `Error: ${error.error.message}`;
-    } else {
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
+    const errorMessage = error.error instanceof ErrorEvent
+      ? `Error: ${error.error.message}`
+      : `Error Code: ${error.status}\nMessage: ${error.message}`;
     this.toastr.error(errorMessage, 'Error Message', {
       positionClass: 'toast-top-full-width',
       closeButton: true
