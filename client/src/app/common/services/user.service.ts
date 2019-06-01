@@ -46,7 +46,7 @@ export class UserService {
   }
 
   getAllHr(): Observable<any> {
-    return this.http.get<any>(`${api}users?roles=HR`, httpOptions);
+    return this.http.get<any>(`${api}users?type=hr`, httpOptions);
   }
 
   getAllManagers(): Observable<any> {
