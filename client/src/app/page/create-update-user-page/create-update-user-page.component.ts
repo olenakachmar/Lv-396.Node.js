@@ -81,11 +81,8 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
 
   checkOnEmptyDates(): void {
     this.finalDates.map(item => {
-      console.log('itemTopic ' + item.topic);
-      console.log('itemDate ' + item.date);
       this.emptyDates = !item.topic || !item.date ? true : false;
     });
-    console.log('emptyDates ' + this.emptyDates);
   }
 
   extractUser(user, chosenDevelopmentDepartment, chosenHrDepartment): any {
