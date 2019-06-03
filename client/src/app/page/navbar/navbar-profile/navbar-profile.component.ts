@@ -1,13 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { throwError } from 'rxjs';
 import { AuthService } from '../../../common/services/auth.service';
 import { UserService } from '../../../common/services/user.service';
-import { NavItemsService } from '../../common/nav-items.service';
 import { DateService } from '../../common/date.service';
 import { TasksService } from '../../common/tasks.service';
 import { User } from '../../../common/models/user';
 import { Task } from '../../common/task';
-import { NavItem } from '../../common/nav-item';
+import { NavItem, NavItemSet } from '../../common/nav-item';
 import { DatesItem } from '../../common/dates-item';
 
 @Component({
@@ -19,40 +19,48 @@ import { DatesItem } from '../../common/dates-item';
 
 export class NavbarProfileComponent implements OnInit {
   @Input() public userType: string;
+  @Input() public menuList: NavItem[];
 
   user: User;
   newTasks: Task[];
-  menuList: NavItem[];
   dateList: DatesItem[];
   newTasksCount: number;
   datesCount: number;
-  active: boolean;
   todayDate: Date;
   typeOfUser: boolean;
+  active: boolean;
+  itemMenuSettings: NavItemSet;
+  avatar: string;
+
 
   constructor(private readonly authService: AuthService,
               private readonly router: Router,
               private readonly route: ActivatedRoute,
-              private readonly navItemsService: NavItemsService,
               private readonly userService: UserService,
               private readonly tasksService: TasksService,
-              private readonly dateService: DateService) {
-  }
+              private readonly dateService: DateService) { }
 
   ngOnInit(): void {
-    this.navItemsService.getNavList()
-      .subscribe(list => this.menuList = list);
     this.userService.takeUser
       .subscribe(user => {
         this.user = user;
-        this.loadUserTasks();
+        this.avatar = user.photoURL || '../../../../assets/img/userimg.jpg';
+        if (user.watched_issues) {
+          this.loadUserTasks(user.watched_issues);
+        }
       });
     this.loadDates();
     this.todayDate = new Date();
-    this.user.photoURL = this.user.photoURL || 'assets/img/userimg.jpg';
+    this.itemMenuSettings = {
+      type: 'rightMenu',
+      style: 'right-menu-elem dropdown-item'
+    };
+
   }
 
   openTaskByid(taskID: string): boolean {
+    this.router.navigate(['/profile/upcoming-tasks'])
+      .catch(err => throwError(new Error(err)));
     if (this.typeOfUser) {
       this.tasksService.taskIsWatched(this.user._id, taskID)
         .subscribe(res => {
@@ -95,10 +103,10 @@ export class NavbarProfileComponent implements OnInit {
     }
   }
 
-  loadUserTasks(): void {
+  loadUserTasks(watchedTasks): void {
     this.tasksService.takeUserTasks
       .subscribe(tasks => {
-        this.newTasks = this.findNewTasks(tasks, this.user.watched_issues);
+        this.newTasks = this.findNewTasks(tasks, watchedTasks);
         this.newTasksCount = this.newTasks.length;
       });
   }
@@ -121,13 +129,15 @@ export class NavbarProfileComponent implements OnInit {
 
   logout(): boolean {
     this.authService.logout();
-    this.router.navigate(['/home']);
+    this.router.navigate(['/home'])
+      .catch(err => throwError(new Error(err)));
 
     return false;
   }
 
   editUserPage(): void {
-    this.router.navigate(['/profile/edit-user', this.user._id], { relativeTo: this.route });
+    this.router.navigate(['/profile/edit-user', this.user._id], { relativeTo: this.route })
+      .catch(err => throwError(new Error(err)));
   }
 
   currentByIndex(i: number): boolean {
@@ -150,4 +160,5 @@ export class NavbarProfileComponent implements OnInit {
       this.dateService.convertDate(date.date) === this.dateService.convertDate(this.todayDate)
     );
   }
+
 }
