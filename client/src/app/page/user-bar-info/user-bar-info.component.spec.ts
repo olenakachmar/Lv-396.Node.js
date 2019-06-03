@@ -7,10 +7,12 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { User } from '../../common/models/user';
+import { UserService } from '../../common/services/user.service';
 
 describe('UserBarInfoComponent', () => {
   let component: UserBarInfoComponent;
   let fixture: ComponentFixture<UserBarInfoComponent>;
+  let userService: UserService;
   const dummyUser: User = {
       watched_issues: [],
       roles: [],
@@ -92,11 +94,30 @@ describe('UserBarInfoComponent', () => {
     fixture = TestBed.createComponent(UserBarInfoComponent);
     component = fixture.componentInstance;
     component.userinfo = dummyUser;
+    userService = TestBed.get(UserService);
+    spyOn(userService, 'getUserType').and
+      .returnValue('customUserType');
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component)
-      .toBeTruthy();
+  it('should return Manager name and surname', () => {
+    expect(component.getManagerName())
+      .toEqual('Skype FileExchanger');
+  });
+
+  it('should set avatar url', () => {
+    component.updateAvatar('avatar');
+    expect('avatar')
+      .toEqual(component.userinfo.photoURL);
+  });
+
+  it('should return TeamLead name and surname', () => {
+    expect(component.getTeamleadName())
+      .toEqual('Skype FileExchanger');
+  });
+
+  it('return userType from Service', () => {
+    expect(component.userType)
+      .toEqual('customUserType');
   });
 });

@@ -5,6 +5,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 
+
 describe('CreateSideBarInfoComponent', () => {
   let component: CreateUpdateSideBarInfoComponent;
   let fixture: ComponentFixture<CreateUpdateSideBarInfoComponent>;
@@ -12,7 +13,9 @@ describe('CreateSideBarInfoComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        CreateUpdateSideBarInfoComponent,
+        CreateUpdateSideBarInfoComponent
+      ],
+      imports: [
         HttpClientTestingModule
       ],
       schemas: [NO_ERRORS_SCHEMA]

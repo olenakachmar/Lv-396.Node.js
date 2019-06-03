@@ -5,6 +5,7 @@ import { UserImageComponent } from './user-image.component';
 describe('UserImageComponent', () => {
   let component: UserImageComponent;
   let fixture: ComponentFixture<UserImageComponent>;
+  const dummyImageUrl: string = 'assets/img/userimg.jpg';
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -17,9 +18,16 @@ describe('UserImageComponent', () => {
     fixture = TestBed.createComponent(UserImageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    component.imageURL = dummyImageUrl;
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component)
+      .toBeTruthy();
+  });
+
+  it('should return imageUrl', () => {
+    expect(component.imageURL)
+      .toEqual('assets/img/userimg.jpg');
   });
 });
