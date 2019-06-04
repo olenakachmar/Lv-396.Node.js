@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Observable, throwError, of } from 'rxjs';
-// import 'rxjs/add/observable/of';
+import { Observable } from 'rxjs';
 import { SocialNetworksComponent } from './social-networks.component';
 
 describe('SocialNetworksComponent', () => {
@@ -31,34 +30,30 @@ describe('SocialNetworksComponent', () => {
     TestBed.configureTestingModule({
       declarations: [SocialNetworksComponent]
     })
-      .compileComponents()
-      .catch(err => throwError(new Error(err)));
+      .compileComponents();
   }));
 
-  beforeEach(() => {
+  beforeEach(async(() => {
     fixture = TestBed.createComponent(SocialNetworksComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component)
-      .toBeTruthy()
-      .catch(err => throwError(new Error(err)));
+      .toBeTruthy();
   });
 
   it(`should be inject service, shouldn't get links list if note async`, () => {
     jasmine.createSpy('getLinksList').and
       .returnValue(Observable.of(mockLinksList));
     expect(component.links)
-      .toEqual(mockLinksList)
-      .catch(err => throwError(new Error(err)));
+      .toEqual(mockLinksList);
     fixture.detectChanges();
   });
 
   it(`should return item id`, () => {
     expect(component.trackById(mockLinksList[1]))
-      .toEqual('1')
-      .catch(err => throwError(new Error(err)));
+      .toEqual('1');
   });
 });
