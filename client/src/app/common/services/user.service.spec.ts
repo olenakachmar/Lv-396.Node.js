@@ -6,7 +6,6 @@ import { api } from '../../../environments/environment';
 
 import { UserService } from './user.service';
 
-
 describe('UserService', () => {
   let injector: TestBed;
   let service: UserService;
@@ -113,7 +112,7 @@ describe('UserService', () => {
       const req = httpMock.expectOne(`${api}users`);
       expect(req.request.method).toBe('GET');
       req.flush(dummyUsers);
-
+      
       const userId = service.getUserId();
       const reqUsersOfHr = httpMock.expectOne(`${api}users?hr=${userId}`);
       expect(reqUsersOfHr.request.method)
