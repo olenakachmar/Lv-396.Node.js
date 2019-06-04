@@ -1,12 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import 'rxjs/add/observable/of';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NavbarComponent } from './navbar.component';
 import { NavbarProfileComponent } from './navbar-profile/navbar-profile.component';
 import { SocialNetworksComponent } from './social-networks/social-networks.component';
 import { NavItemsService } from '../common/nav-items.service';
-import { Observable } from 'rxjs';
+import { Observable, throwError, of } from 'rxjs';
 
 
 describe('NavbarComponent', () => {

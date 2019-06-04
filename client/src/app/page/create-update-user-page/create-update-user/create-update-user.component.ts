@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { UserService } from '../../../common/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -6,14 +6,15 @@ import { User } from '../../../common/models/user';
 
 import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
 import { DatesItem } from '../../common/dates-item';
+import { Subject } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-create-update-user',
   templateUrl: './create-update-user.component.html',
   styleUrls: ['./create-update-user.component.scss']
 })
-export class CreateUpdateUserComponent implements OnInit {
-
+export class CreateUpdateUserComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
 
   @Output() readonly sendContacts: EventEmitter<[]> = new EventEmitter<[]>();
   @Output() readonly sendMContacts: EventEmitter<[]> = new EventEmitter<[]>();
@@ -78,7 +79,9 @@ export class CreateUpdateUserComponent implements OnInit {
   }
 
   private readonly loadUser = (id: string) => {
-    this.userInfoService.getUser(this.id, true)
+
+    this.userInfoService.getUser(this.id)
+      .takeUntil(this.destroy$)
       .subscribe((user) => {
         this.user = user;
         this.contacts = user.contacts;
@@ -117,4 +120,8 @@ export class CreateUpdateUserComponent implements OnInit {
     return this.contactsForm.get('form_contacts') as FormArray;
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

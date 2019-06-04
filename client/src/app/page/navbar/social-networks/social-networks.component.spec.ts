@@ -1,8 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Observable } from 'rxjs';
-import 'rxjs/add/observable/of';
+import { Observable, throwError, of } from 'rxjs';
+// import 'rxjs/add/observable/of';
 import { SocialNetworksComponent } from './social-networks.component';
-import { SocialNetworkService } from '../../common/social-network.service';
 
 describe('SocialNetworksComponent', () => {
   let component: SocialNetworksComponent;
