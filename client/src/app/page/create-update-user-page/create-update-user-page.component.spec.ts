@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateUpdateUserPageComponent } from './create-update-user-page.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+
 
 describe('CreateUserPageComponent', () => {
   let component: CreateUpdateUserPageComponent;
@@ -8,7 +10,8 @@ describe('CreateUserPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateUpdateUserPageComponent ]
+      declarations: [ CreateUpdateUserPageComponent ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));
@@ -20,6 +23,7 @@ describe('CreateUserPageComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component)
+      .toBeTruthy();
   });
 });
