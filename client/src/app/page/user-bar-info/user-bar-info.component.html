@@ -1,7 +1,6 @@
 <div class="user-bar-info" *ngIf="userinfo">
   <div class="photo">
     <app-user-image [imageURL]="userinfo.photoURL"></app-user-image>
-    <app-update-avatar (onUpload)="updateAvatar($event)"></app-update-avatar>
   </div>
   <input type="checkbox" id="bt"/>
   <label class="check-button" for="bt">Show more</label>

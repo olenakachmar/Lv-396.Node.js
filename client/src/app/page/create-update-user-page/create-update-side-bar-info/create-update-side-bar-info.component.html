@@ -1,8 +1,8 @@
 <div class="create-user-bar-info row" *ngIf="showModal">
   <div class="column w-100">
     <div class="upload-image">
-      <app-user-image class="photo"></app-user-image>
-      <button class="update-photo-button">Update Image</button>
+      <app-user-image [imageURL]="user.photoURL" class="photo"></app-user-image>
+      <app-update-avatar (onUpload)="updateAvatar($event)"></app-update-avatar>
     </div>
     <div class="info-form">
       <div class="input-label">

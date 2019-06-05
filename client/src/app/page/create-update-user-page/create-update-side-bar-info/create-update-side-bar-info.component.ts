@@ -89,6 +89,11 @@ export class CreateUpdateSideBarInfoComponent implements OnInit, OnDestroy, OnCh
     this.userService.chosenDepartment.emit();
   }
 
+
+  updateAvatar(newURL: string): void {
+    this.user.photoURL = newURL;
+  }
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
