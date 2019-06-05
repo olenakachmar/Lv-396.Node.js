@@ -104,9 +104,20 @@ describe('UserService', () => {
         expect(users).toEqual(dummyUsers);
       });
 
+      service.getUsersOfHr().subscribe(users => {
+        expect(users.length).toBe(1);
+        expect(users).toEqual(dummyUsers);
+      });
+
       const req = httpMock.expectOne(`${api}users`);
       expect(req.request.method).toBe('GET');
       req.flush(dummyUsers);
+      
+      const userId = service.getUserId();
+      const reqUsersOfHr = httpMock.expectOne(`${api}users?hr=${userId}`);
+      expect(reqUsersOfHr.request.method)
+        .toBe('GET');
+      reqUsersOfHr.flush(dummyUsers);
     });
   });
 });

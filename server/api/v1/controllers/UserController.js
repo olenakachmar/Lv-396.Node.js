@@ -49,6 +49,7 @@ const updateOne = async (req, res) => {
   const {
     id,
   } = req.body;
+  console.log(req.body)
   const user = helpers.reducePropsToObject(arrKeys, req.body);
 
   if (req.body.contacts) {
@@ -87,6 +88,7 @@ const updateOne = async (req, res) => {
     if (user.photoID) {
       cloudinary.v2.api.delete_resources(user.photoID);
     }
+    console.log(user);
     Object.assign(doc, user);
     doc.save();
     res.json(doc);

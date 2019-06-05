@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { throwError } from 'rxjs';
+import { throwError, Subject } from 'rxjs';
 import { AuthService } from '../../../common/services/auth.service';
 import { UserService } from '../../../common/services/user.service';
 import { DateService } from '../../common/date.service';
@@ -17,7 +17,9 @@ import { DatesItem } from '../../common/dates-item';
   providers: [AuthService]
 })
 
-export class NavbarProfileComponent implements OnInit {
+export class NavbarProfileComponent implements OnInit, OnDestroy {
+  private readonly destroy$ = new Subject<void>();
+
   @Input() public userType: string;
   @Input() public menuList: NavItem[];
 
@@ -32,16 +34,17 @@ export class NavbarProfileComponent implements OnInit {
   itemMenuSettings: NavItemSet;
   avatar: string;
 
-
   constructor(private readonly authService: AuthService,
               private readonly router: Router,
               private readonly route: ActivatedRoute,
               private readonly userService: UserService,
               private readonly tasksService: TasksService,
-              private readonly dateService: DateService) { }
+              private readonly dateService: DateService) {
+  }
 
   ngOnInit(): void {
     this.userService.takeUser
+      .takeUntil(this.destroy$)
       .subscribe(user => {
         this.user = user;
         this.avatar = user.photoURL || '../../../../assets/img/userimg.jpg';
@@ -51,6 +54,8 @@ export class NavbarProfileComponent implements OnInit {
       });
     this.loadDates();
     this.todayDate = new Date();
+    this.avatar =  this.user.photoURL || 'assets/img/userimg.jpg';
+
     this.itemMenuSettings = {
       type: 'rightMenu',
       style: 'right-menu-elem dropdown-item'
@@ -63,6 +68,7 @@ export class NavbarProfileComponent implements OnInit {
       .catch(err => throwError(new Error(err)));
     if (this.typeOfUser) {
       this.tasksService.taskIsWatched(this.user._id, taskID)
+        .takeUntil(this.destroy$)
         .subscribe(res => {
           this.removeFromNew(taskID);
         });
@@ -84,6 +90,7 @@ export class NavbarProfileComponent implements OnInit {
     if (this.userService.getUserType() === 'hr') {
       this.typeOfUser = true;
       this.userService.getUsersOfHr()
+        .takeUntil(this.destroy$)
         .subscribe(users => {
           this.dateList = [];
           users.forEach((user) => {
@@ -94,6 +101,7 @@ export class NavbarProfileComponent implements OnInit {
         });
     } else if (this.userService.getUserType() === 'developer') {
       this.userService.getUser(this.userService.getUserId())
+        .takeUntil(this.destroy$)
         .subscribe(user => {
           this.dateList = [];
           this.dateList = this.dateService.setDateList(user, this.dateList);
@@ -105,6 +113,7 @@ export class NavbarProfileComponent implements OnInit {
 
   loadUserTasks(watchedTasks): void {
     this.tasksService.takeUserTasks
+      .takeUntil(this.destroy$)
       .subscribe(tasks => {
         this.newTasks = this.findNewTasks(tasks, watchedTasks);
         this.newTasksCount = this.newTasks.length;
@@ -161,4 +170,8 @@ export class NavbarProfileComponent implements OnInit {
     );
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }
