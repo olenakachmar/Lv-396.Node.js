@@ -9,7 +9,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { User } from '../../common/models/user';
 import { UserService } from '../../common/services/user.service';
 
-describe('UserBarInfoComponent', () => {
+fdescribe('UserBarInfoComponent', () => {
   let component: UserBarInfoComponent;
   let fixture: ComponentFixture<UserBarInfoComponent>;
   let userService: UserService;
@@ -104,12 +104,6 @@ describe('UserBarInfoComponent', () => {
     expect(component.getManagerName())
       .toEqual('Skype FileExchanger');
   });
-
-  // it('should set avatar url', () => {
-  //   component.updateAvatar('avatar');
-  //   expect('avatar')
-  //     .toEqual(component.userinfo.photoURL);
-  // });
 
   it('should return TeamLead name and surname', () => {
     expect(component.getTeamleadName())
